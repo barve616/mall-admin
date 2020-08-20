@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.macro.mall.mapper.DCmsRegionMapper">
+  <resultMap id="BaseResultMap" type="com.macro.mall.model.DCmsRegion">
+    <result column="REGION_ID" jdbcType="VARCHAR" property="regionId" />
+    <result column="PROVINCE_ID" jdbcType="VARCHAR" property="provinceId" />
+    <result column="CITY_ID" jdbcType="VARCHAR" property="cityId" />
+  </resultMap>
+
+
+
+  <insert id="insertCityList" parameterType="list">
+    INSERT INTO d_cms_region
+    (
+    REGION_ID,
+    PROVINCE_ID,
+    CITY_ID
+    )
+    <foreach collection="list" item="item" index="index" separator="union all">
+      select
+      #{item.regionId},
+      #{item.provinceId},
+      #{item.cityId}
+      from dual
+    </foreach>
+  </insert>
+
+  <delete id="delCityListById" parameterType="String">
+    delete from d_cms_region where REGION_ID = #{regionId}
+  </delete>
+  <select id="selectListById" parameterType="String" resultMap="BaseResultMap">
+
+    select REGION_ID,PROVINCE_ID,CITY_ID from d_cms_region where REGION_ID = #{regionId}
+  </select>
+</mapper>

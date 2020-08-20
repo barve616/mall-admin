@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.macro.mall.mapper.DMatchCommonInfoMapper">
+  <resultMap id="BaseResultMap" type="com.macro.mall.model.DMatchCommonInfo">
+    <result column="MATCH_COMMON_ID" jdbcType="VARCHAR" property="matchCommonId" />
+    <result column="MATCH_COMMON_NAME" jdbcType="VARCHAR" property="matchCommonName" />
+    <result column="MATCH_COMMON_PARAM" jdbcType="VARCHAR" property="matchCommonParam" />
+    <result column="MATCH_COMMON_PARAM1" jdbcType="VARCHAR" property="matchCommonParam1" />
+    <result column="MATCH_COMMON_FLAG" jdbcType="VARCHAR" property="matchCommonFlag" />
+  </resultMap>
+
+
+  <sql id="Base_Column_List">
+    MATCH_COMMON_ID, MATCH_COMMON_NAME, MATCH_COMMON_PARAM,MATCH_COMMON_PARAM1, MATCH_COMMON_FLAG
+  </sql>
+
+
+  <select id="queryList" parameterType="com.macro.mall.model.DMatchCommonInfo" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from D_MATCH_COMMON_INFO
+    <where>
+      <if test="matchCommonId != null and matchCommonId !=''">
+       and  MATCH_COMMON_ID = #{matchCommonId,jdbcType=VARCHAR}
+      </if>
+      <if test="matchCommonName != null and matchCommonName !=''">
+        and  MATCH_COMMON_NAME = #{matchCommonName,jdbcType=VARCHAR}
+      </if>
+      <if test="matchCommonParam != null and matchCommonParam !=''">
+        and  MATCH_COMMON_PARAM = #{matchCommonParam,jdbcType=VARCHAR}
+      </if>
+      <if test="matchCommonParam1 != null and matchCommonParam1 !=''">
+        and  MATCH_COMMON_PARAM1 = #{matchCommonParam1,jdbcType=VARCHAR}
+      </if>
+      <if test="matchCommonFlag != null and matchCommonFlag !=''">
+        and  MATCH_COMMON_FLAG = #{matchCommonFlag,jdbcType=VARCHAR}
+      </if>
+    </where>
+    order by MATCH_COMMON_ID
+  </select>
+
+
+  <update id="update" parameterType="com.macro.mall.model.DMatchCommonInfo">
+    update D_MATCH_COMMON_INFO
+    <set>
+      <if test="matchCommonName != null and matchCommonName!=''">
+        MATCH_COMMON_NAME = #{matchCommonName,jdbcType=VARCHAR},
+      </if>
+      <if test="matchCommonParam != null and matchCommonParam!=''">
+        MATCH_COMMON_PARAM = #{matchCommonParam,jdbcType=VARCHAR},
+      </if>
+      <if test="matchCommonParam1 != null and matchCommonParam1 !=''">
+        MATCH_COMMON_PARAM1 = #{matchCommonParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="matchCommonFlag != null and matchCommonFlag!=''">
+        MATCH_COMMON_FLAG = #{matchCommonFlag,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where  MATCH_COMMON_ID = #{matchCommonId,jdbcType=VARCHAR}
+  </update>
+
+</mapper>

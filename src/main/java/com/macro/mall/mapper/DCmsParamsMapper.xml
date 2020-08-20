@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.macro.mall.mapper.DCmsParamsMapper">
+  <resultMap id="BaseResultMap" type="com.macro.mall.model.DCmsParams">
+    <result column="PAGE_ID" jdbcType="VARCHAR" property="pageId" />
+    <result column="FUC_ID" jdbcType="VARCHAR" property="fucId" />
+    <result column="DATAS_ID" jdbcType="VARCHAR" property="datasId" />
+    <result column="PARAMS_FLAG" jdbcType="VARCHAR" property="paramsFlag" />
+    <result column="SPACE_FLAG" jdbcType="VARCHAR" property="spaceFlag" />
+    <result column="PARAMS_NAME" jdbcType="VARCHAR" property="paramsName" />
+    <result column="FONT_SIZE" jdbcType="VARCHAR" property="fontSize" />
+    <result column="FONT_COLOR" jdbcType="VARCHAR" property="fontColor" />
+    <result column="COLOR_R" jdbcType="VARCHAR" property="colorR" />
+    <result column="COLOR_G" jdbcType="VARCHAR" property="colorG" />
+    <result column="COLOR_B" jdbcType="VARCHAR" property="colorB" />
+    <result column="P_DOWN_TIME" jdbcType="VARCHAR" property="pDownTime" />
+    <result column="P_NEWS_NUM" jdbcType="VARCHAR" property="pNewsNum" />
+    <result column="P_BUT_FLAG" jdbcType="VARCHAR" property="pButFlag" />
+    <result column="P_BUT_VALUE" jdbcType="VARCHAR" property="pButValue" />
+    <result column="MODEL_IMAGE" jdbcType="VARCHAR" property="modelImage" />
+    <result column="CHANNEL" jdbcType="VARCHAR" property="channel"/>
+    <result column="ROW_NUM" jdbcType="VARCHAR" property="rowNum"/>
+  </resultMap>
+
+  <select id="selectParamsByIds" parameterType="com.macro.mall.model.DCmsParams" resultMap="BaseResultMap">
+    select PAGE_ID,FUC_ID,DATAS_ID,PARAMS_FLAG,SPACE_FLAG,PARAMS_NAME,FONT_SIZE,FONT_COLOR,COLOR_R,COLOR_G,COLOR_B,P_DOWN_TIME,
+    P_NEWS_NUM,P_BUT_FLAG,P_BUT_VALUE,MODEL_IMAGE,CHANNEL,ROW_NUM from d_cms_params where PAGE_ID = #{pageId} and DATAS_ID = #{datasId}
+  </select>
+
+  <insert id="insert" parameterType="com.macro.mall.model.DCmsParams" useGeneratedKeys="true" keyProperty="datasId">
+    <selectKey keyProperty="datasId" order="BEFORE" resultType="java.lang.String">
+      select SEQ_CMS_PARAMS.nextval from dual
+    </selectKey>
+    insert into D_CMS_PARAMS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      DATAS_ID,
+      <if test="pageId != null">
+        PAGE_ID,
+      </if>
+      <if test="fucId != null">
+        FUC_ID,
+      </if>
+      <if test="paramsFlag != null">
+        PARAMS_FLAG,
+      </if>
+      <if test="spaceFlag != null">
+        SPACE_FLAG,
+      </if>
+      <if test="paramsName != null">
+        PARAMS_NAME,
+      </if>
+      <if test="fontSize != null">
+        FONT_SIZE,
+      </if>
+      <if test="fontColor != null">
+        FONT_COLOR,
+      </if>
+      <if test="colorR != null">
+        COLOR_R,
+      </if>
+      <if test="colorG != null">
+        COLOR_G,
+      </if>
+      <if test="colorB != null">
+        COLOR_B,
+      </if>
+      <if test="pDownTime != null">
+        P_DOWN_TIME,
+      </if>
+      <if test="pNewsNum != null">
+        P_NEWS_NUM,
+      </if>
+      <if test="pButFlag != null">
+        P_BUT_FLAG,
+      </if>
+      <if test="pButValue != null">
+        P_BUT_VALUE,
+      </if>
+      <if test="modelImage != null">
+        MODEL_IMAGE,
+      </if>
+      <if test="channel != null">
+        CHANNEL,
+      </if>
+      <if test="rowNum != null">
+        ROW_NUM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      #{datasId,jdbcType=VARCHAR},
+      <if test="pageId != null">
+        #{pageId,jdbcType=VARCHAR},
+      </if>
+      <if test="fucId != null">
+        #{fucId,jdbcType=VARCHAR},
+      </if>
+      <if test="paramsFlag != null">
+        #{paramsFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="spaceFlag != null">
+        #{spaceFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="paramsName != null">
+        #{paramsName,jdbcType=VARCHAR},
+      </if>
+      <if test="fontSize != null">
+        #{fontSize,jdbcType=VARCHAR},
+      </if>
+      <if test="fontColor != null">
+        #{fontColor,jdbcType=VARCHAR},
+      </if>
+      <if test="colorR != null">
+        #{colorR,jdbcType=VARCHAR},
+      </if>
+      <if test="colorG != null">
+        #{colorG,jdbcType=VARCHAR},
+      </if>
+      <if test="colorB != null">
+        #{colorB,jdbcType=VARCHAR},
+      </if>
+      <if test="pDownTime != null">
+        #{pDownTime,jdbcType=VARCHAR},
+      </if>
+      <if test="pNewsNum != null">
+        #{pNewsNum,jdbcType=VARCHAR},
+      </if>
+      <if test="pButFlag != null">
+        #{pButFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="pButValue != null">
+        #{pButValue,jdbcType=VARCHAR},
+      </if>
+      <if test="modelImage != null">
+        #{modelImage,jdbcType=VARCHAR},
+      </if>
+      <if test="channel != null">
+        #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="rowNum != null">
+        #{rowNum,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <select id="selectParamsById" resultMap="BaseResultMap">
+    select PAGE_ID,FUC_ID,DATAS_ID,PARAMS_FLAG,SPACE_FLAG,PARAMS_NAME,FONT_SIZE,FONT_COLOR,COLOR_R,COLOR_G,COLOR_B,P_DOWN_TIME,
+           P_NEWS_NUM,P_BUT_FLAG,P_BUT_VALUE,MODEL_IMAGE,CHANNEL,ROW_NUM from D_CMS_PARAMS where DATAS_ID = #{id}
+  </select>
+
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.macro.mall.model.DCmsParams">
+    update D_CMS_PARAMS
+    <set>
+      <if test="pageId != null">
+        PAGE_ID = #{pageId,jdbcType=VARCHAR},
+      </if>
+      <if test="fucId != null">
+        FUC_ID = #{fucId,jdbcType=VARCHAR},
+      </if>
+      <if test="paramsFlag != null">
+        PARAMS_FLAG = #{paramsFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="spaceFlag != null">
+        SPACE_FLAG = #{spaceFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="paramsName != null">
+        PARAMS_NAME = #{paramsName,jdbcType=VARCHAR},
+      </if>
+      <if test="fontSize != null">
+        FONT_SIZE = #{fontSize,jdbcType=VARCHAR},
+      </if>
+      <if test="fontColor != null">
+        FONT_COLOR = #{fontColor,jdbcType=VARCHAR},
+      </if>
+      <if test="colorR != null">
+        COLOR_R = #{colorR,jdbcType=VARCHAR},
+      </if>
+      <if test="colorG != null">
+        COLOR_G = #{colorG,jdbcType=VARCHAR},
+      </if>
+      <if test="colorB != null">
+        COLOR_B = #{colorB,jdbcType=VARCHAR},
+      </if>
+      <if test="pDownTime != null">
+        P_DOWN_TIME = #{pDownTime,jdbcType=VARCHAR},
+      </if>
+      <if test="pNewsNum != null">
+        P_NEWS_NUM = #{pNewsNum,jdbcType=VARCHAR},
+      </if>
+      <if test="pButFlag != null">
+        P_BUT_FLAG = #{pButFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="pButValue != null">
+        P_BUT_VALUE = #{pButValue,jdbcType=VARCHAR},
+      </if>
+      <if test="modelImage != null">
+        MODEL_IMAGE = #{modelImage,jdbcType=VARCHAR},
+      </if>
+      <if test="channel != null">
+        CHANNEL = #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="rowNum != null">
+        ROW_NUM = #{rowNum,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where DATAS_ID = #{datasId,jdbcType=VARCHAR}
+  </update>
+    <delete id="delParamsById">
+        delete from D_CMS_PARAMS where DATAS_ID = #{id}
+    </delete>
+</mapper>

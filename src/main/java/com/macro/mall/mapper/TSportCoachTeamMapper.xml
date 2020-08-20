@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.macro.mall.mapper.TSportCoachTeamMapper">
+  <resultMap id="BaseResultMap" type="com.macro.mall.model.TSportCoachTeam">
+    <id column="COACH_ID" jdbcType="CHAR" property="coachId" />
+    <result column="COACH_NAME" jdbcType="VARCHAR" property="coachName" />
+    <result column="COACH_GENDER" jdbcType="CHAR" property="coachGender" />
+    <result column="SPECIALTY" jdbcType="VARCHAR" property="specialty" />
+    <result column="TEACHING_AGE" jdbcType="VARCHAR" property="teachingAge" />
+    <result column="COACH_HEAD_URL" jdbcType="VARCHAR" property="coachHeadUrl" />
+    <result column="WORK_STATE" jdbcType="CHAR" property="workState" />
+    <result column="SHOP_ID" jdbcType="CHAR" property="shopId" />
+    <result column="CREATE_DATE" jdbcType="CHAR" property="createDate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    COACH_ID, COACH_NAME, COACH_GENDER, SPECIALTY, TEACHING_AGE, COACH_HEAD_URL, WORK_STATE, 
+    SHOP_ID, CREATE_DATE
+  </sql>
+  <select id="selectByExample" parameterType="com.macro.mall.model.TSportCoachTeamExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_SPORT_COACH_TEAM
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from T_SPORT_COACH_TEAM
+    where COACH_ID = #{coachId,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from T_SPORT_COACH_TEAM
+    where COACH_ID = #{coachId,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.macro.mall.model.TSportCoachTeamExample">
+    delete from T_SPORT_COACH_TEAM
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.macro.mall.model.TSportCoachTeam">
+    insert into T_SPORT_COACH_TEAM (COACH_ID, COACH_NAME, COACH_GENDER, 
+      SPECIALTY, TEACHING_AGE, COACH_HEAD_URL, 
+      WORK_STATE, SHOP_ID, CREATE_DATE
+      )
+    values (#{coachId,jdbcType=CHAR}, #{coachName,jdbcType=VARCHAR}, #{coachGender,jdbcType=CHAR}, 
+      #{specialty,jdbcType=VARCHAR}, #{teachingAge,jdbcType=VARCHAR}, #{coachHeadUrl,jdbcType=VARCHAR}, 
+      #{workState,jdbcType=CHAR}, #{shopId,jdbcType=CHAR}, #{createDate,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.macro.mall.model.TSportCoachTeam">
+    insert into T_SPORT_COACH_TEAM
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="coachId != null">
+        COACH_ID,
+      </if>
+      <if test="coachName != null">
+        COACH_NAME,
+      </if>
+      <if test="coachGender != null">
+        COACH_GENDER,
+      </if>
+      <if test="specialty != null">
+        SPECIALTY,
+      </if>
+      <if test="teachingAge != null">
+        TEACHING_AGE,
+      </if>
+      <if test="coachHeadUrl != null">
+        COACH_HEAD_URL,
+      </if>
+      <if test="workState != null">
+        WORK_STATE,
+      </if>
+      <if test="shopId != null">
+        SHOP_ID,
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="coachId != null">
+        #{coachId,jdbcType=CHAR},
+      </if>
+      <if test="coachName != null">
+        #{coachName,jdbcType=VARCHAR},
+      </if>
+      <if test="coachGender != null">
+        #{coachGender,jdbcType=CHAR},
+      </if>
+      <if test="specialty != null">
+        #{specialty,jdbcType=VARCHAR},
+      </if>
+      <if test="teachingAge != null">
+        #{teachingAge,jdbcType=VARCHAR},
+      </if>
+      <if test="coachHeadUrl != null">
+        #{coachHeadUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="workState != null">
+        #{workState,jdbcType=CHAR},
+      </if>
+      <if test="shopId != null">
+        #{shopId,jdbcType=CHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.macro.mall.model.TSportCoachTeamExample" resultType="java.lang.Long">
+    select count(*) from T_SPORT_COACH_TEAM
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update T_SPORT_COACH_TEAM
+    <set>
+      <if test="record.coachId != null">
+        COACH_ID = #{record.coachId,jdbcType=CHAR},
+      </if>
+      <if test="record.coachName != null">
+        COACH_NAME = #{record.coachName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.coachGender != null">
+        COACH_GENDER = #{record.coachGender,jdbcType=CHAR},
+      </if>
+      <if test="record.specialty != null">
+        SPECIALTY = #{record.specialty,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teachingAge != null">
+        TEACHING_AGE = #{record.teachingAge,jdbcType=VARCHAR},
+      </if>
+      <if test="record.coachHeadUrl != null">
+        COACH_HEAD_URL = #{record.coachHeadUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workState != null">
+        WORK_STATE = #{record.workState,jdbcType=CHAR},
+      </if>
+      <if test="record.shopId != null">
+        SHOP_ID = #{record.shopId,jdbcType=CHAR},
+      </if>
+      <if test="record.createDate != null">
+        CREATE_DATE = #{record.createDate,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update T_SPORT_COACH_TEAM
+    set COACH_ID = #{record.coachId,jdbcType=CHAR},
+      COACH_NAME = #{record.coachName,jdbcType=VARCHAR},
+      COACH_GENDER = #{record.coachGender,jdbcType=CHAR},
+      SPECIALTY = #{record.specialty,jdbcType=VARCHAR},
+      TEACHING_AGE = #{record.teachingAge,jdbcType=VARCHAR},
+      COACH_HEAD_URL = #{record.coachHeadUrl,jdbcType=VARCHAR},
+      WORK_STATE = #{record.workState,jdbcType=CHAR},
+      SHOP_ID = #{record.shopId,jdbcType=CHAR},
+      CREATE_DATE = #{record.createDate,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.macro.mall.model.TSportCoachTeam">
+    update T_SPORT_COACH_TEAM
+    <set>
+      <if test="coachName != null">
+        COACH_NAME = #{coachName,jdbcType=VARCHAR},
+      </if>
+      <if test="coachGender != null">
+        COACH_GENDER = #{coachGender,jdbcType=CHAR},
+      </if>
+      <if test="specialty != null">
+        SPECIALTY = #{specialty,jdbcType=VARCHAR},
+      </if>
+      <if test="teachingAge != null">
+        TEACHING_AGE = #{teachingAge,jdbcType=VARCHAR},
+      </if>
+      <if test="coachHeadUrl != null">
+        COACH_HEAD_URL = #{coachHeadUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="workState != null">
+        WORK_STATE = #{workState,jdbcType=CHAR},
+      </if>
+      <if test="shopId != null">
+        SHOP_ID = #{shopId,jdbcType=CHAR},
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE = #{createDate,jdbcType=CHAR},
+      </if>
+    </set>
+    where COACH_ID = #{coachId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.macro.mall.model.TSportCoachTeam">
+    update T_SPORT_COACH_TEAM
+    set COACH_NAME = #{coachName,jdbcType=VARCHAR},
+      COACH_GENDER = #{coachGender,jdbcType=CHAR},
+      SPECIALTY = #{specialty,jdbcType=VARCHAR},
+      TEACHING_AGE = #{teachingAge,jdbcType=VARCHAR},
+      COACH_HEAD_URL = #{coachHeadUrl,jdbcType=VARCHAR},
+      WORK_STATE = #{workState,jdbcType=CHAR},
+      SHOP_ID = #{shopId,jdbcType=CHAR},
+      CREATE_DATE = #{createDate,jdbcType=CHAR}
+    where COACH_ID = #{coachId,jdbcType=CHAR}
+  </update>
+  
+  <!--根据店铺id查询有效的教练信息-->
+  <select id="getCoachTeamByShopId" parameterType="java.lang.String" resultMap="BaseResultMap">
+      select t.coach_id,
+               t.coach_name,
+               t.coach_gender,
+               t.specialty,
+               t.teaching_age,
+               case  when t.coach_head_url is null then '' else (select param_value  from d_tcodeposs_para a where a.param_type = 'visitPath2') || t.coach_head_url end as coach_head_url,
+               t.work_state,
+               t.shop_id,
+               t.create_date
+      from t_sport_coach_team t where 1=1 and t.shop_id=#{shopId,jdbcType=VARCHAR}
+      <if test="workState != null and workState !=''">
+           and t.work_state = #{workState,jdbcType=VARCHAR}
+      </if>
+  </select>
+</mapper>

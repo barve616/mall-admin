@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.macro.mall.mapper.DStepInfoMapper">
+  <resultMap id="BaseResultMap" type="com.macro.mall.model.DStepInfo">
+    <result column="USER_NM" jdbcType="VARCHAR" property="userNm" />
+    <result column="CERT_ID" jdbcType="VARCHAR" property="certId" />
+    <result column="CERT_TYPE" jdbcType="VARCHAR" property="certType" />
+    <result column="APPLY_DATE" jdbcType="VARCHAR" property="applyDate" />
+    <result column="APPLY_TIME" jdbcType="VARCHAR" property="applyTime" />
+    <result column="STEP_NUM" jdbcType="VARCHAR" property="stepNum" />
+    <result column="STEP_TOTAL_NUM" jdbcType="VARCHAR" property="stepTotalNum" />
+    <result column="STEP_UPDATE_DATE" jdbcType="VARCHAR" property="stepUpdateDate" />
+    <result column="STEP_INFO" jdbcType="VARCHAR" property="stepInfo" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="CARD_NO" jdbcType="VARCHAR" property="cardNo" />
+    <result column="CARD_TYPE" jdbcType="VARCHAR" property="cardType" />
+    <result column="USER_PLT" jdbcType="CHAR" property="userPlt" />
+    <result column="USER_TYPE" jdbcType="VARCHAR" property="userType" />
+    <result column="STEP_DAYS" jdbcType="VARCHAR" property="stepDays" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    USER_NM, CERT_ID, CERT_TYPE, APPLY_DATE, APPLY_TIME, STEP_NUM, STEP_TOTAL_NUM, STEP_UPDATE_DATE, 
+    STEP_INFO, NAME, CARD_NO, CARD_TYPE, USER_PLT, USER_TYPE, STEP_DAYS
+  </sql>
+  <select id="selectByExample" parameterType="com.macro.mall.model.DStepInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from D_STEP_INFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.macro.mall.model.DStepInfoExample">
+    delete from D_STEP_INFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.macro.mall.model.DStepInfo">
+    insert into D_STEP_INFO (USER_NM, CERT_ID, CERT_TYPE, 
+      APPLY_DATE, APPLY_TIME, STEP_NUM, 
+      STEP_TOTAL_NUM, STEP_UPDATE_DATE, STEP_INFO, 
+      NAME, CARD_NO, CARD_TYPE, 
+      USER_PLT, USER_TYPE, STEP_DAYS
+      )
+    values (#{userNm,jdbcType=VARCHAR}, #{certId,jdbcType=VARCHAR}, #{certType,jdbcType=VARCHAR}, 
+      #{applyDate,jdbcType=VARCHAR}, #{applyTime,jdbcType=VARCHAR}, #{stepNum,jdbcType=VARCHAR}, 
+      #{stepTotalNum,jdbcType=VARCHAR}, #{stepUpdateDate,jdbcType=VARCHAR}, #{stepInfo,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{cardNo,jdbcType=VARCHAR}, #{cardType,jdbcType=VARCHAR}, 
+      #{userPlt,jdbcType=CHAR}, #{userType,jdbcType=VARCHAR}, #{stepDays,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.macro.mall.model.DStepInfo">
+    insert into D_STEP_INFO
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userNm != null">
+        USER_NM,
+      </if>
+      <if test="certId != null">
+        CERT_ID,
+      </if>
+      <if test="certType != null">
+        CERT_TYPE,
+      </if>
+      <if test="applyDate != null">
+        APPLY_DATE,
+      </if>
+      <if test="applyTime != null">
+        APPLY_TIME,
+      </if>
+      <if test="stepNum != null">
+        STEP_NUM,
+      </if>
+      <if test="stepTotalNum != null">
+        STEP_TOTAL_NUM,
+      </if>
+      <if test="stepUpdateDate != null">
+        STEP_UPDATE_DATE,
+      </if>
+      <if test="stepInfo != null">
+        STEP_INFO,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="cardNo != null">
+        CARD_NO,
+      </if>
+      <if test="cardType != null">
+        CARD_TYPE,
+      </if>
+      <if test="userPlt != null">
+        USER_PLT,
+      </if>
+      <if test="userType != null">
+        USER_TYPE,
+      </if>
+      <if test="stepDays != null">
+        STEP_DAYS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userNm != null">
+        #{userNm,jdbcType=VARCHAR},
+      </if>
+      <if test="certId != null">
+        #{certId,jdbcType=VARCHAR},
+      </if>
+      <if test="certType != null">
+        #{certType,jdbcType=VARCHAR},
+      </if>
+      <if test="applyDate != null">
+        #{applyDate,jdbcType=VARCHAR},
+      </if>
+      <if test="applyTime != null">
+        #{applyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="stepNum != null">
+        #{stepNum,jdbcType=VARCHAR},
+      </if>
+      <if test="stepTotalNum != null">
+        #{stepTotalNum,jdbcType=VARCHAR},
+      </if>
+      <if test="stepUpdateDate != null">
+        #{stepUpdateDate,jdbcType=VARCHAR},
+      </if>
+      <if test="stepInfo != null">
+        #{stepInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="cardNo != null">
+        #{cardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="cardType != null">
+        #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="userPlt != null">
+        #{userPlt,jdbcType=CHAR},
+      </if>
+      <if test="userType != null">
+        #{userType,jdbcType=VARCHAR},
+      </if>
+      <if test="stepDays != null">
+        #{stepDays,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.macro.mall.model.DStepInfoExample" resultType="java.lang.Long">
+    select count(*) from D_STEP_INFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update D_STEP_INFO
+    <set>
+      <if test="record.userNm != null">
+        USER_NM = #{record.userNm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.certId != null">
+        CERT_ID = #{record.certId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.certType != null">
+        CERT_TYPE = #{record.certType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applyDate != null">
+        APPLY_DATE = #{record.applyDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applyTime != null">
+        APPLY_TIME = #{record.applyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stepNum != null">
+        STEP_NUM = #{record.stepNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stepTotalNum != null">
+        STEP_TOTAL_NUM = #{record.stepTotalNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stepUpdateDate != null">
+        STEP_UPDATE_DATE = #{record.stepUpdateDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stepInfo != null">
+        STEP_INFO = #{record.stepInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        NAME = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardNo != null">
+        CARD_NO = #{record.cardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardType != null">
+        CARD_TYPE = #{record.cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userPlt != null">
+        USER_PLT = #{record.userPlt,jdbcType=CHAR},
+      </if>
+      <if test="record.userType != null">
+        USER_TYPE = #{record.userType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stepDays != null">
+        STEP_DAYS = #{record.stepDays,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update D_STEP_INFO
+    set USER_NM = #{record.userNm,jdbcType=VARCHAR},
+      CERT_ID = #{record.certId,jdbcType=VARCHAR},
+      CERT_TYPE = #{record.certType,jdbcType=VARCHAR},
+      APPLY_DATE = #{record.applyDate,jdbcType=VARCHAR},
+      APPLY_TIME = #{record.applyTime,jdbcType=VARCHAR},
+      STEP_NUM = #{record.stepNum,jdbcType=VARCHAR},
+      STEP_TOTAL_NUM = #{record.stepTotalNum,jdbcType=VARCHAR},
+      STEP_UPDATE_DATE = #{record.stepUpdateDate,jdbcType=VARCHAR},
+      STEP_INFO = #{record.stepInfo,jdbcType=VARCHAR},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      CARD_NO = #{record.cardNo,jdbcType=VARCHAR},
+      CARD_TYPE = #{record.cardType,jdbcType=VARCHAR},
+      USER_PLT = #{record.userPlt,jdbcType=CHAR},
+      USER_TYPE = #{record.userType,jdbcType=VARCHAR},
+      STEP_DAYS = #{record.stepDays,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

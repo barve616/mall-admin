@@ -1,0 +1,592 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.macro.mall.mapper.DMatchInfoDao">
+
+    <resultMap id="BaseResultMap" type="com.macro.mall.model.DMatchInfo">
+        <!--
+          WARNING - @mbggenerated
+        -->
+        <result column="MATCH_ID" property="matchId" jdbcType="VARCHAR"/>
+        <result column="MATCH_TYPE_ID" property="matchTypeId" jdbcType="VARCHAR"/>
+        <result column="MATCH_GROUP_ID" property="matchGroupId" jdbcType="VARCHAR"/>
+        <result column="MATCH_NAME" property="matchName" jdbcType="VARCHAR"/>
+        <result column="MATCH_ADDRESS" property="matchAddress" jdbcType="VARCHAR"/>
+        <result column="MATCH_PHOTO" property="matchPhoto" jdbcType="VARCHAR"/>
+        <result column="MATCH_APPLY_START_TIME" property="matchApplyStartTime" jdbcType="CHAR"/>
+        <result column="MATCH_APPLY_END_TIME" property="matchApplyEndTime" jdbcType="CHAR"/>
+        <result column="MATCH_START_TIME" property="matchStartTime" jdbcType="CHAR"/>
+        <result column="MATCH_END_TIME" property="matchEndTime" jdbcType="CHAR"/>
+        <result column="MATCH_PAY_FLAG" property="matchPayFlag" jdbcType="CHAR"/>
+        <result column="MATCH_PAY_MONEY" property="matchPayMoney" jdbcType="NUMERIC"/>
+        <result column="MATCH_PAY_MER_ID" property="matchPayMerId" jdbcType="VARCHAR"/>
+        <result column="MATCH_INSURE_FLAG" property="matchInsureFlag" jdbcType="CHAR"/>
+        <result column="MATCH_INSURE_MONEY" property="matchInsureMoney" jdbcType="NUMERIC"/>
+        <result column="MATCH_INSURE_MER_ID" property="matchInsureMerId" jdbcType="VARCHAR"/>
+        <result column="MATCH_TYPE" property="matchType" jdbcType="CHAR"/>
+        <result column="MATCH_NUM_LIMIT" property="matchNumLimit" jdbcType="NUMERIC"/>
+        <result column="MATCH_GROUP_LIMIT" property="matchGroupLimit" jdbcType="NUMERIC"/>
+        <result column="MATCH_GROUP_NUM_LIMIT" property="matchGroupNumLimit" jdbcType="NUMERIC"/>
+        <result column="MATCH_APPLY_PARAM" property="matchApplyParam" jdbcType="VARCHAR"/>
+        <result column="MATCH_VOTE_FLAG" property="matchVoteFlag" jdbcType="CHAR"/>
+        <result column="MATCH_STATE" property="matchState" jdbcType="CHAR"/>
+        <result column="MATCH_DES" property="matchDes" jdbcType="BLOB"/>
+        <result column="MATCH_NOTICE" property="matchNotice" jdbcType="BLOB"/>
+        <result column="MATCH_RULES" property="matchRules" jdbcType="BLOB"/>
+        <result column="MATCH_ATTENTION" property="matchAttention" jdbcType="BLOB"/>
+        <result column="MATCH_MAX_ID" property="matchMaxId" jdbcType="VARCHAR"/>
+        <result column="MATCH_MIN_ID" property="matchMinId" jdbcType="VARCHAR"/>
+        <result column="MATCH_MAX_NAME" property="matchMaxName" jdbcType="VARCHAR"/>
+        <result column="MATCH_MIN_DETAIL" property="matchMinDetail" jdbcType="VARCHAR"/>
+        <result column="MATCH" property="match" jdbcType="VARCHAR"/>
+        <result column="NUM" property="num" jdbcType="VARCHAR"/>
+        <result column="TEAM_NUM" property="teamNum" jdbcType="VARCHAR"/>
+        <result column="MATCH_TP_NAME" property="matchTpName" jdbcType="VARCHAR"/>
+        <result column="MATCH_TP" property="matchTp" jdbcType="VARCHAR"/>
+        <result column="APPLY_TIME" property="applyTime" jdbcType="VARCHAR"/>
+        <result column="MATCH_PHOTO_DETAIL" property="matchPhotoDetail" jdbcType="VARCHAR"/>
+        <result column="MATCH_GENDER_FLAG" property="matchGenderFlag" jdbcType="VARCHAR"/>
+        <result column="MATCH_AGE_FLAG" property="matchAgeFlag" jdbcType="VARCHAR"/>
+        <result column="MATCH_MAX_AGE" property="matchMaxAge" jdbcType="NUMERIC"/>
+        <result column="MATCH_MIN_AGE" property="matchMinAge" jdbcType="NUMERIC"/>
+        <result column="MATCH_STOCK_NUM" property="matchStockNum" jdbcType="NUMERIC"/>
+        <result column="MATCH_GROUP_MAX_LIMIT" property="matchGroupMaxLimit" jdbcType="NUMERIC"/>
+        <result column="MATCH_CREATE_TIME" property="matchCreateTime" jdbcType="VARCHAR"/>
+        <result column="TOTAL_NUM" property="totalNum" jdbcType="VARCHAR"/>
+        <result column="REMOVE_MATCH_NUM" property="removeMatchNum" jdbcType="VARCHAR"/>
+        <result column="STAY_PAY_NUM" property="stayPayNum" jdbcType="VARCHAR"/>
+        <result column="REMOVE_SIGN_NUM" property="removeSignNum" jdbcType="VARCHAR"/>
+        <result column="SUCCESS_TEAM_NUM" property="successTeamNum" jdbcType="VARCHAR"/>
+        <result column="ERR_TEAM_NUM" property="errTeamNum" jdbcType="VARCHAR"/>
+        <result column="TEAMING_NUM" property="teamingNum" jdbcType="VARCHAR"/>
+        <result column="AUDITING_ERR_NUM" property="auditingErrNum" jdbcType="VARCHAR"/>
+        <result column="MATCH_SPONSOR" property="matchSponsor" jdbcType="VARCHAR"/>
+        <result column="MATCH_DES_TITLE" property="matchDesTitle" jdbcType="VARCHAR"/>
+        <result column="MATCH_NOTICE_TITLE" property="matchNoticeTitle" jdbcType="VARCHAR"/>
+        <result column="MATCH_RULES_TITLE" property="matchRulesTitle" jdbcType="VARCHAR"/>
+        <result column="MATCH_ATTENTION_TITLE" property="matchAttentionTitle" jdbcType="VARCHAR"/>
+        <result column="MATCH_CHECK_STATE" property="matchCheckState" jdbcType="VARCHAR"/>
+        <result column="MATCH_CHECK_NAME" property="matchCheckName" jdbcType="VARCHAR"/>
+        <result column="MATCH_CHECK_TIME" property="matchCheckTime" jdbcType="VARCHAR"/>
+        <result column="MATCH_CHECK_DES" property="matchCheckDes" jdbcType="VARCHAR"/>
+        <result column="MATCH_CREATE_NAME" property="matchCreateName" jdbcType="VARCHAR"/>
+        <result column="MATCH_FINALS_FLAG" property="matchFinalsFlag" jdbcType="VARCHAR"/>
+        <result column="MATCH_CODE" property="matchCode" jdbcType="VARCHAR"/>
+        <result column="MATCH_PRE_ID" property="matchPreId" jdbcType="VARCHAR"/>
+        <result column="MATCH_PRE_NAME" property="matchPreName" jdbcType="VARCHAR"/>
+
+
+
+
+    </resultMap>
+    <select id="queryMatchReportList" parameterType="com.macro.mall.model.DMatchInfo" resultMap="BaseResultMap">
+        select d.match_id,
+        d.match_type,
+        m.match_tp_name || m.match_max_name as match,
+        m.match_tp,
+        m.match_tp_name,
+        d.match_apply_start_time,
+        d.match_apply_end_time,
+        d.match_vote_flag,
+        d.match_state,
+        m.match_min_detail,
+        (select count(*)
+        from d_match_apply_info s
+        where s.match_id = d.match_id
+        ) AS TOTAL_NUM,
+        (select count(*)
+        from d_match_apply_info s
+        where s.match_id = d.match_id
+        and s.apply_state = '00'
+        ) as num,
+        (select count(*)
+        from d_match_apply_info s
+        where s.match_id = d.match_id
+        and s.apply_state = '09'
+        ) as REMOVE_MATCH_NUM,
+        (select count(*)
+        from d_match_apply_info s
+        where s.match_id = d.match_id
+        and s.apply_state in ('01', '02')
+        and s.match_type = '0') as STAY_PAY_NUM,
+        (select count(*)
+        from d_match_apply_info s
+        where s.match_id = d.match_id
+        and s.apply_state = '10'
+        and s.match_type = '0') as REMOVE_SIGN_NUM,
+        (select distinct count(b.team_id)
+        from d_match_team_info b
+        where b.match_id = d.match_id) as team_num,
+        (select distinct count(b.team_id)
+        from d_match_team_info b
+        where b.match_id = d.match_id
+        and b.team_state = '2') as SUCCESS_TEAM_NUM,
+        (select distinct count(b.team_id)
+        from d_match_team_info b
+        where b.match_id = d.match_id
+        and b.team_state = '1') as TEAMING_NUM,
+        (select distinct count(b.team_id)
+        from d_match_team_info b
+        where b.match_id = d.match_id
+        and b.team_state = '4') as AUDITING_ERR_NUM,
+        d.match_create_time
+        from d_match_info d
+        join d_match_minterm m
+        on m.match_min_id = d.match_group_id
+        <where>
+            <if test="matchName!=null and matchName!=''">
+                and m.match_min_detail like
+                '%'||#{matchName,jdbcType=VARCHAR}||'%'
+            </if>
+            <if test="matchType!=null and matchType!=''">
+                and d.match_type = #{matchType}
+            </if>
+            <if test="matchVoteFlag!=null and matchVoteFlag!=''">
+                and d.match_vote_flag = #{matchVoteFlag}
+            </if>
+            <if test="matchState!=null and matchState!=''">
+                and d.match_state = #{matchState}
+            </if>
+            <if test="matchMaxId!=null and matchMaxId!=''">
+                and m.match_max_id = #{matchMaxId}
+            </if>
+            <if test="matchTp!=null and matchTp!=''">
+                and m.MATCH_TP = #{matchTp}
+            </if>
+            <if test="startTime !=null and startTime !=''">
+                and d.MATCH_APPLY_START_TIME <![CDATA[>=]]> #{startTime}
+            </if>
+            <if test="endTime!=null and endTime!=''">
+                and d.MATCH_APPLY_END_TIME <![CDATA[<=]]>  #{endTime}
+            </if>
+        </where>
+        order by d.MATCH_CREATE_TIME DESC
+    </select>
+
+
+    <select id="queryMatchStockNum" parameterType="String" resultType="Integer">
+        select  MATCH_STOCK_NUM from  d_match_info where  MATCH_ID = #{matchId}
+    </select>
+
+    <update id="updateStockNum" parameterType="String">
+      update    d_match_info set   MATCH_STOCK_NUM=MATCH_STOCK_NUM-1   where  MATCH_ID = #{matchId}
+    </update>
+
+    <select id="queryList" parameterType="com.macro.mall.model.DMatchInfo" resultMap="BaseResultMap">
+        select  d.match_id,
+        d.match_type_id,
+        (select distinct match_max_name from d_match_minterm t where t.match_max_id=d.match_type_id) as match_max_name,
+        d.match_group_id,
+        (select distinct match_min_detail from d_match_minterm t where t.match_min_id=d.match_group_id) as match_min_detail,
+        d.match_name,
+        d.match_des,
+        d.match_des_title,
+        d.match_address,
+        (select param_value from d_tcodeposs_para a where a.param_type = 'visitPath2')||d.match_photo as match_photo,
+        d.match_apply_start_time,
+        d.match_apply_end_time,
+        d.match_start_time,
+        d.match_end_time,
+        d.match_pay_flag,
+        d.match_pay_money,
+        d.match_pay_mer_id,
+        d.match_insure_flag,
+        d.match_insure_money,
+        d.match_insure_mer_id,
+        d.match_type,
+        d.match_num_limit,
+        d.match_group_limit,
+        d.match_group_num_limit,
+        d.match_apply_param,
+        d.match_vote_flag,
+        d.match_state,
+        d.match_notice,
+        d.match_notice_title,
+        d.match_rules,
+        d.match_rules_title,
+        d.match_attention,
+        d.match_attention_title,
+        (select param_value from d_tcodeposs_para a where a.param_type = 'visitPath2')||d.match_photo_detail as match_photo_detail,
+        d.match_gender_flag,
+        d.match_age_flag,
+        d.match_max_age,
+        d.match_min_age,
+        d.match_stock_num,
+        d.match_group_max_limit,
+        d.match_create_time,
+        d.match_sponsor,
+        d.MATCH_CHECK_STATE,
+        d.MATCH_CHECK_NAME,
+        d.MATCH_CHECK_TIME,
+        d.MATCH_CHECK_DES,
+        d.MATCH_CREATE_NAME,
+        (select distinct match_tp_name from d_match_minterm t where t.match_tp=d.match_tp) as match_tp_name,
+        d.match_tp ,
+        d.MATCH_FINALS_FLAG,
+        d.MATCH_PRE_ID,
+        d2.match_name as MATCH_PRE_NAME
+        from  d_match_info  d
+        left join d_match_info d2 on d.MATCH_PRE_ID=d2.match_id
+        <where>
+            d.match_id !='99'
+            <if test="matchName!=null and matchName!=''">
+                and d.match_name like
+                '%'||#{matchName,jdbcType=VARCHAR}||'%'
+            </if>
+            <if test="matchCheckState!=null and matchCheckState!=''">
+                and d.MATCH_CHECK_STATE = #{matchCheckState}
+            </if>
+            <if test="matchType!=null and matchType!=''">
+                and d.match_type = #{matchType}
+            </if>
+            <if test="matchVoteFlag!=null and matchVoteFlag!=''">
+                and d.match_vote_flag = #{matchVoteFlag}
+            </if>
+            <if test="matchState!=null and matchState!=''">
+                and d.match_state = #{matchState}
+            </if>
+            <if test="matchMaxId!=null and matchMaxId!=''">
+                and d.match_type_id = #{matchMaxId}
+            </if>
+            <if test="matchMinId!=null and matchMinId!=''">
+                and d.match_group_id = #{matchMinId}
+            </if>
+            <if test="matchTp!=null and matchTp!=''">
+                and d.MATCH_TP = #{matchTp}
+            </if>
+        </where>
+        order by d.MATCH_CREATE_TIME DESC
+    </select>
+
+
+    <select id="queryList1" parameterType="com.macro.mall.model.DMatchInfo" resultMap="BaseResultMap">
+        select  d.match_id,
+        d.match_type_id,
+        (select distinct match_max_name from d_match_minterm t where t.match_max_id=d.match_type_id) as match_max_name,
+        d.match_group_id,
+        (select distinct match_min_detail from d_match_minterm t where t.match_min_id=d.match_group_id) as match_min_detail,
+        d.match_name,
+        d.match_des,
+        d.match_des_title,
+        d.match_address,
+        (select param_value from d_tcodeposs_para a where a.param_type = 'visitPath2')||d.match_photo as match_photo,
+        d.match_apply_start_time,
+        d.match_apply_end_time,
+        d.match_start_time,
+        d.match_end_time,
+        d.match_pay_flag,
+        d.match_pay_money,
+        d.match_pay_mer_id,
+        d.match_insure_flag,
+        d.match_insure_money,
+        d.match_insure_mer_id,
+        d.match_type,
+        d.match_num_limit,
+        d.match_group_limit,
+        d.match_group_num_limit,
+        d.match_apply_param,
+        d.match_vote_flag,
+        d.match_state,
+        d.match_notice,
+        d.match_notice_title,
+        d.match_rules,
+        d.match_rules_title,
+        d.match_attention,
+        d.match_attention_title,
+        (select param_value from d_tcodeposs_para a where a.param_type = 'visitPath2')||d.match_photo_detail as match_photo_detail,
+        d.match_gender_flag,
+        d.match_age_flag,
+        d.match_max_age,
+        d.match_min_age,
+        d.match_stock_num,
+        d.match_group_max_limit,
+        d.match_create_time,
+        d.match_sponsor,
+        d.MATCH_CHECK_STATE,
+        d.MATCH_CHECK_NAME,
+        d.MATCH_CHECK_TIME,
+        d.MATCH_CHECK_DES,
+        d.MATCH_CREATE_NAME,
+        (select distinct match_tp_name from d_match_minterm t where t.match_tp=d.match_tp) as match_tp_name,
+        d.match_tp ,
+        MATCH_FINALS_FLAG,
+        MATCH_PRE_ID
+        from  d_match_info  d
+        <where>
+            d.match_id !='99'
+            <if test="matchName!=null and matchName!=''">
+                and d.match_name = #{matchName}
+            </if>
+            <if test="matchCheckState!=null and matchCheckState!=''">
+                and d.MATCH_CHECK_STATE = #{matchCheckState}
+            </if>
+            <if test="matchType!=null and matchType!=''">
+                and d.match_type = #{matchType}
+            </if>
+            <if test="matchVoteFlag!=null and matchVoteFlag!=''">
+                and d.match_vote_flag = #{matchVoteFlag}
+            </if>
+            <if test="matchState!=null and matchState!=''">
+                and d.match_state = #{matchState}
+            </if>
+            <if test="matchMaxId!=null and matchMaxId!=''">
+                and d.match_type_id = #{matchMaxId}
+            </if>
+            <if test="matchMinId!=null and matchMinId!=''">
+                and d.match_group_id = #{matchMinId}
+            </if>
+            <if test="matchTp!=null and matchTp!=''">
+                and d.MATCH_TP = #{matchTp}
+            </if>
+        </where>
+        order by d.MATCH_CREATE_TIME DESC
+    </select>
+
+
+    <insert id="insert" parameterType="com.macro.mall.model.DMatchInfo">
+    insert into d_match_info (MATCH_ID, MATCH_TYPE_ID, MATCH_GROUP_ID,
+      MATCH_NAME,MATCH_DES,MATCH_ADDRESS,MATCH_PHOTO,MATCH_APPLY_START_TIME,
+      MATCH_APPLY_END_TIME,MATCH_START_TIME,MATCH_END_TIME,MATCH_PAY_FLAG,
+      MATCH_PAY_MONEY,MATCH_PAY_MER_ID,MATCH_INSURE_FLAG,MATCH_INSURE_MONEY,
+      MATCH_INSURE_MER_ID,MATCH_TYPE,MATCH_NUM_LIMIT,MATCH_GROUP_LIMIT,
+      MATCH_GROUP_NUM_LIMIT,MATCH_APPLY_PARAM,MATCH_VOTE_FLAG,MATCH_STATE,
+      MATCH_NOTICE,MATCH_RULES,MATCH_ATTENTION,MATCH_PHOTO_DETAIL,MATCH_GENDER_FLAG,
+      MATCH_AGE_FLAG,MATCH_MAX_AGE,MATCH_MIN_AGE,MATCH_STOCK_NUM,MATCH_GROUP_MAX_LIMIT,
+      MATCH_CREATE_TIME,MATCH_SPONSOR,MATCH_TP,MATCH_DES_TITLE, MATCH_NOTICE_TITLE,
+       MATCH_RULES_TITLE ,MATCH_ATTENTION_TITLE,
+       MATCH_CHECK_STATE,
+        MATCH_CREATE_NAME,MATCH_CODE,MATCH_FINALS_FLAG,
+        MATCH_PRE_ID)
+    values (sys_guid(),
+     #{matchTypeId,jdbcType=VARCHAR}, #{matchGroupId,jdbcType=VARCHAR}, #{matchName,jdbcType=VARCHAR},
+     #{matchDes,jdbcType=BLOB}, #{matchAddress,jdbcType=VARCHAR}, #{matchPhoto,jdbcType=VARCHAR},
+     #{matchApplyStartTime,jdbcType=VARCHAR},#{matchApplyEndTime,jdbcType=VARCHAR},
+     #{matchStartTime,jdbcType=VARCHAR}, #{matchEndTime,jdbcType=VARCHAR},
+     #{matchPayFlag,jdbcType=VARCHAR}, #{matchPayMoney,jdbcType=NUMERIC},
+     #{matchPayMerId,jdbcType=VARCHAR}, #{matchInsureFlag,jdbcType=VARCHAR},
+     #{matchInsureMoney,jdbcType=NUMERIC}, #{matchInsureMerId,jdbcType=VARCHAR},
+     #{matchType,jdbcType=VARCHAR}, #{matchNumLimit,jdbcType=NUMERIC},
+     #{matchGroupLimit,jdbcType=NUMERIC}, #{matchGroupNumLimit,jdbcType=NUMERIC},
+     #{matchApplyParam,jdbcType=VARCHAR}, #{matchVoteFlag,jdbcType=VARCHAR},
+     #{matchState,jdbcType=VARCHAR}, #{matchNotice,jdbcType=BLOB},
+     #{matchRules,jdbcType=BLOB},#{matchAttention,jdbcType=BLOB},
+     #{matchPhotoDetail,jdbcType=VARCHAR},#{matchGenderFlag,jdbcType=VARCHAR},
+     #{matchAgeFlag,jdbcType=VARCHAR},#{matchMaxAge,jdbcType=NUMERIC},
+     #{matchMinAge,jdbcType=NUMERIC},#{matchStockNum,jdbcType=NUMERIC},
+     #{matchGroupMaxLimit,jdbcType=NUMERIC},to_char(sysdate,'yyyy-mm-dd hh24:mi:ss'),
+     #{matchSponsor,jdbcType=VARCHAR},#{matchTp,jdbcType=VARCHAR}
+     ,#{matchDesTitle,jdbcType=VARCHAR},#{matchNoticeTitle,jdbcType=VARCHAR}
+     ,#{matchRulesTitle,jdbcType=VARCHAR},#{matchAttentionTitle,jdbcType=VARCHAR},
+     '0',#{matchCreateName,jdbcType=VARCHAR},#{matchCode,jdbcType=VARCHAR},
+     #{matchFinalsFlag,jdbcType=VARCHAR} ,
+     #{matchPreId,jdbcType=VARCHAR}
+     )
+  </insert>
+
+    <delete id="delete" parameterType="String">
+    delete from d_match_info
+     where MATCH_ID=  #{matchId,jdbcType=VARCHAR}
+  </delete>
+
+
+    <update id="update" parameterType="com.macro.mall.model.DMatchInfo">
+        update d_match_info
+        set
+        MATCH_CHECK_TIME =to_char(sysdate,'yyyy-mm-dd hh24:mi:ss')
+        <if test="matchCheckDes!=null and matchCheckDes!=''">
+            ,MATCH_CHECK_DES = #{matchCheckDes}
+        </if>
+        <if test="matchCheckName!=null and matchCheckName!=''">
+            ,MATCH_CHECK_NAME = #{matchCheckName}
+        </if>
+        <if test="matchCheckState!=null and matchCheckState!=''">
+            ,MATCH_CHECK_STATE = #{matchCheckState}
+        </if>
+        <if test="matchTypeId!=null and matchTypeId!=''">
+            ,MATCH_TYPE_ID = #{matchTypeId}
+        </if>
+        <if test="matchGroupId!=null and matchGroupId!=''">
+            ,  MATCH_GROUP_ID = #{matchGroupId}
+        </if>
+        <if test="matchName!=null and matchName!=''">
+            , MATCH_NAME = #{matchName}
+        </if>
+        <if test="matchDes!=null and matchDes!=''">
+            , MATCH_DES = #{matchDes}
+        </if>
+        <if test="matchAddress!=null and matchAddress!=''">
+            ,  MATCH_ADDRESS = #{matchAddress}
+        </if>
+        <if test="matchPhoto!=null and matchPhoto!=''">
+            ,  MATCH_PHOTO = #{matchPhoto}
+        </if>
+        <if test="matchApplyStartTime!=null and matchApplyStartTime!=''">
+            ,   MATCH_APPLY_START_TIME = #{matchApplyStartTime}
+        </if>
+        <if test="matchApplyEndTime!=null and matchApplyEndTime!=''">
+            , MATCH_APPLY_END_TIME = #{matchApplyEndTime}
+        </if>
+        <if test="matchStartTime!=null and matchStartTime!=''">
+            ,  MATCH_START_TIME = #{matchStartTime}
+        </if>
+        <if test="matchEndTime!=null and matchEndTime!=''">
+            ,  MATCH_END_TIME = #{matchEndTime}
+        </if>
+        <if test="matchPayFlag!=null and matchPayFlag!=''">
+            ,  MATCH_PAY_FLAG = #{matchPayFlag}
+        </if>
+        <if test="matchPayMoney!=null and matchPayMoney!=''">
+            , MATCH_PAY_MONEY = #{matchPayMoney}
+        </if>
+        <if test="matchPayMerId!=null and matchPayMerId!=''">
+            , MATCH_PAY_MER_ID = #{matchPayMerId}
+        </if>
+        <if test="matchInsureFlag!=null and matchInsureFlag!=''">
+            , MATCH_INSURE_FLAG = #{matchInsureFlag}
+        </if>
+        <if test="matchInsureMoney!=null and matchInsureMoney!=''">
+            ,  MATCH_INSURE_MONEY = #{matchInsureMoney}
+        </if>
+        <if test="matchInsureMerId!=null and matchInsureMerId!=''">
+            , MATCH_INSURE_MER_ID = #{matchInsureMerId}
+        </if>
+        <if test="matchType!=null and matchType!=''">
+            , MATCH_TYPE = #{matchType}
+        </if>
+        <if test="matchNumLimit!=null and matchNumLimit!=''">
+            ,  MATCH_NUM_LIMIT = #{matchNumLimit}
+        </if>
+        <if test="matchGroupLimit!=null and matchGroupLimit!=''">
+            ,  MATCH_GROUP_LIMIT = #{matchGroupLimit}
+        </if>
+        <if test="matchGroupNumLimit!=null and matchGroupNumLimit!=''">
+            , MATCH_GROUP_NUM_LIMIT = #{matchGroupNumLimit}
+        </if>
+        <if test="matchApplyParam!=null and matchApplyParam!=''">
+            , MATCH_APPLY_PARAM = #{matchApplyParam}
+        </if>
+        <if test="matchVoteFlag!=null and matchVoteFlag!=''">
+            ,  MATCH_VOTE_FLAG = #{matchVoteFlag}
+        </if>
+        <if test="matchState!=null and matchState!=''">
+            ,  MATCH_STATE = #{matchState}
+        </if>
+        <if test="matchNotice!=null and matchNotice!=''">
+            , MATCH_NOTICE = #{matchNotice}
+        </if>
+        <if test="matchRules!=null and matchRules!=''">
+            ,  MATCH_RULES = #{matchRules}
+        </if>
+        <if test="matchAttention!=null and matchAttention!=''">
+            , MATCH_ATTENTION = #{matchAttention}
+        </if>
+        <if test="matchPhotoDetail!=null and matchPhotoDetail!=''">
+            , MATCH_PHOTO_DETAIL = #{matchPhotoDetail}
+        </if>
+        <if test="matchGenderFlag!=null and matchGenderFlag!=''">
+            , MATCH_GENDER_FLAG = #{matchGenderFlag}
+        </if>
+        <if test="matchAgeFlag!=null and matchAgeFlag!=''">
+            , MATCH_AGE_FLAG = #{matchAgeFlag}
+        </if>
+        <if test="matchMaxAge!=null and matchMaxAge!=''">
+            ,MATCH_MAX_AGE = #{matchMaxAge}
+        </if>
+        <if test="matchMinAge!=null and matchMinAge!=''">
+            , MATCH_MIN_AGE = #{matchMinAge}
+        </if>
+        <if test="matchStockNum!=null and matchStockNum!=''">
+            ,MATCH_STOCK_NUM = #{matchStockNum}
+        </if>
+        <if test="matchGroupMaxLimit!=null and matchGroupMaxLimit!=''">
+            , MATCH_GROUP_MAX_LIMIT = #{matchGroupMaxLimit}
+        </if>
+        <if test="matchSponsor!=null and matchSponsor!=''">
+            , MATCH_SPONSOR = #{matchSponsor}
+        </if>
+        <if test="matchTp!=null and matchTp!=''">
+            ,MATCH_TP = #{matchTp}
+        </if>
+        <if test="matchDesTitle!=null and matchDesTitle!=''">
+            ,MATCH_DES_TITLE = #{matchDesTitle}
+        </if>
+        <if test="matchNoticeTitle!=null and matchNoticeTitle!=''">
+            ,MATCH_NOTICE_TITLE = #{matchNoticeTitle}
+        </if>
+        <if test="matchRulesTitle!=null and matchRulesTitle!=''">
+            ,MATCH_RULES_TITLE = #{matchRulesTitle}
+        </if>
+        <if test="matchAttentionTitle!=null and matchAttentionTitle!=''">
+            ,MATCH_ATTENTION_TITLE = #{matchAttentionTitle}
+        </if>
+
+        <if test="matchFinalsFlag!=null and matchFinalsFlag!=''">
+            ,MATCH_FINALS_FLAG = #{matchRulesTitle}
+        </if>
+        <if test="matchPreId!=null and matchPreId!=''">
+            ,MATCH_PRE_ID = #{matchPreId}
+        </if>
+        where MATCH_ID=  #{matchId,jdbcType=VARCHAR}
+    </update>
+
+    <select id="queryPreMatchList" parameterType="String" resultMap="BaseResultMap">
+         SELECT t.match_name,t.MATCH_ID as  match_pre_id from d_match_info t WHERE t.match_group_id=#{matchGroupId}  AND t.match_finals_flag='1'
+    </select>
+
+    <select id="selectPreMatchById" parameterType="String" resultMap="BaseResultMap">
+        select  d.match_id,
+         d.match_type_id,
+        d.match_type_id as match_max_id,
+         d.match_group_id as match_min_id,
+        (select distinct match_max_name from d_match_minterm t where t.match_max_id=d.match_type_id) as match_max_name,
+        d.match_group_id,
+        (select distinct match_min_detail from d_match_minterm t where t.match_min_id=d.match_group_id) as match_min_detail,
+        d.match_name,
+        d.match_des,
+        d.match_des_title,
+        d.match_address,
+        (select param_value from d_tcodeposs_para a where a.param_type = 'visitPath2')||d.match_photo as match_photo,
+        d.match_apply_start_time,
+        d.match_apply_end_time,
+        d.match_start_time,
+        d.match_end_time,
+        d.match_pay_flag,
+        d.match_pay_money,
+        d.match_pay_mer_id,
+        d.match_insure_flag,
+        d.match_insure_money,
+        d.match_insure_mer_id,
+        d.match_type,
+        d.match_num_limit,
+        d.match_group_limit,
+        d.match_group_num_limit,
+        d.match_apply_param,
+        d.match_vote_flag,
+        d.match_state,
+        d.match_notice,
+        d.match_notice_title,
+        d.match_rules,
+        d.match_rules_title,
+        d.match_attention,
+        d.match_attention_title,
+        (select param_value from d_tcodeposs_para a where a.param_type = 'visitPath2')||d.match_photo_detail as match_photo_detail,
+        d.match_gender_flag,
+        d.match_age_flag,
+        d.match_max_age,
+        d.match_min_age,
+        d.match_stock_num,
+        d.match_group_max_limit,
+        d.match_create_time,
+        d.match_sponsor,
+        d.MATCH_CHECK_STATE,
+        d.MATCH_CHECK_NAME,
+        d.MATCH_CHECK_TIME,
+        d.MATCH_CHECK_DES,
+        d.MATCH_CREATE_NAME,
+        (select distinct match_tp_name from d_match_minterm t where t.match_tp=d.match_tp) as match_tp_name,
+        d.match_tp ,
+        MATCH_FINALS_FLAG,
+        MATCH_PRE_ID
+        from  d_match_info  d
+      WHERE d.match_id=#{matchPreId}
+    </select>
+</mapper>

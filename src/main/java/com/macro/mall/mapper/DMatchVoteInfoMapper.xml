@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.macro.mall.mapper.DMatchVoteInfoMapper">
+  <resultMap id="BaseResultMap" type="com.macro.mall.model.DMatchVoteInfo">
+    <result column="VOTE_ID" jdbcType="VARCHAR" property="voteId" />
+    <result column="WEEK_NO" jdbcType="NUMERIC" property="weekNo" />
+    <result column="TEAM_ID" jdbcType="VARCHAR" property="teamId" />
+    <result column="USER_ID" jdbcType="VARCHAR" property="userId" />
+    <result column="USER_NM" jdbcType="VARCHAR" property="userNm" />
+    <result column="VOTE_NUM" jdbcType="NUMERIC" property="voteNum" />
+    <result column="VOTE_TIME" jdbcType="CHAR" property="voteTime" />
+    <result column="MATCH_NAME" jdbcType="VARCHAR" property="matchName" />
+    <result column="MATCH_TP_NAME" jdbcType="VARCHAR" property="matchTpName" />
+    <result column="MATCH_TP" jdbcType="VARCHAR" property="matchTp" />
+    <result column="TEAM_NAME" jdbcType="VARCHAR" property="teamName" />
+    <result column="TEAM_HEADER_NAME" jdbcType="VARCHAR" property="teamHeaderName" />
+  </resultMap>
+
+
+  <select id="queryList" parameterType="com.macro.mall.model.DMatchVoteInfo" resultMap="BaseResultMap">
+    select l.team_id,
+    l.team_name,
+    (select sum(d.vote_num)
+    from D_MATCH_VOTE_INFO d
+    where l.team_id = d.team_id
+    group by d.team_id) as vote_num,
+    l.team_header_name,
+    x.match_max_type_name as MATCH_TP_NAME,
+    z.match_name
+    from d_match_team_info l
+    join d_match_info z
+    on l.match_id = z.match_id
+    join d_match_maxtype x
+    on z.match_tp = x.match_max_type_id
+    where l.team_id in (select distinct (d.team_id)
+    from D_MATCH_VOTE_INFO d
+    group by d.team_id)
+      <if test="matchTp != null and matchTp!=''">
+        and x.match_max_type_id = #{matchTp,jdbcType=VARCHAR}
+      </if>
+      <if test="matchName != null and matchName!=''">
+        and z.MATCH_NAME = #{matchName,jdbcType=VARCHAR}
+      </if>
+      <if test="teamName != null and teamName!=''">
+        and l.TEAM_NAME = #{teamName,jdbcType=VARCHAR}
+      </if>
+
+  </select>
+
+
+
+
+
+
+</mapper>

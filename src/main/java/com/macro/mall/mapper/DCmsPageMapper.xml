@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.macro.mall.mapper.DCmsPageMapper">
+  <resultMap id="CMS000002ResultMap" type="com.macro.mall.cms.bean.CMS000002Result">
+    <result column="FUN_ID" property="funId"/>
+    <result column="FUN_NAME" property="funName"/>
+    <result column="PAGE_ID" property="pageId"/>
+    <result column="DATAS_ID" property="datasId"/>
+    <result column="PARAMS_FLAG" property="paramsFlag"/>
+    <result column="SPACE_FLAG" property="spaceFlag"/>
+    <result column="PARAMS_NAME" property="paramsName"/>
+    <result column="FONT_SIZE" property="fontSize"/>
+    <result column="FONT_COLOR" property="fontColor"/>
+    <result column="COLOR_R" property="colorR"/>
+    <result column="COLOR_G" property="colorG"/>
+    <result column="COLOR_B" property="colorB"/>
+    <result column="P_DOWN_TIME" property="pDownTime"/>
+    <result column="P_NEWS_NUM" property="pNewsNum"/>
+    <result column="P_BUT_FLAG" property="pButFlag"/>
+    <result column="P_BUT_VALUE" property="pButValue"/>
+    <result column="MODEL_IMAGE" property="modelImage"/>
+    <result column="CHANNEL" property="channel"/>
+    <result column="ROW_NUM" property="rowNum"/>
+    <collection property="cmsDatas" ofType="com.macro.mall.cms.bean.CmsData" notNullColumn="DATA_ID">
+      <id column="DATA_ID" property="dataId"/>
+      <result column="DATA_IMAGE1" property="funImage01"/>
+      <result column="DATA_IMAGE2" property="funImage02"/>
+      <result column="DATA_IMAGE3" property="funImage03"/>
+      <result column="DATA_IMAGE4" property="funImage04"/>
+      <result column="DATA_NAME" property="funTitle"/>
+      <result column="DATAS_GROUP" property="dataGId"/>
+      <result column="DATAS_ID" property="dataSId"/>
+      <result column="DATA_SORT" property="dataSort"/>
+      <result column="D_STATE" property="datastate"/>
+    </collection>
+  </resultMap>
+
+  <resultMap id="BaseResultMap" type="com.macro.mall.model.DCmsPage">
+    <result column="PAGE_ID" jdbcType="VARCHAR" property="pageId" />
+    <result column="PAGE_NAME" jdbcType="VARCHAR" property="pageName" />
+    <result column="P_START_TIME" jdbcType="VARCHAR" property="pStartTime" />
+    <result column="P_END_TIME" jdbcType="VARCHAR" property="pEndTime" />
+    <result column="P_SORT_ID" jdbcType="VARCHAR" property="pSortId" />
+    <result column="PAGE_FLAG" jdbcType="VARCHAR" property="pageFlag" />
+    <result column="PAGE_STATE" jdbcType="VARCHAR" property="pageState" />
+    <result column="P_UP_TIME" jdbcType="VARCHAR" property="pUpTime" />
+    <result column="P_TEM_SORT" jdbcType="VARCHAR" property="pTemSort" />
+    <result column="P_SAVE_SORT" jdbcType="VARCHAR" property="pSaveSort" />
+  </resultMap>
+
+
+  <resultMap id="pageList" type="com.macro.mall.cms.bean.CmsPage">
+    <result column="PAGE_ID" property="pageId"/>
+    <result column="PAGE_NAME" property="pageName"/>
+    <result column="P_START_TIME" property="startTime"/>
+    <result column="P_END_TIME" property="endTime"/>
+    <result column="P_SORT_ID" property="pSortId"/>
+    <result column="PAGE_STATE" property="sate"/>
+    <result column="P_UP_TIME" property="upTime"/>
+    <result column="P_TITLE_NAME" property="titleName"/>
+    <result column="SORT_NAME" property="sortName"/>
+  </resultMap>
+
+
+
+  <!-- 首页信息查询 -->
+  <select id="selectPagelist"  parameterType="com.macro.mall.model.DCmsPage" resultMap="pageList">
+    select
+    a.PAGE_ID,a.PAGE_NAME,a.P_START_TIME,a.P_END_TIME,a.P_SORT_ID,a.PAGE_STATE,a.P_UP_TIME,a.P_TITLE_NAME, b.TYPE_NAME as SORT_NAME
+    from D_CMS_PAGE a
+    left join D_CMD_PAGE_TYPE b on b.PAGE_TYPE_ID = a.P_SORT_ID
+    <where>
+      <if test="pSortId != null and pSortId != ''">
+        and P_SORT_ID = #{pSortId}
+      </if>
+      <if test="pageName != null and pageName !=''  ">
+        and   PAGE_NAME like     concat(concat('%',#{pageName,jdbcType=VARCHAR}),'%')
+      </if>
+      <if test="pageState != null and pageState !=''  ">
+        and  PAGE_STATE =#{pageState,jdbcType=VARCHAR}
+      </if>
+      <if test="pStartTime != null and  pStartTime !=''">
+        and  to_date(P_START_TIME,'yyyy-mm-dd hh24:mi:ss') <![CDATA[<=]]> to_date(#{pStartTime,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+      </if>
+      <if test="pEndTime != null and  pEndTime  !=''">
+        and   to_date(P_END_TIME,'yyyy-mm-dd hh24:mi:ss') <![CDATA[>=]]> to_date(#{pEndTime,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+      </if>
+    </where>
+    order by PAGE_ID desc
+  </select>
+
+
+
+  <!-- 客户端查询 -->
+  <select id="selectPhonePage"  parameterType="com.macro.mall.model.DCmsPage" resultMap="BaseResultMap">
+    select PAGE_ID,PAGE_NAME,P_START_TIME,P_END_TIME,P_SORT_ID,PAGE_FLAG,PAGE_STATE,P_UP_TIME,P_TEM_SORT,P_SAVE_SORT
+    from D_CMS_PAGE a
+    <where>
+      <if test="pSortId != null and pSortId !=''  ">
+        and a.p_sort_id = #{pSortId,jdbcType=VARCHAR}
+      </if>
+
+      <if test="pageFlag != null and pageFlag !=''  ">
+        and a.page_flag = #{pageFlag,jdbcType=VARCHAR}
+      </if>
+
+      <if test="pageState != null and pageState !=''  ">
+        and a.page_state = #{pageState,jdbcType=VARCHAR}
+      </if>
+
+      <if test="nowDate != null and nowDate !=''  ">
+        and #{nowDate,jdbcType=VARCHAR}  between a.p_start_time and a.p_end_time
+      </if>
+    </where>
+   order by a.p_up_time
+
+  </select>
+
+
+
+
+  <!-- 查询二维码信息 -->
+  <select id="selectPage" parameterType="string" resultMap="BaseResultMap">
+   select PAGE_ID,PAGE_NAME,P_START_TIME,P_END_TIME,P_SORT_ID,PAGE_FLAG,PAGE_STATE,P_UP_TIME,P_TEM_SORT,P_SAVE_SORT from D_CMS_PAGE where  PAGE_ID = #{0}
+	</select>
+
+
+  <select id="selectByName" parameterType="string" resultMap="BaseResultMap">
+   select PAGE_ID,PAGE_NAME,P_START_TIME,P_END_TIME,P_SORT_ID,PAGE_FLAG,PAGE_STATE,P_UP_TIME,P_TEM_SORT,P_SAVE_SORT from D_CMS_PAGE where  PAGE_NAME = #{0}
+	</select>
+
+  <insert id="insertPage" parameterType="com.macro.mall.model.DCmsPage" useGeneratedKeys="true" keyProperty="pageId">
+    <selectKey resultType="String" order="BEFORE" keyProperty="pageId">
+      select SEQ_PAGE_ID.nextval from dual
+    </selectKey>
+
+    insert into D_CMS_PAGE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+        PAGE_ID,
+      <if test="pageName != null">
+        PAGE_NAME,
+      </if>
+      <if test="titleName != null and titleName != ''">
+        P_TITLE_NAME,
+      </if>
+      <if test="pStartTime != null">
+        P_START_TIME,
+      </if>
+      <if test="pEndTime != null">
+        P_END_TIME,
+      </if>
+      <if test="pSortId != null">
+        P_SORT_ID,
+      </if>
+      <if test="pageFlag != null">
+        PAGE_FLAG,
+      </if>
+      <if test="pageState != null">
+        PAGE_STATE,
+      </if>
+      <if test="pUpTime != null">
+        P_UP_TIME,
+      </if>
+      <if test="pTemSort != null">
+        P_TEM_SORT,
+      </if>
+      <if test="pSaveSort != null">
+        P_SAVE_SORT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+
+      #{pageId},
+
+      <if test="pageName != null">
+        #{pageName,jdbcType=VARCHAR},
+      </if>
+      <if test="titleName != null and titleName != ''">
+        #{titleName,jdbcType=VARCHAR},
+      </if>
+      <if test="pStartTime != null">
+        #{pStartTime,jdbcType=VARCHAR},
+      </if>
+      <if test="pEndTime != null">
+        #{pEndTime,jdbcType=VARCHAR},
+      </if>
+      <if test="pSortId != null">
+        #{pSortId,jdbcType=VARCHAR},
+      </if>
+      <if test="pageFlag != null">
+        #{pageFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="pageState != null">
+        #{pageState,jdbcType=VARCHAR},
+      </if>
+      <if test="pUpTime != null">
+        #{pUpTime,jdbcType=VARCHAR},
+      </if>
+      <if test="pTemSort != null">
+        #{pTemSort,jdbcType=VARCHAR},
+      </if>
+      <if test="pSaveSort != null">
+        #{pSaveSort,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+
+  <update id="updatePage" parameterType="com.macro.mall.model.DCmsPage">
+    update D_CMS_PAGE
+    <set>
+      <if test="pageId != null">
+        PAGE_ID = #{pageId,jdbcType=VARCHAR},
+      </if>
+      <if test="pageName != null">
+        PAGE_NAME = #{pageName,jdbcType=VARCHAR},
+      </if>
+      <if test="pStartTime != null">
+        P_START_TIME = #{pStartTime,jdbcType=VARCHAR},
+      </if>
+      <if test="pEndTime != null">
+        P_END_TIME = #{pEndTime,jdbcType=VARCHAR},
+      </if>
+      <if test="pSortId != null">
+        P_SORT_ID = #{pSortId,jdbcType=VARCHAR},
+      </if>
+      <if test="pageFlag != null">
+        PAGE_FLAG = #{pageFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="pageState != null">
+        PAGE_STATE = #{pageState,jdbcType=VARCHAR},
+      </if>
+
+        P_UP_TIME = to_char(sysdate,'YYYY-MM-DD HH24:MI:SS'),
+
+      <if test="pTemSort != null">
+        P_TEM_SORT = #{pTemSort,jdbcType=VARCHAR},
+      </if>
+      <if test="pSaveSort != null">
+        P_SAVE_SORT = #{pSaveSort,jdbcType=VARCHAR},
+      </if>
+      <if test="titleName != null and titleName != ''">
+        P_TITLE_NAME = #{titleName},
+      </if>
+    </set>
+    where  PAGE_ID = #{pageId,jdbcType=VARCHAR}
+  </update>
+
+  <select id="preview" parameterType="com.macro.mall.cms.bean.Preview" resultMap="CMS000002ResultMap">
+    select c.FUN_ID, c.FUN_NAME, a.PAGE_ID,a.DATAS_ID,a.PARAMS_FLAG,a.SPACE_FLAG,a.PARAMS_NAME,a.FONT_SIZE,a.FONT_COLOR,a.COLOR_R,a.COLOR_G,
+           a.COLOR_B,a.P_DOWN_TIME,a.P_NEWS_NUM,a.P_BUT_FLAG,a.P_BUT_VALUE,a.MODEL_IMAGE,a.CHANNEL,a.ROW_NUM,
+           b.DATA_IMAGE1, b.DATA_IMAGE2, b.DATA_IMAGE3, b.DATA_IMAGE4, b.DATA_NAME, b.DATA_ID, b.DATAS_ID, b.DATAS_GROUP, b.DATA_SORT, b.D_STATE
+    from D_CMS_PARAMS a
+    left join D_CMS_FUNCITON c on a.FUC_ID = c.FUN_ID
+    left join D_CMS_DATA b on a.DATAS_ID = b.DATAS_ID
+    left join D_CMS_REGION d on b.DATA_ID = d.REGION_ID
+    left join D_CMS_PEOPLE e on e.PEOPLE_ID = b.DATA_ID
+    where
+      a.PAGE_ID = #{pageId}
+    <if test="dStatss != null and dStatss.length != 0">
+      <foreach collection="dStatss" item="dStats" open=" and b.D_STATE in ( " separator=" , " close=" ) ">
+        #{dStats}
+      </foreach>
+    </if>
+      <if test="startTime != null and startTime != ''">and to_date(b.D_START_TIME,'yyyy-mm-dd hh24:mi:ss') <![CDATA[>=]]> to_date(#{startTime},'yyyy-mm-dd hh24:mi:ss')</if>
+      <if test="endTime != null and endTime != ''">and to_date(b.D_END_TIME,'yyyy-mm-dd hh24:mi:ss') <![CDATA[<=]]> to_date(#{endTime},'yyyy-mm-dd hh24:mi:ss')</if>
+      <if test="mlifeFlag != null and mlifeFlag != ''"> and b.D_MLIFE_FLAG = #{mlifeFlag}</if>
+      <if test="phoneFlag != null and phoneFlag != ''"> and b.D_PHONE_FLAG = #{phoneFlag}</if>
+      <if test="wxFlag != null and wxFlag != ''"> and b.D_WX_FLAG = #{wxFlag}</if>
+      <if test="xcxFlag != null and xcxFlag != ''"> and b.D_XCX_FLAG = #{xcxFlag}</if>
+      <if test="cityId != null and cityId != ''"> and d.CITY_ID = #{cityId}</if>
+      <if test="userId != null and userId != ''"> and e.USER_ID = #{userId}</if>
+    <if test="datasIds != null and datasIds.length != 0">
+      <foreach collection="datasIds" item="datasId" open=" and a.DATAS_ID in ( " separator=" , " close=" ) ">
+        #{datasId}
+      </foreach>
+      <foreach collection="datasIds" item="dStats" open=" order by instr (' " separator=" , " close=" ',A.DATAS_ID) ">
+        ${dStats}
+      </foreach>
+      ,b.DATA_SORT asc
+    </if>
+  </select>
+
+</mapper>

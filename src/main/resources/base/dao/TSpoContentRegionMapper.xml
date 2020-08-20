@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.macro.mall.base.dao.TSpoContentRegionDao" >
+  <resultMap id="BaseResultMap" type="com.macro.mall.base.dto.topConfig.TSpoContentRegion" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <result column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="CONTENT_ID" property="contentId" jdbcType="VARCHAR" />
+    <result column="PROVINCE_ID" property="provinceId" jdbcType="VARCHAR" />
+    <result column="CITY_ID" property="cityId" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="CityInfoMap" type="com.macro.mall.base.dto.topConfig.LayoutRegionInfo" >
+ <result column="CITY_NAME" property="cityName"/>
+ <result column="CITY_ID" property="cityId"/>
+ </resultMap>
+  <!-- add by zxy  保存运动首页城市配置信息 -->
+	<insert id="insertCityIdList" parameterType="list">
+	INSERT INTO t_spo_content_region 
+		(  
+		   ID,
+		   CONTENT_ID,
+		   PROVINCE_ID,
+		   CITY_ID
+		)
+   <foreach collection="list" item="item" index="index" separator="union all">
+    select
+    #{item.id},
+    #{item.contentId},
+    #{item.provinceId},
+    #{item.cityId}
+    from dual
+    </foreach>
+	</insert>
+	
+	<select id="getContentCityInfo" parameterType="String" resultMap="CityInfoMap">
+	  select a.PROVINCE_ID || '-' || a.CITY_ID as CITY_ID,
+           b.province_name || '-' || b.city_name as city_name
+      from t_spo_content_region a
+      left join d_city_information b
+        on a.PROVINCE_ID = b.PROVINCE_ID
+       and a.CITY_ID = b.CITY_ID
+      where a.CONTENT_ID=#{id,jdbcType=VARCHAR} 
+	</select>
+	 <!-- 更新区域限制前的删除操作 -->
+   <select id="deleteContentRegionInfo" parameterType="String">     
+     delete  from  t_spo_content_region t where t.Content_ID=#{ContentId,jdbcType=VARCHAR} 
+   </select>
+   
+    <delete id="deleteCityInfoByIDs" parameterType = "String"  >
+		delete from t_spo_content_region t  where  t.CONTENT_ID
+		in 
+		<foreach collection="array" index="index" item="item" open="(" separator="," close=")">
+		#{item}
+		</foreach>
+	</delete>
+	
+	
+	<select id="selectIndexCityInfo" parameterType="com.macro.mall.base.dto.topConfig.TSpoContentRegion" resultMap="BaseResultMap">
+	 select  id,
+		   CONTENT_ID,
+		   PROVINCE_ID,
+		   CITY_ID
+		   from t_spo_content_region
+		   where CONTENT_ID =#{contentId} and CITY_ID = #{cityId}
+	</select>
+</mapper>

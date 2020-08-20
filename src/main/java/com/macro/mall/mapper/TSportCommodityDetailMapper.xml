@@ -1,0 +1,733 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.macro.mall.mapper.TSportCommodityDetailMapper">
+  <resultMap id="BaseResultMap" type="com.macro.mall.model.TSportCommodityDetail">
+    <id column="COMMODITY_DETAIL_ID" jdbcType="VARCHAR" property="commodityDetailId" />
+    <result column="COMMODITY_ID" jdbcType="VARCHAR" property="commodityId" />
+    <result column="POS_COMMODITY_ID" jdbcType="VARCHAR" property="posCommodityId" />
+    <result column="CREATE_TIME" jdbcType="CHAR" property="createTime" />
+    <result column="UPDATE_TIME" jdbcType="CHAR" property="updateTime" />
+    <result column="CHANNEL" jdbcType="VARCHAR" property="channel" />
+    <result column="ROTATIONN_CHART_URL" jdbcType="VARCHAR" property="rotationnChartUrl" />
+    <result column="PIC_URL" jdbcType="VARCHAR" property="picUrl" />
+    <result column="COMMODITY_NAME" jdbcType="VARCHAR" property="commodityName" />
+    <result column="COMMODITY_STATE" jdbcType="CHAR" property="commodityState" />
+    <result column="MONTHLY_SALES" jdbcType="NUMERIC" property="monthlySales" />
+    <result column="COMMODITY_SALES" jdbcType="NUMERIC" property="commoditySales" />
+    <result column="COMMODITY_STOCK" jdbcType="VARCHAR" property="commodityStock" />
+    <result column="RESERVE_DAYS" jdbcType="VARCHAR" property="reserveDays" />
+    <result column="ADVANCE_RESERVE_DAYS" jdbcType="VARCHAR" property="advanceReserveDays" />
+    <result column="COMMODITY_SCORE" jdbcType="VARCHAR" property="commodityScore" />
+    <result column="DAILY_PRICE" jdbcType="NUMERIC" property="dailyPrice" />
+    <result column="VACATION_PRICE" jdbcType="NUMERIC" property="vacationPrice" />
+    <result column="HOLIDAY_PRICE" jdbcType="NUMERIC" property="holidayPrice" />
+    <result column="COMMODITY_FIELD" jdbcType="VARCHAR" property="commodityField" />
+    <result column="COMMODITY_DESCRIBE" jdbcType="VARCHAR" property="commodityDescribe" />
+    <result column="PURCHASE_LIMITS" jdbcType="VARCHAR" property="purchaseLimits" />
+    <result column="TIME_OUT_DT" jdbcType="VARCHAR" property="timeOutDt" />
+    <result column="ON_FRAME_TIME" jdbcType="CHAR" property="onFrameTime" />
+    <result column="OFF_FRAME_TIME" jdbcType="CHAR" property="offFrameTime" />
+    <result column="ON_SALE_TIME" jdbcType="CHAR" property="onSaleTime" />
+    <result column="OFF_SALE_TIME" jdbcType="CHAR" property="offSaleTime" />
+    <result column="USE_START_TIME" jdbcType="CHAR" property="useStartTime" />
+    <result column="USE_END_TIME" jdbcType="CHAR" property="useEndTime" />
+    <result column="LIMIT_DATE" jdbcType="VARCHAR" property="limitDate" />
+    <result column="DETAIL_REMARK" jdbcType="VARCHAR" property="detailRemark" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.macro.mall.model.TSportCommodityDetail">
+    <result column="COMMODITY_SHOW" jdbcType="CLOB" property="commodityShow" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    COMMODITY_DETAIL_ID, COMMODITY_ID, POS_COMMODITY_ID, CREATE_TIME, UPDATE_TIME, CHANNEL, 
+    ROTATIONN_CHART_URL, PIC_URL, COMMODITY_NAME, COMMODITY_STATE, MONTHLY_SALES, COMMODITY_SALES, 
+    COMMODITY_STOCK, RESERVE_DAYS, ADVANCE_RESERVE_DAYS, COMMODITY_SCORE, DAILY_PRICE, 
+    VACATION_PRICE, HOLIDAY_PRICE, COMMODITY_FIELD, COMMODITY_DESCRIBE, PURCHASE_LIMITS, 
+    TIME_OUT_DT, ON_FRAME_TIME, OFF_FRAME_TIME, ON_SALE_TIME, OFF_SALE_TIME, USE_START_TIME, 
+    USE_END_TIME, LIMIT_DATE, DETAIL_REMARK
+  </sql>
+  <sql id="Blob_Column_List">
+    COMMODITY_SHOW
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.macro.mall.model.TSportCommodityDetailExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from T_SPORT_COMMODITY_DETAIL
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.macro.mall.model.TSportCommodityDetailExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_SPORT_COMMODITY_DETAIL
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from T_SPORT_COMMODITY_DETAIL
+    where COMMODITY_DETAIL_ID = #{commodityDetailId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from T_SPORT_COMMODITY_DETAIL
+    where COMMODITY_DETAIL_ID = #{commodityDetailId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.macro.mall.model.TSportCommodityDetailExample">
+    delete from T_SPORT_COMMODITY_DETAIL
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.macro.mall.model.TSportCommodityDetail">
+    insert into T_SPORT_COMMODITY_DETAIL (COMMODITY_DETAIL_ID, COMMODITY_ID, POS_COMMODITY_ID, 
+      CREATE_TIME, UPDATE_TIME, CHANNEL, 
+      ROTATIONN_CHART_URL, PIC_URL, COMMODITY_NAME, 
+      COMMODITY_STATE, MONTHLY_SALES, COMMODITY_SALES, 
+      COMMODITY_STOCK, RESERVE_DAYS, ADVANCE_RESERVE_DAYS, 
+      COMMODITY_SCORE, DAILY_PRICE, VACATION_PRICE, 
+      HOLIDAY_PRICE, COMMODITY_FIELD, COMMODITY_DESCRIBE, 
+      PURCHASE_LIMITS, TIME_OUT_DT, ON_FRAME_TIME, 
+      OFF_FRAME_TIME, ON_SALE_TIME, OFF_SALE_TIME, 
+      USE_START_TIME, USE_END_TIME, LIMIT_DATE, 
+      DETAIL_REMARK, COMMODITY_SHOW)
+    values (#{commodityDetailId,jdbcType=VARCHAR}, #{commodityId,jdbcType=VARCHAR}, #{posCommodityId,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=CHAR}, #{updateTime,jdbcType=CHAR}, #{channel,jdbcType=VARCHAR}, 
+      #{rotationnChartUrl,jdbcType=VARCHAR}, #{picUrl,jdbcType=VARCHAR}, #{commodityName,jdbcType=VARCHAR}, 
+      #{commodityState,jdbcType=CHAR}, #{monthlySales,jdbcType=NUMERIC}, #{commoditySales,jdbcType=NUMERIC}, 
+      #{commodityStock,jdbcType=VARCHAR}, #{reserveDays,jdbcType=VARCHAR}, #{advanceReserveDays,jdbcType=VARCHAR}, 
+      #{commodityScore,jdbcType=VARCHAR}, #{dailyPrice,jdbcType=NUMERIC}, #{vacationPrice,jdbcType=NUMERIC}, 
+      #{holidayPrice,jdbcType=NUMERIC}, #{commodityField,jdbcType=VARCHAR}, #{commodityDescribe,jdbcType=VARCHAR}, 
+      #{purchaseLimits,jdbcType=VARCHAR}, #{timeOutDt,jdbcType=VARCHAR}, #{onFrameTime,jdbcType=CHAR}, 
+      #{offFrameTime,jdbcType=CHAR}, #{onSaleTime,jdbcType=CHAR}, #{offSaleTime,jdbcType=CHAR}, 
+      #{useStartTime,jdbcType=CHAR}, #{useEndTime,jdbcType=CHAR}, #{limitDate,jdbcType=VARCHAR}, 
+      #{detailRemark,jdbcType=VARCHAR}, #{commodityShow,jdbcType=CLOB})
+  </insert>
+  <insert id="insertSelective" parameterType="com.macro.mall.model.TSportCommodityDetail">
+    insert into T_SPORT_COMMODITY_DETAIL
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="commodityDetailId != null">
+        COMMODITY_DETAIL_ID,
+      </if>
+      <if test="commodityId != null">
+        COMMODITY_ID,
+      </if>
+      <if test="posCommodityId != null">
+        POS_COMMODITY_ID,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+      <if test="channel != null">
+        CHANNEL,
+      </if>
+      <if test="rotationnChartUrl != null">
+        ROTATIONN_CHART_URL,
+      </if>
+      <if test="picUrl != null">
+        PIC_URL,
+      </if>
+      <if test="commodityName != null">
+        COMMODITY_NAME,
+      </if>
+      <if test="commodityState != null">
+        COMMODITY_STATE,
+      </if>
+      <if test="monthlySales != null">
+        MONTHLY_SALES,
+      </if>
+      <if test="commoditySales != null">
+        COMMODITY_SALES,
+      </if>
+      <if test="commodityStock != null">
+        COMMODITY_STOCK,
+      </if>
+      <if test="reserveDays != null">
+        RESERVE_DAYS,
+      </if>
+      <if test="advanceReserveDays != null">
+        ADVANCE_RESERVE_DAYS,
+      </if>
+      <if test="commodityScore != null">
+        COMMODITY_SCORE,
+      </if>
+      <if test="dailyPrice != null">
+        DAILY_PRICE,
+      </if>
+      <if test="vacationPrice != null">
+        VACATION_PRICE,
+      </if>
+      <if test="holidayPrice != null">
+        HOLIDAY_PRICE,
+      </if>
+      <if test="commodityField != null">
+        COMMODITY_FIELD,
+      </if>
+      <if test="commodityDescribe != null">
+        COMMODITY_DESCRIBE,
+      </if>
+      <if test="purchaseLimits != null">
+        PURCHASE_LIMITS,
+      </if>
+      <if test="timeOutDt != null">
+        TIME_OUT_DT,
+      </if>
+      <if test="onFrameTime != null">
+        ON_FRAME_TIME,
+      </if>
+      <if test="offFrameTime != null">
+        OFF_FRAME_TIME,
+      </if>
+      <if test="onSaleTime != null">
+        ON_SALE_TIME,
+      </if>
+      <if test="offSaleTime != null">
+        OFF_SALE_TIME,
+      </if>
+      <if test="useStartTime != null">
+        USE_START_TIME,
+      </if>
+      <if test="useEndTime != null">
+        USE_END_TIME,
+      </if>
+      <if test="limitDate != null">
+        LIMIT_DATE,
+      </if>
+      <if test="detailRemark != null">
+        DETAIL_REMARK,
+      </if>
+      <if test="commodityShow != null">
+        COMMODITY_SHOW,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="commodityDetailId != null">
+        #{commodityDetailId,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityId != null">
+        #{commodityId,jdbcType=VARCHAR},
+      </if>
+      <if test="posCommodityId != null">
+        #{posCommodityId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=CHAR},
+      </if>
+      <if test="channel != null">
+        #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="rotationnChartUrl != null">
+        #{rotationnChartUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="picUrl != null">
+        #{picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityName != null">
+        #{commodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityState != null">
+        #{commodityState,jdbcType=CHAR},
+      </if>
+      <if test="monthlySales != null">
+        #{monthlySales,jdbcType=NUMERIC},
+      </if>
+      <if test="commoditySales != null">
+        #{commoditySales,jdbcType=NUMERIC},
+      </if>
+      <if test="commodityStock != null">
+        #{commodityStock,jdbcType=VARCHAR},
+      </if>
+      <if test="reserveDays != null">
+        #{reserveDays,jdbcType=VARCHAR},
+      </if>
+      <if test="advanceReserveDays != null">
+        #{advanceReserveDays,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityScore != null">
+        #{commodityScore,jdbcType=VARCHAR},
+      </if>
+      <if test="dailyPrice != null">
+        #{dailyPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="vacationPrice != null">
+        #{vacationPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="holidayPrice != null">
+        #{holidayPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="commodityField != null">
+        #{commodityField,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityDescribe != null">
+        #{commodityDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="purchaseLimits != null">
+        #{purchaseLimits,jdbcType=VARCHAR},
+      </if>
+      <if test="timeOutDt != null">
+        #{timeOutDt,jdbcType=VARCHAR},
+      </if>
+      <if test="onFrameTime != null">
+        #{onFrameTime,jdbcType=CHAR},
+      </if>
+      <if test="offFrameTime != null">
+        #{offFrameTime,jdbcType=CHAR},
+      </if>
+      <if test="onSaleTime != null">
+        #{onSaleTime,jdbcType=CHAR},
+      </if>
+      <if test="offSaleTime != null">
+        #{offSaleTime,jdbcType=CHAR},
+      </if>
+      <if test="useStartTime != null">
+        #{useStartTime,jdbcType=CHAR},
+      </if>
+      <if test="useEndTime != null">
+        #{useEndTime,jdbcType=CHAR},
+      </if>
+      <if test="limitDate != null">
+        #{limitDate,jdbcType=VARCHAR},
+      </if>
+      <if test="detailRemark != null">
+        #{detailRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityShow != null">
+        #{commodityShow,jdbcType=CLOB},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.macro.mall.model.TSportCommodityDetailExample" resultType="java.lang.Long">
+    select count(*) from T_SPORT_COMMODITY_DETAIL
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update T_SPORT_COMMODITY_DETAIL
+    <set>
+      <if test="record.commodityDetailId != null">
+        COMMODITY_DETAIL_ID = #{record.commodityDetailId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commodityId != null">
+        COMMODITY_ID = #{record.commodityId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.posCommodityId != null">
+        POS_COMMODITY_ID = #{record.posCommodityId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        CREATE_TIME = #{record.createTime,jdbcType=CHAR},
+      </if>
+      <if test="record.updateTime != null">
+        UPDATE_TIME = #{record.updateTime,jdbcType=CHAR},
+      </if>
+      <if test="record.channel != null">
+        CHANNEL = #{record.channel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rotationnChartUrl != null">
+        ROTATIONN_CHART_URL = #{record.rotationnChartUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.picUrl != null">
+        PIC_URL = #{record.picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commodityName != null">
+        COMMODITY_NAME = #{record.commodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commodityState != null">
+        COMMODITY_STATE = #{record.commodityState,jdbcType=CHAR},
+      </if>
+      <if test="record.monthlySales != null">
+        MONTHLY_SALES = #{record.monthlySales,jdbcType=NUMERIC},
+      </if>
+      <if test="record.commoditySales != null">
+        COMMODITY_SALES = #{record.commoditySales,jdbcType=NUMERIC},
+      </if>
+      <if test="record.commodityStock != null">
+        COMMODITY_STOCK = #{record.commodityStock,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reserveDays != null">
+        RESERVE_DAYS = #{record.reserveDays,jdbcType=VARCHAR},
+      </if>
+      <if test="record.advanceReserveDays != null">
+        ADVANCE_RESERVE_DAYS = #{record.advanceReserveDays,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commodityScore != null">
+        COMMODITY_SCORE = #{record.commodityScore,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dailyPrice != null">
+        DAILY_PRICE = #{record.dailyPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="record.vacationPrice != null">
+        VACATION_PRICE = #{record.vacationPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="record.holidayPrice != null">
+        HOLIDAY_PRICE = #{record.holidayPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="record.commodityField != null">
+        COMMODITY_FIELD = #{record.commodityField,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commodityDescribe != null">
+        COMMODITY_DESCRIBE = #{record.commodityDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="record.purchaseLimits != null">
+        PURCHASE_LIMITS = #{record.purchaseLimits,jdbcType=VARCHAR},
+      </if>
+      <if test="record.timeOutDt != null">
+        TIME_OUT_DT = #{record.timeOutDt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.onFrameTime != null">
+        ON_FRAME_TIME = #{record.onFrameTime,jdbcType=CHAR},
+      </if>
+      <if test="record.offFrameTime != null">
+        OFF_FRAME_TIME = #{record.offFrameTime,jdbcType=CHAR},
+      </if>
+      <if test="record.onSaleTime != null">
+        ON_SALE_TIME = #{record.onSaleTime,jdbcType=CHAR},
+      </if>
+      <if test="record.offSaleTime != null">
+        OFF_SALE_TIME = #{record.offSaleTime,jdbcType=CHAR},
+      </if>
+      <if test="record.useStartTime != null">
+        USE_START_TIME = #{record.useStartTime,jdbcType=CHAR},
+      </if>
+      <if test="record.useEndTime != null">
+        USE_END_TIME = #{record.useEndTime,jdbcType=CHAR},
+      </if>
+      <if test="record.limitDate != null">
+        LIMIT_DATE = #{record.limitDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.detailRemark != null">
+        DETAIL_REMARK = #{record.detailRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commodityShow != null">
+        COMMODITY_SHOW = #{record.commodityShow,jdbcType=CLOB},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update T_SPORT_COMMODITY_DETAIL
+    set COMMODITY_DETAIL_ID = #{record.commodityDetailId,jdbcType=VARCHAR},
+      COMMODITY_ID = #{record.commodityId,jdbcType=VARCHAR},
+      POS_COMMODITY_ID = #{record.posCommodityId,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=CHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=CHAR},
+      CHANNEL = #{record.channel,jdbcType=VARCHAR},
+      ROTATIONN_CHART_URL = #{record.rotationnChartUrl,jdbcType=VARCHAR},
+      PIC_URL = #{record.picUrl,jdbcType=VARCHAR},
+      COMMODITY_NAME = #{record.commodityName,jdbcType=VARCHAR},
+      COMMODITY_STATE = #{record.commodityState,jdbcType=CHAR},
+      MONTHLY_SALES = #{record.monthlySales,jdbcType=NUMERIC},
+      COMMODITY_SALES = #{record.commoditySales,jdbcType=NUMERIC},
+      COMMODITY_STOCK = #{record.commodityStock,jdbcType=VARCHAR},
+      RESERVE_DAYS = #{record.reserveDays,jdbcType=VARCHAR},
+      ADVANCE_RESERVE_DAYS = #{record.advanceReserveDays,jdbcType=VARCHAR},
+      COMMODITY_SCORE = #{record.commodityScore,jdbcType=VARCHAR},
+      DAILY_PRICE = #{record.dailyPrice,jdbcType=NUMERIC},
+      VACATION_PRICE = #{record.vacationPrice,jdbcType=NUMERIC},
+      HOLIDAY_PRICE = #{record.holidayPrice,jdbcType=NUMERIC},
+      COMMODITY_FIELD = #{record.commodityField,jdbcType=VARCHAR},
+      COMMODITY_DESCRIBE = #{record.commodityDescribe,jdbcType=VARCHAR},
+      PURCHASE_LIMITS = #{record.purchaseLimits,jdbcType=VARCHAR},
+      TIME_OUT_DT = #{record.timeOutDt,jdbcType=VARCHAR},
+      ON_FRAME_TIME = #{record.onFrameTime,jdbcType=CHAR},
+      OFF_FRAME_TIME = #{record.offFrameTime,jdbcType=CHAR},
+      ON_SALE_TIME = #{record.onSaleTime,jdbcType=CHAR},
+      OFF_SALE_TIME = #{record.offSaleTime,jdbcType=CHAR},
+      USE_START_TIME = #{record.useStartTime,jdbcType=CHAR},
+      USE_END_TIME = #{record.useEndTime,jdbcType=CHAR},
+      LIMIT_DATE = #{record.limitDate,jdbcType=VARCHAR},
+      DETAIL_REMARK = #{record.detailRemark,jdbcType=VARCHAR},
+      COMMODITY_SHOW = #{record.commodityShow,jdbcType=CLOB}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update T_SPORT_COMMODITY_DETAIL
+    set COMMODITY_DETAIL_ID = #{record.commodityDetailId,jdbcType=VARCHAR},
+      COMMODITY_ID = #{record.commodityId,jdbcType=VARCHAR},
+      POS_COMMODITY_ID = #{record.posCommodityId,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=CHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=CHAR},
+      CHANNEL = #{record.channel,jdbcType=VARCHAR},
+      ROTATIONN_CHART_URL = #{record.rotationnChartUrl,jdbcType=VARCHAR},
+      PIC_URL = #{record.picUrl,jdbcType=VARCHAR},
+      COMMODITY_NAME = #{record.commodityName,jdbcType=VARCHAR},
+      COMMODITY_STATE = #{record.commodityState,jdbcType=CHAR},
+      MONTHLY_SALES = #{record.monthlySales,jdbcType=NUMERIC},
+      COMMODITY_SALES = #{record.commoditySales,jdbcType=NUMERIC},
+      COMMODITY_STOCK = #{record.commodityStock,jdbcType=VARCHAR},
+      RESERVE_DAYS = #{record.reserveDays,jdbcType=VARCHAR},
+      ADVANCE_RESERVE_DAYS = #{record.advanceReserveDays,jdbcType=VARCHAR},
+      COMMODITY_SCORE = #{record.commodityScore,jdbcType=VARCHAR},
+      DAILY_PRICE = #{record.dailyPrice,jdbcType=NUMERIC},
+      VACATION_PRICE = #{record.vacationPrice,jdbcType=NUMERIC},
+      HOLIDAY_PRICE = #{record.holidayPrice,jdbcType=NUMERIC},
+      COMMODITY_FIELD = #{record.commodityField,jdbcType=VARCHAR},
+      COMMODITY_DESCRIBE = #{record.commodityDescribe,jdbcType=VARCHAR},
+      PURCHASE_LIMITS = #{record.purchaseLimits,jdbcType=VARCHAR},
+      TIME_OUT_DT = #{record.timeOutDt,jdbcType=VARCHAR},
+      ON_FRAME_TIME = #{record.onFrameTime,jdbcType=CHAR},
+      OFF_FRAME_TIME = #{record.offFrameTime,jdbcType=CHAR},
+      ON_SALE_TIME = #{record.onSaleTime,jdbcType=CHAR},
+      OFF_SALE_TIME = #{record.offSaleTime,jdbcType=CHAR},
+      USE_START_TIME = #{record.useStartTime,jdbcType=CHAR},
+      USE_END_TIME = #{record.useEndTime,jdbcType=CHAR},
+      LIMIT_DATE = #{record.limitDate,jdbcType=VARCHAR},
+      DETAIL_REMARK = #{record.detailRemark,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.macro.mall.model.TSportCommodityDetail">
+    update T_SPORT_COMMODITY_DETAIL
+    <set>
+      <if test="commodityId != null">
+        COMMODITY_ID = #{commodityId,jdbcType=VARCHAR},
+      </if>
+      <if test="posCommodityId != null">
+        POS_COMMODITY_ID = #{posCommodityId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=CHAR},
+      </if>
+      <if test="channel != null">
+        CHANNEL = #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="rotationnChartUrl != null">
+        ROTATIONN_CHART_URL = #{rotationnChartUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="picUrl != null">
+        PIC_URL = #{picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityName != null">
+        COMMODITY_NAME = #{commodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityState != null">
+        COMMODITY_STATE = #{commodityState,jdbcType=CHAR},
+      </if>
+      <if test="monthlySales != null">
+        MONTHLY_SALES = #{monthlySales,jdbcType=NUMERIC},
+      </if>
+      <if test="commoditySales != null">
+        COMMODITY_SALES = #{commoditySales,jdbcType=NUMERIC},
+      </if>
+      <if test="commodityStock != null">
+        COMMODITY_STOCK = #{commodityStock,jdbcType=VARCHAR},
+      </if>
+      <if test="reserveDays != null">
+        RESERVE_DAYS = #{reserveDays,jdbcType=VARCHAR},
+      </if>
+      <if test="advanceReserveDays != null">
+        ADVANCE_RESERVE_DAYS = #{advanceReserveDays,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityScore != null">
+        COMMODITY_SCORE = #{commodityScore,jdbcType=VARCHAR},
+      </if>
+      <if test="dailyPrice != null">
+        DAILY_PRICE = #{dailyPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="vacationPrice != null">
+        VACATION_PRICE = #{vacationPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="holidayPrice != null">
+        HOLIDAY_PRICE = #{holidayPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="commodityField != null">
+        COMMODITY_FIELD = #{commodityField,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityDescribe != null">
+        COMMODITY_DESCRIBE = #{commodityDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="purchaseLimits != null">
+        PURCHASE_LIMITS = #{purchaseLimits,jdbcType=VARCHAR},
+      </if>
+      <if test="timeOutDt != null">
+        TIME_OUT_DT = #{timeOutDt,jdbcType=VARCHAR},
+      </if>
+      <if test="onFrameTime != null">
+        ON_FRAME_TIME = #{onFrameTime,jdbcType=CHAR},
+      </if>
+      <if test="offFrameTime != null">
+        OFF_FRAME_TIME = #{offFrameTime,jdbcType=CHAR},
+      </if>
+      <if test="onSaleTime != null">
+        ON_SALE_TIME = #{onSaleTime,jdbcType=CHAR},
+      </if>
+      <if test="offSaleTime != null">
+        OFF_SALE_TIME = #{offSaleTime,jdbcType=CHAR},
+      </if>
+      <if test="useStartTime != null">
+        USE_START_TIME = #{useStartTime,jdbcType=CHAR},
+      </if>
+      <if test="useEndTime != null">
+        USE_END_TIME = #{useEndTime,jdbcType=CHAR},
+      </if>
+      <if test="limitDate != null">
+        LIMIT_DATE = #{limitDate,jdbcType=VARCHAR},
+      </if>
+      <if test="detailRemark != null">
+        DETAIL_REMARK = #{detailRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityShow != null">
+        COMMODITY_SHOW = #{commodityShow,jdbcType=CLOB},
+      </if>
+    </set>
+    where COMMODITY_DETAIL_ID = #{commodityDetailId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.macro.mall.model.TSportCommodityDetail">
+    update T_SPORT_COMMODITY_DETAIL
+    set COMMODITY_ID = #{commodityId,jdbcType=VARCHAR},
+      POS_COMMODITY_ID = #{posCommodityId,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=CHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=CHAR},
+      CHANNEL = #{channel,jdbcType=VARCHAR},
+      ROTATIONN_CHART_URL = #{rotationnChartUrl,jdbcType=VARCHAR},
+      PIC_URL = #{picUrl,jdbcType=VARCHAR},
+      COMMODITY_NAME = #{commodityName,jdbcType=VARCHAR},
+      COMMODITY_STATE = #{commodityState,jdbcType=CHAR},
+      MONTHLY_SALES = #{monthlySales,jdbcType=NUMERIC},
+      COMMODITY_SALES = #{commoditySales,jdbcType=NUMERIC},
+      COMMODITY_STOCK = #{commodityStock,jdbcType=VARCHAR},
+      RESERVE_DAYS = #{reserveDays,jdbcType=VARCHAR},
+      ADVANCE_RESERVE_DAYS = #{advanceReserveDays,jdbcType=VARCHAR},
+      COMMODITY_SCORE = #{commodityScore,jdbcType=VARCHAR},
+      DAILY_PRICE = #{dailyPrice,jdbcType=NUMERIC},
+      VACATION_PRICE = #{vacationPrice,jdbcType=NUMERIC},
+      HOLIDAY_PRICE = #{holidayPrice,jdbcType=NUMERIC},
+      COMMODITY_FIELD = #{commodityField,jdbcType=VARCHAR},
+      COMMODITY_DESCRIBE = #{commodityDescribe,jdbcType=VARCHAR},
+      PURCHASE_LIMITS = #{purchaseLimits,jdbcType=VARCHAR},
+      TIME_OUT_DT = #{timeOutDt,jdbcType=VARCHAR},
+      ON_FRAME_TIME = #{onFrameTime,jdbcType=CHAR},
+      OFF_FRAME_TIME = #{offFrameTime,jdbcType=CHAR},
+      ON_SALE_TIME = #{onSaleTime,jdbcType=CHAR},
+      OFF_SALE_TIME = #{offSaleTime,jdbcType=CHAR},
+      USE_START_TIME = #{useStartTime,jdbcType=CHAR},
+      USE_END_TIME = #{useEndTime,jdbcType=CHAR},
+      LIMIT_DATE = #{limitDate,jdbcType=VARCHAR},
+      DETAIL_REMARK = #{detailRemark,jdbcType=VARCHAR},
+      COMMODITY_SHOW = #{commodityShow,jdbcType=CLOB}
+    where COMMODITY_DETAIL_ID = #{commodityDetailId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.macro.mall.model.TSportCommodityDetail">
+    update T_SPORT_COMMODITY_DETAIL
+    set COMMODITY_ID = #{commodityId,jdbcType=VARCHAR},
+      POS_COMMODITY_ID = #{posCommodityId,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=CHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=CHAR},
+      CHANNEL = #{channel,jdbcType=VARCHAR},
+      ROTATIONN_CHART_URL = #{rotationnChartUrl,jdbcType=VARCHAR},
+      PIC_URL = #{picUrl,jdbcType=VARCHAR},
+      COMMODITY_NAME = #{commodityName,jdbcType=VARCHAR},
+      COMMODITY_STATE = #{commodityState,jdbcType=CHAR},
+      MONTHLY_SALES = #{monthlySales,jdbcType=NUMERIC},
+      COMMODITY_SALES = #{commoditySales,jdbcType=NUMERIC},
+      COMMODITY_STOCK = #{commodityStock,jdbcType=VARCHAR},
+      RESERVE_DAYS = #{reserveDays,jdbcType=VARCHAR},
+      ADVANCE_RESERVE_DAYS = #{advanceReserveDays,jdbcType=VARCHAR},
+      COMMODITY_SCORE = #{commodityScore,jdbcType=VARCHAR},
+      DAILY_PRICE = #{dailyPrice,jdbcType=NUMERIC},
+      VACATION_PRICE = #{vacationPrice,jdbcType=NUMERIC},
+      HOLIDAY_PRICE = #{holidayPrice,jdbcType=NUMERIC},
+      COMMODITY_FIELD = #{commodityField,jdbcType=VARCHAR},
+      COMMODITY_DESCRIBE = #{commodityDescribe,jdbcType=VARCHAR},
+      PURCHASE_LIMITS = #{purchaseLimits,jdbcType=VARCHAR},
+      TIME_OUT_DT = #{timeOutDt,jdbcType=VARCHAR},
+      ON_FRAME_TIME = #{onFrameTime,jdbcType=CHAR},
+      OFF_FRAME_TIME = #{offFrameTime,jdbcType=CHAR},
+      ON_SALE_TIME = #{onSaleTime,jdbcType=CHAR},
+      OFF_SALE_TIME = #{offSaleTime,jdbcType=CHAR},
+      USE_START_TIME = #{useStartTime,jdbcType=CHAR},
+      USE_END_TIME = #{useEndTime,jdbcType=CHAR},
+      LIMIT_DATE = #{limitDate,jdbcType=VARCHAR},
+      DETAIL_REMARK = #{detailRemark,jdbcType=VARCHAR}
+    where COMMODITY_DETAIL_ID = #{commodityDetailId,jdbcType=VARCHAR}
+  </update>
+</mapper>

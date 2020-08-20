@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.macro.mall.mapper.DStepActivityMapper">
+  <resultMap id="BaseResultMap" type="com.macro.mall.model.DStepActivity">
+    <result column="ACTIVITY_NAME" jdbcType="VARCHAR" property="activityName" />
+    <result column="ACTIVITY_START_DT" jdbcType="VARCHAR" property="activityStartDt" />
+    <result column="ACTIVITY_END_DT" jdbcType="VARCHAR" property="activityEndDt" />
+    <result column="ACTIVITY_ID" jdbcType="VARCHAR" property="activityId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ACTIVITY_NAME, ACTIVITY_START_DT, ACTIVITY_END_DT, ACTIVITY_ID
+  </sql>
+  <select id="selectByExample" parameterType="com.macro.mall.model.DStepActivityExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from D_STEP_ACTIVITY
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.macro.mall.model.DStepActivityExample">
+    delete from D_STEP_ACTIVITY
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.macro.mall.model.DStepActivity">
+    insert into D_STEP_ACTIVITY (ACTIVITY_NAME, ACTIVITY_START_DT, ACTIVITY_END_DT, 
+      ACTIVITY_ID)
+    values (#{activityName,jdbcType=VARCHAR}, #{activityStartDt,jdbcType=VARCHAR}, #{activityEndDt,jdbcType=VARCHAR}, 
+      #{activityId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.macro.mall.model.DStepActivity">
+    insert into D_STEP_ACTIVITY
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="activityName != null">
+        ACTIVITY_NAME,
+      </if>
+      <if test="activityStartDt != null">
+        ACTIVITY_START_DT,
+      </if>
+      <if test="activityEndDt != null">
+        ACTIVITY_END_DT,
+      </if>
+      <if test="activityId != null">
+        ACTIVITY_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="activityName != null">
+        #{activityName,jdbcType=VARCHAR},
+      </if>
+      <if test="activityStartDt != null">
+        #{activityStartDt,jdbcType=VARCHAR},
+      </if>
+      <if test="activityEndDt != null">
+        #{activityEndDt,jdbcType=VARCHAR},
+      </if>
+      <if test="activityId != null">
+        #{activityId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.macro.mall.model.DStepActivityExample" resultType="java.lang.Long">
+    select count(*) from D_STEP_ACTIVITY
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update D_STEP_ACTIVITY
+    <set>
+      <if test="record.activityName != null">
+        ACTIVITY_NAME = #{record.activityName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.activityStartDt != null">
+        ACTIVITY_START_DT = #{record.activityStartDt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.activityEndDt != null">
+        ACTIVITY_END_DT = #{record.activityEndDt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.activityId != null">
+        ACTIVITY_ID = #{record.activityId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update D_STEP_ACTIVITY
+    set ACTIVITY_NAME = #{record.activityName,jdbcType=VARCHAR},
+      ACTIVITY_START_DT = #{record.activityStartDt,jdbcType=VARCHAR},
+      ACTIVITY_END_DT = #{record.activityEndDt,jdbcType=VARCHAR},
+      ACTIVITY_ID = #{record.activityId,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+
+  <select id="queryStepActivity" resultMap="BaseResultMap">
+    select  * from D_STEP_ACTIVITY where ACTIVITY_ID='66'
+  </select>
+</mapper>

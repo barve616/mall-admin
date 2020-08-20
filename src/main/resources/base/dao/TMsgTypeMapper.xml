@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.macro.mall.base.dao.TMsgTypeDao" >
+  <resultMap id="BaseResultMap" type="com.macro.mall.base.dto.topConfig.TMsgType" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <result column="MSG_TYPE" property="msgType" jdbcType="VARCHAR" />
+    <result column="MSG_INFO" property="msgInfo" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="selectMsgInfo" resultMap="BaseResultMap">
+   select MSG_TYPE,MSG_INFO from t_msg_type
+  </select>
+</mapper>

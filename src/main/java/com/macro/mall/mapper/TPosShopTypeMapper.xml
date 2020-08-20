@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.macro.mall.mapper.TPosShopTypeMapper">
+  <resultMap id="BaseResultMap" type="com.macro.mall.model.TPosShopType">
+    <result column="COMMODITY_TYPE_ID" jdbcType="VARCHAR" property="commodityTypeId" />
+    <result column="POS_SHOP_ID" jdbcType="VARCHAR" property="posShopId" />
+    <result column="COMMODITY_TYPE_NAME" jdbcType="VARCHAR" property="commodityTypeName" />
+    <result column="COMMODITY_TYPE_PID" jdbcType="VARCHAR" property="commodityTypePid" />
+    <result column="STRATUM" jdbcType="VARCHAR" property="stratum" />
+    <result column="STATE" jdbcType="VARCHAR" property="state" />
+    <result column="COMMODITY_TYPE_NO" jdbcType="VARCHAR" property="commodityTypeNo" />
+    <result column="CREATED_TIME" jdbcType="VARCHAR" property="createdTime" />
+    <result column="UPDATED_TIME" jdbcType="VARCHAR" property="updatedTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    COMMODITY_TYPE_ID, POS_SHOP_ID, COMMODITY_TYPE_NAME, COMMODITY_TYPE_PID, STRATUM, 
+    STATE, COMMODITY_TYPE_NO, CREATED_TIME, UPDATED_TIME
+  </sql>
+  <select id="selectByExample" parameterType="com.macro.mall.model.TPosShopTypeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_POS_SHOP_TYPE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.macro.mall.model.TPosShopTypeExample">
+    delete from T_POS_SHOP_TYPE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.macro.mall.model.TPosShopType">
+    insert into T_POS_SHOP_TYPE (COMMODITY_TYPE_ID, POS_SHOP_ID, COMMODITY_TYPE_NAME, 
+      COMMODITY_TYPE_PID, STRATUM, STATE, 
+      COMMODITY_TYPE_NO, CREATED_TIME, UPDATED_TIME
+      )
+    values (#{commodityTypeId,jdbcType=VARCHAR}, #{posShopId,jdbcType=VARCHAR}, #{commodityTypeName,jdbcType=VARCHAR}, 
+      #{commodityTypePid,jdbcType=VARCHAR}, #{stratum,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, 
+      #{commodityTypeNo,jdbcType=VARCHAR}, #{createdTime,jdbcType=TIMESTAMP}, #{updatedTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.macro.mall.model.TPosShopType">
+    insert into T_POS_SHOP_TYPE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="commodityTypeId != null">
+        COMMODITY_TYPE_ID,
+      </if>
+      <if test="posShopId != null">
+        POS_SHOP_ID,
+      </if>
+      <if test="commodityTypeName != null">
+        COMMODITY_TYPE_NAME,
+      </if>
+      <if test="commodityTypePid != null">
+        COMMODITY_TYPE_PID,
+      </if>
+      <if test="stratum != null">
+        STRATUM,
+      </if>
+      <if test="state != null">
+        STATE,
+      </if>
+      <if test="commodityTypeNo != null">
+        COMMODITY_TYPE_NO,
+      </if>
+      <if test="createdTime != null">
+        CREATED_TIME,
+      </if>
+      <if test="updatedTime != null">
+        UPDATED_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="commodityTypeId != null">
+        #{commodityTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="posShopId != null">
+        #{posShopId,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityTypeName != null">
+        #{commodityTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityTypePid != null">
+        #{commodityTypePid,jdbcType=VARCHAR},
+      </if>
+      <if test="stratum != null">
+        #{stratum,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityTypeNo != null">
+        #{commodityTypeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        #{createdTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedTime != null">
+        #{updatedTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.macro.mall.model.TPosShopTypeExample" resultType="java.lang.Long">
+    select count(*) from T_POS_SHOP_TYPE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update T_POS_SHOP_TYPE
+    <set>
+      <if test="record.commodityTypeId != null">
+        COMMODITY_TYPE_ID = #{record.commodityTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.posShopId != null">
+        POS_SHOP_ID = #{record.posShopId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commodityTypeName != null">
+        COMMODITY_TYPE_NAME = #{record.commodityTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commodityTypePid != null">
+        COMMODITY_TYPE_PID = #{record.commodityTypePid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stratum != null">
+        STRATUM = #{record.stratum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null">
+        STATE = #{record.state,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commodityTypeNo != null">
+        COMMODITY_TYPE_NO = #{record.commodityTypeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdTime != null">
+        CREATED_TIME = #{record.createdTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updatedTime != null">
+        UPDATED_TIME = #{record.updatedTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update T_POS_SHOP_TYPE
+    set COMMODITY_TYPE_ID = #{record.commodityTypeId,jdbcType=VARCHAR},
+      POS_SHOP_ID = #{record.posShopId,jdbcType=VARCHAR},
+      COMMODITY_TYPE_NAME = #{record.commodityTypeName,jdbcType=VARCHAR},
+      COMMODITY_TYPE_PID = #{record.commodityTypePid,jdbcType=VARCHAR},
+      STRATUM = #{record.stratum,jdbcType=VARCHAR},
+      STATE = #{record.state,jdbcType=VARCHAR},
+      COMMODITY_TYPE_NO = #{record.commodityTypeNo,jdbcType=VARCHAR},
+      CREATED_TIME = #{record.createdTime,jdbcType=VARCHAR},
+      UPDATED_TIME = #{record.updatedTime,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+
+  <!--根据父级id商户id查询商户商品分类-->
+  <select id="posShopTypeByPidList" parameterType="com.macro.mall.model.TPosShopType" resultMap="BaseResultMap">
+    select t.commodity_type_id,
+           t.pos_shop_id,
+           t.commodity_type_name,
+           t.commodity_type_pid,
+           t.stratum,
+           t.state,
+           t.commodity_type_no,
+           t.created_time,
+           t.updated_time
+           from T_POS_SHOP_TYPE t
+    where 1=1
+    and t.pos_shop_id =#{posShopId,jdbcType=VARCHAR}
+    and t.commodity_type_pid= #{commodityTypePid,jdbcType=VARCHAR}
+    <if test="state !=null and state !=''">
+       and t.state=#{state,jdbcType=VARCHAR}
+    </if>
+    order by commodity_type_no asc
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+      select t.commodity_type_id,
+      t.pos_shop_id,
+      t.commodity_type_name,
+      t.commodity_type_pid,
+      t.stratum,
+      t.state,
+      t.commodity_type_no,
+      t.created_time,
+      t.updated_time
+      from T_POS_SHOP_TYPE t
+      where 1=1
+      and t.commodity_type_id =#{commodityTypeId,jdbcType=VARCHAR}
+</select>
+
+
+
+
+  <!--根据父级id获取最大id-->
+  <select id="nextShopCommodityTypeId" parameterType="java.lang.String" resultType="java.lang.String">
+    select to_char(nvl(max(to_number(t.commodity_type_id)), 0) + 1)
+            from t_pos_shop_type t
+        where t.commodity_type_pid = #{commodityTypePid,jdbcType=VARCHAR}
+  </select>
+
+  <select id="posShopTypeListByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+      select t.commodity_type_id,
+      t.pos_shop_id,
+      t.commodity_type_name,
+      t.commodity_type_pid,
+      t.stratum,
+      t.state,
+      t.commodity_type_no,
+      t.created_time,
+      t.updated_time
+      from T_POS_SHOP_TYPE t
+      where 1=1
+      and t.commodity_type_name =#{shopTypeName,jdbcType=VARCHAR}
+</select>
+
+</mapper>

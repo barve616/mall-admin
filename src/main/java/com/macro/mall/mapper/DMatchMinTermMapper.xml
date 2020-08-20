@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.macro.mall.mapper.DMatchMinTermDao" >
+
+
+    <resultMap id="BaseResultMap" type="com.macro.mall.model.DMatchMinTerm">
+        <id  column="MATCH_MAX_ID" property="matchMaxId" jdbcType="VARCHAR"/>
+        <result column="MATCH_MIN_ID" property="matchMinId" jdbcType="VARCHAR"/>
+        <result column="MATCH_MAX_NAME" property="matchMaxName" jdbcType="VARCHAR"/>
+        <result column="MATCH_MIN_DETAIL" property="matchMinDetail" jdbcType="VARCHAR"/>
+        <result column="MATCH_TP" property="matchTp" jdbcType="VARCHAR"/>
+        <result column="MATCH_TP_NAME" property="matchTpName" jdbcType="VARCHAR"/>
+    </resultMap>
+
+  <select id="FindAll" parameterType="com.macro.mall.model.DMatchMinTerm" resultMap="BaseResultMap">
+   select *  from D_MATCH_MINTERM
+  </select>
+
+
+    <insert id="insert" parameterType="com.macro.mall.model.DMatchMinTerm">
+    insert into D_MATCH_MINTERM (MATCH_MAX_ID, MATCH_MIN_ID,
+    MATCH_MAX_NAME,MATCH_MIN_DETAIL,MATCH_TP,MATCH_TP_NAME)
+    values (#{matchMaxId,jdbcType=VARCHAR}, #{matchMinId,jdbcType=VARCHAR},
+   #{matchMaxName,jdbcType=VARCHAR},#{matchMinDetail,jdbcType=VARCHAR},
+   #{matchTp,jdbcType=VARCHAR},#{matchTpName,jdbcType=VARCHAR})
+   </insert>
+
+    <select id="getMaxInfo" parameterType="String" resultMap="BaseResultMap">
+select t.match_max_type_name as MATCH_TP_NAME ,t.match_max_type_id as MATCH_TP ,d.match_max_name from d_match_maxterm d
+join d_match_maxtype t on d.match_max_type_id=t.match_max_type_id
+where d.match_max_id=  #{matchMaxId,jdbcType=VARCHAR}
+</select>
+
+    <select id="queryList" parameterType="com.macro.mall.model.DMatchMinTerm" resultMap="BaseResultMap">
+   select *  from D_MATCH_MINTERM
+   <where>
+       <if test="matchMaxId != null and matchMaxId!=''">
+           and  MATCH_MAX_ID = #{matchMaxId,jdbcType=VARCHAR}
+       </if>
+       <if test="matchMinId != null and matchMinId!=''">
+           and  MATCH_MIN_ID = #{matchMinId,jdbcType=VARCHAR}
+       </if>
+       <if test="matchMaxName != null and matchMaxName!=''">
+           and  MATCH_MAX_NAME = #{matchMaxName,jdbcType=VARCHAR}
+       </if>
+       <if test="matchMinDetail != null and matchMinDetail!=''">
+           and  MATCH_MIN_DETAIL = #{matchMinDetail,jdbcType=VARCHAR}
+       </if>
+       <if test="matchTp != null and matchTp!=''">
+           and  MATCH_TP = #{matchTp,jdbcType=VARCHAR}
+       </if>
+       <if test="matchTpName != null and matchTpName!=''">
+           and  MATCH_TP_NAME = #{matchTpName,jdbcType=VARCHAR}
+       </if>
+   </where>
+  </select>
+
+
+
+    <select id="queryList1" parameterType="com.macro.mall.model.DMatchMinTerm" resultMap="BaseResultMap">
+        select *  from D_MATCH_MINTERM
+        <where>
+            <if test="matchMaxId != null and matchMaxId!=''">
+                and  MATCH_MAX_ID = #{matchMaxId,jdbcType=VARCHAR}
+            </if>
+            <if test="matchMinId != null and matchMinId!=''">
+                and  MATCH_MIN_ID = #{matchMinId,jdbcType=VARCHAR}
+            </if>
+            <if test="matchMaxName != null and matchMaxName!=''">
+                and  MATCH_MAX_NAME = #{matchMaxName,jdbcType=VARCHAR}
+            </if>
+            <if test="matchMinDetail != null and matchMinDetail!=''">
+                and  MATCH_MIN_DETAIL = #{matchMinDetail,jdbcType=VARCHAR}
+            </if>
+            <if test="matchTp != null and matchTp!=''">
+                and  MATCH_TP = #{matchTp,jdbcType=VARCHAR}
+            </if>
+            <if test="matchTpName != null and matchTpName!=''">
+                and  MATCH_TP_NAME = #{matchTpName,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+
+    <select id="FindAllByOne" parameterType="com.macro.mall.model.DMatchMinTerm" resultMap="BaseResultMap">
+   select distinct MATCH_MAX_ID ,MATCH_MAX_NAME from D_MATCH_MINTERM where
+   MATCH_TP = #{matchTp}
+  </select>
+
+    <update id="update" parameterType="com.macro.mall.model.DMatchMinTerm">
+        update D_MATCH_MINTERM
+        <set>
+            <if test="matchMaxId != null and matchMaxId!=''">
+                  MATCH_MAX_ID = #{matchMaxId,jdbcType=VARCHAR},
+            </if>
+            <if test="matchMaxName != null and matchMaxName!=''">
+                  MATCH_MAX_NAME = #{matchMaxName,jdbcType=VARCHAR},
+            </if>
+            <if test="matchMinDetail != null and matchMinDetail!=''">
+                  MATCH_MIN_DETAIL = #{matchMinDetail,jdbcType=VARCHAR},
+            </if>
+            <if test="matchTp != null and matchTp!=''">
+                  MATCH_TP = #{matchTp,jdbcType=VARCHAR},
+            </if>
+            <if test="matchTpName != null and matchTpName!=''">
+                  MATCH_TP_NAME = #{matchTpName,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where  MATCH_MIN_ID = #{matchMinId,jdbcType=VARCHAR}
+    </update>
+
+
+    <update id="update1" parameterType="String">
+        update D_MATCH_MINTERM
+        set MATCH_TP_NAME = #{matchTpName,jdbcType=VARCHAR}
+        where   MATCH_TP = #{matchTp,jdbcType=VARCHAR}
+    </update>
+
+    <update id="update2" parameterType="String">
+        update D_MATCH_MINTERM
+     set    MATCH_MAX_NAME = #{matchMaxName,jdbcType=VARCHAR}
+        where   MATCH_MAX_ID = #{matchMaxId,jdbcType=VARCHAR}
+    </update>
+
+
+    <delete id="delete" parameterType="String">
+    delete from D_MATCH_MINTERM
+     where MATCH_MIN_ID=  #{matchMinId,jdbcType=VARCHAR}
+  </delete>
+
+</mapper>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.macro.mall.mapper.DTcodepossParaMapper">
+  <resultMap id="BaseResultMap" type="com.macro.mall.model.DTcodepossPara">
+    <!-- WARNING - @mbggenerated -->
+    <result column="PARAM_TYPE" property="paramType" jdbcType="VARCHAR" />
+    <result column="CN_NAME" property="cnName" jdbcType="VARCHAR" />
+    <result column="PARAM_VALUE" property="paramValue" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="getParaValByParaType" parameterType="String"
+          resultType="String">
+		select t.param_value from D_TCODEPOSS_PARA t where t.param_type =#{paraType}
+  </select>
+</mapper>

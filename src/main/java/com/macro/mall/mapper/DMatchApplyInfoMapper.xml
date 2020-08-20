@@ -1,0 +1,802 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.macro.mall.mapper.DMatchApplyInfoMapper">
+  <resultMap id="BaseResultMap" type="com.macro.mall.model.DMatchApplyInfo">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="MATCH_ID" jdbcType="VARCHAR" property="matchId" />
+    <result column="MATCH_TYPE" jdbcType="CHAR" property="matchType" />
+    <result column="TEAM_ID" jdbcType="VARCHAR" property="teamId" />
+    <result column="REAL_NAME" jdbcType="VARCHAR" property="realName" />
+    <result column="USER_PHONE" jdbcType="VARCHAR" property="userPhone" />
+    <result column="CERT_ID" jdbcType="VARCHAR" property="certId" />
+    <result column="CERT_TYPE" jdbcType="VARCHAR" property="certType" />
+    <result column="BANK_CARD" jdbcType="VARCHAR" property="bankCard" />
+    <result column="CARD_TYPE" jdbcType="VARCHAR" property="cardType" />
+    <result column="GENDER" jdbcType="CHAR" property="gender" />
+    <result column="OTHER_PARAM" jdbcType="VARCHAR" property="otherParam" />
+    <result column="APPLY_CREATE_DATE" jdbcType="VARCHAR" property="applyCreateDate" />
+    <result column="APPLY_CREATE_TIME" jdbcType="VARCHAR" property="applyCreateTime" />
+    <result column="APPLY_SUCCESS_DATE" jdbcType="VARCHAR" property="applySuccessDate" />
+    <result column="APPLY_SUCCESS_TIME" jdbcType="VARCHAR" property="applySuccessTime" />
+    <result column="APPLY_CHANNEL" jdbcType="VARCHAR" property="applyChannel" />
+    <result column="APPLY_STATE" jdbcType="CHAR" property="applyState" />
+    <result column="SAFE_ORDERNO" jdbcType="VARCHAR" property="safeOrderno" />
+    <result column="EMERGENCY_NAME" jdbcType="VARCHAR" property="emergencyName" />
+    <result column="EMERGENCY_PHONE" jdbcType="VARCHAR" property="emergencyPhone" />
+    <result column="EMERGENCY_ADDRESS" jdbcType="VARCHAR" property="emergencyAddress" />
+    <result column="AGE" jdbcType="VARCHAR" property="age" />
+    <result column="UPDATE_DATE_TIME" jdbcType="VARCHAR" property="updateDateTime" />
+    <result column="FLAG" jdbcType="VARCHAR" property="flag" />
+    <result column="REGION" jdbcType="VARCHAR" property="region" />
+    <result column="COMMUNITY" jdbcType="VARCHAR" property="community" />
+    <result column="HEAD_FLAG" jdbcType="VARCHAR" property="headFlag" />
+    <result column="TEAM_NAME" jdbcType="VARCHAR" property="teamName" />
+    <result column="TEAM_STATE" jdbcType="VARCHAR" property="teamState" />
+    <result column="TEAM_CREATE_TIME" jdbcType="VARCHAR" property="teamCreateTime" />
+    <result column="MATCH_MIN_DETAIL" jdbcType="VARCHAR" property="matchMinDetail" />
+    <result column="MATCH_TP_NAME" jdbcType="VARCHAR" property="matchTpName" />
+    <result column="MATCH_MAX_NAME" jdbcType="VARCHAR" property="matchMaxName" />
+    <result column="DETAIL_ADDRESS" jdbcType="VARCHAR" property="detailAddress" />
+    <result column="MATCH_NAME" jdbcType="VARCHAR" property="matchName" />
+
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, MATCH_ID, MATCH_TYPE, TEAM_ID, REAL_NAME, USER_PHONE, CERT_ID, CERT_TYPE, BANK_CARD, 
+    CARD_TYPE, GENDER, OTHER_PARAM, APPLY_CREATE_DATE, APPLY_CREATE_TIME, APPLY_SUCCESS_DATE, 
+    APPLY_SUCCESS_TIME, APPLY_CHANNEL, APPLY_STATE, SAFE_ORDERNO, EMERGENCY_NAME, EMERGENCY_PHONE, 
+    EMERGENCY_ADDRESS, AGE, UPDATE_DATE_TIME, FLAG, REGION, COMMUNITY
+  </sql>
+  <select id="selectByExample" parameterType="com.macro.mall.model.DMatchApplyInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from D_MATCH_APPLY_INFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from D_MATCH_APPLY_INFO
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectByPrimaryKey1" parameterType="com.macro.mall.model.DMatchApplyInfo" resultMap="BaseResultMap">
+
+    select
+    ID
+    , MATCH_ID, MATCH_TYPE, TEAM_ID, REAL_NAME, USER_PHONE ,  substr(CERT_ID,0,length(CERT_ID)-4)||'****' as CERT_ID, CERT_TYPE, substr(BANK_CARD,0,4) ||'********'||substr(BANK_CARD,length(BANK_CARD)-3,4) as BANK_CARD
+    ,CARD_TYPE, GENDER, OTHER_PARAM, APPLY_CREATE_DATE, APPLY_CREATE_TIME, APPLY_SUCCESS_DATE,
+    APPLY_SUCCESS_TIME, APPLY_CHANNEL, APPLY_STATE, SAFE_ORDERNO, EMERGENCY_NAME,  EMERGENCY_PHONE,
+    EMERGENCY_ADDRESS, AGE, UPDATE_DATE_TIME, FLAG, REGION, COMMUNITY
+    from (    select t.*,row_number()over(partition by user_phone,match_id order by t.apply_create_date desc,t.apply_create_time desc) row_number from D_MATCH_APPLY_INFO t
+    ) d where row_number=1 and
+--     where
+    d.MATCH_ID = #{matchId,jdbcType=VARCHAR}
+    <if test="realName!=null and realName!=''">
+      and d.REAL_NAME like
+      '%'||#{realName,jdbcType=VARCHAR}||'%'
+    </if>
+    <if test="gender!=null and gender!=''">
+      and d.GENDER = #{gender}
+    </if>
+    <if test="applyState!=null and applyState!=''">
+      and d.APPLY_STATE = #{applyState}
+    </if>
+    <if test="userPhone!=null and userPhone!=''">
+      and d.USER_PHONE like
+      '%'||#{userPhone,jdbcType=VARCHAR}||'%'
+    </if>
+    <if test="certId!=null and certId!=''">
+      and d.CERT_ID = #{certId}
+    </if>
+    <if test="bankCard!=null and bankCard!=''">
+      and d.BANK_CARD = #{bankCard}
+    </if>
+  </select>
+
+
+
+
+  <select id="selectByPrimaryKey2" parameterType="com.macro.mall.model.DMatchApplyInfo" resultMap="BaseResultMap">
+    select m.match_min_detail,
+       m.match_tp_name,
+       m.match_max_name,
+       d.real_name,
+    substr(CERT_ID,0,length(CERT_ID)-4)||'****' as CERT_ID,
+       d.cert_type,
+     USER_PHONE,
+       d.gender,
+       d.age,
+       d.emergency_address,
+       d.emergency_name,
+   EMERGENCY_PHONE,
+    substr(BANK_CARD,0,4) ||'********'||substr(BANK_CARD,length(BANK_CARD)-3,4) as BANK_CARD,
+       d.apply_create_date,
+       d.apply_create_time,
+       d.apply_state
+  from D_MATCH_APPLY_INFO d
+   join d_match_info t
+    on d.match_id = t.match_id
+      and t.match_type='0'
+   join d_match_minterm m
+    on m.match_min_id = t.match_group_id
+    <where>
+      <if test="gender!=null and gender!=''">
+        and d.GENDER = #{gender}
+      </if>
+      <if test="realName!=null and realName!=''">
+        and d.REAL_NAME = #{realName}
+      </if>
+      <if test="matchId!=null and matchId!=''">
+        and d.MATCH_ID = #{matchId}
+      </if>
+      <if test="applyState!=null and applyState!=''">
+        and d.APPLY_STATE = #{applyState}
+      </if>
+      <if test="userPhone!=null and userPhone!=''">
+        and d.USER_PHONE like
+        '%'||#{userPhone,jdbcType=VARCHAR}||'%'
+      </if>
+      <if test="certId!=null and certId!=''">
+        and d.CERT_ID = #{certId}
+      </if>
+      <if test="bankCard!=null and bankCard!=''">
+        and d.BANK_CARD = #{bankCard}
+      </if>
+    </where>
+  </select>
+
+
+
+
+
+  <select id="selectByPrimaryKey3" parameterType="com.macro.mall.model.DMatchApplyInfo" resultMap="BaseResultMap">
+     select m.match_min_detail,
+       m.match_tp_name,
+       m.match_max_name,
+       d.real_name,
+    substr(CERT_ID,0,length(CERT_ID)-4)||'****' as CERT_ID,
+       d.cert_type,
+     USER_PHONE,
+       d.gender,
+       d.age,
+       d.emergency_address,
+       d.emergency_name,
+     EMERGENCY_PHONE,
+    substr(BANK_CARD,0,4) ||'********'||substr(BANK_CARD,length(BANK_CARD)-3,4) as BANK_CARD,
+       d.apply_create_date,
+       d.apply_create_time,
+       d.apply_state,
+       s.team_name,
+       d.head_flag,
+       s.team_create_time
+  from D_MATCH_APPLY_INFO d
+   join d_match_info t
+    on d.match_id = t.match_id
+    and t.match_type='1'
+   join d_match_minterm m
+    on m.match_min_id = t.match_group_id
+     join d_match_team_info s
+    on d.team_id=s.team_id
+    <where>
+      <if test="teamName!=null and teamName!=''">
+        and d.TEAM_NAME like
+        '%'||#{teamName,jdbcType=VARCHAR}||'%'
+      </if>
+      <if test="matchId!=null and matchId!=''">
+        and d.MATCH_ID = #{matchId}
+      </if>
+      <if test="realName!=null and realName!=''">
+        and d.REAL_NAME = #{realName}
+      </if>
+      <if test="headFlag!=null and headFlag!=''">
+        and d.HEAD_FLAG = #{headFlag}
+      </if>
+      <if test="applyState!=null and applyState!=''">
+        and d.APPLY_STATE = #{applyState}
+      </if>
+      <if test="userPhone!=null and userPhone!=''">
+        and d.USER_PHONE like
+        '%'||#{userPhone,jdbcType=VARCHAR}||'%'
+      </if>
+      <if test="certId!=null and certId!=''">
+        and d.CERT_ID = #{certId}
+      </if>
+      <if test="bankCard!=null and bankCard!=''">
+        and d.BANK_CARD = #{bankCard}
+      </if>
+    </where>
+  </select>
+
+
+    <select id="selectTeamsByone" parameterType="com.macro.mall.model.DMatchApplyInfo" resultMap="BaseResultMap">
+      select t.team_name, d.real_name,  substr(d.cert_id,0,length(d.cert_id)-4)||'****' as cert_id,
+      d.cert_type,   user_phone,d.age,  d.gender, d.emergency_name, emergency_phone,t.team_id,
+      d.emergency_address, substr(d.bank_card,0,4) ||'********'||substr(d.bank_card,length(d.bank_card)-3,4) as bank_card,  t.team_state,t.team_create_time,
+      d.head_flag,d.apply_state
+      from D_MATCH_APPLY_INFO d
+      join   d_match_team_info  t   on d.team_id=t.team_id and d.match_type='1'
+     where
+         d.MATCH_ID = #{matchId,jdbcType=VARCHAR}
+        <if test="headFlag != null and headFlag!=''">
+        and  d.head_flag = #{headFlag,jdbcType=VARCHAR}
+        </if>
+        <if test="realName != null and realName!=''">
+          and  d.real_name = #{realName,jdbcType=VARCHAR}
+        </if>
+        <if test="applyState != null and applyState!=''">
+          and  d.apply_state = #{applyState,jdbcType=VARCHAR}
+        </if>
+      <if test="certId != null and certId!=''">
+        and  d.cert_id = #{certId,jdbcType=VARCHAR}
+      </if>
+      <if test="bankCard != null and bankCard!=''">
+        and  d.bank_card = #{bankCard,jdbcType=VARCHAR}
+      </if>
+      <if test="userPhone!=null and userPhone!=''">
+        and d.USER_PHONE like
+        '%'||#{userPhone,jdbcType=VARCHAR}||'%'
+      </if>
+        <if test="teamName!=null and teamName!=''">
+          and t.TEAM_NAME like
+          '%'||#{teamName,jdbcType=VARCHAR}||'%'
+        </if>
+      order  by  t.team_create_time desc
+    </select>
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from D_MATCH_APPLY_INFO
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.macro.mall.model.DMatchApplyInfoExample">
+    delete from D_MATCH_APPLY_INFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.macro.mall.model.DMatchApplyInfo">
+    insert into D_MATCH_APPLY_INFO (ID, MATCH_ID, MATCH_TYPE, 
+      TEAM_ID, REAL_NAME, USER_PHONE, 
+      CERT_ID, CERT_TYPE, BANK_CARD, 
+      CARD_TYPE, GENDER, OTHER_PARAM, 
+      APPLY_CREATE_DATE, APPLY_CREATE_TIME, APPLY_SUCCESS_DATE, 
+      APPLY_SUCCESS_TIME, APPLY_CHANNEL, APPLY_STATE, 
+      SAFE_ORDERNO, EMERGENCY_NAME, EMERGENCY_PHONE, 
+      EMERGENCY_ADDRESS, AGE, UPDATE_DATE_TIME, 
+      FLAG, REGION, COMMUNITY
+      )
+    values (#{id,jdbcType=VARCHAR}, #{matchId,jdbcType=VARCHAR}, #{matchType,jdbcType=CHAR}, 
+      #{teamId,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR}, #{userPhone,jdbcType=VARCHAR}, 
+      #{certId,jdbcType=VARCHAR}, #{certType,jdbcType=VARCHAR}, #{bankCard,jdbcType=VARCHAR}, 
+      #{cardType,jdbcType=VARCHAR}, #{gender,jdbcType=CHAR}, #{otherParam,jdbcType=VARCHAR}, 
+      #{applyCreateDate,jdbcType=VARCHAR}, #{applyCreateTime,jdbcType=VARCHAR}, #{applySuccessDate,jdbcType=VARCHAR}, 
+      #{applySuccessTime,jdbcType=VARCHAR}, #{applyChannel,jdbcType=VARCHAR}, #{applyState,jdbcType=CHAR}, 
+      #{safeOrderno,jdbcType=VARCHAR}, #{emergencyName,jdbcType=VARCHAR}, #{emergencyPhone,jdbcType=VARCHAR}, 
+      #{emergencyAddress,jdbcType=VARCHAR}, #{age,jdbcType=VARCHAR}, #{updateDateTime,jdbcType=VARCHAR}, 
+      #{flag,jdbcType=VARCHAR}, #{region,jdbcType=VARCHAR}, #{community,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.macro.mall.model.DMatchApplyInfo">
+    insert into D_MATCH_APPLY_INFO
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="matchId != null">
+        MATCH_ID,
+      </if>
+      <if test="matchType != null">
+        MATCH_TYPE,
+      </if>
+      <if test="teamId != null">
+        TEAM_ID,
+      </if>
+      <if test="realName != null">
+        REAL_NAME,
+      </if>
+      <if test="userPhone != null">
+        USER_PHONE,
+      </if>
+      <if test="certId != null">
+        CERT_ID,
+      </if>
+      <if test="certType != null">
+        CERT_TYPE,
+      </if>
+      <if test="bankCard != null">
+        BANK_CARD,
+      </if>
+      <if test="cardType != null">
+        CARD_TYPE,
+      </if>
+      <if test="gender != null">
+        GENDER,
+      </if>
+      <if test="otherParam != null">
+        OTHER_PARAM,
+      </if>
+      <if test="applyCreateDate != null">
+        APPLY_CREATE_DATE,
+      </if>
+      <if test="applyCreateTime != null">
+        APPLY_CREATE_TIME,
+      </if>
+      <if test="applySuccessDate != null">
+        APPLY_SUCCESS_DATE,
+      </if>
+      <if test="applySuccessTime != null">
+        APPLY_SUCCESS_TIME,
+      </if>
+      <if test="applyChannel != null">
+        APPLY_CHANNEL,
+      </if>
+      <if test="applyState != null">
+        APPLY_STATE,
+      </if>
+      <if test="safeOrderno != null">
+        SAFE_ORDERNO,
+      </if>
+      <if test="emergencyName != null">
+        EMERGENCY_NAME,
+      </if>
+      <if test="emergencyPhone != null">
+        EMERGENCY_PHONE,
+      </if>
+      <if test="emergencyAddress != null">
+        EMERGENCY_ADDRESS,
+      </if>
+      <if test="age != null">
+        AGE,
+      </if>
+      <if test="updateDateTime != null">
+        UPDATE_DATE_TIME,
+      </if>
+      <if test="flag != null">
+        FLAG,
+      </if>
+      <if test="region != null">
+        REGION,
+      </if>
+      <if test="community != null">
+        COMMUNITY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="matchId != null">
+        #{matchId,jdbcType=VARCHAR},
+      </if>
+      <if test="matchType != null">
+        #{matchType,jdbcType=CHAR},
+      </if>
+      <if test="teamId != null">
+        #{teamId,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null">
+        #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null">
+        #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="certId != null">
+        #{certId,jdbcType=VARCHAR},
+      </if>
+      <if test="certType != null">
+        #{certType,jdbcType=VARCHAR},
+      </if>
+      <if test="bankCard != null">
+        #{bankCard,jdbcType=VARCHAR},
+      </if>
+      <if test="cardType != null">
+        #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=CHAR},
+      </if>
+      <if test="otherParam != null">
+        #{otherParam,jdbcType=VARCHAR},
+      </if>
+      <if test="applyCreateDate != null">
+        #{applyCreateDate,jdbcType=VARCHAR},
+      </if>
+      <if test="applyCreateTime != null">
+        #{applyCreateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="applySuccessDate != null">
+        #{applySuccessDate,jdbcType=VARCHAR},
+      </if>
+      <if test="applySuccessTime != null">
+        #{applySuccessTime,jdbcType=VARCHAR},
+      </if>
+      <if test="applyChannel != null">
+        #{applyChannel,jdbcType=VARCHAR},
+      </if>
+      <if test="applyState != null">
+        #{applyState,jdbcType=CHAR},
+      </if>
+      <if test="safeOrderno != null">
+        #{safeOrderno,jdbcType=VARCHAR},
+      </if>
+      <if test="emergencyName != null">
+        #{emergencyName,jdbcType=VARCHAR},
+      </if>
+      <if test="emergencyPhone != null">
+        #{emergencyPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="emergencyAddress != null">
+        #{emergencyAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDateTime != null">
+        #{updateDateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=VARCHAR},
+      </if>
+      <if test="region != null">
+        #{region,jdbcType=VARCHAR},
+      </if>
+      <if test="community != null">
+        #{community,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.macro.mall.model.DMatchApplyInfoExample" resultType="java.lang.Long">
+    select count(*) from D_MATCH_APPLY_INFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update D_MATCH_APPLY_INFO
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.matchId != null">
+        MATCH_ID = #{record.matchId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.matchType != null">
+        MATCH_TYPE = #{record.matchType,jdbcType=CHAR},
+      </if>
+      <if test="record.teamId != null">
+        TEAM_ID = #{record.teamId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.realName != null">
+        REAL_NAME = #{record.realName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userPhone != null">
+        USER_PHONE = #{record.userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.certId != null">
+        CERT_ID = #{record.certId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.certType != null">
+        CERT_TYPE = #{record.certType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankCard != null">
+        BANK_CARD = #{record.bankCard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardType != null">
+        CARD_TYPE = #{record.cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gender != null">
+        GENDER = #{record.gender,jdbcType=CHAR},
+      </if>
+      <if test="record.otherParam != null">
+        OTHER_PARAM = #{record.otherParam,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applyCreateDate != null">
+        APPLY_CREATE_DATE = #{record.applyCreateDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applyCreateTime != null">
+        APPLY_CREATE_TIME = #{record.applyCreateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applySuccessDate != null">
+        APPLY_SUCCESS_DATE = #{record.applySuccessDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applySuccessTime != null">
+        APPLY_SUCCESS_TIME = #{record.applySuccessTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applyChannel != null">
+        APPLY_CHANNEL = #{record.applyChannel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applyState != null">
+        APPLY_STATE = #{record.applyState,jdbcType=CHAR},
+      </if>
+      <if test="record.safeOrderno != null">
+        SAFE_ORDERNO = #{record.safeOrderno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.emergencyName != null">
+        EMERGENCY_NAME = #{record.emergencyName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.emergencyPhone != null">
+        EMERGENCY_PHONE = #{record.emergencyPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.emergencyAddress != null">
+        EMERGENCY_ADDRESS = #{record.emergencyAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.age != null">
+        AGE = #{record.age,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateDateTime != null">
+        UPDATE_DATE_TIME = #{record.updateDateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flag != null">
+        FLAG = #{record.flag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.region != null">
+        REGION = #{record.region,jdbcType=VARCHAR},
+      </if>
+      <if test="record.community != null">
+        COMMUNITY = #{record.community,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update D_MATCH_APPLY_INFO
+    set ID = #{record.id,jdbcType=VARCHAR},
+      MATCH_ID = #{record.matchId,jdbcType=VARCHAR},
+      MATCH_TYPE = #{record.matchType,jdbcType=CHAR},
+      TEAM_ID = #{record.teamId,jdbcType=VARCHAR},
+      REAL_NAME = #{record.realName,jdbcType=VARCHAR},
+      USER_PHONE = #{record.userPhone,jdbcType=VARCHAR},
+      CERT_ID = #{record.certId,jdbcType=VARCHAR},
+      CERT_TYPE = #{record.certType,jdbcType=VARCHAR},
+      BANK_CARD = #{record.bankCard,jdbcType=VARCHAR},
+      CARD_TYPE = #{record.cardType,jdbcType=VARCHAR},
+      GENDER = #{record.gender,jdbcType=CHAR},
+      OTHER_PARAM = #{record.otherParam,jdbcType=VARCHAR},
+      APPLY_CREATE_DATE = #{record.applyCreateDate,jdbcType=VARCHAR},
+      APPLY_CREATE_TIME = #{record.applyCreateTime,jdbcType=VARCHAR},
+      APPLY_SUCCESS_DATE = #{record.applySuccessDate,jdbcType=VARCHAR},
+      APPLY_SUCCESS_TIME = #{record.applySuccessTime,jdbcType=VARCHAR},
+      APPLY_CHANNEL = #{record.applyChannel,jdbcType=VARCHAR},
+      APPLY_STATE = #{record.applyState,jdbcType=CHAR},
+      SAFE_ORDERNO = #{record.safeOrderno,jdbcType=VARCHAR},
+      EMERGENCY_NAME = #{record.emergencyName,jdbcType=VARCHAR},
+      EMERGENCY_PHONE = #{record.emergencyPhone,jdbcType=VARCHAR},
+      EMERGENCY_ADDRESS = #{record.emergencyAddress,jdbcType=VARCHAR},
+      AGE = #{record.age,jdbcType=VARCHAR},
+      UPDATE_DATE_TIME = #{record.updateDateTime,jdbcType=VARCHAR},
+      FLAG = #{record.flag,jdbcType=VARCHAR},
+      REGION = #{record.region,jdbcType=VARCHAR},
+      COMMUNITY = #{record.community,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.macro.mall.model.DMatchApplyInfo">
+    update D_MATCH_APPLY_INFO
+    <set>
+      <if test="matchId != null">
+        MATCH_ID = #{matchId,jdbcType=VARCHAR},
+      </if>
+      <if test="matchType != null">
+        MATCH_TYPE = #{matchType,jdbcType=CHAR},
+      </if>
+      <if test="teamId != null">
+        TEAM_ID = #{teamId,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null">
+        REAL_NAME = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null">
+        USER_PHONE = #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="certId != null">
+        CERT_ID = #{certId,jdbcType=VARCHAR},
+      </if>
+      <if test="certType != null">
+        CERT_TYPE = #{certType,jdbcType=VARCHAR},
+      </if>
+      <if test="bankCard != null">
+        BANK_CARD = #{bankCard,jdbcType=VARCHAR},
+      </if>
+      <if test="cardType != null">
+        CARD_TYPE = #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        GENDER = #{gender,jdbcType=CHAR},
+      </if>
+      <if test="otherParam != null">
+        OTHER_PARAM = #{otherParam,jdbcType=VARCHAR},
+      </if>
+      <if test="applyCreateDate != null">
+        APPLY_CREATE_DATE = #{applyCreateDate,jdbcType=VARCHAR},
+      </if>
+      <if test="applyCreateTime != null">
+        APPLY_CREATE_TIME = #{applyCreateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="applySuccessDate != null">
+        APPLY_SUCCESS_DATE = #{applySuccessDate,jdbcType=VARCHAR},
+      </if>
+      <if test="applySuccessTime != null">
+        APPLY_SUCCESS_TIME = #{applySuccessTime,jdbcType=VARCHAR},
+      </if>
+      <if test="applyChannel != null">
+        APPLY_CHANNEL = #{applyChannel,jdbcType=VARCHAR},
+      </if>
+      <if test="applyState != null">
+        APPLY_STATE = #{applyState,jdbcType=CHAR},
+      </if>
+      <if test="safeOrderno != null">
+        SAFE_ORDERNO = #{safeOrderno,jdbcType=VARCHAR},
+      </if>
+      <if test="emergencyName != null">
+        EMERGENCY_NAME = #{emergencyName,jdbcType=VARCHAR},
+      </if>
+      <if test="emergencyPhone != null">
+        EMERGENCY_PHONE = #{emergencyPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="emergencyAddress != null">
+        EMERGENCY_ADDRESS = #{emergencyAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        AGE = #{age,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDateTime != null">
+        UPDATE_DATE_TIME = #{updateDateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null">
+        FLAG = #{flag,jdbcType=VARCHAR},
+      </if>
+      <if test="region != null">
+        REGION = #{region,jdbcType=VARCHAR},
+      </if>
+      <if test="community != null">
+        COMMUNITY = #{community,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.macro.mall.model.DMatchApplyInfo">
+    update D_MATCH_APPLY_INFO
+    set MATCH_ID = #{matchId,jdbcType=VARCHAR},
+      MATCH_TYPE = #{matchType,jdbcType=CHAR},
+      TEAM_ID = #{teamId,jdbcType=VARCHAR},
+      REAL_NAME = #{realName,jdbcType=VARCHAR},
+      USER_PHONE = #{userPhone,jdbcType=VARCHAR},
+      CERT_ID = #{certId,jdbcType=VARCHAR},
+      CERT_TYPE = #{certType,jdbcType=VARCHAR},
+      BANK_CARD = #{bankCard,jdbcType=VARCHAR},
+      CARD_TYPE = #{cardType,jdbcType=VARCHAR},
+      GENDER = #{gender,jdbcType=CHAR},
+      OTHER_PARAM = #{otherParam,jdbcType=VARCHAR},
+      APPLY_CREATE_DATE = #{applyCreateDate,jdbcType=VARCHAR},
+      APPLY_CREATE_TIME = #{applyCreateTime,jdbcType=VARCHAR},
+      APPLY_SUCCESS_DATE = #{applySuccessDate,jdbcType=VARCHAR},
+      APPLY_SUCCESS_TIME = #{applySuccessTime,jdbcType=VARCHAR},
+      APPLY_CHANNEL = #{applyChannel,jdbcType=VARCHAR},
+      APPLY_STATE = #{applyState,jdbcType=CHAR},
+      SAFE_ORDERNO = #{safeOrderno,jdbcType=VARCHAR},
+      EMERGENCY_NAME = #{emergencyName,jdbcType=VARCHAR},
+      EMERGENCY_PHONE = #{emergencyPhone,jdbcType=VARCHAR},
+      EMERGENCY_ADDRESS = #{emergencyAddress,jdbcType=VARCHAR},
+      AGE = #{age,jdbcType=VARCHAR},
+      UPDATE_DATE_TIME = #{updateDateTime,jdbcType=VARCHAR},
+      FLAG = #{flag,jdbcType=VARCHAR},
+      REGION = #{region,jdbcType=VARCHAR},
+      COMMUNITY = #{community,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+
+
+  <select id="selectApplyUserInfo" parameterType="String" resultMap="BaseResultMap">
+         SELECT *
+    FROM (SELECT T.USER_PHONE,
+                 T.CERT_ID,
+                 T.REAL_NAME,
+                 T.HEAD_FLAG,
+                 T.MATCH_TYPE
+            FROM D_MATCH_APPLY_INFO T
+           WHERE T.MATCH_ID = #{matchId}
+             AND T.USER_PHONE = #{userPhone}
+             AND T.APPLY_STATE = '00'
+           ORDER BY T.UPDATE_DATE_TIME DESC)
+   WHERE ROWNUM = 1
+  </select>
+
+  <select id="queryVltList" parameterType="com.macro.mall.model.DMatchApplyInfo" resultMap="BaseResultMap">
+    select d.REAL_NAME,d.CERT_ID,d.USER_PHONE,d.APPLY_CHANNEL,d.APPLY_CREATE_DATE,d.DETAIL_ADDRESS,t.MATCH_NAME
+    from D_MATCH_APPLY_INFO  d join d_match_info  t on d.match_id=t.match_id
+    where  d.match_code='3'
+    <if test="matchName!=null and matchName!=''">
+      and  t.MATCH_NAME = #{matchName}
+    </if>
+    <if test="realName!=null and realName!=''">
+      and  d.REAL_NAME = #{realName}
+    </if>
+    <if test="certId!=null and certId!=''">
+      and  d.CERT_ID = #{certId}
+    </if>
+    <if test="userPhone!=null and userPhone!=''">
+      and  d.USER_PHONE = #{userPhone}
+    </if>
+    <if test="applyChanel!=null and applyChanel!=''">
+      and  d.APPLY_CHANNEL = #{applyChanel}
+    </if>
+    <if test="startTime !=null and startTime !=''">
+      and d.APPLY_CREATE_DATE <![CDATA[>=]]> #{startTime}
+    </if>
+    <if test="endTime!=null and endTime!=''">
+      and d.APPLY_CREATE_DATE <![CDATA[<=]]>  #{endTime}
+    </if>
+  </select>
+  <delete id="detailStepActivity">
+    delete from d_match_apply_info where match_code='3'
+  </delete>
+</mapper>

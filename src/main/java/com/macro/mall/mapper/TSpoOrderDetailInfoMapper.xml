@@ -1,0 +1,1377 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.macro.mall.mapper.TSpoOrderDetailInfoMapper">
+  <resultMap id="BaseResultMap" type="com.macro.mall.model.TSpoOrderDetailInfo">
+    <id column="ORDER_DETAIL_ID" jdbcType="VARCHAR" property="orderDetailId" />
+    <result column="ORDER_ID" jdbcType="VARCHAR" property="orderId" />
+    <result column="ORDER_CODE" jdbcType="VARCHAR" property="orderCode" />
+    <result column="USER_ID" jdbcType="VARCHAR" property="userId" />
+    <result column="USER_NM" jdbcType="VARCHAR" property="userNm" />
+    <result column="CHANNEL" jdbcType="VARCHAR" property="channel" />
+    <result column="MER_NAME" jdbcType="VARCHAR" property="merName" />
+    <result column="MER_ID" jdbcType="VARCHAR" property="merId" />
+    <result column="TERM_ID" jdbcType="VARCHAR" property="termId" />
+    <result column="PRODUCT_ID" jdbcType="VARCHAR" property="productId" />
+    <result column="COMMODITY_DETAIL_ID" jdbcType="VARCHAR" property="commodityDetailId" />
+    <result column="PRODUCT_NAME" jdbcType="VARCHAR" property="productName" />
+    <result column="TOTAL" jdbcType="VARCHAR" property="total" />
+    <result column="PRICE" jdbcType="NUMERIC" property="price" />
+    <result column="COMMODITY_FIELD" jdbcType="VARCHAR" property="commodityField" />
+    <result column="CARD_NO" jdbcType="VARCHAR" property="cardNo" />
+    <result column="PAY_TYPE" jdbcType="VARCHAR" property="payType" />
+    <result column="PAY_MONEY" jdbcType="VARCHAR" property="payMoney" />
+    <result column="PAY_POINT" jdbcType="VARCHAR" property="payPoint" />
+    <result column="TIME_OUT_DT" jdbcType="CHAR" property="timeOutDt" />
+    <result column="CREATE_DT" jdbcType="CHAR" property="createDt" />
+    <result column="STATE" jdbcType="CHAR" property="state" />
+    <result column="RE_SQ_CODE" jdbcType="VARCHAR" property="reSqCode" />
+    <result column="ZDZ_ORDER_ID" jdbcType="VARCHAR" property="zdzOrderId" />
+    <result column="PAY_DATE" jdbcType="CHAR" property="payDate" />
+    <result column="PAY_TIME" jdbcType="CHAR" property="payTime" />
+    <result column="RETURN_MSG" jdbcType="VARCHAR" property="returnMsg" />
+    <result column="RETURN_DATE" jdbcType="CHAR" property="returnDate" />
+    <result column="RETURN_PURCHASE_DATE" jdbcType="CHAR" property="returnPurchaseDate" />
+    <result column="RETURN_PURCHASE_TIME" jdbcType="CHAR" property="returnPurchaseTime" />
+    <result column="SEQ_NO" jdbcType="VARCHAR" property="seqNo" />
+    <result column="IS_COUPON" jdbcType="VARCHAR" property="isCoupon" />
+    <result column="COUPON_ID" jdbcType="VARCHAR" property="couponId" />
+    <result column="MER_SEQ_NO" jdbcType="VARCHAR" property="merSeqNo" />
+    <result column="PAY_CHANNEL" jdbcType="VARCHAR" property="payChannel" />
+    <result column="CERT_TYPE" jdbcType="VARCHAR" property="certType" />
+    <result column="CERT_ID" jdbcType="VARCHAR" property="certId" />
+    <result column="PAY_CARD_TYPE" jdbcType="VARCHAR" property="payCardType" />
+    <result column="PAY_STAGES" jdbcType="VARCHAR" property="payStages" />
+    <result column="PRODUCE_PIC_URL" jdbcType="VARCHAR" property="producePicUrl" />
+    <result column="WRITE_OFF_CODE" jdbcType="VARCHAR" property="writeOffCode" />
+    <result column="CAPYCHA" jdbcType="VARCHAR" property="capycha" />
+    <result column="ORDER_TYPE" jdbcType="VARCHAR" property="orderType" />
+    <result column="ORDER_SEC_TYPE" jdbcType="VARCHAR" property="orderSecType" />
+    <result column="TOKEN_ID" jdbcType="VARCHAR" property="tokenId" />
+    <result column="MER_PAY_TYPE" jdbcType="VARCHAR" property="merPayType" />
+    <result column="IS_OVERSEAS" jdbcType="CHAR" property="isOverseas" />
+    <result column="MER_CARD_TYPE" jdbcType="VARCHAR" property="merCardType" />
+    <result column="CARD_BIN" jdbcType="VARCHAR" property="cardBin" />
+    <result column="INTEGRAL_ID" jdbcType="VARCHAR" property="integralId" />
+    <result column="DISCOUNT_PRICE" jdbcType="NUMERIC" property="discountPrice" />
+    <result column="NORMAL_PRICE" jdbcType="NUMERIC" property="normalPrice" />
+    <result column="ACCOUNTT_CHANNEL" jdbcType="CHAR" property="accounttChannel" />
+    <result column="WTPNO" jdbcType="VARCHAR" property="wtpno" />
+    <result column="PAY_REAL_MONEY" jdbcType="NUMERIC" property="payRealMoney" />
+    <result column="PAY_REAL_POINT" jdbcType="NUMERIC" property="payRealPoint" />
+    <result column="ORDER_DATE" jdbcType="CHAR" property="orderDate" />
+    <result column="CONTACTS_NAME" jdbcType="VARCHAR" property="contactsName" />
+    <result column="CONTACTS_PHONE" jdbcType="VARCHAR" property="contactsPhone" />
+    <result column="CONTACTS_EMAIL" jdbcType="VARCHAR" property="contactsEmail" />
+    <result column="VISITOR_NAME" jdbcType="VARCHAR" property="visitorName" />
+    <result column="VISITOR_GENDER" jdbcType="VARCHAR" property="visitorGender" />
+    <result column="VISITOR_PHONE" jdbcType="VARCHAR" property="visitorPhone" />
+    <result column="VISITOR_ID_TYPE" jdbcType="VARCHAR" property="visitorIdType" />
+    <result column="VISITOR_ID_NUM" jdbcType="VARCHAR" property="visitorIdNum" />
+    <result column="VISITOR_EMAIL" jdbcType="VARCHAR" property="visitorEmail" />
+    <result column="VISITOR_AGE" jdbcType="VARCHAR" property="visitorAge" />
+    <result column="DISCOUNT_MONEY" jdbcType="NUMERIC" property="discountMoney" />
+    <result column="UNION_ID" jdbcType="VARCHAR" property="unionId" />
+    <result column="OPEN_ID" jdbcType="VARCHAR" property="openId" />
+    <result column="RETURN_MONEY" jdbcType="VARCHAR" property="returnMoney" />
+    <result column="START_BOOK_DATE" jdbcType="CHAR" property="startBookDate" />
+    <result column="END_BOOK_DATE" jdbcType="CHAR" property="endBookDate" />
+    <result column="SHOP_ID" jdbcType="VARCHAR" property="shopId" />
+    <result column="COMMODITY_OUT_TIME" jdbcType="CHAR" property="commodityOutTime" />
+    <result column="COUPON_STATE" jdbcType="CHAR" property="couponState" />
+    <result column="WRITE_OFF_STATE" jdbcType="CHAR" property="writeOffState" />
+  </resultMap>
+
+  <resultMap id="baseUserInfo" type="com.macro.mall.communicate.resourcecenter.bean.OrderTouristDO">
+    <result column="ORDER_ID" jdbcType="VARCHAR" property="orderId" />
+    <result column="CONTACTS_NAME" jdbcType="VARCHAR" property="contactsName" />
+    <result column="CONTACTS_PHONE" jdbcType="VARCHAR" property="contactsPhone" />
+    <result column="CONTACTS_EMAIL" jdbcType="VARCHAR" property="contactsEmail" />
+    <result column="VISITOR_NAME" jdbcType="VARCHAR" property="visitorName" />
+    <result column="VISITOR_GENDER" jdbcType="VARCHAR" property="visitorGender" />
+    <result column="VISITOR_PHONE" jdbcType="VARCHAR" property="visitorPhone" />
+    <result column="VISITOR_ID_TYPE" jdbcType="VARCHAR" property="visitorIdType" />
+    <result column="VISITOR_ID_NUM" jdbcType="VARCHAR" property="visitorIdNum" />
+    <result column="VISITOR_EMAIL" jdbcType="VARCHAR" property="visitorEmail" />
+    <result column="VISITOR_AGE" jdbcType="VARCHAR" property="visitorAge" />
+  </resultMap>
+
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ORDER_DETAIL_ID, ORDER_ID, ORDER_CODE, USER_ID, USER_NM, CHANNEL, MER_NAME, MER_ID, 
+    TERM_ID, PRODUCT_ID, COMMODITY_DETAIL_ID, PRODUCT_NAME, TOTAL, PRICE, COMMODITY_FIELD, 
+    CARD_NO, PAY_TYPE, PAY_MONEY, PAY_POINT, TIME_OUT_DT, CREATE_DT, STATE, RE_SQ_CODE, 
+    ZDZ_ORDER_ID, PAY_DATE, PAY_TIME, RETURN_MSG, RETURN_DATE, RETURN_PURCHASE_DATE, 
+    RETURN_PURCHASE_TIME, SEQ_NO, IS_COUPON, COUPON_ID, MER_SEQ_NO, PAY_CHANNEL, CERT_TYPE, 
+    CERT_ID, PAY_CARD_TYPE, PAY_STAGES, PRODUCE_PIC_URL, WRITE_OFF_CODE, CAPYCHA, ORDER_TYPE, 
+    ORDER_SEC_TYPE, TOKEN_ID, MER_PAY_TYPE, IS_OVERSEAS, MER_CARD_TYPE, CARD_BIN, INTEGRAL_ID, 
+    DISCOUNT_PRICE, NORMAL_PRICE, ACCOUNTT_CHANNEL, WTPNO, PAY_REAL_MONEY, PAY_REAL_POINT, 
+    ORDER_DATE, CONTACTS_NAME, CONTACTS_PHONE, CONTACTS_EMAIL, VISITOR_NAME, VISITOR_GENDER, 
+    VISITOR_PHONE, VISITOR_ID_TYPE, VISITOR_ID_NUM, VISITOR_EMAIL, VISITOR_AGE, DISCOUNT_MONEY, 
+    UNION_ID, OPEN_ID, RETURN_MONEY, START_BOOK_DATE, END_BOOK_DATE, SHOP_ID, COMMODITY_OUT_TIME, 
+    COUPON_STATE, WRITE_OFF_STATE
+  </sql>
+  <select id="selectByExample" parameterType="com.macro.mall.model.TSpoOrderDetailInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_SPO_ORDER_DETAIL_INFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from T_SPO_ORDER_DETAIL_INFO
+    where ORDER_DETAIL_ID = #{orderDetailId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from T_SPO_ORDER_DETAIL_INFO
+    where ORDER_DETAIL_ID = #{orderDetailId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.macro.mall.model.TSpoOrderDetailInfoExample">
+    delete from T_SPO_ORDER_DETAIL_INFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+
+  <insert id="insert" parameterType="com.macro.mall.model.TSpoOrderDetailInfo">
+    insert into T_SPO_ORDER_DETAIL_INFO (ORDER_DETAIL_ID, ORDER_ID, ORDER_CODE, 
+      USER_ID, USER_NM, CHANNEL, 
+      MER_NAME, MER_ID, TERM_ID, 
+      PRODUCT_ID, COMMODITY_DETAIL_ID, PRODUCT_NAME, 
+      TOTAL, PRICE, COMMODITY_FIELD, 
+      CARD_NO, PAY_TYPE, PAY_MONEY, 
+      PAY_POINT, TIME_OUT_DT, CREATE_DT, 
+      STATE, RE_SQ_CODE, ZDZ_ORDER_ID, 
+      PAY_DATE, PAY_TIME, RETURN_MSG, 
+      RETURN_DATE, RETURN_PURCHASE_DATE, RETURN_PURCHASE_TIME, 
+      SEQ_NO, IS_COUPON, COUPON_ID, 
+      MER_SEQ_NO, PAY_CHANNEL, CERT_TYPE, 
+      CERT_ID, PAY_CARD_TYPE, PAY_STAGES, 
+      PRODUCE_PIC_URL, WRITE_OFF_CODE, CAPYCHA, 
+      ORDER_TYPE, ORDER_SEC_TYPE, TOKEN_ID, 
+      MER_PAY_TYPE, IS_OVERSEAS, MER_CARD_TYPE, 
+      CARD_BIN, INTEGRAL_ID, DISCOUNT_PRICE, 
+      NORMAL_PRICE, ACCOUNTT_CHANNEL, WTPNO, 
+      PAY_REAL_MONEY, PAY_REAL_POINT, ORDER_DATE, 
+      CONTACTS_NAME, CONTACTS_PHONE, CONTACTS_EMAIL, 
+      VISITOR_NAME, VISITOR_GENDER, VISITOR_PHONE, 
+      VISITOR_ID_TYPE, VISITOR_ID_NUM, VISITOR_EMAIL, 
+      VISITOR_AGE, DISCOUNT_MONEY, UNION_ID, 
+      OPEN_ID, RETURN_MONEY, START_BOOK_DATE, 
+      END_BOOK_DATE, SHOP_ID, COMMODITY_OUT_TIME, 
+      COUPON_STATE, WRITE_OFF_STATE)
+    values (#{orderDetailId,jdbcType=VARCHAR}, #{orderId,jdbcType=VARCHAR}, #{orderCode,jdbcType=VARCHAR}, 
+      #{userId,jdbcType=VARCHAR}, #{userNm,jdbcType=VARCHAR}, #{channel,jdbcType=VARCHAR}, 
+      #{merName,jdbcType=VARCHAR}, #{merId,jdbcType=VARCHAR}, #{termId,jdbcType=VARCHAR}, 
+      #{productId,jdbcType=VARCHAR}, #{commodityDetailId,jdbcType=VARCHAR}, #{productName,jdbcType=VARCHAR}, 
+      #{total,jdbcType=VARCHAR}, #{price,jdbcType=NUMERIC}, #{commodityField,jdbcType=VARCHAR}, 
+      #{cardNo,jdbcType=VARCHAR}, #{payType,jdbcType=VARCHAR}, #{payMoney,jdbcType=VARCHAR}, 
+      #{payPoint,jdbcType=VARCHAR}, #{timeOutDt,jdbcType=CHAR}, #{createDt,jdbcType=CHAR}, 
+      #{state,jdbcType=CHAR}, #{reSqCode,jdbcType=VARCHAR}, #{zdzOrderId,jdbcType=VARCHAR}, 
+      #{payDate,jdbcType=CHAR}, #{payTime,jdbcType=CHAR}, #{returnMsg,jdbcType=VARCHAR}, 
+      #{returnDate,jdbcType=CHAR}, #{returnPurchaseDate,jdbcType=CHAR}, #{returnPurchaseTime,jdbcType=CHAR}, 
+      #{seqNo,jdbcType=VARCHAR}, #{isCoupon,jdbcType=VARCHAR}, #{couponId,jdbcType=VARCHAR}, 
+      #{merSeqNo,jdbcType=VARCHAR}, #{payChannel,jdbcType=VARCHAR}, #{certType,jdbcType=VARCHAR}, 
+      #{certId,jdbcType=VARCHAR}, #{payCardType,jdbcType=VARCHAR}, #{payStages,jdbcType=VARCHAR}, 
+      #{producePicUrl,jdbcType=VARCHAR}, #{writeOffCode,jdbcType=VARCHAR}, #{capycha,jdbcType=VARCHAR}, 
+      #{orderType,jdbcType=VARCHAR}, #{orderSecType,jdbcType=VARCHAR}, #{tokenId,jdbcType=VARCHAR}, 
+      #{merPayType,jdbcType=VARCHAR}, #{isOverseas,jdbcType=CHAR}, #{merCardType,jdbcType=VARCHAR}, 
+      #{cardBin,jdbcType=VARCHAR}, #{integralId,jdbcType=VARCHAR}, #{discountPrice,jdbcType=NUMERIC}, 
+      #{normalPrice,jdbcType=NUMERIC}, #{accounttChannel,jdbcType=CHAR}, #{wtpno,jdbcType=VARCHAR}, 
+      #{payRealMoney,jdbcType=NUMERIC}, #{payRealPoint,jdbcType=NUMERIC}, #{orderDate,jdbcType=CHAR}, 
+      #{contactsName,jdbcType=VARCHAR}, #{contactsPhone,jdbcType=VARCHAR}, #{contactsEmail,jdbcType=VARCHAR}, 
+      #{visitorName,jdbcType=VARCHAR}, #{visitorGender,jdbcType=VARCHAR}, #{visitorPhone,jdbcType=VARCHAR}, 
+      #{visitorIdType,jdbcType=VARCHAR}, #{visitorIdNum,jdbcType=VARCHAR}, #{visitorEmail,jdbcType=VARCHAR}, 
+      #{visitorAge,jdbcType=VARCHAR}, #{discountMoney,jdbcType=NUMERIC}, #{unionId,jdbcType=VARCHAR}, 
+      #{openId,jdbcType=VARCHAR}, #{returnMoney,jdbcType=VARCHAR}, #{startBookDate,jdbcType=CHAR}, 
+      #{endBookDate,jdbcType=CHAR}, #{shopId,jdbcType=VARCHAR}, #{commodityOutTime,jdbcType=CHAR}, 
+      #{couponState,jdbcType=CHAR}, #{writeOffState,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.macro.mall.model.TSpoOrderDetailInfo">
+    insert into T_SPO_ORDER_DETAIL_INFO
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderDetailId != null">
+        ORDER_DETAIL_ID,
+      </if>
+      <if test="orderId != null">
+        ORDER_ID,
+      </if>
+      <if test="orderCode != null">
+        ORDER_CODE,
+      </if>
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="userNm != null">
+        USER_NM,
+      </if>
+      <if test="channel != null">
+        CHANNEL,
+      </if>
+      <if test="merName != null">
+        MER_NAME,
+      </if>
+      <if test="merId != null">
+        MER_ID,
+      </if>
+      <if test="termId != null">
+        TERM_ID,
+      </if>
+      <if test="productId != null">
+        PRODUCT_ID,
+      </if>
+      <if test="commodityDetailId != null">
+        COMMODITY_DETAIL_ID,
+      </if>
+      <if test="productName != null">
+        PRODUCT_NAME,
+      </if>
+      <if test="total != null">
+        TOTAL,
+      </if>
+      <if test="price != null">
+        PRICE,
+      </if>
+      <if test="commodityField != null">
+        COMMODITY_FIELD,
+      </if>
+      <if test="cardNo != null">
+        CARD_NO,
+      </if>
+      <if test="payType != null">
+        PAY_TYPE,
+      </if>
+      <if test="payMoney != null">
+        PAY_MONEY,
+      </if>
+      <if test="payPoint != null">
+        PAY_POINT,
+      </if>
+      <if test="timeOutDt != null">
+        TIME_OUT_DT,
+      </if>
+      <if test="createDt != null">
+        CREATE_DT,
+      </if>
+      <if test="state != null">
+        STATE,
+      </if>
+      <if test="reSqCode != null">
+        RE_SQ_CODE,
+      </if>
+      <if test="zdzOrderId != null">
+        ZDZ_ORDER_ID,
+      </if>
+      <if test="payDate != null">
+        PAY_DATE,
+      </if>
+      <if test="payTime != null">
+        PAY_TIME,
+      </if>
+      <if test="returnMsg != null">
+        RETURN_MSG,
+      </if>
+      <if test="returnDate != null">
+        RETURN_DATE,
+      </if>
+      <if test="returnPurchaseDate != null">
+        RETURN_PURCHASE_DATE,
+      </if>
+      <if test="returnPurchaseTime != null">
+        RETURN_PURCHASE_TIME,
+      </if>
+      <if test="seqNo != null">
+        SEQ_NO,
+      </if>
+      <if test="isCoupon != null">
+        IS_COUPON,
+      </if>
+      <if test="couponId != null">
+        COUPON_ID,
+      </if>
+      <if test="merSeqNo != null">
+        MER_SEQ_NO,
+      </if>
+      <if test="payChannel != null">
+        PAY_CHANNEL,
+      </if>
+      <if test="certType != null">
+        CERT_TYPE,
+      </if>
+      <if test="certId != null">
+        CERT_ID,
+      </if>
+      <if test="payCardType != null">
+        PAY_CARD_TYPE,
+      </if>
+      <if test="payStages != null">
+        PAY_STAGES,
+      </if>
+      <if test="producePicUrl != null">
+        PRODUCE_PIC_URL,
+      </if>
+      <if test="writeOffCode != null">
+        WRITE_OFF_CODE,
+      </if>
+      <if test="capycha != null">
+        CAPYCHA,
+      </if>
+      <if test="orderType != null">
+        ORDER_TYPE,
+      </if>
+      <if test="orderSecType != null">
+        ORDER_SEC_TYPE,
+      </if>
+      <if test="tokenId != null">
+        TOKEN_ID,
+      </if>
+      <if test="merPayType != null">
+        MER_PAY_TYPE,
+      </if>
+      <if test="isOverseas != null">
+        IS_OVERSEAS,
+      </if>
+      <if test="merCardType != null">
+        MER_CARD_TYPE,
+      </if>
+      <if test="cardBin != null">
+        CARD_BIN,
+      </if>
+      <if test="integralId != null">
+        INTEGRAL_ID,
+      </if>
+      <if test="discountPrice != null">
+        DISCOUNT_PRICE,
+      </if>
+      <if test="normalPrice != null">
+        NORMAL_PRICE,
+      </if>
+      <if test="accounttChannel != null">
+        ACCOUNTT_CHANNEL,
+      </if>
+      <if test="wtpno != null">
+        WTPNO,
+      </if>
+      <if test="payRealMoney != null">
+        PAY_REAL_MONEY,
+      </if>
+      <if test="payRealPoint != null">
+        PAY_REAL_POINT,
+      </if>
+      <if test="orderDate != null">
+        ORDER_DATE,
+      </if>
+      <if test="contactsName != null">
+        CONTACTS_NAME,
+      </if>
+      <if test="contactsPhone != null">
+        CONTACTS_PHONE,
+      </if>
+      <if test="contactsEmail != null">
+        CONTACTS_EMAIL,
+      </if>
+      <if test="visitorName != null">
+        VISITOR_NAME,
+      </if>
+      <if test="visitorGender != null">
+        VISITOR_GENDER,
+      </if>
+      <if test="visitorPhone != null">
+        VISITOR_PHONE,
+      </if>
+      <if test="visitorIdType != null">
+        VISITOR_ID_TYPE,
+      </if>
+      <if test="visitorIdNum != null">
+        VISITOR_ID_NUM,
+      </if>
+      <if test="visitorEmail != null">
+        VISITOR_EMAIL,
+      </if>
+      <if test="visitorAge != null">
+        VISITOR_AGE,
+      </if>
+      <if test="discountMoney != null">
+        DISCOUNT_MONEY,
+      </if>
+      <if test="unionId != null">
+        UNION_ID,
+      </if>
+      <if test="openId != null">
+        OPEN_ID,
+      </if>
+      <if test="returnMoney != null">
+        RETURN_MONEY,
+      </if>
+      <if test="startBookDate != null">
+        START_BOOK_DATE,
+      </if>
+      <if test="endBookDate != null">
+        END_BOOK_DATE,
+      </if>
+      <if test="shopId != null">
+        SHOP_ID,
+      </if>
+      <if test="commodityOutTime != null">
+        COMMODITY_OUT_TIME,
+      </if>
+      <if test="couponState != null">
+        COUPON_STATE,
+      </if>
+      <if test="writeOffState != null">
+        WRITE_OFF_STATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderDetailId != null">
+        #{orderDetailId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderCode != null">
+        #{orderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userNm != null">
+        #{userNm,jdbcType=VARCHAR},
+      </if>
+      <if test="channel != null">
+        #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="merName != null">
+        #{merName,jdbcType=VARCHAR},
+      </if>
+      <if test="merId != null">
+        #{merId,jdbcType=VARCHAR},
+      </if>
+      <if test="termId != null">
+        #{termId,jdbcType=VARCHAR},
+      </if>
+      <if test="productId != null">
+        #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityDetailId != null">
+        #{commodityDetailId,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null">
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="total != null">
+        #{total,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=NUMERIC},
+      </if>
+      <if test="commodityField != null">
+        #{commodityField,jdbcType=VARCHAR},
+      </if>
+      <if test="cardNo != null">
+        #{cardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="payType != null">
+        #{payType,jdbcType=VARCHAR},
+      </if>
+      <if test="payMoney != null">
+        #{payMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="payPoint != null">
+        #{payPoint,jdbcType=VARCHAR},
+      </if>
+      <if test="timeOutDt != null">
+        #{timeOutDt,jdbcType=CHAR},
+      </if>
+      <if test="createDt != null">
+        #{createDt,jdbcType=CHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=CHAR},
+      </if>
+      <if test="reSqCode != null">
+        #{reSqCode,jdbcType=VARCHAR},
+      </if>
+      <if test="zdzOrderId != null">
+        #{zdzOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="payDate != null">
+        #{payDate,jdbcType=CHAR},
+      </if>
+      <if test="payTime != null">
+        #{payTime,jdbcType=CHAR},
+      </if>
+      <if test="returnMsg != null">
+        #{returnMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="returnDate != null">
+        #{returnDate,jdbcType=CHAR},
+      </if>
+      <if test="returnPurchaseDate != null">
+        #{returnPurchaseDate,jdbcType=CHAR},
+      </if>
+      <if test="returnPurchaseTime != null">
+        #{returnPurchaseTime,jdbcType=CHAR},
+      </if>
+      <if test="seqNo != null">
+        #{seqNo,jdbcType=VARCHAR},
+      </if>
+      <if test="isCoupon != null">
+        #{isCoupon,jdbcType=VARCHAR},
+      </if>
+      <if test="couponId != null">
+        #{couponId,jdbcType=VARCHAR},
+      </if>
+      <if test="merSeqNo != null">
+        #{merSeqNo,jdbcType=VARCHAR},
+      </if>
+      <if test="payChannel != null">
+        #{payChannel,jdbcType=VARCHAR},
+      </if>
+      <if test="certType != null">
+        #{certType,jdbcType=VARCHAR},
+      </if>
+      <if test="certId != null">
+        #{certId,jdbcType=VARCHAR},
+      </if>
+      <if test="payCardType != null">
+        #{payCardType,jdbcType=VARCHAR},
+      </if>
+      <if test="payStages != null">
+        #{payStages,jdbcType=VARCHAR},
+      </if>
+      <if test="producePicUrl != null">
+        #{producePicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="writeOffCode != null">
+        #{writeOffCode,jdbcType=VARCHAR},
+      </if>
+      <if test="capycha != null">
+        #{capycha,jdbcType=VARCHAR},
+      </if>
+      <if test="orderType != null">
+        #{orderType,jdbcType=VARCHAR},
+      </if>
+      <if test="orderSecType != null">
+        #{orderSecType,jdbcType=VARCHAR},
+      </if>
+      <if test="tokenId != null">
+        #{tokenId,jdbcType=VARCHAR},
+      </if>
+      <if test="merPayType != null">
+        #{merPayType,jdbcType=VARCHAR},
+      </if>
+      <if test="isOverseas != null">
+        #{isOverseas,jdbcType=CHAR},
+      </if>
+      <if test="merCardType != null">
+        #{merCardType,jdbcType=VARCHAR},
+      </if>
+      <if test="cardBin != null">
+        #{cardBin,jdbcType=VARCHAR},
+      </if>
+      <if test="integralId != null">
+        #{integralId,jdbcType=VARCHAR},
+      </if>
+      <if test="discountPrice != null">
+        #{discountPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="normalPrice != null">
+        #{normalPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="accounttChannel != null">
+        #{accounttChannel,jdbcType=CHAR},
+      </if>
+      <if test="wtpno != null">
+        #{wtpno,jdbcType=VARCHAR},
+      </if>
+      <if test="payRealMoney != null">
+        #{payRealMoney,jdbcType=NUMERIC},
+      </if>
+      <if test="payRealPoint != null">
+        #{payRealPoint,jdbcType=NUMERIC},
+      </if>
+      <if test="orderDate != null">
+        #{orderDate,jdbcType=CHAR},
+      </if>
+      <if test="contactsName != null">
+        #{contactsName,jdbcType=VARCHAR},
+      </if>
+      <if test="contactsPhone != null">
+        #{contactsPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="contactsEmail != null">
+        #{contactsEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorName != null">
+        #{visitorName,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorGender != null">
+        #{visitorGender,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorPhone != null">
+        #{visitorPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorIdType != null">
+        #{visitorIdType,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorIdNum != null">
+        #{visitorIdNum,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorEmail != null">
+        #{visitorEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorAge != null">
+        #{visitorAge,jdbcType=VARCHAR},
+      </if>
+      <if test="discountMoney != null">
+        #{discountMoney,jdbcType=NUMERIC},
+      </if>
+      <if test="unionId != null">
+        #{unionId,jdbcType=VARCHAR},
+      </if>
+      <if test="openId != null">
+        #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="returnMoney != null">
+        #{returnMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="startBookDate != null">
+        #{startBookDate,jdbcType=CHAR},
+      </if>
+      <if test="endBookDate != null">
+        #{endBookDate,jdbcType=CHAR},
+      </if>
+      <if test="shopId != null">
+        #{shopId,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityOutTime != null">
+        #{commodityOutTime,jdbcType=CHAR},
+      </if>
+      <if test="couponState != null">
+        #{couponState,jdbcType=CHAR},
+      </if>
+      <if test="writeOffState != null">
+        #{writeOffState,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.macro.mall.model.TSpoOrderDetailInfoExample" resultType="java.lang.Long">
+    select count(*) from T_SPO_ORDER_DETAIL_INFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update T_SPO_ORDER_DETAIL_INFO
+    <set>
+      <if test="record.orderDetailId != null">
+        ORDER_DETAIL_ID = #{record.orderDetailId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderId != null">
+        ORDER_ID = #{record.orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderCode != null">
+        ORDER_CODE = #{record.orderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null">
+        USER_ID = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userNm != null">
+        USER_NM = #{record.userNm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.channel != null">
+        CHANNEL = #{record.channel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.merName != null">
+        MER_NAME = #{record.merName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.merId != null">
+        MER_ID = #{record.merId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.termId != null">
+        TERM_ID = #{record.termId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productId != null">
+        PRODUCT_ID = #{record.productId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commodityDetailId != null">
+        COMMODITY_DETAIL_ID = #{record.commodityDetailId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productName != null">
+        PRODUCT_NAME = #{record.productName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.total != null">
+        TOTAL = #{record.total,jdbcType=VARCHAR},
+      </if>
+      <if test="record.price != null">
+        PRICE = #{record.price,jdbcType=NUMERIC},
+      </if>
+      <if test="record.commodityField != null">
+        COMMODITY_FIELD = #{record.commodityField,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardNo != null">
+        CARD_NO = #{record.cardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payType != null">
+        PAY_TYPE = #{record.payType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payMoney != null">
+        PAY_MONEY = #{record.payMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payPoint != null">
+        PAY_POINT = #{record.payPoint,jdbcType=VARCHAR},
+      </if>
+      <if test="record.timeOutDt != null">
+        TIME_OUT_DT = #{record.timeOutDt,jdbcType=CHAR},
+      </if>
+      <if test="record.createDt != null">
+        CREATE_DT = #{record.createDt,jdbcType=CHAR},
+      </if>
+      <if test="record.state != null">
+        STATE = #{record.state,jdbcType=CHAR},
+      </if>
+      <if test="record.reSqCode != null">
+        RE_SQ_CODE = #{record.reSqCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zdzOrderId != null">
+        ZDZ_ORDER_ID = #{record.zdzOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payDate != null">
+        PAY_DATE = #{record.payDate,jdbcType=CHAR},
+      </if>
+      <if test="record.payTime != null">
+        PAY_TIME = #{record.payTime,jdbcType=CHAR},
+      </if>
+      <if test="record.returnMsg != null">
+        RETURN_MSG = #{record.returnMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.returnDate != null">
+        RETURN_DATE = #{record.returnDate,jdbcType=CHAR},
+      </if>
+      <if test="record.returnPurchaseDate != null">
+        RETURN_PURCHASE_DATE = #{record.returnPurchaseDate,jdbcType=CHAR},
+      </if>
+      <if test="record.returnPurchaseTime != null">
+        RETURN_PURCHASE_TIME = #{record.returnPurchaseTime,jdbcType=CHAR},
+      </if>
+      <if test="record.seqNo != null">
+        SEQ_NO = #{record.seqNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isCoupon != null">
+        IS_COUPON = #{record.isCoupon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.couponId != null">
+        COUPON_ID = #{record.couponId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.merSeqNo != null">
+        MER_SEQ_NO = #{record.merSeqNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payChannel != null">
+        PAY_CHANNEL = #{record.payChannel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.certType != null">
+        CERT_TYPE = #{record.certType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.certId != null">
+        CERT_ID = #{record.certId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payCardType != null">
+        PAY_CARD_TYPE = #{record.payCardType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payStages != null">
+        PAY_STAGES = #{record.payStages,jdbcType=VARCHAR},
+      </if>
+      <if test="record.producePicUrl != null">
+        PRODUCE_PIC_URL = #{record.producePicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.writeOffCode != null">
+        WRITE_OFF_CODE = #{record.writeOffCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.capycha != null">
+        CAPYCHA = #{record.capycha,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderType != null">
+        ORDER_TYPE = #{record.orderType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderSecType != null">
+        ORDER_SEC_TYPE = #{record.orderSecType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tokenId != null">
+        TOKEN_ID = #{record.tokenId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.merPayType != null">
+        MER_PAY_TYPE = #{record.merPayType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isOverseas != null">
+        IS_OVERSEAS = #{record.isOverseas,jdbcType=CHAR},
+      </if>
+      <if test="record.merCardType != null">
+        MER_CARD_TYPE = #{record.merCardType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardBin != null">
+        CARD_BIN = #{record.cardBin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.integralId != null">
+        INTEGRAL_ID = #{record.integralId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.discountPrice != null">
+        DISCOUNT_PRICE = #{record.discountPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="record.normalPrice != null">
+        NORMAL_PRICE = #{record.normalPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="record.accounttChannel != null">
+        ACCOUNTT_CHANNEL = #{record.accounttChannel,jdbcType=CHAR},
+      </if>
+      <if test="record.wtpno != null">
+        WTPNO = #{record.wtpno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payRealMoney != null">
+        PAY_REAL_MONEY = #{record.payRealMoney,jdbcType=NUMERIC},
+      </if>
+      <if test="record.payRealPoint != null">
+        PAY_REAL_POINT = #{record.payRealPoint,jdbcType=NUMERIC},
+      </if>
+      <if test="record.orderDate != null">
+        ORDER_DATE = #{record.orderDate,jdbcType=CHAR},
+      </if>
+      <if test="record.contactsName != null">
+        CONTACTS_NAME = #{record.contactsName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contactsPhone != null">
+        CONTACTS_PHONE = #{record.contactsPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contactsEmail != null">
+        CONTACTS_EMAIL = #{record.contactsEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.visitorName != null">
+        VISITOR_NAME = #{record.visitorName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.visitorGender != null">
+        VISITOR_GENDER = #{record.visitorGender,jdbcType=VARCHAR},
+      </if>
+      <if test="record.visitorPhone != null">
+        VISITOR_PHONE = #{record.visitorPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.visitorIdType != null">
+        VISITOR_ID_TYPE = #{record.visitorIdType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.visitorIdNum != null">
+        VISITOR_ID_NUM = #{record.visitorIdNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.visitorEmail != null">
+        VISITOR_EMAIL = #{record.visitorEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.visitorAge != null">
+        VISITOR_AGE = #{record.visitorAge,jdbcType=VARCHAR},
+      </if>
+      <if test="record.discountMoney != null">
+        DISCOUNT_MONEY = #{record.discountMoney,jdbcType=NUMERIC},
+      </if>
+      <if test="record.unionId != null">
+        UNION_ID = #{record.unionId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.openId != null">
+        OPEN_ID = #{record.openId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.returnMoney != null">
+        RETURN_MONEY = #{record.returnMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startBookDate != null">
+        START_BOOK_DATE = #{record.startBookDate,jdbcType=CHAR},
+      </if>
+      <if test="record.endBookDate != null">
+        END_BOOK_DATE = #{record.endBookDate,jdbcType=CHAR},
+      </if>
+      <if test="record.shopId != null">
+        SHOP_ID = #{record.shopId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commodityOutTime != null">
+        COMMODITY_OUT_TIME = #{record.commodityOutTime,jdbcType=CHAR},
+      </if>
+      <if test="record.couponState != null">
+        COUPON_STATE = #{record.couponState,jdbcType=CHAR},
+      </if>
+      <if test="record.writeOffState != null">
+        WRITE_OFF_STATE = #{record.writeOffState,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update T_SPO_ORDER_DETAIL_INFO
+    set ORDER_DETAIL_ID = #{record.orderDetailId,jdbcType=VARCHAR},
+      ORDER_ID = #{record.orderId,jdbcType=VARCHAR},
+      ORDER_CODE = #{record.orderCode,jdbcType=VARCHAR},
+      USER_ID = #{record.userId,jdbcType=VARCHAR},
+      USER_NM = #{record.userNm,jdbcType=VARCHAR},
+      CHANNEL = #{record.channel,jdbcType=VARCHAR},
+      MER_NAME = #{record.merName,jdbcType=VARCHAR},
+      MER_ID = #{record.merId,jdbcType=VARCHAR},
+      TERM_ID = #{record.termId,jdbcType=VARCHAR},
+      PRODUCT_ID = #{record.productId,jdbcType=VARCHAR},
+      COMMODITY_DETAIL_ID = #{record.commodityDetailId,jdbcType=VARCHAR},
+      PRODUCT_NAME = #{record.productName,jdbcType=VARCHAR},
+      TOTAL = #{record.total,jdbcType=VARCHAR},
+      PRICE = #{record.price,jdbcType=NUMERIC},
+      COMMODITY_FIELD = #{record.commodityField,jdbcType=VARCHAR},
+      CARD_NO = #{record.cardNo,jdbcType=VARCHAR},
+      PAY_TYPE = #{record.payType,jdbcType=VARCHAR},
+      PAY_MONEY = #{record.payMoney,jdbcType=VARCHAR},
+      PAY_POINT = #{record.payPoint,jdbcType=VARCHAR},
+      TIME_OUT_DT = #{record.timeOutDt,jdbcType=CHAR},
+      CREATE_DT = #{record.createDt,jdbcType=CHAR},
+      STATE = #{record.state,jdbcType=CHAR},
+      RE_SQ_CODE = #{record.reSqCode,jdbcType=VARCHAR},
+      ZDZ_ORDER_ID = #{record.zdzOrderId,jdbcType=VARCHAR},
+      PAY_DATE = #{record.payDate,jdbcType=CHAR},
+      PAY_TIME = #{record.payTime,jdbcType=CHAR},
+      RETURN_MSG = #{record.returnMsg,jdbcType=VARCHAR},
+      RETURN_DATE = #{record.returnDate,jdbcType=CHAR},
+      RETURN_PURCHASE_DATE = #{record.returnPurchaseDate,jdbcType=CHAR},
+      RETURN_PURCHASE_TIME = #{record.returnPurchaseTime,jdbcType=CHAR},
+      SEQ_NO = #{record.seqNo,jdbcType=VARCHAR},
+      IS_COUPON = #{record.isCoupon,jdbcType=VARCHAR},
+      COUPON_ID = #{record.couponId,jdbcType=VARCHAR},
+      MER_SEQ_NO = #{record.merSeqNo,jdbcType=VARCHAR},
+      PAY_CHANNEL = #{record.payChannel,jdbcType=VARCHAR},
+      CERT_TYPE = #{record.certType,jdbcType=VARCHAR},
+      CERT_ID = #{record.certId,jdbcType=VARCHAR},
+      PAY_CARD_TYPE = #{record.payCardType,jdbcType=VARCHAR},
+      PAY_STAGES = #{record.payStages,jdbcType=VARCHAR},
+      PRODUCE_PIC_URL = #{record.producePicUrl,jdbcType=VARCHAR},
+      WRITE_OFF_CODE = #{record.writeOffCode,jdbcType=VARCHAR},
+      CAPYCHA = #{record.capycha,jdbcType=VARCHAR},
+      ORDER_TYPE = #{record.orderType,jdbcType=VARCHAR},
+      ORDER_SEC_TYPE = #{record.orderSecType,jdbcType=VARCHAR},
+      TOKEN_ID = #{record.tokenId,jdbcType=VARCHAR},
+      MER_PAY_TYPE = #{record.merPayType,jdbcType=VARCHAR},
+      IS_OVERSEAS = #{record.isOverseas,jdbcType=CHAR},
+      MER_CARD_TYPE = #{record.merCardType,jdbcType=VARCHAR},
+      CARD_BIN = #{record.cardBin,jdbcType=VARCHAR},
+      INTEGRAL_ID = #{record.integralId,jdbcType=VARCHAR},
+      DISCOUNT_PRICE = #{record.discountPrice,jdbcType=NUMERIC},
+      NORMAL_PRICE = #{record.normalPrice,jdbcType=NUMERIC},
+      ACCOUNTT_CHANNEL = #{record.accounttChannel,jdbcType=CHAR},
+      WTPNO = #{record.wtpno,jdbcType=VARCHAR},
+      PAY_REAL_MONEY = #{record.payRealMoney,jdbcType=NUMERIC},
+      PAY_REAL_POINT = #{record.payRealPoint,jdbcType=NUMERIC},
+      ORDER_DATE = #{record.orderDate,jdbcType=CHAR},
+      CONTACTS_NAME = #{record.contactsName,jdbcType=VARCHAR},
+      CONTACTS_PHONE = #{record.contactsPhone,jdbcType=VARCHAR},
+      CONTACTS_EMAIL = #{record.contactsEmail,jdbcType=VARCHAR},
+      VISITOR_NAME = #{record.visitorName,jdbcType=VARCHAR},
+      VISITOR_GENDER = #{record.visitorGender,jdbcType=VARCHAR},
+      VISITOR_PHONE = #{record.visitorPhone,jdbcType=VARCHAR},
+      VISITOR_ID_TYPE = #{record.visitorIdType,jdbcType=VARCHAR},
+      VISITOR_ID_NUM = #{record.visitorIdNum,jdbcType=VARCHAR},
+      VISITOR_EMAIL = #{record.visitorEmail,jdbcType=VARCHAR},
+      VISITOR_AGE = #{record.visitorAge,jdbcType=VARCHAR},
+      DISCOUNT_MONEY = #{record.discountMoney,jdbcType=NUMERIC},
+      UNION_ID = #{record.unionId,jdbcType=VARCHAR},
+      OPEN_ID = #{record.openId,jdbcType=VARCHAR},
+      RETURN_MONEY = #{record.returnMoney,jdbcType=VARCHAR},
+      START_BOOK_DATE = #{record.startBookDate,jdbcType=CHAR},
+      END_BOOK_DATE = #{record.endBookDate,jdbcType=CHAR},
+      SHOP_ID = #{record.shopId,jdbcType=VARCHAR},
+      COMMODITY_OUT_TIME = #{record.commodityOutTime,jdbcType=CHAR},
+      COUPON_STATE = #{record.couponState,jdbcType=CHAR},
+      WRITE_OFF_STATE = #{record.writeOffState,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.macro.mall.model.TSpoOrderDetailInfo">
+    update T_SPO_ORDER_DETAIL_INFO
+    <set>
+      <if test="orderId != null">
+        ORDER_ID = #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderCode != null">
+        ORDER_CODE = #{orderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        USER_ID = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userNm != null">
+        USER_NM = #{userNm,jdbcType=VARCHAR},
+      </if>
+      <if test="channel != null">
+        CHANNEL = #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="merName != null">
+        MER_NAME = #{merName,jdbcType=VARCHAR},
+      </if>
+      <if test="merId != null">
+        MER_ID = #{merId,jdbcType=VARCHAR},
+      </if>
+      <if test="termId != null">
+        TERM_ID = #{termId,jdbcType=VARCHAR},
+      </if>
+      <if test="productId != null">
+        PRODUCT_ID = #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityDetailId != null">
+        COMMODITY_DETAIL_ID = #{commodityDetailId,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null">
+        PRODUCT_NAME = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="total != null">
+        TOTAL = #{total,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        PRICE = #{price,jdbcType=NUMERIC},
+      </if>
+      <if test="commodityField != null">
+        COMMODITY_FIELD = #{commodityField,jdbcType=VARCHAR},
+      </if>
+      <if test="cardNo != null">
+        CARD_NO = #{cardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="payType != null">
+        PAY_TYPE = #{payType,jdbcType=VARCHAR},
+      </if>
+      <if test="payMoney != null">
+        PAY_MONEY = #{payMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="payPoint != null">
+        PAY_POINT = #{payPoint,jdbcType=VARCHAR},
+      </if>
+      <if test="timeOutDt != null">
+        TIME_OUT_DT = #{timeOutDt,jdbcType=CHAR},
+      </if>
+      <if test="createDt != null">
+        CREATE_DT = #{createDt,jdbcType=CHAR},
+      </if>
+      <if test="state != null">
+        STATE = #{state,jdbcType=CHAR},
+      </if>
+      <if test="reSqCode != null">
+        RE_SQ_CODE = #{reSqCode,jdbcType=VARCHAR},
+      </if>
+      <if test="zdzOrderId != null">
+        ZDZ_ORDER_ID = #{zdzOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="payDate != null">
+        PAY_DATE = #{payDate,jdbcType=CHAR},
+      </if>
+      <if test="payTime != null">
+        PAY_TIME = #{payTime,jdbcType=CHAR},
+      </if>
+      <if test="returnMsg != null">
+        RETURN_MSG = #{returnMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="returnDate != null">
+        RETURN_DATE = #{returnDate,jdbcType=CHAR},
+      </if>
+      <if test="returnPurchaseDate != null">
+        RETURN_PURCHASE_DATE = #{returnPurchaseDate,jdbcType=CHAR},
+      </if>
+      <if test="returnPurchaseTime != null">
+        RETURN_PURCHASE_TIME = #{returnPurchaseTime,jdbcType=CHAR},
+      </if>
+      <if test="seqNo != null">
+        SEQ_NO = #{seqNo,jdbcType=VARCHAR},
+      </if>
+      <if test="isCoupon != null">
+        IS_COUPON = #{isCoupon,jdbcType=VARCHAR},
+      </if>
+      <if test="couponId != null">
+        COUPON_ID = #{couponId,jdbcType=VARCHAR},
+      </if>
+      <if test="merSeqNo != null">
+        MER_SEQ_NO = #{merSeqNo,jdbcType=VARCHAR},
+      </if>
+      <if test="payChannel != null">
+        PAY_CHANNEL = #{payChannel,jdbcType=VARCHAR},
+      </if>
+      <if test="certType != null">
+        CERT_TYPE = #{certType,jdbcType=VARCHAR},
+      </if>
+      <if test="certId != null">
+        CERT_ID = #{certId,jdbcType=VARCHAR},
+      </if>
+      <if test="payCardType != null">
+        PAY_CARD_TYPE = #{payCardType,jdbcType=VARCHAR},
+      </if>
+      <if test="payStages != null">
+        PAY_STAGES = #{payStages,jdbcType=VARCHAR},
+      </if>
+      <if test="producePicUrl != null">
+        PRODUCE_PIC_URL = #{producePicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="writeOffCode != null">
+        WRITE_OFF_CODE = #{writeOffCode,jdbcType=VARCHAR},
+      </if>
+      <if test="capycha != null">
+        CAPYCHA = #{capycha,jdbcType=VARCHAR},
+      </if>
+      <if test="orderType != null">
+        ORDER_TYPE = #{orderType,jdbcType=VARCHAR},
+      </if>
+      <if test="orderSecType != null">
+        ORDER_SEC_TYPE = #{orderSecType,jdbcType=VARCHAR},
+      </if>
+      <if test="tokenId != null">
+        TOKEN_ID = #{tokenId,jdbcType=VARCHAR},
+      </if>
+      <if test="merPayType != null">
+        MER_PAY_TYPE = #{merPayType,jdbcType=VARCHAR},
+      </if>
+      <if test="isOverseas != null">
+        IS_OVERSEAS = #{isOverseas,jdbcType=CHAR},
+      </if>
+      <if test="merCardType != null">
+        MER_CARD_TYPE = #{merCardType,jdbcType=VARCHAR},
+      </if>
+      <if test="cardBin != null">
+        CARD_BIN = #{cardBin,jdbcType=VARCHAR},
+      </if>
+      <if test="integralId != null">
+        INTEGRAL_ID = #{integralId,jdbcType=VARCHAR},
+      </if>
+      <if test="discountPrice != null">
+        DISCOUNT_PRICE = #{discountPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="normalPrice != null">
+        NORMAL_PRICE = #{normalPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="accounttChannel != null">
+        ACCOUNTT_CHANNEL = #{accounttChannel,jdbcType=CHAR},
+      </if>
+      <if test="wtpno != null">
+        WTPNO = #{wtpno,jdbcType=VARCHAR},
+      </if>
+      <if test="payRealMoney != null">
+        PAY_REAL_MONEY = #{payRealMoney,jdbcType=NUMERIC},
+      </if>
+      <if test="payRealPoint != null">
+        PAY_REAL_POINT = #{payRealPoint,jdbcType=NUMERIC},
+      </if>
+      <if test="orderDate != null">
+        ORDER_DATE = #{orderDate,jdbcType=CHAR},
+      </if>
+      <if test="contactsName != null">
+        CONTACTS_NAME = #{contactsName,jdbcType=VARCHAR},
+      </if>
+      <if test="contactsPhone != null">
+        CONTACTS_PHONE = #{contactsPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="contactsEmail != null">
+        CONTACTS_EMAIL = #{contactsEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorName != null">
+        VISITOR_NAME = #{visitorName,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorGender != null">
+        VISITOR_GENDER = #{visitorGender,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorPhone != null">
+        VISITOR_PHONE = #{visitorPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorIdType != null">
+        VISITOR_ID_TYPE = #{visitorIdType,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorIdNum != null">
+        VISITOR_ID_NUM = #{visitorIdNum,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorEmail != null">
+        VISITOR_EMAIL = #{visitorEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorAge != null">
+        VISITOR_AGE = #{visitorAge,jdbcType=VARCHAR},
+      </if>
+      <if test="discountMoney != null">
+        DISCOUNT_MONEY = #{discountMoney,jdbcType=NUMERIC},
+      </if>
+      <if test="unionId != null">
+        UNION_ID = #{unionId,jdbcType=VARCHAR},
+      </if>
+      <if test="openId != null">
+        OPEN_ID = #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="returnMoney != null">
+        RETURN_MONEY = #{returnMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="startBookDate != null">
+        START_BOOK_DATE = #{startBookDate,jdbcType=CHAR},
+      </if>
+      <if test="endBookDate != null">
+        END_BOOK_DATE = #{endBookDate,jdbcType=CHAR},
+      </if>
+      <if test="shopId != null">
+        SHOP_ID = #{shopId,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityOutTime != null">
+        COMMODITY_OUT_TIME = #{commodityOutTime,jdbcType=CHAR},
+      </if>
+      <if test="couponState != null">
+        COUPON_STATE = #{couponState,jdbcType=CHAR},
+      </if>
+      <if test="writeOffState != null">
+        WRITE_OFF_STATE = #{writeOffState,jdbcType=CHAR},
+      </if>
+    </set>
+    where ORDER_DETAIL_ID = #{orderDetailId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.macro.mall.model.TSpoOrderDetailInfo">
+    update T_SPO_ORDER_DETAIL_INFO
+    set ORDER_ID = #{orderId,jdbcType=VARCHAR},
+      ORDER_CODE = #{orderCode,jdbcType=VARCHAR},
+      USER_ID = #{userId,jdbcType=VARCHAR},
+      USER_NM = #{userNm,jdbcType=VARCHAR},
+      CHANNEL = #{channel,jdbcType=VARCHAR},
+      MER_NAME = #{merName,jdbcType=VARCHAR},
+      MER_ID = #{merId,jdbcType=VARCHAR},
+      TERM_ID = #{termId,jdbcType=VARCHAR},
+      PRODUCT_ID = #{productId,jdbcType=VARCHAR},
+      COMMODITY_DETAIL_ID = #{commodityDetailId,jdbcType=VARCHAR},
+      PRODUCT_NAME = #{productName,jdbcType=VARCHAR},
+      TOTAL = #{total,jdbcType=VARCHAR},
+      PRICE = #{price,jdbcType=NUMERIC},
+      COMMODITY_FIELD = #{commodityField,jdbcType=VARCHAR},
+      CARD_NO = #{cardNo,jdbcType=VARCHAR},
+      PAY_TYPE = #{payType,jdbcType=VARCHAR},
+      PAY_MONEY = #{payMoney,jdbcType=VARCHAR},
+      PAY_POINT = #{payPoint,jdbcType=VARCHAR},
+      TIME_OUT_DT = #{timeOutDt,jdbcType=CHAR},
+      CREATE_DT = #{createDt,jdbcType=CHAR},
+      STATE = #{state,jdbcType=CHAR},
+      RE_SQ_CODE = #{reSqCode,jdbcType=VARCHAR},
+      ZDZ_ORDER_ID = #{zdzOrderId,jdbcType=VARCHAR},
+      PAY_DATE = #{payDate,jdbcType=CHAR},
+      PAY_TIME = #{payTime,jdbcType=CHAR},
+      RETURN_MSG = #{returnMsg,jdbcType=VARCHAR},
+      RETURN_DATE = #{returnDate,jdbcType=CHAR},
+      RETURN_PURCHASE_DATE = #{returnPurchaseDate,jdbcType=CHAR},
+      RETURN_PURCHASE_TIME = #{returnPurchaseTime,jdbcType=CHAR},
+      SEQ_NO = #{seqNo,jdbcType=VARCHAR},
+      IS_COUPON = #{isCoupon,jdbcType=VARCHAR},
+      COUPON_ID = #{couponId,jdbcType=VARCHAR},
+      MER_SEQ_NO = #{merSeqNo,jdbcType=VARCHAR},
+      PAY_CHANNEL = #{payChannel,jdbcType=VARCHAR},
+      CERT_TYPE = #{certType,jdbcType=VARCHAR},
+      CERT_ID = #{certId,jdbcType=VARCHAR},
+      PAY_CARD_TYPE = #{payCardType,jdbcType=VARCHAR},
+      PAY_STAGES = #{payStages,jdbcType=VARCHAR},
+      PRODUCE_PIC_URL = #{producePicUrl,jdbcType=VARCHAR},
+      WRITE_OFF_CODE = #{writeOffCode,jdbcType=VARCHAR},
+      CAPYCHA = #{capycha,jdbcType=VARCHAR},
+      ORDER_TYPE = #{orderType,jdbcType=VARCHAR},
+      ORDER_SEC_TYPE = #{orderSecType,jdbcType=VARCHAR},
+      TOKEN_ID = #{tokenId,jdbcType=VARCHAR},
+      MER_PAY_TYPE = #{merPayType,jdbcType=VARCHAR},
+      IS_OVERSEAS = #{isOverseas,jdbcType=CHAR},
+      MER_CARD_TYPE = #{merCardType,jdbcType=VARCHAR},
+      CARD_BIN = #{cardBin,jdbcType=VARCHAR},
+      INTEGRAL_ID = #{integralId,jdbcType=VARCHAR},
+      DISCOUNT_PRICE = #{discountPrice,jdbcType=NUMERIC},
+      NORMAL_PRICE = #{normalPrice,jdbcType=NUMERIC},
+      ACCOUNTT_CHANNEL = #{accounttChannel,jdbcType=CHAR},
+      WTPNO = #{wtpno,jdbcType=VARCHAR},
+      PAY_REAL_MONEY = #{payRealMoney,jdbcType=NUMERIC},
+      PAY_REAL_POINT = #{payRealPoint,jdbcType=NUMERIC},
+      ORDER_DATE = #{orderDate,jdbcType=CHAR},
+      CONTACTS_NAME = #{contactsName,jdbcType=VARCHAR},
+      CONTACTS_PHONE = #{contactsPhone,jdbcType=VARCHAR},
+      CONTACTS_EMAIL = #{contactsEmail,jdbcType=VARCHAR},
+      VISITOR_NAME = #{visitorName,jdbcType=VARCHAR},
+      VISITOR_GENDER = #{visitorGender,jdbcType=VARCHAR},
+      VISITOR_PHONE = #{visitorPhone,jdbcType=VARCHAR},
+      VISITOR_ID_TYPE = #{visitorIdType,jdbcType=VARCHAR},
+      VISITOR_ID_NUM = #{visitorIdNum,jdbcType=VARCHAR},
+      VISITOR_EMAIL = #{visitorEmail,jdbcType=VARCHAR},
+      VISITOR_AGE = #{visitorAge,jdbcType=VARCHAR},
+      DISCOUNT_MONEY = #{discountMoney,jdbcType=NUMERIC},
+      UNION_ID = #{unionId,jdbcType=VARCHAR},
+      OPEN_ID = #{openId,jdbcType=VARCHAR},
+      RETURN_MONEY = #{returnMoney,jdbcType=VARCHAR},
+      START_BOOK_DATE = #{startBookDate,jdbcType=CHAR},
+      END_BOOK_DATE = #{endBookDate,jdbcType=CHAR},
+      SHOP_ID = #{shopId,jdbcType=VARCHAR},
+      COMMODITY_OUT_TIME = #{commodityOutTime,jdbcType=CHAR},
+      COUPON_STATE = #{couponState,jdbcType=CHAR},
+      WRITE_OFF_STATE = #{writeOffState,jdbcType=CHAR}
+    where ORDER_DETAIL_ID = #{orderDetailId,jdbcType=VARCHAR}
+  </update>
+
+
+  <select id="findTourisInfo" parameterType="string" resultMap="baseUserInfo">
+    select
+      ORDER_ID, CONTACTS_NAME, CONTACTS_PHONE, CONTACTS_EMAIL,
+      VISITOR_NAME, VISITOR_GENDER, VISITOR_PHONE,
+      VISITOR_ID_TYPE, VISITOR_ID_NUM, VISITOR_EMAIL,
+      VISITOR_AGE
+    from T_SPO_ORDER_DETAIL_INFO t
+    where t.order_id = #{orderId, jdbcType=VARCHAR}
+  </select>
+</mapper>

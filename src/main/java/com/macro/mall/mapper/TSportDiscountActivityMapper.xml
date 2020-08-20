@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.macro.mall.mapper.TSportDiscountActivityMapper">
+  <resultMap id="BaseResultMap" type="com.macro.mall.model.TSportDiscountActivity">
+    <result column="ACTIVITY_ID" jdbcType="VARCHAR" property="activityId" />
+    <result column="ACTIVITY_NAME" jdbcType="VARCHAR" property="activityName" />
+    <result column="ACTIVITY_TYPE_ID" jdbcType="VARCHAR" property="activityTypeId" />
+    <result column="PLAY_TYPE" jdbcType="VARCHAR" property="playType" />
+    <result column="STATE" jdbcType="CHAR" property="state" />
+    <result column="ACTIVITY_STATUS" jdbcType="CHAR" property="activityStatus" />
+    <result column="CARD_LIMIT" jdbcType="VARCHAR" property="cardLimit" />
+    <result column="CARD_ID" jdbcType="VARCHAR" property="cardId" />
+    <result column="FULL_AMOUNT" jdbcType="VARCHAR" property="fullAmount" />
+    <result column="REDUCTION" jdbcType="VARCHAR" property="reduction" />
+    <result column="LIMIT_RULE" jdbcType="CHAR" property="limitRule" />
+    <result column="LIMIT_RANGE" jdbcType="VARCHAR" property="limitRange" />
+    <result column="LIMIT_NUM" jdbcType="VARCHAR" property="limitNum" />
+    <result column="IMMEDIATELY_REDUCTION" jdbcType="VARCHAR" property="immediatelyReduction" />
+    <result column="DISCOUNT" jdbcType="VARCHAR" property="discount" />
+    <result column="ONLINE_CHANNEL" jdbcType="CHAR" property="onlineChannel" />
+    <result column="NOTICE" jdbcType="VARCHAR" property="notice" />
+    <result column="BRIEF" jdbcType="VARCHAR" property="brief" />
+    <result column="ACTIVITY_START_TIME" jdbcType="CHAR" property="activityStartTime" />
+    <result column="ACTIVITY_END_TIME" jdbcType="CHAR" property="activityEndTime" />
+    <result column="CREATE_TIME" jdbcType="CHAR" property="createTime" />
+    <result column="UPDATE_TIME" jdbcType="CHAR" property="updateTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ACTIVITY_ID, ACTIVITY_NAME, ACTIVITY_TYPE_ID, PLAY_TYPE, STATE, ACTIVITY_STATUS, 
+    CARD_LIMIT, CARD_ID, FULL_AMOUNT, REDUCTION, LIMIT_RULE, LIMIT_RANGE, LIMIT_NUM, 
+    IMMEDIATELY_REDUCTION, DISCOUNT, ONLINE_CHANNEL, NOTICE, BRIEF, ACTIVITY_START_TIME, 
+    ACTIVITY_END_TIME, CREATE_TIME, UPDATE_TIME
+  </sql>
+  <select id="selectByExample" parameterType="com.macro.mall.model.TSportDiscountActivityExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_SPORT_DISCOUNT_ACTIVITY
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.macro.mall.model.TSportDiscountActivityExample">
+    delete from T_SPORT_DISCOUNT_ACTIVITY
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.macro.mall.model.TSportDiscountActivity">
+    insert into T_SPORT_DISCOUNT_ACTIVITY (ACTIVITY_ID, ACTIVITY_NAME, ACTIVITY_TYPE_ID, 
+      PLAY_TYPE, STATE, ACTIVITY_STATUS, 
+      CARD_LIMIT, CARD_ID, FULL_AMOUNT, 
+      REDUCTION, LIMIT_RULE, LIMIT_RANGE, 
+      LIMIT_NUM, IMMEDIATELY_REDUCTION, DISCOUNT, 
+      ONLINE_CHANNEL, NOTICE, BRIEF, 
+      ACTIVITY_START_TIME, ACTIVITY_END_TIME, CREATE_TIME, 
+      UPDATE_TIME)
+    values (#{activityId,jdbcType=VARCHAR}, #{activityName,jdbcType=VARCHAR}, #{activityTypeId,jdbcType=VARCHAR}, 
+      #{playType,jdbcType=VARCHAR}, #{state,jdbcType=CHAR}, #{activityStatus,jdbcType=CHAR}, 
+      #{cardLimit,jdbcType=VARCHAR}, #{cardId,jdbcType=VARCHAR}, #{fullAmount,jdbcType=VARCHAR}, 
+      #{reduction,jdbcType=VARCHAR}, #{limitRule,jdbcType=CHAR}, #{limitRange,jdbcType=VARCHAR}, 
+      #{limitNum,jdbcType=VARCHAR}, #{immediatelyReduction,jdbcType=VARCHAR}, #{discount,jdbcType=VARCHAR}, 
+      #{onlineChannel,jdbcType=CHAR}, #{notice,jdbcType=VARCHAR}, #{brief,jdbcType=VARCHAR}, 
+      #{activityStartTime,jdbcType=CHAR}, #{activityEndTime,jdbcType=CHAR}, #{createTime,jdbcType=CHAR}, 
+      #{updateTime,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.macro.mall.model.TSportDiscountActivity">
+    insert into T_SPORT_DISCOUNT_ACTIVITY
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="activityId != null">
+        ACTIVITY_ID,
+      </if>
+      <if test="activityName != null">
+        ACTIVITY_NAME,
+      </if>
+      <if test="activityTypeId != null">
+        ACTIVITY_TYPE_ID,
+      </if>
+      <if test="playType != null">
+        PLAY_TYPE,
+      </if>
+      <if test="state != null">
+        STATE,
+      </if>
+      <if test="activityStatus != null">
+        ACTIVITY_STATUS,
+      </if>
+      <if test="cardLimit != null">
+        CARD_LIMIT,
+      </if>
+      <if test="cardId != null">
+        CARD_ID,
+      </if>
+      <if test="fullAmount != null">
+        FULL_AMOUNT,
+      </if>
+      <if test="reduction != null">
+        REDUCTION,
+      </if>
+      <if test="limitRule != null">
+        LIMIT_RULE,
+      </if>
+      <if test="limitRange != null">
+        LIMIT_RANGE,
+      </if>
+      <if test="limitNum != null">
+        LIMIT_NUM,
+      </if>
+      <if test="immediatelyReduction != null">
+        IMMEDIATELY_REDUCTION,
+      </if>
+      <if test="discount != null">
+        DISCOUNT,
+      </if>
+      <if test="onlineChannel != null">
+        ONLINE_CHANNEL,
+      </if>
+      <if test="notice != null">
+        NOTICE,
+      </if>
+      <if test="brief != null">
+        BRIEF,
+      </if>
+      <if test="activityStartTime != null">
+        ACTIVITY_START_TIME,
+      </if>
+      <if test="activityEndTime != null">
+        ACTIVITY_END_TIME,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="activityId != null">
+        #{activityId,jdbcType=VARCHAR},
+      </if>
+      <if test="activityName != null">
+        #{activityName,jdbcType=VARCHAR},
+      </if>
+      <if test="activityTypeId != null">
+        #{activityTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="playType != null">
+        #{playType,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=CHAR},
+      </if>
+      <if test="activityStatus != null">
+        #{activityStatus,jdbcType=CHAR},
+      </if>
+      <if test="cardLimit != null">
+        #{cardLimit,jdbcType=VARCHAR},
+      </if>
+      <if test="cardId != null">
+        #{cardId,jdbcType=VARCHAR},
+      </if>
+      <if test="fullAmount != null">
+        #{fullAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="reduction != null">
+        #{reduction,jdbcType=VARCHAR},
+      </if>
+      <if test="limitRule != null">
+        #{limitRule,jdbcType=CHAR},
+      </if>
+      <if test="limitRange != null">
+        #{limitRange,jdbcType=VARCHAR},
+      </if>
+      <if test="limitNum != null">
+        #{limitNum,jdbcType=VARCHAR},
+      </if>
+      <if test="immediatelyReduction != null">
+        #{immediatelyReduction,jdbcType=VARCHAR},
+      </if>
+      <if test="discount != null">
+        #{discount,jdbcType=VARCHAR},
+      </if>
+      <if test="onlineChannel != null">
+        #{onlineChannel,jdbcType=CHAR},
+      </if>
+      <if test="notice != null">
+        #{notice,jdbcType=VARCHAR},
+      </if>
+      <if test="brief != null">
+        #{brief,jdbcType=VARCHAR},
+      </if>
+      <if test="activityStartTime != null">
+        #{activityStartTime,jdbcType=CHAR},
+      </if>
+      <if test="activityEndTime != null">
+        #{activityEndTime,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.macro.mall.model.TSportDiscountActivityExample" resultType="java.lang.Long">
+    select count(*) from T_SPORT_DISCOUNT_ACTIVITY
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update T_SPORT_DISCOUNT_ACTIVITY
+    <set>
+      <if test="record.activityId != null">
+        ACTIVITY_ID = #{record.activityId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.activityName != null">
+        ACTIVITY_NAME = #{record.activityName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.activityTypeId != null">
+        ACTIVITY_TYPE_ID = #{record.activityTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.playType != null">
+        PLAY_TYPE = #{record.playType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null">
+        STATE = #{record.state,jdbcType=CHAR},
+      </if>
+      <if test="record.activityStatus != null">
+        ACTIVITY_STATUS = #{record.activityStatus,jdbcType=CHAR},
+      </if>
+      <if test="record.cardLimit != null">
+        CARD_LIMIT = #{record.cardLimit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardId != null">
+        CARD_ID = #{record.cardId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fullAmount != null">
+        FULL_AMOUNT = #{record.fullAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reduction != null">
+        REDUCTION = #{record.reduction,jdbcType=VARCHAR},
+      </if>
+      <if test="record.limitRule != null">
+        LIMIT_RULE = #{record.limitRule,jdbcType=CHAR},
+      </if>
+      <if test="record.limitRange != null">
+        LIMIT_RANGE = #{record.limitRange,jdbcType=VARCHAR},
+      </if>
+      <if test="record.limitNum != null">
+        LIMIT_NUM = #{record.limitNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.immediatelyReduction != null">
+        IMMEDIATELY_REDUCTION = #{record.immediatelyReduction,jdbcType=VARCHAR},
+      </if>
+      <if test="record.discount != null">
+        DISCOUNT = #{record.discount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.onlineChannel != null">
+        ONLINE_CHANNEL = #{record.onlineChannel,jdbcType=CHAR},
+      </if>
+      <if test="record.notice != null">
+        NOTICE = #{record.notice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.brief != null">
+        BRIEF = #{record.brief,jdbcType=VARCHAR},
+      </if>
+      <if test="record.activityStartTime != null">
+        ACTIVITY_START_TIME = #{record.activityStartTime,jdbcType=CHAR},
+      </if>
+      <if test="record.activityEndTime != null">
+        ACTIVITY_END_TIME = #{record.activityEndTime,jdbcType=CHAR},
+      </if>
+      <if test="record.createTime != null">
+        CREATE_TIME = #{record.createTime,jdbcType=CHAR},
+      </if>
+      <if test="record.updateTime != null">
+        UPDATE_TIME = #{record.updateTime,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update T_SPORT_DISCOUNT_ACTIVITY
+    set ACTIVITY_ID = #{record.activityId,jdbcType=VARCHAR},
+      ACTIVITY_NAME = #{record.activityName,jdbcType=VARCHAR},
+      ACTIVITY_TYPE_ID = #{record.activityTypeId,jdbcType=VARCHAR},
+      PLAY_TYPE = #{record.playType,jdbcType=VARCHAR},
+      STATE = #{record.state,jdbcType=CHAR},
+      ACTIVITY_STATUS = #{record.activityStatus,jdbcType=CHAR},
+      CARD_LIMIT = #{record.cardLimit,jdbcType=VARCHAR},
+      CARD_ID = #{record.cardId,jdbcType=VARCHAR},
+      FULL_AMOUNT = #{record.fullAmount,jdbcType=VARCHAR},
+      REDUCTION = #{record.reduction,jdbcType=VARCHAR},
+      LIMIT_RULE = #{record.limitRule,jdbcType=CHAR},
+      LIMIT_RANGE = #{record.limitRange,jdbcType=VARCHAR},
+      LIMIT_NUM = #{record.limitNum,jdbcType=VARCHAR},
+      IMMEDIATELY_REDUCTION = #{record.immediatelyReduction,jdbcType=VARCHAR},
+      DISCOUNT = #{record.discount,jdbcType=VARCHAR},
+      ONLINE_CHANNEL = #{record.onlineChannel,jdbcType=CHAR},
+      NOTICE = #{record.notice,jdbcType=VARCHAR},
+      BRIEF = #{record.brief,jdbcType=VARCHAR},
+      ACTIVITY_START_TIME = #{record.activityStartTime,jdbcType=CHAR},
+      ACTIVITY_END_TIME = #{record.activityEndTime,jdbcType=CHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=CHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+
+  <!--根据活动类型查询活动-->
+  <select id="selectByType" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from T_SPORT_DISCOUNT_ACTIVITY
+    where ACTIVITY_TYPE_ID=#{typeId,jdbcType=VARCHAR}
+    order by ACTIVITY_START_TIME desc
+  </select>
+  <!--根据条件查询活动-->
+  <select id="selectByCondition" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from T_SPORT_DISCOUNT_ACTIVITY t
+    where
+    t.ACTIVITY_TYPE_ID = #{typeId,jdbcType=VARCHAR}
+    <if test="searchInfo!= null and searchInfo!= ''">
+      and t.ACTIVITY_NAME like '%' || #{searchInfo,jdbcType=VARCHAR} ||'%'
+    </if>
+    <if test="starTime!= null and starTime!= '' and endTime!= null and endTime!= ''">
+      and t.ACTIVITY_START_TIME &gt;= #{starTime,jdbcType=VARCHAR}
+      and t.ACTIVITY_START_TIME &lt;= #{endTime,jdbcType=VARCHAR}
+    </if>
+    <if test="starTime!= null and starTime!= '' and endTime== null and endTime== ''">
+      and t.ACTIVITY_START_TIME &lt; #{starTime,jdbcType=VARCHAR}
+    </if>
+    <if test="playType!= null and playType!= ''">
+      and t.PLAY_TYPE = #{playType,jdbcType=VARCHAR}
+    </if>
+    order by t.ACTIVITY_START_TIME desc
+  </select>
+</mapper>

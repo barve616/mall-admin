@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.macro.mall.mapper.DMatchRotationChartInfoMapper">
+  <resultMap id="BaseResultMap" type="com.macro.mall.model.DMatchRotationChartInfo">
+    <result column="MATCH_ID" jdbcType="VARCHAR" property="matchId" />
+    <result column="MATCH_SEQ" jdbcType="VARCHAR" property="matchSeq" />
+    <result column="MATCH_STATE" jdbcType="VARCHAR" property="matchState" />
+    <result column="MATCH_PICTURE" jdbcType="VARCHAR" property="matchPicture" />
+    <result column="MATCH_JUMP_URL" jdbcType="VARCHAR" property="matchJumpUrl" />
+    <result column="MATCH_JUMP_FLAG" jdbcType="VARCHAR" property="matchJumpFlag" />
+  </resultMap>
+
+
+  <sql id="Base_Column_List">
+    MATCH_ID, MATCH_SEQ, MATCH_STATE, MATCH_PICTURE, MATCH_JUMP_URL, MATCH_JUMP_FLAG
+  </sql>
+  <select id="queryList" parameterType="com.macro.mall.model.DMatchRotationChartInfo" resultMap="BaseResultMap">
+    select MATCH_ID, MATCH_SEQ, MATCH_STATE, (select param_value from d_tcodeposs_para a where a.param_type = 'visitPath2')||MATCH_PICTURE as MATCH_PICTURE, MATCH_JUMP_URL, MATCH_JUMP_FLAG from D_MATCH_ROTATION_CHART_INFO
+    <where>
+      <if test="matchSeq != null and matchSeq!=''">
+       and MATCH_SEQ = #{matchSeq,jdbcType=VARCHAR}
+      </if>
+      <if test="matchState != null and matchState!=''">
+        and MATCH_STATE = #{matchState,jdbcType=VARCHAR}
+      </if>
+      <if test="matchJumpUrl != null and matchJumpUrl!=''">
+        and MATCH_JUMP_URL = #{matchJumpUrl,jdbcType=VARCHAR}
+      </if>
+      <if test="matchPicture != null and matchPicture!=''">
+        and MATCH_PICTURE = #{matchPicture,jdbcType=VARCHAR}
+      </if>
+      <if test="matchJumpFlag != null and matchJumpFlag!=''">
+        and MATCH_JUMP_FLAG = #{matchJumpFlag,jdbcType=VARCHAR}
+      </if>
+    </where>
+    order by  MATCH_SEQ
+  </select>
+
+  <select id="queryList1" parameterType="com.macro.mall.model.DMatchRotationChartInfo" resultMap="BaseResultMap">
+    select MATCH_ID, MATCH_SEQ, MATCH_STATE, (select param_value from d_tcodeposs_para a where a.param_type = 'visitPath2')||MATCH_PICTURE as MATCH_PICTURE, MATCH_JUMP_URL, MATCH_JUMP_FLAG from D_MATCH_ROTATION_CHART_INFO
+    <where>
+      <if test="matchSeq != null and matchSeq!=''">
+        and MATCH_SEQ = #{matchSeq,jdbcType=VARCHAR}
+      </if>
+      <if test="matchId != null and matchId!=''">
+        and MATCH_ID = #{matchId,jdbcType=VARCHAR}
+      </if>
+      <if test="matchState != null and matchState!=''">
+        and MATCH_STATE = #{matchState,jdbcType=VARCHAR}
+      </if>
+      <if test="matchJumpUrl != null and matchJumpUrl!=''">
+        and MATCH_JUMP_URL = #{matchJumpUrl,jdbcType=VARCHAR}
+      </if>
+      <if test="matchPicture != null and matchPicture!=''">
+        and MATCH_PICTURE = #{matchPicture,jdbcType=VARCHAR}
+      </if>
+      <if test="matchJumpFlag != null and matchJumpFlag!=''">
+        and MATCH_JUMP_FLAG = #{matchJumpFlag,jdbcType=VARCHAR}
+      </if>
+    </where>
+    order by  MATCH_SEQ
+  </select>
+  <delete id="delete" parameterType="String">
+    delete from D_MATCH_ROTATION_CHART_INFO
+    where MATCH_ID =#{matchId,jdbcType=VARCHAR}
+  </delete>
+
+  <insert id="insert" parameterType="com.macro.mall.model.DMatchRotationChartInfo">
+    insert into D_MATCH_ROTATION_CHART_INFO (MATCH_ID, MATCH_SEQ, MATCH_STATE, 
+      MATCH_PICTURE, MATCH_JUMP_URL, MATCH_JUMP_FLAG
+      )
+    values (sys_guid(), #{matchSeq,jdbcType=VARCHAR}, #{matchState,jdbcType=VARCHAR},
+      #{matchPicture,jdbcType=VARCHAR}, #{matchJumpUrl,jdbcType=VARCHAR}, #{matchJumpFlag,jdbcType=VARCHAR}
+      )
+  </insert>
+
+  <update id="update" parameterType="com.macro.mall.model.DMatchRotationChartInfo">
+        update D_MATCH_ROTATION_CHART_INFO
+        <set>
+          <if test="matchSeq != null and matchSeq!=''">
+             MATCH_SEQ = #{matchSeq,jdbcType=VARCHAR},
+          </if>
+          <if test="matchState != null and matchState!=''">
+             MATCH_STATE = #{matchState,jdbcType=VARCHAR},
+          </if>
+          <if test="matchJumpUrl != null and matchJumpUrl!=''">
+             MATCH_JUMP_URL = #{matchJumpUrl,jdbcType=VARCHAR},
+          </if>
+          <if test="matchPicture != null and matchPicture!=''">
+             MATCH_PICTURE = #{matchPicture,jdbcType=VARCHAR},
+          </if>
+          <if test="matchJumpFlag != null and matchJumpFlag!=''">
+             MATCH_JUMP_FLAG = #{matchJumpFlag,jdbcType=VARCHAR},
+          </if>
+        </set>
+    where MATCH_ID = #{matchId,jdbcType=VARCHAR}
+  </update>
+</mapper>

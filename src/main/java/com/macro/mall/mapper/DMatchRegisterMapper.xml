@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.macro.mall.mapper.DMatchRegisterMapper">
+  <resultMap id="BaseResultMap" type="com.macro.mall.model.DMatchRegister">
+    <result column="USER_PHONE" jdbcType="VARCHAR" property="userPhone" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="STATE" jdbcType="VARCHAR" property="state" />
+    <result column="SMS_CODE" jdbcType="VARCHAR" property="smsCode" />
+  </resultMap>
+
+
+  <insert id="insertList"  parameterType="java.util.List">
+    insert into D_MATCH_REGISTER (USER_PHONE, NAME,STATE)
+    <foreach collection="list" item="item" index="index" separator="union all">
+    select
+      #{item.userPhone,jdbcType=VARCHAR},
+      #{item.name,jdbcType=VARCHAR},
+      #{item.state,jdbcType=VARCHAR}
+      from dual
+    </foreach>
+  </insert>
+
+  <select id="query" parameterType="com.macro.mall.model.DMatchRegister" resultMap="BaseResultMap">
+   select *  from D_MATCH_REGISTER
+   <where>
+     <if test="name!=null and name!=''">
+       and NAME = #{name}
+     </if>
+     <if test="state!=null and state!=''">
+       and STATE = #{state}
+     </if>
+     <if test="userPhone!=null and userPhone!=''">
+       and USER_PHONE = #{userPhone}
+     </if>
+   </where>
+  </select>
+
+
+  <select id="querySendMessage" parameterType="com.macro.mall.model.DMatchRegister" resultMap="BaseResultMap">
+    select *  from D_MATCH_REGISTER
+   where STATE = '01'
+  </select>
+
+  <update id="updateState"  parameterType="String" >
+    update  D_MATCH_REGISTER set STATE='02'
+    where  USER_PHONE = #{userPhone}
+  </update>
+
+</mapper>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.macro.mall.mapper.DMatchParam1InfoMapper">
+  <resultMap id="BaseResultMap" type="com.macro.mall.model.DMatchParam1Info">
+    <result column="PARAM" jdbcType="VARCHAR" property="param" />
+    <result column="PARAM_NAME" jdbcType="VARCHAR" property="paramName" />
+    <result column="ID" jdbcType="VARCHAR" property="id" />
+  </resultMap>
+
+  <delete id="delete" parameterType="String">
+    delete from d_match_param1_info
+     where ID=  #{id,jdbcType=VARCHAR}
+  </delete>
+
+  <insert id="insert" parameterType="com.macro.mall.model.DMatchParam1Info">
+    insert into d_match_param1_info (PARAM, PARAM_NAME,
+      ID)
+    values (#{param,jdbcType=VARCHAR}, #{paramName,jdbcType=VARCHAR},
+      sys_guid())
+  </insert>
+
+
+
+  <update id="update" parameterType="com.macro.mall.model.DMatchMaxtype">
+    update d_match_param1_info
+    set
+    <if test="param != null and param!=''">
+      PARAM = #{param,jdbcType=VARCHAR},
+    </if>
+    <if test="paramName != null and paramName!=''">
+      PARAM_NAME = #{paramName,jdbcType=VARCHAR}
+    </if>
+    where  ID = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <select id="queryList" parameterType="com.macro.mall.model.DMatchMaxtype" resultMap="BaseResultMap">
+    select  * from  d_match_param1_info
+    <where>
+      <if test="param != null and param!=''">
+        and PARAM = #{param,jdbcType=VARCHAR}
+      </if>
+      <if test="paramName != null and paramName!=''">
+        and  PARAM_NAME = #{paramName,jdbcType=VARCHAR}
+      </if>
+      <if test="id != null and id!=''">
+        and  ID = #{id,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+  <select id="queryList1" parameterType="com.macro.mall.model.DMatchMaxtype" resultMap="BaseResultMap">
+    select  * from  d_match_param1_info
+    <where>
+      <if test="param != null and param!=''">
+        and PARAM = #{param,jdbcType=VARCHAR}
+      </if>
+      <if test="paramName != null and paramName!=''">
+        and  PARAM_NAME = #{paramName,jdbcType=VARCHAR}
+      </if>
+      <if test="id != null and id!=''">
+        and  ID = #{id,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+</mapper>

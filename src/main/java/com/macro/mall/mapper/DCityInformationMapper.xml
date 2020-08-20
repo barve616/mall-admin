@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.macro.mall.mapper.DCityInformationMapper">
+  <resultMap id="BaseResultMap" type="com.macro.mall.model.DCityInformation">
+    <result column="PROVINCE_ID" jdbcType="VARCHAR" property="provinceId" />
+    <result column="PROVINCE_NAME" jdbcType="VARCHAR" property="provinceName" />
+    <result column="CITY_NAME" jdbcType="VARCHAR" property="cityName" />
+    <result column="CITY_ID" jdbcType="VARCHAR" property="cityId" />
+    <result column="AREA2" jdbcType="VARCHAR" property="area2" />
+    <result column="LOCATION_ID" jdbcType="VARCHAR" property="locationId" />
+    <result column="VAS_CITY_ID" jdbcType="VARCHAR" property="vasCityId" />
+    <result column="VALS_POSTION_ID" jdbcType="VARCHAR" property="valsPostionId" />
+    <result column="FLAG" jdbcType="CHAR" property="flag" />
+    <result column="IS_HOT" jdbcType="CHAR" property="isHot" />
+  </resultMap>
+
+
+
+
+<select id="getCityMapInfo" resultMap="BaseResultMap"  parameterType="com.macro.mall.model.DCityInformation">
+select CITY_ID,name,PROVINCE_ID from (select CITY_ID, CITY_NAME as name ,PROVINCE_ID
+from d_city_information
+
+ where  PROVINCE_ID !='000000' and nvl(flag,'1') !='0'
+
+union all (select PROVINCE_ID as CITY_ID, PROVINCE_NAME as name,null as PROVINCE_ID
+from (select PROVINCE_ID,
+PROVINCE_NAME,
+CITY_NAME,
+CITY_ID,
+row_number() over(PARTITION by t.province_id order by CITY_ID) rn
+from d_city_information t
+where
+  PROVINCE_ID !='000000' and nvl(flag,'1') !='0'
+)
+where rn = 1) )order by name
+</select>
+
+  <select id="getProvinceInfo"  resultMap="BaseResultMap"  >
+		select PROVINCE_ID,PROVINCE_NAME
+		from d_city_information
+		where CITY_ID !='000000'
+		group by PROVINCE_ID,PROVINCE_NAME
+		order by PROVINCE_ID
+   </select>
+  <select id="getCityListByProvinceId" parameterType="java.lang.String"   resultMap="BaseResultMap" >
+	select t.city_name,t.city_id from d_city_information t where  t.province_id =#{provinceId,jdbcType=VARCHAR}
+   </select>
+
+</mapper>

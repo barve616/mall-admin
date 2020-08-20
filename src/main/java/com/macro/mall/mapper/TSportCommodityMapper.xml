@@ -1,0 +1,881 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.macro.mall.mapper.TSportCommodityMapper">
+  <resultMap id="BaseResultMap" type="com.macro.mall.model.TSportCommodity">
+    <id column="COMMODITY_ID" jdbcType="VARCHAR" property="commodityId" />
+    <result column="CREATE_TIME" jdbcType="CHAR" property="createTime" />
+    <result column="UPDATE_TIME" jdbcType="CHAR" property="updateTime" />
+    <result column="COMMODITY_TYPE_ID" jdbcType="VARCHAR" property="commodityTypeId" />
+    <result column="SHOP_COMMODITY_TYPE" jdbcType="VARCHAR" property="shopCommodityType" />
+    <result column="CHANNEL" jdbcType="VARCHAR" property="channel" />
+    <result column="ROTATIONN_CHART_URL" jdbcType="VARCHAR" property="rotationnChartUrl" />
+    <result column="PIC_URL" jdbcType="VARCHAR" property="picUrl" />
+    <result column="SHOP_ID" jdbcType="VARCHAR" property="shopId" />
+    <result column="POS_ID" jdbcType="VARCHAR" property="posId" />
+    <result column="BRAND_ID" jdbcType="VARCHAR" property="brandId" />
+    <result column="COMMODITY_NAME" jdbcType="VARCHAR" property="commodityName" />
+    <result column="MONTHLY_SALES" jdbcType="NUMERIC" property="monthlySales" />
+    <result column="COMMODITY_SALES" jdbcType="NUMERIC" property="commoditySales" />
+    <result column="COMMODITY_STOCK" jdbcType="NUMERIC" property="commodityStock" />
+    <result column="PHONE" jdbcType="VARCHAR" property="phone" />
+    <result column="SITE" jdbcType="VARCHAR" property="site" />
+    <result column="PROVINCE_CODE" jdbcType="VARCHAR" property="provinceCode" />
+    <result column="CITY_CODE" jdbcType="VARCHAR" property="cityCode" />
+    <result column="REGION_CODE" jdbcType="VARCHAR" property="regionCode" />
+    <result column="RESERVE_DAYS" jdbcType="VARCHAR" property="reserveDays" />
+    <result column="ADVANCE_RESERVE_DAYS" jdbcType="VARCHAR" property="advanceReserveDays" />
+    <result column="COMMODITY_SCORE" jdbcType="VARCHAR" property="commodityScore" />
+    <result column="COMMODITY_DAILY_PRICE" jdbcType="NUMERIC" property="commodityDailyPrice" />
+    <result column="COMMODITY_MIN_PRICE" jdbcType="NUMERIC" property="commodityMinPrice" />
+    <result column="COMMODITY_MAX_PRICE" jdbcType="NUMERIC" property="commodityMaxPrice" />
+    <result column="COMMODITY_DESCRIBE" jdbcType="VARCHAR" property="commodityDescribe" />
+    <result column="DETAIL_REMARK" jdbcType="VARCHAR" property="detailRemark" />
+    <result column="EXAMINE_STATUS" jdbcType="CHAR" property="examineStatus" />
+    <result column="EXAMINE_FAILURE_REASON" jdbcType="VARCHAR" property="examineFailureReason" />
+    <result column="EXAMINE_TIME" jdbcType="CHAR" property="examineTime" />
+    <result column="EXAMINE_PERSON" jdbcType="VARCHAR" property="examinePerson" />
+    <result column="STORE_ID" jdbcType="VARCHAR" property="storeId" />
+    <result column="COMMODITY_LONGITUDE" jdbcType="VARCHAR" property="commodityLongitude" />
+    <result column="COMMODITY_LATITUDE" jdbcType="VARCHAR" property="commodityLatitude" />
+    <result column="COMMODITY_TYPE_NAME" jdbcType="VARCHAR" property="commodityTypeName" />
+    <result column="ACTIVITY_STOCK" jdbcType="VARCHAR" property="activityStock" />
+    <result column="STORE_ID" jdbcType="VARCHAR" property="storeId" />
+    <result column="COMMODITY_LONGITUDE" jdbcType="VARCHAR" property="commodityLongitude" />
+    <result column="COMMODITY_LATITUDE" jdbcType="VARCHAR" property="commodityLatitude" />
+  </resultMap>
+
+  <resultMap id="TSportCommodityTypeResultMap" type="com.macro.mall.model.TSportCommodityType">
+    <id column="COMMODITY_TYPE_ID" jdbcType="VARCHAR" property="commodityTypeId" />
+    <result column="COMMODITY_TYPE_NAME" jdbcType="VARCHAR" property="commodityTypeName" />
+    <result column="COMMODITY_P_ID" jdbcType="VARCHAR" property="commodityPId" />
+    <result column="STRATUM" jdbcType="VARCHAR" property="stratum" />
+    <result column="CREATE_TIME" jdbcType="CHAR" property="createTime" />
+    <result column="UPDATE_TIME" jdbcType="CHAR" property="updateTime" />
+    <result column="COMMODITY_TYPE_NO" jdbcType="VARCHAR" property="commodityTypeNo" />
+    <result column="COMMODITY_TYPE_STATUS" jdbcType="CHAR" property="commodityTypeStatus" />
+  </resultMap>
+
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    COMMODITY_ID, CREATE_TIME, UPDATE_TIME, COMMODITY_TYPE_ID, SHOP_COMMODITY_TYPE, CHANNEL, 
+    ROTATIONN_CHART_URL, PIC_URL, SHOP_ID, POS_ID, BRAND_ID, COMMODITY_NAME, MONTHLY_SALES, 
+    COMMODITY_SALES, COMMODITY_STOCK, PHONE, SITE, PROVINCE_CODE, CITY_CODE, REGION_CODE, 
+    RESERVE_DAYS, ADVANCE_RESERVE_DAYS, COMMODITY_SCORE, COMMODITY_DAILY_PRICE, COMMODITY_MIN_PRICE,
+    COMMODITY_MAX_PRICE, COMMODITY_DESCRIBE, DETAIL_REMARK, EXAMINE_STATUS, EXAMINE_FAILURE_REASON,
+    EXAMINE_TIME, EXAMINE_PERSON, STORE_ID, COMMODITY_LONGITUDE, COMMODITY_LATITUDE
+  </sql>
+  <select id="selectByExample" parameterType="com.macro.mall.model.TSportCommodityExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_SPORT_COMMODITY
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from T_SPORT_COMMODITY
+    where COMMODITY_ID = #{commodityId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from T_SPORT_COMMODITY
+    where COMMODITY_ID = #{commodityId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.macro.mall.model.TSportCommodityExample">
+    delete from T_SPORT_COMMODITY
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.macro.mall.model.TSportCommodity">
+    insert into T_SPORT_COMMODITY (COMMODITY_ID, CREATE_TIME, UPDATE_TIME, 
+      COMMODITY_TYPE_ID, SHOP_COMMODITY_TYPE, CHANNEL, 
+      ROTATIONN_CHART_URL, PIC_URL, SHOP_ID, 
+      POS_ID, BRAND_ID, COMMODITY_NAME, 
+      MONTHLY_SALES, COMMODITY_SALES, COMMODITY_STOCK, 
+      PHONE, SITE, PROVINCE_CODE, 
+      CITY_CODE, REGION_CODE, RESERVE_DAYS, 
+      ADVANCE_RESERVE_DAYS, COMMODITY_SCORE, COMMODITY_DAILY_PRICE, 
+      COMMODITY_MIN_PRICE, COMMODITY_MAX_PRICE, COMMODITY_DESCRIBE,
+      DETAIL_REMARK, EXAMINE_STATUS, EXAMINE_FAILURE_REASON, 
+      EXAMINE_TIME, EXAMINE_PERSON, STORE_ID,
+      COMMODITY_LONGITUDE, COMMODITY_LATITUDE)
+    values (#{commodityId,jdbcType=VARCHAR}, #{createTime,jdbcType=CHAR}, #{updateTime,jdbcType=CHAR}, 
+      #{commodityTypeId,jdbcType=VARCHAR}, #{shopCommodityType,jdbcType=VARCHAR}, #{channel,jdbcType=VARCHAR}, 
+      #{rotationnChartUrl,jdbcType=VARCHAR}, #{picUrl,jdbcType=VARCHAR}, #{shopId,jdbcType=VARCHAR}, 
+      #{posId,jdbcType=VARCHAR}, #{brandId,jdbcType=VARCHAR}, #{commodityName,jdbcType=VARCHAR}, 
+      #{monthlySales,jdbcType=NUMERIC}, #{commoditySales,jdbcType=NUMERIC}, #{commodityStock,jdbcType=NUMERIC}, 
+      #{phone,jdbcType=VARCHAR}, #{site,jdbcType=VARCHAR}, #{provinceCode,jdbcType=VARCHAR}, 
+      #{cityCode,jdbcType=VARCHAR}, #{regionCode,jdbcType=VARCHAR}, #{reserveDays,jdbcType=VARCHAR}, 
+      #{advanceReserveDays,jdbcType=VARCHAR}, #{commodityScore,jdbcType=VARCHAR}, #{commodityDailyPrice,jdbcType=NUMERIC}, 
+      #{commodityMinPrice,jdbcType=NUMERIC}, #{commodityMaxPrice,jdbcType=NUMERIC}, #{commodityDescribe,jdbcType=VARCHAR},
+      #{detailRemark,jdbcType=VARCHAR}, #{examineStatus,jdbcType=CHAR}, #{examineFailureReason,jdbcType=VARCHAR}, 
+      #{examineTime,jdbcType=CHAR}, #{examinePerson,jdbcType=VARCHAR}, #{storeId,jdbcType=VARCHAR},
+      #{commodityLongitude,jdbcType=VARCHAR}, #{commodityLatitude,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.macro.mall.model.TSportCommodity">
+    insert into T_SPORT_COMMODITY
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="commodityId != null">
+        COMMODITY_ID,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+      <if test="commodityTypeId != null">
+        COMMODITY_TYPE_ID,
+      </if>
+      <if test="shopCommodityType != null">
+        SHOP_COMMODITY_TYPE,
+      </if>
+      <if test="channel != null">
+        CHANNEL,
+      </if>
+      <if test="rotationnChartUrl != null">
+        ROTATIONN_CHART_URL,
+      </if>
+      <if test="picUrl != null">
+        PIC_URL,
+      </if>
+      <if test="shopId != null">
+        SHOP_ID,
+      </if>
+      <if test="posId != null">
+        POS_ID,
+      </if>
+      <if test="brandId != null">
+        BRAND_ID,
+      </if>
+      <if test="commodityName != null">
+        COMMODITY_NAME,
+      </if>
+      <if test="monthlySales != null">
+        MONTHLY_SALES,
+      </if>
+      <if test="commoditySales != null">
+        COMMODITY_SALES,
+      </if>
+      <if test="commodityStock != null">
+        COMMODITY_STOCK,
+      </if>
+      <if test="phone != null">
+        PHONE,
+      </if>
+      <if test="site != null">
+        SITE,
+      </if>
+      <if test="provinceCode != null">
+        PROVINCE_CODE,
+      </if>
+      <if test="cityCode != null">
+        CITY_CODE,
+      </if>
+      <if test="regionCode != null">
+        REGION_CODE,
+      </if>
+      <if test="reserveDays != null">
+        RESERVE_DAYS,
+      </if>
+      <if test="advanceReserveDays != null">
+        ADVANCE_RESERVE_DAYS,
+      </if>
+      <if test="commodityScore != null">
+        COMMODITY_SCORE,
+      </if>
+      <if test="commodityDailyPrice != null">
+        COMMODITY_DAILY_PRICE,
+      </if>
+      <if test="commodityMinPrice != null">
+        COMMODITY_MIN_PRICE,
+      </if>
+      <if test="commodityMaxPrice != null">
+        COMMODITY_MAX_PRICE,
+      </if>
+      <if test="commodityDescribe != null">
+        COMMODITY_DESCRIBE,
+      </if>
+      <if test="detailRemark != null">
+        DETAIL_REMARK,
+      </if>
+      <if test="examineStatus != null">
+        EXAMINE_STATUS,
+      </if>
+      <if test="examineFailureReason != null">
+        EXAMINE_FAILURE_REASON,
+      </if>
+      <if test="examineTime != null">
+        EXAMINE_TIME,
+      </if>
+      <if test="examinePerson != null">
+        EXAMINE_PERSON,
+      </if>
+      <if test="storeId != null">
+        STORE_ID,
+      </if>
+      <if test="commodityLongitude != null">
+        COMMODITY_LONGITUDE,
+      </if>
+      <if test="commodityLatitude != null">
+        COMMODITY_LATITUDE,
+      </if>
+      <if test="storeId != null">
+        STORE_ID,
+      </if>
+      <if test="commodityLongitude != null">
+        COMMODITY_LONGITUDE,
+      </if>
+      <if test="commodityLatitude != null">
+        COMMODITY_LATITUDE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="commodityId != null">
+        #{commodityId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=CHAR},
+      </if>
+      <if test="commodityTypeId != null">
+        #{commodityTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="shopCommodityType != null">
+        #{shopCommodityType,jdbcType=VARCHAR},
+      </if>
+      <if test="channel != null">
+        #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="rotationnChartUrl != null">
+        #{rotationnChartUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="picUrl != null">
+        #{picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="shopId != null">
+        #{shopId,jdbcType=VARCHAR},
+      </if>
+      <if test="posId != null">
+        #{posId,jdbcType=VARCHAR},
+      </if>
+      <if test="brandId != null">
+        #{brandId,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityName != null">
+        #{commodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="monthlySales != null">
+        #{monthlySales,jdbcType=NUMERIC},
+      </if>
+      <if test="commoditySales != null">
+        #{commoditySales,jdbcType=NUMERIC},
+      </if>
+      <if test="commodityStock != null">
+        #{commodityStock,jdbcType=NUMERIC},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="site != null">
+        #{site,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceCode != null">
+        #{provinceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cityCode != null">
+        #{cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="regionCode != null">
+        #{regionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="reserveDays != null">
+        #{reserveDays,jdbcType=VARCHAR},
+      </if>
+      <if test="advanceReserveDays != null">
+        #{advanceReserveDays,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityScore != null">
+        #{commodityScore,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityDailyPrice != null">
+        #{commodityDailyPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="commodityMinPrice != null">
+        #{commodityMinPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="commodityMaxPrice != null">
+        #{commodityMaxPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="commodityDescribe != null">
+        #{commodityDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="detailRemark != null">
+        #{detailRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="examineStatus != null">
+        #{examineStatus,jdbcType=CHAR},
+      </if>
+      <if test="examineFailureReason != null">
+        #{examineFailureReason,jdbcType=VARCHAR},
+      </if>
+      <if test="examineTime != null">
+        #{examineTime,jdbcType=CHAR},
+      </if>
+      <if test="examinePerson != null">
+        #{examinePerson,jdbcType=VARCHAR},
+      </if>
+      <if test="storeId != null">
+        #{storeId,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityLongitude != null">
+        #{commodityLongitude,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityLatitude != null">
+        #{commodityLatitude,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.macro.mall.model.TSportCommodityExample" resultType="java.lang.Long">
+    select count(*) from T_SPORT_COMMODITY
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update T_SPORT_COMMODITY
+    <set>
+      <if test="record.commodityId != null">
+        COMMODITY_ID = #{record.commodityId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        CREATE_TIME = #{record.createTime,jdbcType=CHAR},
+      </if>
+      <if test="record.updateTime != null">
+        UPDATE_TIME = #{record.updateTime,jdbcType=CHAR},
+      </if>
+      <if test="record.commodityTypeId != null">
+        COMMODITY_TYPE_ID = #{record.commodityTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopCommodityType != null">
+        SHOP_COMMODITY_TYPE = #{record.shopCommodityType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.channel != null">
+        CHANNEL = #{record.channel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rotationnChartUrl != null">
+        ROTATIONN_CHART_URL = #{record.rotationnChartUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.picUrl != null">
+        PIC_URL = #{record.picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopId != null">
+        SHOP_ID = #{record.shopId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.posId != null">
+        POS_ID = #{record.posId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.brandId != null">
+        BRAND_ID = #{record.brandId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commodityName != null">
+        COMMODITY_NAME = #{record.commodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.monthlySales != null">
+        MONTHLY_SALES = #{record.monthlySales,jdbcType=NUMERIC},
+      </if>
+      <if test="record.commoditySales != null">
+        COMMODITY_SALES = #{record.commoditySales,jdbcType=NUMERIC},
+      </if>
+      <if test="record.commodityStock != null">
+        COMMODITY_STOCK = #{record.commodityStock,jdbcType=NUMERIC},
+      </if>
+      <if test="record.phone != null">
+        PHONE = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.site != null">
+        SITE = #{record.site,jdbcType=VARCHAR},
+      </if>
+      <if test="record.provinceCode != null">
+        PROVINCE_CODE = #{record.provinceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cityCode != null">
+        CITY_CODE = #{record.cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.regionCode != null">
+        REGION_CODE = #{record.regionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reserveDays != null">
+        RESERVE_DAYS = #{record.reserveDays,jdbcType=VARCHAR},
+      </if>
+      <if test="record.advanceReserveDays != null">
+        ADVANCE_RESERVE_DAYS = #{record.advanceReserveDays,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commodityScore != null">
+        COMMODITY_SCORE = #{record.commodityScore,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commodityDailyPrice != null">
+        COMMODITY_DAILY_PRICE = #{record.commodityDailyPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="record.commodityMinPrice != null">
+        COMMODITY_MIN_PRICE = #{record.commodityMinPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="record.commodityMaxPrice != null">
+        COMMODITY_MAX_PRICE = #{record.commodityMaxPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="record.commodityDescribe != null">
+        COMMODITY_DESCRIBE = #{record.commodityDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="record.detailRemark != null">
+        DETAIL_REMARK = #{record.detailRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examineStatus != null">
+        EXAMINE_STATUS = #{record.examineStatus,jdbcType=CHAR},
+      </if>
+      <if test="record.examineFailureReason != null">
+        EXAMINE_FAILURE_REASON = #{record.examineFailureReason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examineTime != null">
+        EXAMINE_TIME = #{record.examineTime,jdbcType=CHAR},
+      </if>
+      <if test="record.examinePerson != null">
+        EXAMINE_PERSON = #{record.examinePerson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.storeId != null">
+        STORE_ID = #{record.storeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commodityLongitude != null">
+        COMMODITY_LONGITUDE = #{record.commodityLongitude,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commodityLatitude != null">
+        COMMODITY_LATITUDE = #{record.commodityLatitude,jdbcType=VARCHAR},
+      </if>
+      <if test="record.storeId != null">
+        STORE_ID = #{record.storeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commodityLongitude != null">
+        COMMODITY_LONGITUDE = #{record.commodityLongitude,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commodityLatitude != null">
+        COMMODITY_LATITUDE = #{record.commodityLatitude,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update T_SPORT_COMMODITY
+    set COMMODITY_ID = #{record.commodityId,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=CHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=CHAR},
+      COMMODITY_TYPE_ID = #{record.commodityTypeId,jdbcType=VARCHAR},
+      SHOP_COMMODITY_TYPE = #{record.shopCommodityType,jdbcType=VARCHAR},
+      CHANNEL = #{record.channel,jdbcType=VARCHAR},
+      ROTATIONN_CHART_URL = #{record.rotationnChartUrl,jdbcType=VARCHAR},
+      PIC_URL = #{record.picUrl,jdbcType=VARCHAR},
+      SHOP_ID = #{record.shopId,jdbcType=VARCHAR},
+      POS_ID = #{record.posId,jdbcType=VARCHAR},
+      BRAND_ID = #{record.brandId,jdbcType=VARCHAR},
+      COMMODITY_NAME = #{record.commodityName,jdbcType=VARCHAR},
+      MONTHLY_SALES = #{record.monthlySales,jdbcType=NUMERIC},
+      COMMODITY_SALES = #{record.commoditySales,jdbcType=NUMERIC},
+      COMMODITY_STOCK = #{record.commodityStock,jdbcType=NUMERIC},
+      PHONE = #{record.phone,jdbcType=VARCHAR},
+      SITE = #{record.site,jdbcType=VARCHAR},
+      PROVINCE_CODE = #{record.provinceCode,jdbcType=VARCHAR},
+      CITY_CODE = #{record.cityCode,jdbcType=VARCHAR},
+      REGION_CODE = #{record.regionCode,jdbcType=VARCHAR},
+      RESERVE_DAYS = #{record.reserveDays,jdbcType=VARCHAR},
+      ADVANCE_RESERVE_DAYS = #{record.advanceReserveDays,jdbcType=VARCHAR},
+      COMMODITY_SCORE = #{record.commodityScore,jdbcType=VARCHAR},
+      COMMODITY_DAILY_PRICE = #{record.commodityDailyPrice,jdbcType=NUMERIC},
+      COMMODITY_MIN_PRICE = #{record.commodityMinPrice,jdbcType=NUMERIC},
+      COMMODITY_MAX_PRICE = #{record.commodityMaxPrice,jdbcType=NUMERIC},
+      COMMODITY_DESCRIBE = #{record.commodityDescribe,jdbcType=VARCHAR},
+      DETAIL_REMARK = #{record.detailRemark,jdbcType=VARCHAR},
+      EXAMINE_STATUS = #{record.examineStatus,jdbcType=CHAR},
+      EXAMINE_FAILURE_REASON = #{record.examineFailureReason,jdbcType=VARCHAR},
+      EXAMINE_TIME = #{record.examineTime,jdbcType=CHAR},
+      EXAMINE_PERSON = #{record.examinePerson,jdbcType=VARCHAR},
+      STORE_ID = #{record.storeId,jdbcType=VARCHAR},
+      COMMODITY_LONGITUDE = #{record.commodityLongitude,jdbcType=VARCHAR},
+      COMMODITY_LATITUDE = #{record.commodityLatitude,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.macro.mall.model.TSportCommodity">
+    update T_SPORT_COMMODITY
+    <set>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=CHAR},
+      </if>
+      <if test="commodityTypeId != null">
+        COMMODITY_TYPE_ID = #{commodityTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="shopCommodityType != null">
+        SHOP_COMMODITY_TYPE = #{shopCommodityType,jdbcType=VARCHAR},
+      </if>
+      <if test="channel != null">
+        CHANNEL = #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="rotationnChartUrl != null">
+        ROTATIONN_CHART_URL = #{rotationnChartUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="picUrl != null">
+        PIC_URL = #{picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="shopId != null">
+        SHOP_ID = #{shopId,jdbcType=VARCHAR},
+      </if>
+      <if test="posId != null">
+        POS_ID = #{posId,jdbcType=VARCHAR},
+      </if>
+      <if test="brandId != null">
+        BRAND_ID = #{brandId,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityName != null">
+        COMMODITY_NAME = #{commodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="monthlySales != null">
+        MONTHLY_SALES = #{monthlySales,jdbcType=NUMERIC},
+      </if>
+      <if test="commoditySales != null">
+        COMMODITY_SALES = #{commoditySales,jdbcType=NUMERIC},
+      </if>
+      <if test="commodityStock != null">
+        COMMODITY_STOCK = #{commodityStock,jdbcType=NUMERIC},
+      </if>
+      <if test="phone != null">
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="site != null">
+        SITE = #{site,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceCode != null">
+        PROVINCE_CODE = #{provinceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cityCode != null">
+        CITY_CODE = #{cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="regionCode != null">
+        REGION_CODE = #{regionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="reserveDays != null">
+        RESERVE_DAYS = #{reserveDays,jdbcType=VARCHAR},
+      </if>
+      <if test="advanceReserveDays != null">
+        ADVANCE_RESERVE_DAYS = #{advanceReserveDays,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityScore != null">
+        COMMODITY_SCORE = #{commodityScore,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityDailyPrice != null">
+        COMMODITY_DAILY_PRICE = #{commodityDailyPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="commodityMinPrice != null">
+        COMMODITY_MIN_PRICE = #{commodityMinPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="commodityMaxPrice != null">
+        COMMODITY_MAX_PRICE = #{commodityMaxPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="commodityDescribe != null">
+        COMMODITY_DESCRIBE = #{commodityDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="detailRemark != null">
+        DETAIL_REMARK = #{detailRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="examineStatus != null">
+        EXAMINE_STATUS = #{examineStatus,jdbcType=CHAR},
+      </if>
+      <if test="examineFailureReason != null">
+        EXAMINE_FAILURE_REASON = #{examineFailureReason,jdbcType=VARCHAR},
+      </if>
+      <if test="examineTime != null">
+        EXAMINE_TIME = #{examineTime,jdbcType=CHAR},
+      </if>
+      <if test="examinePerson != null">
+        EXAMINE_PERSON = #{examinePerson,jdbcType=VARCHAR},
+      </if>
+      <if test="storeId != null">
+        STORE_ID = #{storeId,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityLongitude != null">
+        COMMODITY_LONGITUDE = #{commodityLongitude,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityLatitude != null">
+        COMMODITY_LATITUDE = #{commodityLatitude,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where COMMODITY_ID = #{commodityId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.macro.mall.model.TSportCommodity">
+    update T_SPORT_COMMODITY
+    set CREATE_TIME = #{createTime,jdbcType=CHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=CHAR},
+      COMMODITY_TYPE_ID = #{commodityTypeId,jdbcType=VARCHAR},
+      SHOP_COMMODITY_TYPE = #{shopCommodityType,jdbcType=VARCHAR},
+      CHANNEL = #{channel,jdbcType=VARCHAR},
+      ROTATIONN_CHART_URL = #{rotationnChartUrl,jdbcType=VARCHAR},
+      PIC_URL = #{picUrl,jdbcType=VARCHAR},
+      SHOP_ID = #{shopId,jdbcType=VARCHAR},
+      POS_ID = #{posId,jdbcType=VARCHAR},
+      BRAND_ID = #{brandId,jdbcType=VARCHAR},
+      COMMODITY_NAME = #{commodityName,jdbcType=VARCHAR},
+      MONTHLY_SALES = #{monthlySales,jdbcType=NUMERIC},
+      COMMODITY_SALES = #{commoditySales,jdbcType=NUMERIC},
+      COMMODITY_STOCK = #{commodityStock,jdbcType=NUMERIC},
+      PHONE = #{phone,jdbcType=VARCHAR},
+      SITE = #{site,jdbcType=VARCHAR},
+      PROVINCE_CODE = #{provinceCode,jdbcType=VARCHAR},
+      CITY_CODE = #{cityCode,jdbcType=VARCHAR},
+      REGION_CODE = #{regionCode,jdbcType=VARCHAR},
+      RESERVE_DAYS = #{reserveDays,jdbcType=VARCHAR},
+      ADVANCE_RESERVE_DAYS = #{advanceReserveDays,jdbcType=VARCHAR},
+      COMMODITY_SCORE = #{commodityScore,jdbcType=VARCHAR},
+      COMMODITY_DAILY_PRICE = #{commodityDailyPrice,jdbcType=NUMERIC},
+      COMMODITY_MIN_PRICE = #{commodityMinPrice,jdbcType=NUMERIC},
+      COMMODITY_MAX_PRICE = #{commodityMaxPrice,jdbcType=NUMERIC},
+      COMMODITY_DESCRIBE = #{commodityDescribe,jdbcType=VARCHAR},
+      DETAIL_REMARK = #{detailRemark,jdbcType=VARCHAR},
+      EXAMINE_STATUS = #{examineStatus,jdbcType=CHAR},
+      EXAMINE_FAILURE_REASON = #{examineFailureReason,jdbcType=VARCHAR},
+      EXAMINE_TIME = #{examineTime,jdbcType=CHAR},
+      EXAMINE_PERSON = #{examinePerson,jdbcType=VARCHAR},
+      STORE_ID = #{storeId,jdbcType=VARCHAR},
+      COMMODITY_LONGITUDE = #{commodityLongitude,jdbcType=VARCHAR},
+      COMMODITY_LATITUDE = #{commodityLatitude,jdbcType=VARCHAR}
+    where COMMODITY_ID = #{commodityId,jdbcType=VARCHAR}
+  </update>
+
+  <!-- 根据商品类型id修改商品状态-->
+  <update id="updateCommodityByTypeId" parameterType="java.lang.String">
+    update T_SPORT_COMMODITY set EXAMINE_STATUS=#{examineStatus,jdbcType=CHAR}
+    where COMMODITY_TYPE_ID = #{commodityTypeId,jdbcType=VARCHAR}
+  </update>
+
+  <update id="updateCommodityTypeAndChannelById" parameterType="com.macro.mall.model.TSportCommodity">
+    update T_SPORT_COMMODITY
+    <set>
+      <if test="shopCommodityType != null and shopCommodityType !='' ">
+        shop_commodity_type=#{shopCommodityType,jdbcType=VARCHAR},
+      </if>
+      <if test="channel !=null and  channel !='' ">
+        channel= #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime !=null and  updateTime !='' ">
+        UPDATE_TIME= #{updateTime,jdbcType=CHAR},
+      </if>
+    </set>
+    where COMMODITY_ID = #{commodityId,jdbcType=VARCHAR}
+  </update>
+
+
+  <select id="selectSportCommodityList" parameterType="com.macro.mall.communicate.resourcecenter.bean.TSportCommodityVO" resultMap="BaseResultMap">
+    select  t.commodity_id,t.create_time,t.update_time,t.commodity_type_id,t.shop_commodity_type,t.channel,t.rotationn_chart_url,t.pic_url,
+    t.shop_id,t.pos_id, t.brand_id,t.commodity_name,t.monthly_sales,t.commodity_sales,t.commodity_stock,t.phone,t.site,t.province_code,
+    t.city_code,t.region_code,t.reserve_days,t.advance_reserve_days,t.commodity_score,t.commodity_daily_price,t.commodity_min_price, t.commodity_max_price,
+    t.commodity_describe,t.detail_remark, t.examine_status,t.examine_failure_reason,t.examine_time,t.examine_person,t.store_id, t.commodity_longitude, t.commodity_latitude
+    from t_sport_commodity t where 1=1
+    <if test="commdityName != null">
+      and  COMMODITY_NAME like '%'|| #{commdityName,jdbcType=VARCHAR} ||'%'
+    </if>
+    <if test="commodityId != null">
+      and  commodity_id = #{commodityId,jdbcType=VARCHAR}
+    </if>
+    <if test="commdityType != null">
+      and  commodity_type_id = #{commdityType,jdbcType=VARCHAR}
+    </if>
+    <if test="posId != null">
+      and  POS_ID = #{posId,jdbcType=VARCHAR}
+    </if>
+    <if test="posId != null">
+      and  shop_id = #{shopId,jdbcType=VARCHAR}
+    </if>
+    <if test="channel != null">
+      and  channel = #{posId,jdbcType=VARCHAR}
+    </if>
+    <if test="commdityStatus !=null">
+      and  examine_status = #{commdityStatus,jdbcType=VARCHAR}
+    </if>
+    order by
+    <if test="topping != null">
+      case when COMMODITY_ID in
+      <foreach collection="topping" open=" (" close=" ) " separator="," item="top">
+        #{top}
+      </foreach>
+      then 1 else 2 end,
+    </if>
+    examine_time desc
+  </select>
+
+  <select id="getShopCommodityType" resultMap="TSportCommodityTypeResultMap">
+    select COMMODITY_TYPE_ID,COMMODITY_TYPE_NAME,COMMODITY_P_ID,STRATUM,CREATE_TIME,UPDATE_TIME,COMMODITY_TYPE_NO,COMMODITY_TYPE_STATUS
+    from t_sport_commodity_type a connect by prior a.COMMODITY_P_ID = a.COMMODITY_TYPE_ID start with a.COMMODITY_TYPE_ID = #{CommodityTypeId}
+  </select>
+
+
+
+  <sql id="Commodity_List">
+    tsc.commodity_id,tsc.create_time,tsc.update_time,tsc.commodity_type_id,tsc.shop_commodity_type,tsc.channel,tsc.rotationn_chart_url,
+   tsc.pic_url,tsc.shop_id,tsc.pos_id,tsc.brand_id,tsc.commodity_name,tsc.monthly_sales,tsc.commodity_sales,tsc.commodity_stock,tsc.phone,
+   tsc.site,tsc.province_code,tsc.city_code,tsc.region_code,tsc.reserve_days,tsc.advance_reserve_days,tsc.commodity_score,tsc.commodity_daily_price,
+   tsc.COMMODITY_MIN_PRICE,tsc.COMMODITY_MAX_PRICE,tsc.commodity_describe,tsc.detail_remark,tsc.examine_status,tsc.examine_failure_reason,tsc.examine_time,tsc.examine_person,tsc.store_id
+  </sql>
+
+  <!--查询此活动下的所有商品 -->
+  <select id="selectCommodityByActivityId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select <include refid="Commodity_List"/>,sct.commodity_type_name,sca.activity_stock
+    from t_sport_commodity tsc
+    left join t_sport_commodity_activity sca
+    on tsc.commodity_id=sca.commodity_id
+    left join t_sport_commodity_type sct
+    on tsc.commodity_type_id=sct.commodity_type_id
+    where sca.activity_id=#{activityId,jdbcType=VARCHAR}
+    and tsc.EXAMINE_STATUS='00'
+    <if test="searchInfo!= null and searchInfo!= ''">
+      and tsc.commodity_name like '%' || #{searchInfo,jdbcType=VARCHAR} ||'%'
+    </if>
+    <if test="commodityTypeId!= null and commodityTypeId!= ''">
+      and tsc.COMMODITY_TYPE_ID = #{commodityTypeId,jdbcType=VARCHAR}
+    </if>
+    order by tsc.CREATE_TIME desc
+  </select>
+  <!--查询没参与此活动的商品-->
+  <select id="selectNoActivityCommodity" parameterType="java.lang.String" resultMap="BaseResultMap">
+
+    select <include refid="Commodity_List"/>,sct.commodity_type_name from t_sport_commodity tsc
+    left join t_sport_commodity_type sct
+    on tsc.commodity_type_id=sct.commodity_type_id
+    where tsc.commodity_id not in
+    (select sca.commodity_id from t_sport_commodity_activity sca
+    where sca.activity_id=#{activityId,jdbcType=VARCHAR})
+    and tsc.EXAMINE_STATUS='00'
+    and tsc.commodity_type_id!='3021033'
+    <if test="searchInfo!= null and searchInfo!= ''">
+      and tsc.COMMODITY_NAME like '%' || #{searchInfo,jdbcType=VARCHAR} ||'%'
+    </if>
+    <if test="commodityTypeId!= null and commodityTypeId!= ''">
+      and tsc.COMMODITY_TYPE_ID= #{commodityTypeId,jdbcType=VARCHAR}
+    </if>
+  </select>
+
+  <!--查询没参与此活动的某个商品类型的商品数量-->
+  <select id="selectNoActivityCommodityType" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select tsc.commodity_type_id,sct.commodity_type_name,count(*) num from t_sport_commodity tsc,t_sport_commodity_type sct
+    where tsc.commodity_id not in(select tsc.commodity_id from t_sport_commodity_activity tsc
+    where tsc.activity_id= #{activityId,jdbcType=VARCHAR})
+    and tsc.commodity_type_id=sct.commodity_type_id
+    and tsc.EXAMINE_STATUS='00'
+    <if test="searchInfo!= null and searchInfo!= ''">
+      and sct.commodity_type_name like '%' || #{searchInfo,jdbcType=VARCHAR} ||'%'
+    </if>
+    group by tsc.commodity_type_id,sct.commodity_type_name
+  </select>
+  <!--查寻秒杀活动某时间段的商品-->
+  <select id="selectCommodityByTimeSlotId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select <include refid="Commodity_List"/>,sct.commodity_type_name,sca.activity_stock
+    from t_sport_commodity tsc
+    left join t_sport_commodity_activity sca
+    on tsc.commodity_id=sca.commodity_id
+    left join t_sport_commodity_type sct
+    on tsc.commodity_type_id=sct.commodity_type_id
+    where sca.time_slot_id=#{timeSlotId,jdbcType=VARCHAR}
+    and tsc.EXAMINE_STATUS='00'
+    <if test="searchInfo!= null and searchInfo!= ''">
+      and tsc.ACTIVITY_NAME like '%' || #{searchInfo,jdbcType=VARCHAR} ||'%'
+    </if>
+    <if test="commodityTypeId!= null and commodityTypeId!= ''">
+      and tsc.COMMODITY_TYPE_ID = #{commodityTypeId,jdbcType=VARCHAR}
+    </if>
+    order by tsc.CREATE_TIME desc
+  </select>
+
+  <!--查询不在某个时间段参加秒杀的商品-->
+  <select id="selectNoTimeSlotCommodity" parameterType="java.lang.String" resultMap="BaseResultMap">
+     select <include refid="Commodity_List"/>,sct.commodity_type_name,sca.activity_stock
+    from t_sport_commodity tsc
+    left join t_sport_commodity_activity sca
+    on tsc.commodity_id=sca.commodity_id
+    left join t_sport_commodity_type sct
+    on tsc.commodity_type_id=sct.commodity_type_id
+    where tsc.commodity_id not in
+    (select sca.commodity_id from t_sport_commodity_activity sca
+    inner join t_sport_time_slot sts
+    on sts.time_slot_id=sca.time_slot_id
+    where sts.start_time between #{startTime,jdbcType=VARCHAR} and #{endTime,jdbcType=VARCHAR})
+    or #{startTime,jdbcType=VARCHAR} between sts.start_time and sts.end_time
+    and tsc.commodity_type_id!='3021033'
+  </select>
+</mapper>

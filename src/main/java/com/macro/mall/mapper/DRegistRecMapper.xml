@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.macro.mall.mapper.DRegistRecMapper">
+	<resultMap id="BaseResultMap" type="com.macro.mall.model.DRegistRec">
+		<!-- WARNING - @mbggenerated -->
+		<result column="DATA_DT" property="dataDt" jdbcType="CHAR" />
+		<result column="SEQ_NO" property="seqNo" jdbcType="VARCHAR" />
+		<result column="USER_ID" property="userId" jdbcType="VARCHAR" />
+		<result column="VERI_CDE" property="veriCde" jdbcType="VARCHAR" />
+		<result column="CREATE_TM" property="createTm" jdbcType="CHAR" />
+		<result column="CHK_COUNT" property="chkCount" jdbcType="DECIMAL" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="IMEI" property="imei" jdbcType="VARCHAR" />
+		<result column="RANDOMCODE" property="randomcode" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<select id="selectRegistById" parameterType="String" resultMap="BaseResultMap">
+		select * from (select t.* from D_REGIST_REC t
+		where USER_ID =
+		#{userId} order by t.create_tm desc) where rownum = 1
+	</select>
+
+	<update id="updateSMSErrCnt" parameterType="String">
+		UPDATE D_REGIST_REC SET CHK_COUNT=CHK_COUNT+1 WHERE USER_ID = #{userId}
+	</update>
+	
+	<update id="updateSussSms"  parameterType="String">
+	update d_count_sms t set t.req_no_pass = '0' where t.id = #{id} and
+	t.req_date=to_char(sysdate,'yyyyMMdd')
+	</update>
+	<insert id="insertSmsInfo" parameterType="com.macro.mall.model.DRegistRec">
+	insert into D_REGIST_REC (DATA_DT,SEQ_NO,USER_ID,VERI_CDE,CREATE_TM,CHK_COUNT,REMARK) 
+	values (#{dataDt},#{seqNo},#{userId},#{veriCde},#{createTm},#{chkCount},#{remark})
+	</insert>
+</mapper>

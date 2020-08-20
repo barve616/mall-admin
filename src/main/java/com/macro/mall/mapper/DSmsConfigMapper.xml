@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.macro.mall.mapper.DSmsConfigMapper">
+	<resultMap id="BaseResultMap" type="com.macro.mall.model.DSmsConfig">
+		<!-- WARNING - @mbggenerated -->
+		<result column="ID" property="id" jdbcType="VARCHAR" />
+		<result column="NAME" property="name" jdbcType="VARCHAR" />
+		<result column="CONTENT" property="content" jdbcType="VARCHAR" />
+		<result column="LOGIN_FLAG" property="loginFlag" jdbcType="CHAR" />
+		<result column="CARD_FLAG" property="cardFlag" jdbcType="CHAR" />
+		<result column="IDTYPE_FLAG" property="idtypeFlag" jdbcType="CHAR" />
+		<result column="PHONE_FLAG" property="phoneFlag" jdbcType="CHAR" />
+		<result column="STATE" property="state" jdbcType="CHAR" />
+	</resultMap>
+	<select id="selectSmsId" parameterType="String" resultMap="BaseResultMap">
+		select content from  d_sms_config
+		 where id = #{id}
+	</select>
+
+	<select id="selectSmsById" parameterType="String" resultMap="BaseResultMap">
+		select * from  d_sms_config
+		 where id = #{id}
+	</select>
+
+</mapper>

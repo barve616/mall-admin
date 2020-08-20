@@ -1,0 +1,765 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.macro.mall.mapper.TSportPosMapper">
+  <resultMap id="BaseResultMap" type="com.macro.mall.model.TSportPos">
+    <id column="POS_ID" jdbcType="VARCHAR" property="posId" />
+    <result column="CHANNEL" jdbcType="VARCHAR" property="channel" />
+    <result column="REGISTER_ADDRESS" jdbcType="VARCHAR" property="registerAddress" />
+    <result column="COMPANY_BUSINE" jdbcType="VARCHAR" property="companyBusine" />
+    <result column="ACCOUNT_CARD" jdbcType="VARCHAR" property="accountCard" />
+    <result column="ACCOUNT_BANK" jdbcType="VARCHAR" property="accountBank" />
+    <result column="CONTACTS_NAME" jdbcType="VARCHAR" property="contactsName" />
+    <result column="PHONE" jdbcType="VARCHAR" property="phone" />
+    <result column="EMAIL" jdbcType="VARCHAR" property="email" />
+    <result column="PROMOTER_UNIT" jdbcType="VARCHAR" property="promoterUnit" />
+    <result column="PROMOTER_STATE" jdbcType="CHAR" property="promoterState" />
+    <result column="PROMOTER_NAME" jdbcType="VARCHAR" property="promoterName" />
+    <result column="BUSINESS_EXPIRY_DATE" jdbcType="VARCHAR" property="businessExpiryDate" />
+    <result column="BUSINESS_CODE" jdbcType="VARCHAR" property="businessCode" />
+    <result column="BUSINESS_PIC" jdbcType="VARCHAR" property="businessPic" />
+    <result column="OPERATE_CODE" jdbcType="VARCHAR" property="operateCode" />
+    <result column="OPERATE_PIC" jdbcType="VARCHAR" property="operatePic" />
+    <result column="LEGAL_PERSION_NAME" jdbcType="VARCHAR" property="legalPersionName" />
+    <result column="LEGAL_PERSION_ID" jdbcType="VARCHAR" property="legalPersionId" />
+    <result column="LEGAL_PERSION_FRONT" jdbcType="VARCHAR" property="legalPersionFront" />
+    <result column="LEGAL_PERSION_BACK" jdbcType="VARCHAR" property="legalPersionBack" />
+    <result column="POS_EXAMINE_INFO" jdbcType="VARCHAR" property="posExamineInfo" />
+    <result column="POS_EXAMINE_STATE" jdbcType="CHAR" property="posExamineState" />
+    <result column="EXAMINE_PERSION" jdbcType="VARCHAR" property="examinePersion" />
+    <result column="EXAMINE_TIME" jdbcType="VARCHAR" property="examineTime" />
+    <result column="CREATED_TIME" jdbcType="VARCHAR" property="createdTime" />
+    <result column="UPDATED_TIME" jdbcType="VARCHAR" property="updatedTime" />
+    <result column="SIGN_BANK" jdbcType="VARCHAR" property="signBank" />
+  </resultMap>
+
+
+  <resultMap id="ListResultMap" extends="BaseResultMap" type="com.macro.mall.communicate.resourcecenter.bean.MerchantDO">
+    <result column="CHANNEL" jdbcType="VARCHAR" property="channel" />
+    <result column="COMPANY_NAME" jdbcType="VARCHAR" property="companyName" />
+    <result column="SHOP_ID" jdbcType="VARCHAR" property="shopId" />
+    <result column="SHOP_NAME" jdbcType="VARCHAR" property="shopName" />
+    <result column="SHOP_ENGLISH_NAME" jdbcType="VARCHAR" property="shopEnglishName" />
+    <result column="SHOP_TYPE" jdbcType="VARCHAR" property="shopType" />
+    <result column="COMMODITY_NUM" jdbcType="VARCHAR" property="commodityNum" />
+    <result column="AUDIT_NUM" jdbcType="VARCHAR" property="auditNum" />
+  </resultMap>
+
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    POS_ID, CHANNEL, REGISTER_ADDRESS, COMPANY_BUSINE, ACCOUNT_CARD, ACCOUNT_BANK, CONTACTS_NAME, 
+    PHONE, EMAIL, PROMOTER_UNIT, PROMOTER_STATE, PROMOTER_NAME, BUSINESS_EXPIRY_DATE, 
+    BUSINESS_CODE, BUSINESS_PIC, OPERATE_CODE, OPERATE_PIC, LEGAL_PERSION_NAME, LEGAL_PERSION_ID, 
+    LEGAL_PERSION_FRONT, LEGAL_PERSION_BACK, POS_EXAMINE_INFO, POS_EXAMINE_STATE, EXAMINE_PERSION, 
+    EXAMINE_TIME, CREATED_TIME, UPDATED_TIME, SIGN_BANK
+  </sql>
+  <select id="selectByExample" parameterType="com.macro.mall.model.TSportPosExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_SPORT_POS
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from T_SPORT_POS
+    where POS_ID = #{posId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from T_SPORT_POS
+    where POS_ID = #{posId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.macro.mall.model.TSportPosExample">
+    delete from T_SPORT_POS
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.macro.mall.model.TSportPos">
+    insert into T_SPORT_POS (POS_ID, CHANNEL, REGISTER_ADDRESS, 
+      COMPANY_BUSINE, ACCOUNT_CARD, ACCOUNT_BANK, 
+      CONTACTS_NAME, PHONE, EMAIL, 
+      PROMOTER_UNIT, PROMOTER_STATE, PROMOTER_NAME, 
+      BUSINESS_EXPIRY_DATE, BUSINESS_CODE, BUSINESS_PIC, 
+      OPERATE_CODE, OPERATE_PIC, LEGAL_PERSION_NAME, 
+      LEGAL_PERSION_ID, LEGAL_PERSION_FRONT, LEGAL_PERSION_BACK, 
+      POS_EXAMINE_INFO, POS_EXAMINE_STATE, EXAMINE_PERSION, 
+      EXAMINE_TIME, CREATED_TIME, UPDATED_TIME, 
+      SIGN_BANK)
+    values (#{posId,jdbcType=VARCHAR}, #{channel,jdbcType=VARCHAR}, #{registerAddress,jdbcType=VARCHAR}, 
+      #{companyBusine,jdbcType=VARCHAR}, #{accountCard,jdbcType=VARCHAR}, #{accountBank,jdbcType=VARCHAR}, 
+      #{contactsName,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{promoterUnit,jdbcType=VARCHAR}, #{promoterState,jdbcType=CHAR}, #{promoterName,jdbcType=VARCHAR}, 
+      #{businessExpiryDate,jdbcType=VARCHAR}, #{businessCode,jdbcType=VARCHAR}, #{businessPic,jdbcType=VARCHAR}, 
+      #{operateCode,jdbcType=VARCHAR}, #{operatePic,jdbcType=VARCHAR}, #{legalPersionName,jdbcType=VARCHAR}, 
+      #{legalPersionId,jdbcType=VARCHAR}, #{legalPersionFront,jdbcType=VARCHAR}, #{legalPersionBack,jdbcType=VARCHAR}, 
+      #{posExamineInfo,jdbcType=VARCHAR}, #{posExamineState,jdbcType=CHAR}, #{examinePersion,jdbcType=VARCHAR}, 
+      #{examineTime,jdbcType=VARCHAR}, #{createdTime,jdbcType=VARCHAR}, #{updatedTime,jdbcType=VARCHAR}, 
+      #{signBank,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.macro.mall.model.TSportPos">
+    insert into T_SPORT_POS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="posId != null">
+        POS_ID,
+      </if>
+      <if test="channel != null">
+        CHANNEL,
+      </if>
+      <if test="registerAddress != null">
+        REGISTER_ADDRESS,
+      </if>
+      <if test="companyBusine != null">
+        COMPANY_BUSINE,
+      </if>
+      <if test="accountCard != null">
+        ACCOUNT_CARD,
+      </if>
+      <if test="accountBank != null">
+        ACCOUNT_BANK,
+      </if>
+      <if test="contactsName != null">
+        CONTACTS_NAME,
+      </if>
+      <if test="phone != null">
+        PHONE,
+      </if>
+      <if test="email != null">
+        EMAIL,
+      </if>
+      <if test="promoterUnit != null">
+        PROMOTER_UNIT,
+      </if>
+      <if test="promoterState != null">
+        PROMOTER_STATE,
+      </if>
+      <if test="promoterName != null">
+        PROMOTER_NAME,
+      </if>
+      <if test="businessExpiryDate != null">
+        BUSINESS_EXPIRY_DATE,
+      </if>
+      <if test="businessCode != null">
+        BUSINESS_CODE,
+      </if>
+      <if test="businessPic != null">
+        BUSINESS_PIC,
+      </if>
+      <if test="operateCode != null">
+        OPERATE_CODE,
+      </if>
+      <if test="operatePic != null">
+        OPERATE_PIC,
+      </if>
+      <if test="legalPersionName != null">
+        LEGAL_PERSION_NAME,
+      </if>
+      <if test="legalPersionId != null">
+        LEGAL_PERSION_ID,
+      </if>
+      <if test="legalPersionFront != null">
+        LEGAL_PERSION_FRONT,
+      </if>
+      <if test="legalPersionBack != null">
+        LEGAL_PERSION_BACK,
+      </if>
+      <if test="posExamineInfo != null">
+        POS_EXAMINE_INFO,
+      </if>
+      <if test="posExamineState != null">
+        POS_EXAMINE_STATE,
+      </if>
+      <if test="examinePersion != null">
+        EXAMINE_PERSION,
+      </if>
+      <if test="examineTime != null">
+        EXAMINE_TIME,
+      </if>
+      <if test="createdTime != null">
+        CREATED_TIME,
+      </if>
+      <if test="updatedTime != null">
+        UPDATED_TIME,
+      </if>
+      <if test="signBank != null">
+        SIGN_BANK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="posId != null">
+        #{posId,jdbcType=VARCHAR},
+      </if>
+      <if test="channel != null">
+        #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="registerAddress != null">
+        #{registerAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="companyBusine != null">
+        #{companyBusine,jdbcType=VARCHAR},
+      </if>
+      <if test="accountCard != null">
+        #{accountCard,jdbcType=VARCHAR},
+      </if>
+      <if test="accountBank != null">
+        #{accountBank,jdbcType=VARCHAR},
+      </if>
+      <if test="contactsName != null">
+        #{contactsName,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="promoterUnit != null">
+        #{promoterUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="promoterState != null">
+        #{promoterState,jdbcType=CHAR},
+      </if>
+      <if test="promoterName != null">
+        #{promoterName,jdbcType=VARCHAR},
+      </if>
+      <if test="businessExpiryDate != null">
+        #{businessExpiryDate,jdbcType=VARCHAR},
+      </if>
+      <if test="businessCode != null">
+        #{businessCode,jdbcType=VARCHAR},
+      </if>
+      <if test="businessPic != null">
+        #{businessPic,jdbcType=VARCHAR},
+      </if>
+      <if test="operateCode != null">
+        #{operateCode,jdbcType=VARCHAR},
+      </if>
+      <if test="operatePic != null">
+        #{operatePic,jdbcType=VARCHAR},
+      </if>
+      <if test="legalPersionName != null">
+        #{legalPersionName,jdbcType=VARCHAR},
+      </if>
+      <if test="legalPersionId != null">
+        #{legalPersionId,jdbcType=VARCHAR},
+      </if>
+      <if test="legalPersionFront != null">
+        #{legalPersionFront,jdbcType=VARCHAR},
+      </if>
+      <if test="legalPersionBack != null">
+        #{legalPersionBack,jdbcType=VARCHAR},
+      </if>
+      <if test="posExamineInfo != null">
+        #{posExamineInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="posExamineState != null">
+        #{posExamineState,jdbcType=CHAR},
+      </if>
+      <if test="examinePersion != null">
+        #{examinePersion,jdbcType=VARCHAR},
+      </if>
+      <if test="examineTime != null">
+        #{examineTime,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        #{createdTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedTime != null">
+        #{updatedTime,jdbcType=VARCHAR},
+      </if>
+      <if test="signBank != null">
+        #{signBank,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.macro.mall.model.TSportPosExample" resultType="java.lang.Long">
+    select count(*) from T_SPORT_POS
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update T_SPORT_POS
+    <set>
+      <if test="record.posId != null">
+        POS_ID = #{record.posId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.channel != null">
+        CHANNEL = #{record.channel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.registerAddress != null">
+        REGISTER_ADDRESS = #{record.registerAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyBusine != null">
+        COMPANY_BUSINE = #{record.companyBusine,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accountCard != null">
+        ACCOUNT_CARD = #{record.accountCard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accountBank != null">
+        ACCOUNT_BANK = #{record.accountBank,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contactsName != null">
+        CONTACTS_NAME = #{record.contactsName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null">
+        PHONE = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null">
+        EMAIL = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.promoterUnit != null">
+        PROMOTER_UNIT = #{record.promoterUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.promoterState != null">
+        PROMOTER_STATE = #{record.promoterState,jdbcType=CHAR},
+      </if>
+      <if test="record.promoterName != null">
+        PROMOTER_NAME = #{record.promoterName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.businessExpiryDate != null">
+        BUSINESS_EXPIRY_DATE = #{record.businessExpiryDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.businessCode != null">
+        BUSINESS_CODE = #{record.businessCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.businessPic != null">
+        BUSINESS_PIC = #{record.businessPic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operateCode != null">
+        OPERATE_CODE = #{record.operateCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operatePic != null">
+        OPERATE_PIC = #{record.operatePic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.legalPersionName != null">
+        LEGAL_PERSION_NAME = #{record.legalPersionName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.legalPersionId != null">
+        LEGAL_PERSION_ID = #{record.legalPersionId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.legalPersionFront != null">
+        LEGAL_PERSION_FRONT = #{record.legalPersionFront,jdbcType=VARCHAR},
+      </if>
+      <if test="record.legalPersionBack != null">
+        LEGAL_PERSION_BACK = #{record.legalPersionBack,jdbcType=VARCHAR},
+      </if>
+      <if test="record.posExamineInfo != null">
+        POS_EXAMINE_INFO = #{record.posExamineInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.posExamineState != null">
+        POS_EXAMINE_STATE = #{record.posExamineState,jdbcType=CHAR},
+      </if>
+      <if test="record.examinePersion != null">
+        EXAMINE_PERSION = #{record.examinePersion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examineTime != null">
+        EXAMINE_TIME = #{record.examineTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdTime != null">
+        CREATED_TIME = #{record.createdTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updatedTime != null">
+        UPDATED_TIME = #{record.updatedTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.signBank != null">
+        SIGN_BANK = #{record.signBank,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update T_SPORT_POS
+    set POS_ID = #{record.posId,jdbcType=VARCHAR},
+      CHANNEL = #{record.channel,jdbcType=VARCHAR},
+      REGISTER_ADDRESS = #{record.registerAddress,jdbcType=VARCHAR},
+      COMPANY_BUSINE = #{record.companyBusine,jdbcType=VARCHAR},
+      ACCOUNT_CARD = #{record.accountCard,jdbcType=VARCHAR},
+      ACCOUNT_BANK = #{record.accountBank,jdbcType=VARCHAR},
+      CONTACTS_NAME = #{record.contactsName,jdbcType=VARCHAR},
+      PHONE = #{record.phone,jdbcType=VARCHAR},
+      EMAIL = #{record.email,jdbcType=VARCHAR},
+      PROMOTER_UNIT = #{record.promoterUnit,jdbcType=VARCHAR},
+      PROMOTER_STATE = #{record.promoterState,jdbcType=CHAR},
+      PROMOTER_NAME = #{record.promoterName,jdbcType=VARCHAR},
+      BUSINESS_EXPIRY_DATE = #{record.businessExpiryDate,jdbcType=VARCHAR},
+      BUSINESS_CODE = #{record.businessCode,jdbcType=VARCHAR},
+      BUSINESS_PIC = #{record.businessPic,jdbcType=VARCHAR},
+      OPERATE_CODE = #{record.operateCode,jdbcType=VARCHAR},
+      OPERATE_PIC = #{record.operatePic,jdbcType=VARCHAR},
+      LEGAL_PERSION_NAME = #{record.legalPersionName,jdbcType=VARCHAR},
+      LEGAL_PERSION_ID = #{record.legalPersionId,jdbcType=VARCHAR},
+      LEGAL_PERSION_FRONT = #{record.legalPersionFront,jdbcType=VARCHAR},
+      LEGAL_PERSION_BACK = #{record.legalPersionBack,jdbcType=VARCHAR},
+      POS_EXAMINE_INFO = #{record.posExamineInfo,jdbcType=VARCHAR},
+      POS_EXAMINE_STATE = #{record.posExamineState,jdbcType=CHAR},
+      EXAMINE_PERSION = #{record.examinePersion,jdbcType=VARCHAR},
+      EXAMINE_TIME = #{record.examineTime,jdbcType=VARCHAR},
+      CREATED_TIME = #{record.createdTime,jdbcType=VARCHAR},
+      UPDATED_TIME = #{record.updatedTime,jdbcType=VARCHAR},
+      SIGN_BANK = #{record.signBank,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.macro.mall.model.TSportPos">
+    update T_SPORT_POS
+    <set>
+      <if test="channel != null">
+        CHANNEL = #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="registerAddress != null">
+        REGISTER_ADDRESS = #{registerAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="companyBusine != null">
+        COMPANY_BUSINE = #{companyBusine,jdbcType=VARCHAR},
+      </if>
+      <if test="accountCard != null">
+        ACCOUNT_CARD = #{accountCard,jdbcType=VARCHAR},
+      </if>
+      <if test="accountBank != null">
+        ACCOUNT_BANK = #{accountBank,jdbcType=VARCHAR},
+      </if>
+      <if test="contactsName != null">
+        CONTACTS_NAME = #{contactsName,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="promoterUnit != null">
+        PROMOTER_UNIT = #{promoterUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="promoterState != null">
+        PROMOTER_STATE = #{promoterState,jdbcType=CHAR},
+      </if>
+      <if test="promoterName != null">
+        PROMOTER_NAME = #{promoterName,jdbcType=VARCHAR},
+      </if>
+      <if test="businessExpiryDate != null">
+        BUSINESS_EXPIRY_DATE = #{businessExpiryDate,jdbcType=VARCHAR},
+      </if>
+      <if test="businessCode != null">
+        BUSINESS_CODE = #{businessCode,jdbcType=VARCHAR},
+      </if>
+      <if test="businessPic != null">
+        BUSINESS_PIC = #{businessPic,jdbcType=VARCHAR},
+      </if>
+      <if test="operateCode != null">
+        OPERATE_CODE = #{operateCode,jdbcType=VARCHAR},
+      </if>
+      <if test="operatePic != null">
+        OPERATE_PIC = #{operatePic,jdbcType=VARCHAR},
+      </if>
+      <if test="legalPersionName != null">
+        LEGAL_PERSION_NAME = #{legalPersionName,jdbcType=VARCHAR},
+      </if>
+      <if test="legalPersionId != null">
+        LEGAL_PERSION_ID = #{legalPersionId,jdbcType=VARCHAR},
+      </if>
+      <if test="legalPersionFront != null">
+        LEGAL_PERSION_FRONT = #{legalPersionFront,jdbcType=VARCHAR},
+      </if>
+      <if test="legalPersionBack != null">
+        LEGAL_PERSION_BACK = #{legalPersionBack,jdbcType=VARCHAR},
+      </if>
+      <if test="posExamineInfo != null">
+        POS_EXAMINE_INFO = #{posExamineInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="posExamineState != null">
+        POS_EXAMINE_STATE = #{posExamineState,jdbcType=CHAR},
+      </if>
+      <if test="examinePersion != null">
+        EXAMINE_PERSION = #{examinePersion,jdbcType=VARCHAR},
+      </if>
+      <if test="examineTime != null">
+        EXAMINE_TIME = #{examineTime,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        CREATED_TIME = #{createdTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedTime != null">
+        UPDATED_TIME = #{updatedTime,jdbcType=VARCHAR},
+      </if>
+      <if test="signBank != null">
+        SIGN_BANK = #{signBank,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where POS_ID = #{posId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.macro.mall.model.TSportPos">
+    update T_SPORT_POS
+    set CHANNEL = #{channel,jdbcType=VARCHAR},
+      REGISTER_ADDRESS = #{registerAddress,jdbcType=VARCHAR},
+      COMPANY_BUSINE = #{companyBusine,jdbcType=VARCHAR},
+      ACCOUNT_CARD = #{accountCard,jdbcType=VARCHAR},
+      ACCOUNT_BANK = #{accountBank,jdbcType=VARCHAR},
+      CONTACTS_NAME = #{contactsName,jdbcType=VARCHAR},
+      PHONE = #{phone,jdbcType=VARCHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      PROMOTER_UNIT = #{promoterUnit,jdbcType=VARCHAR},
+      PROMOTER_STATE = #{promoterState,jdbcType=CHAR},
+      PROMOTER_NAME = #{promoterName,jdbcType=VARCHAR},
+      BUSINESS_EXPIRY_DATE = #{businessExpiryDate,jdbcType=VARCHAR},
+      BUSINESS_CODE = #{businessCode,jdbcType=VARCHAR},
+      BUSINESS_PIC = #{businessPic,jdbcType=VARCHAR},
+      OPERATE_CODE = #{operateCode,jdbcType=VARCHAR},
+      OPERATE_PIC = #{operatePic,jdbcType=VARCHAR},
+      LEGAL_PERSION_NAME = #{legalPersionName,jdbcType=VARCHAR},
+      LEGAL_PERSION_ID = #{legalPersionId,jdbcType=VARCHAR},
+      LEGAL_PERSION_FRONT = #{legalPersionFront,jdbcType=VARCHAR},
+      LEGAL_PERSION_BACK = #{legalPersionBack,jdbcType=VARCHAR},
+      POS_EXAMINE_INFO = #{posExamineInfo,jdbcType=VARCHAR},
+      POS_EXAMINE_STATE = #{posExamineState,jdbcType=CHAR},
+      EXAMINE_PERSION = #{examinePersion,jdbcType=VARCHAR},
+      EXAMINE_TIME = #{examineTime,jdbcType=VARCHAR},
+      CREATED_TIME = #{createdTime,jdbcType=VARCHAR},
+      UPDATED_TIME = #{updatedTime,jdbcType=VARCHAR},
+      SIGN_BANK = #{signBank,jdbcType=VARCHAR}
+    where POS_ID = #{posId,jdbcType=VARCHAR}
+  </update>
+
+
+
+  <update id="updateInfo" parameterType="com.macro.mall.model.TSportPos">
+    update T_SPORT_POS
+    <set>
+      <if test="registerAddress != null and registerAddress != ''">
+        REGISTER_ADDRESS = #{registerAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="companyBusine != null and companyBusine != ''">
+        COMPANY_BUSINE = #{companyBusine,jdbcType=VARCHAR},
+      </if>
+      <if test="accountCard != null and accountCard != ''">
+        ACCOUNT_CARD = #{accountCard,jdbcType=VARCHAR},
+      </if>
+      <if test="accountBank != null and accountBank != ''">
+        ACCOUNT_BANK = #{accountBank,jdbcType=VARCHAR},
+      </if>
+      <if test="contactsName != null and contactsName != ''">
+        CONTACTS_NAME = #{contactsName,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null and phone != ''">
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null and email != ''">
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="promoterUnit != null and promoterUnit != ''">
+        PROMOTER_UNIT = #{promoterUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="promoterState != null and promoterState != ''">
+        PROMOTER_STATE = #{promoterState,jdbcType=CHAR},
+      </if>
+      <if test="promoterName != null and promoterName != ''">
+        PROMOTER_NAME = #{promoterName,jdbcType=VARCHAR},
+      </if>
+      <if test="businessExpiryDate != null and businessExpiryDate != ''">
+        BUSINESS_EXPIRY_DATE = #{businessExpiryDate,jdbcType=VARCHAR},
+      </if>
+      <if test="businessCode != null and businessCode != ''">
+        BUSINESS_CODE = #{businessCode,jdbcType=VARCHAR},
+      </if>
+      <if test="businessPic != null and businessPic != ''">
+        BUSINESS_PIC = #{businessPic,jdbcType=VARCHAR},
+      </if>
+      <if test="operateCode != null and operateCode != ''">
+        OPERATE_CODE = #{operateCode,jdbcType=VARCHAR},
+      </if>
+      <if test="operatePic != null and operatePic != ''">
+        OPERATE_PIC = #{operatePic,jdbcType=VARCHAR},
+      </if>
+      <if test="legalPersionName != null and legalPersionName != ''">
+        LEGAL_PERSION_NAME = #{legalPersionName,jdbcType=VARCHAR},
+      </if>
+      <if test="legalPersionId != null and legalPersionId != ''">
+        LEGAL_PERSION_ID = #{legalPersionId,jdbcType=VARCHAR},
+      </if>
+      <if test="legalPersionFront != null and legalPersionFront != ''">
+        LEGAL_PERSION_FRONT = #{legalPersionFront,jdbcType=VARCHAR},
+      </if>
+      <if test="legalPersionBack != null and legalPersionBack != ''">
+        LEGAL_PERSION_BACK = #{legalPersionBack,jdbcType=VARCHAR},
+      </if>
+      <if test="posExamineInfo != null and posExamineInfo != ''">
+        POS_EXAMINE_INFO = #{posExamineInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="posExamineState != null and posExamineState != ''">
+        POS_EXAMINE_STATE = #{posExamineState,jdbcType=CHAR},
+      </if>
+      <if test="examinePersion != null and examinePersion != ''">
+        EXAMINE_PERSION = #{examinePersion,jdbcType=VARCHAR},
+      </if>
+      <if test="examineTime != null and examineTime != ''">
+        EXAMINE_TIME = #{examineTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedTime != null and updatedTime != ''">
+        UPDATED_TIME = #{updatedTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where CHANNEL = #{channel,jdbcType=VARCHAR}
+  </update>
+
+  <!-- 查询列表-->
+  <select id="selectList" parameterType="map" resultMap="ListResultMap">
+    select t.pos_id,
+    t.register_address,
+    t.company_busine,
+    t.account_card,
+    t.account_bank,
+    t.contacts_name,
+    t.phone,
+    t.email,
+    t.promoter_unit,
+    t.promoter_state,
+    t.promoter_name,
+    t.business_expiry_date,
+    t.business_code,
+    t.business_pic,
+    t.operate_code,
+    t.operate_pic,
+    t.legal_persion_name,
+    t.legal_persion_id,
+    t.legal_persion_front,
+    t.legal_persion_back,
+    t.pos_examine_info,
+    t.pos_examine_state,
+    t.examine_persion,
+    t.examine_time,
+    t.created_time,
+    t.updated_time,
+    d.channel,
+    d.info as company_name,
+    b.shop_id,
+    b.shop_name,
+    b.shop_english_name,
+    b.shop_type,
+    e.commodity_num
+    from T_SPORT_POS t
+    left join d_h5_mer_term_id d
+    on t.channel = d.channel
+    left join d_h5_mer_info a
+    on d.channel = a.mer_channel
+    left join T_POS_SHOP_INFO b
+    on t.pos_id = b.pos_id
+    left join (select count(c.commodity_id) as commodity_num, c.shop_id
+    from t_sport_commodity c
+    group by c.shop_id) e
+    on b.shop_id = e.shop_id
+    <where>
+      <if test="companyName != null and companyName != ''">
+        and d.info like '%'|| #{companyName, jdbcType=VARCHAR} ||'%'
+      </if>
+      <if test="shopType != null and shopType != ''">
+        and b.shop_type = #{shopType, jdbcType=VARCHAR}
+      </if>
+      <if test="posExamineState != null and posExamineState != ''">
+        and t.pos_examine_state = #{posExamineState, jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+
+  <select id="countByMerInfo" parameterType="map" resultType="java.lang.Integer">
+      select
+          count(t.pos_id)
+          from T_SPORT_POS t
+          left join d_h5_mer_term_id d
+          on t.channel = d.channel
+          left join d_h5_mer_info a
+          on d.channel = a.mer_channel
+          left join T_POS_SHOP_INFO b
+          on t.pos_id = b.pos_id
+          left join (select count(c.commodity_id) as commodity_num, c.shop_id
+          from t_sport_commodity c
+          group by c.shop_id) e
+          on b.shop_id = e.shop_id
+      <where>
+        <if test="merId != null and merId != ''">
+          and d.mer_id = #{merId, jdbcType=VARCHAR}
+        </if>
+        <if test="termId != null and termId != ''">
+          and d.term_id = #{termId, jdbcType=VARCHAR}
+        </if>
+        <if test="info != null and info != ''">
+          and d.info like '%' ||  #{info, jdbcType=VARCHAR} || '%'
+        </if>
+        <if test="businessCode != null and businessCode != ''">
+          and t.business_code = #{businessCode, jdbcType=VARCHAR}
+        </if>
+        <if test="operateCode != null and operateCode != ''">
+          and t.operate_code = #{operateCode, jdbcType=VARCHAR}
+        </if>
+        <if test="shopName != null and shopName != ''">
+          and b.shop_name like '%' ||  #{shopName, jdbcType=VARCHAR} || '%'
+        </if>
+      </where>
+  </select>
+</mapper>

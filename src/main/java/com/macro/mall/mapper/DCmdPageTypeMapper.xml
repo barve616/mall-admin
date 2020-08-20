@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.macro.mall.mapper.DCmdPageTypeMapper">
+  <resultMap id="BaseResultMap" type="com.macro.mall.model.DCmdPageType">
+    <!--@mbg.generated-->
+    <!--@Table D_CMD_PAGE_TYPE-->
+    <id column="PAGE_TYPE_ID" jdbcType="VARCHAR" property="pageTypeId" />
+    <result column="TYPE_NAME" jdbcType="VARCHAR" property="typeName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    PAGE_TYPE_ID, TYPE_NAME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from D_CMD_PAGE_TYPE
+    where PAGE_TYPE_ID = #{pageTypeId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    <!--@mbg.generated-->
+    delete from D_CMD_PAGE_TYPE
+    where PAGE_TYPE_ID = #{pageTypeId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.macro.mall.model.DCmdPageType">
+    <!--@mbg.generated-->
+    insert into D_CMD_PAGE_TYPE (PAGE_TYPE_ID, TYPE_NAME)
+    values (#{pageTypeId,jdbcType=VARCHAR}, #{typeName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.macro.mall.model.DCmdPageType">
+    <!--@mbg.generated-->
+    insert into D_CMD_PAGE_TYPE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pageTypeId != null">
+        PAGE_TYPE_ID,
+      </if>
+      <if test="typeName != null">
+        TYPE_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pageTypeId != null">
+        #{pageTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="typeName != null">
+        #{typeName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.macro.mall.model.DCmdPageType">
+    <!--@mbg.generated-->
+    update D_CMD_PAGE_TYPE
+    <set>
+      <if test="typeName != null">
+        TYPE_NAME = #{typeName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where PAGE_TYPE_ID = #{pageTypeId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.macro.mall.model.DCmdPageType">
+    <!--@mbg.generated-->
+    update D_CMD_PAGE_TYPE
+    set TYPE_NAME = #{typeName,jdbcType=VARCHAR}
+    where PAGE_TYPE_ID = #{pageTypeId,jdbcType=VARCHAR}
+  </update>
+
+  <select id="lists" resultMap="BaseResultMap">
+    select PAGE_TYPE_ID,TYPE_NAME from D_CMD_PAGE_TYPE
+    <where>
+      <if test="pageTypeId != null and pageTypeId != ''">PAGE_TYPE_ID = #{pageTypeId}</if>
+      <if test="typeName != null and typeName != ''"> and TYPE_NAME = #{typeName}</if>
+    </where>
+  </select>
+</mapper>

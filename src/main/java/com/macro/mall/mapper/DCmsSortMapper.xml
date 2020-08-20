@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.macro.mall.mapper.DCmsSortMapper">
+  <resultMap id="BaseResultMap" type="com.macro.mall.model.DCmsSort">
+    <result column="PAGE_ID" jdbcType="VARCHAR" property="pageId" />
+    <result column="DATAS_ID" jdbcType="VARCHAR" property="datasId" />
+    <result column="SAVE_SORT" jdbcType="VARCHAR" property="saveSort" />
+    <result column="TEMP_SORT" jdbcType="VARCHAR" property="tempSort" />
+    <result column="DATA_ID" jdbcType="VARCHAR" property="dataId" />
+    <result column="DATA_SORT" jdbcType="VARCHAR" property="dataSort" />
+  </resultMap>
+
+</mapper>

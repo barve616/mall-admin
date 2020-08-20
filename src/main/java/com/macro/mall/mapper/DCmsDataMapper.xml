@@ -1,0 +1,455 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.macro.mall.mapper.DCmsDataMapper">
+    <resultMap id="CMS000007Result" type="com.macro.mall.cms.bean.Cms000007Result">
+        <result column="DATAS_GROUP" property="datasGroup"/>
+        <result column="D_START_TIME" property="dStartTime"/>
+        <result column="D_END_TIME" property="dEndTime"/>
+        <result column="D_STATE" property="dState"/>
+        <result column="D_MLIFE_FLAG" property="dMlifeFlag"/>
+        <result column="M_LINK" property="mLink"/>
+        <result column="M_JUMP_ID" property="mJumpId"/>
+        <result column="M_JUMP_VALUE" property="mJumpValue"/>
+        <result column="D_PHONE_FLAG" property="dPhoneFlag"/>
+        <result column="P_LINK" property="pLink"/>
+        <result column="P_JUMP_ID" property="pJumpId"/>
+        <result column="P_JUMP_VALUE" property="pJumpValue"/>
+        <result column="D_WX_FLAG" property="dWxFlag"/>
+        <result column="W_LINK" property="wLink"/>
+        <result column="W_JUMP_ID" property="wJumpId"/>
+        <result column="W_JUMP_VALUE" property="wJumpValue"/>
+        <result column="D_XCX_FLAG" property="dXcxFlag"/>
+        <result column="X_LINK" property="xLink"/>
+        <result column="X_JUMP_ID" property="xJumpId"/>
+        <result column="X_JUMP_VALUE" property="xJumpValue"/>
+        <result column="DATA_NAME" property="dataName"/>
+        <result column="DATA_IMAGE1" property="dataImage1"/>
+        <result column="DATA_IMAGE2" property="dataImage2"/>
+        <result column="DATA_IMAGE3" property="dataImage3"/>
+        <result column="DATA_IMAGE4" property="dataImage4"/>
+        <result column="DATA_TYPE" property="dataType"/>
+        <result column="CITY_ID" property="cityId"/>
+        <result column="PEOPLE_TYPE" property="peopleType"/>
+    </resultMap>
+
+    <resultMap id="citysResult" type="com.macro.mall.model.DCmsRegion">
+        <result column="REGION_ID" property="regionId"/>
+        <result column="CITY_ID" property="cityId"/>
+        <result column="PROVINCE_ID" property="provinceId"/>
+    </resultMap>
+
+    <resultMap id="BaseResultMap" type="com.macro.mall.model.DCmsData">
+    <result column="DATA_ID" jdbcType="VARCHAR" property="dataId" />
+    <result column="PAGE_ID" jdbcType="VARCHAR" property="pageId" />
+    <result column="FUNC_ID" jdbcType="VARCHAR" property="funcId" />
+    <result column="DATAS_ID" jdbcType="VARCHAR" property="datasId" />
+    <result column="DATAS_GROUP" jdbcType="VARCHAR" property="datasGroup" />
+    <result column="D_START_TIME" jdbcType="VARCHAR" property="dStartTime" />
+    <result column="D_END_TIME" jdbcType="VARCHAR" property="dEndTime" />
+    <result column="D_STATE" jdbcType="VARCHAR" property="dState" />
+    <result column="D_MLIFE_FLAG" jdbcType="VARCHAR" property="dMlifeFlag" />
+    <result column="M_LINK" jdbcType="VARCHAR" property="mLink" />
+    <result column="M_JUMP_ID" jdbcType="VARCHAR" property="mJumpId" />
+    <result column="M_JUMP_VALUE" jdbcType="VARCHAR" property="mJumpValue" />
+    <result column="D_PHONE_FLAG" jdbcType="VARCHAR" property="dPhoneFlag" />
+    <result column="P_LINK" jdbcType="VARCHAR" property="pLink" />
+    <result column="P_JUMP_ID" jdbcType="VARCHAR" property="pJumpId" />
+    <result column="P_JUMP_VALUE" jdbcType="VARCHAR" property="pJumpValue" />
+    <result column="D_WX_FLAG" jdbcType="VARCHAR" property="dWxFlag" />
+    <result column="W_LINK" jdbcType="VARCHAR" property="wLink" />
+    <result column="W_JUMP_ID" jdbcType="VARCHAR" property="wJumpId" />
+    <result column="W_JUMP_VALUE" jdbcType="VARCHAR" property="wJumpValue" />
+    <result column="D_XCX_FLAG" jdbcType="VARCHAR" property="dXcxFlag" />
+    <result column="X_LINK" jdbcType="VARCHAR" property="xLink" />
+    <result column="X_JUMP_ID" jdbcType="VARCHAR" property="xJumpId" />
+    <result column="X_JUMP_VALUE" jdbcType="VARCHAR" property="xJumpValue" />
+    <result column="DATA_NAME" jdbcType="VARCHAR" property="dataName" />
+    <result column="DATA_IMAGE1" jdbcType="VARCHAR" property="dataImage1" />
+    <result column="DATA_IMAGE2" jdbcType="VARCHAR" property="dataImage2" />
+    <result column="DATA_IMAGE3" jdbcType="VARCHAR" property="dataImage3" />
+    <result column="DATA_IMAGE4" jdbcType="VARCHAR" property="dataImage4" />
+    <result column="DATA_TYPE" jdbcType="VARCHAR" property="dataType" />
+    <result column="FUNCS_ID" jdbcType="VARCHAR" property="funcsId" />
+    <result column="DATA_SORT" jdbcType="VARCHAR" property="dataSort" />
+
+
+  </resultMap>
+
+    <select id="find" resultMap="BaseResultMap" parameterType="com.macro.mall.model.DCmsData">
+        select DATA_ID,PAGE_ID,FUNC_ID,DATAS_ID,DATAS_GROUP,D_START_TIME,D_END_TIME,D_STATE,D_MLIFE_FLAG,M_LINK,M_JUMP_ID,M_JUMP_VALUE,
+               D_PHONE_FLAG,P_LINK,P_JUMP_ID,P_JUMP_VALUE,D_WX_FLAG,W_LINK,W_JUMP_ID,W_JUMP_VALUE,D_XCX_FLAG,X_LINK,X_JUMP_ID,X_JUMP_VALUE,
+               DATA_NAME,DATA_IMAGE1,DATA_IMAGE2,DATA_IMAGE3,DATA_IMAGE4,DATA_TYPE,FUNCS_ID,DATA_SORT
+        from D_CMS_DATA
+        <where>
+            <if test="datasId != null and datasId != ''">and DATAS_ID = #{datasId}</if>
+        </where>
+    </select>
+
+
+  <!-- 首页信息查询 -->
+  <select id="selectDataList"  parameterType="com.macro.mall.model.DCmsData" resultMap="BaseResultMap">
+    select DATA_ID,PAGE_ID,FUNC_ID,DATAS_ID,DATAS_GROUP,D_START_TIME,D_END_TIME,D_STATE,D_MLIFE_FLAG,M_LINK,M_JUMP_ID,M_JUMP_VALUE,
+      D_PHONE_FLAG,P_LINK,P_JUMP_ID,P_JUMP_VALUE,D_WX_FLAG,W_LINK,W_JUMP_ID,W_JUMP_VALUE,D_XCX_FLAG,X_LINK,X_JUMP_ID,X_JUMP_VALUE,
+      DATA_NAME,DATA_IMAGE1,DATA_IMAGE2,DATA_IMAGE3,DATA_IMAGE4,DATA_TYPE,FUNCS_ID,DATA_SORT
+    from d_cms_data a
+    left join d_cms_region b
+    on a.data_id=b.region_id
+    left join d_cms_people c
+    on a.data_id =c.people_id
+    where 1=1
+
+    and a.page_id=#{pageId,jdbcType=VARCHAR}
+    and a.datas_id=#{datasId,jdbcType=VARCHAR}
+    <if test="dStartTime != null and  dStartTime !=''">
+      and  a.D_START_TIME<![CDATA[>=]]> #{dStartTime,jdbcType=VARCHAR}
+    </if>
+    <if test="dEndTime != null and  dEndTime  !=''">
+      and   a.D_END_TIME <![CDATA[<=]]> #{dEndTime,jdbcType=VARCHAR}
+    </if>
+
+    <if test="dMlifeFlag != null and  dMlifeFlag  !=''">
+      and   a.D_MLIFE_FLAG = #{dMlifeFlag,jdbcType=VARCHAR}
+    </if>
+    <if test="dPhoneFlag != null and  dPhoneFlag  !=''">
+      and   a.D_PHONE_FLAG= #{dPhoneFlag,jdbcType=VARCHAR}
+    </if>
+    <if test="dWxFlag != null and  dWxFlag  !=''">
+      and   a.D_WX_FLAG = #{dWxFlag,jdbcType=VARCHAR}
+    </if>
+    <if test="dXcxFlag != null and  dXcxFlag  !=''">
+      and   a.D_XCX_FLAG = #{dXcxFlag,jdbcType=VARCHAR}
+    </if>
+
+    <if test="state != null and  state  !=''">
+      and  a.D_STATE  in
+      <foreach   item="item"  index="index"  collection="state" open="("  separator="," close=")" >
+
+       #{item}
+
+    </foreach>
+
+    </if>
+
+    <if test="cityId != null and  cityId  !=''">
+      and b.city_id=#{cityId,jdbcType=VARCHAR}
+    </if>
+
+    <if test="peopleId != null and  peopleId  !=''">
+      and c.user_id=#{peopleId,jdbcType=VARCHAR}
+    </if>
+
+
+
+
+    order by  a.data_sort
+  </select>
+
+
+
+  <update id="updateData"  parameterType="java.lang.String">
+	    update d_cms_data
+		set D_STATE = '01'
+		where 1=1
+		and  data_id=#{0}
+  </update>
+
+  <!-- 首页信息查询 -->
+  <select id="findDate"  parameterType="java.lang.String" resultMap="BaseResultMap">
+    select DATA_ID,PAGE_ID,FUNC_ID,DATAS_ID,DATAS_GROUP,D_START_TIME,D_END_TIME,D_STATE,D_MLIFE_FLAG,M_LINK,M_JUMP_ID,M_JUMP_VALUE,
+      D_PHONE_FLAG,P_LINK,P_JUMP_ID,P_JUMP_VALUE,D_WX_FLAG,W_LINK,W_JUMP_ID,W_JUMP_VALUE,D_XCX_FLAG,X_LINK,X_JUMP_ID,X_JUMP_VALUE,
+      DATA_NAME,DATA_IMAGE1,DATA_IMAGE2,DATA_IMAGE3,DATA_IMAGE4,DATA_TYPE,FUNCS_ID,DATA_SORT
+    from d_cms_data
+    where data_id=#{0}
+  </select>
+
+
+
+  <insert id="inserDate" parameterType="com.macro.mall.model.DCmsData" useGeneratedKeys="true" keyProperty="dataId">
+    <selectKey keyProperty="dataId" order="BEFORE" resultType="java.lang.String">
+      select seq_data_id.nextval from dual
+    </selectKey>
+    insert into D_CMS_DATA (DATA_ID, PAGE_ID, FUNC_ID,
+      DATAS_ID, DATAS_GROUP, D_START_TIME,
+      D_END_TIME, D_STATE, D_MLIFE_FLAG,
+      M_LINK, M_JUMP_ID, M_JUMP_VALUE,
+      D_PHONE_FLAG, P_LINK, P_JUMP_ID,
+      P_JUMP_VALUE, D_WX_FLAG, W_LINK,
+      W_JUMP_ID, W_JUMP_VALUE, D_XCX_FLAG,
+      X_LINK, X_JUMP_ID, X_JUMP_VALUE,
+      DATA_NAME, DATA_IMAGE1, DATA_IMAGE2,
+      DATA_IMAGE3, DATA_IMAGE4, DATA_TYPE,
+      FUNCS_ID, DATA_SORT)
+    values ( #{dataId,jdbcType=VARCHAR}, #{pageId,jdbcType=VARCHAR}, #{funcId,jdbcType=VARCHAR},
+      #{datasId,jdbcType=VARCHAR}, #{datasGroup,jdbcType=VARCHAR}, #{dStartTime,jdbcType=VARCHAR},
+      #{dEndTime,jdbcType=VARCHAR}, #{dState,jdbcType=VARCHAR}, #{dMlifeFlag,jdbcType=VARCHAR},
+      #{mLink,jdbcType=VARCHAR}, #{mJumpId,jdbcType=VARCHAR}, #{mJumpValue,jdbcType=VARCHAR},
+      #{dPhoneFlag,jdbcType=VARCHAR}, #{pLink,jdbcType=VARCHAR}, #{pJumpId,jdbcType=VARCHAR},
+      #{pJumpValue,jdbcType=VARCHAR}, #{dWxFlag,jdbcType=VARCHAR}, #{wLink,jdbcType=VARCHAR},
+      #{wJumpId,jdbcType=VARCHAR}, #{wJumpValue,jdbcType=VARCHAR}, #{dXcxFlag,jdbcType=VARCHAR},
+      #{xLink,jdbcType=VARCHAR}, #{xJumpId,jdbcType=VARCHAR}, #{xJumpValue,jdbcType=VARCHAR},
+      #{dataName,jdbcType=VARCHAR}, #{dataImage1,jdbcType=VARCHAR}, #{dataImage2,jdbcType=VARCHAR},
+      #{dataImage3,jdbcType=VARCHAR}, #{dataImage4,jdbcType=VARCHAR}, #{dataType,jdbcType=VARCHAR},
+      #{funcsId,jdbcType=VARCHAR}, #{dataSort,jdbcType=VARCHAR})
+  </insert>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <select id="searchDataList" parameterType="com.macro.mall.model.DCmsData" resultMap="BaseResultMap">
+    select DATA_ID,PAGE_ID,FUNC_ID,DATAS_ID,DATAS_GROUP,D_START_TIME,D_END_TIME,D_STATE,D_MLIFE_FLAG,M_LINK,M_JUMP_ID,M_JUMP_VALUE,
+      D_PHONE_FLAG,P_LINK,P_JUMP_ID,P_JUMP_VALUE,D_WX_FLAG,W_LINK,W_JUMP_ID,W_JUMP_VALUE,D_XCX_FLAG,X_LINK,X_JUMP_ID,X_JUMP_VALUE,
+      DATA_NAME,DATA_IMAGE1,DATA_IMAGE2,DATA_IMAGE3,DATA_IMAGE4,DATA_TYPE,FUNCS_ID,DATA_SORT from d_cms_data
+    <where>
+        <if test="funcId != null and  funcId !=''">
+          and     FUNC_ID =   #{funcId,jdbcType=VARCHAR}
+        </if>
+        <if test="dState != null and  dState !=''">
+          and  D_STATE =   #{dState,jdbcType=VARCHAR}
+        </if>
+        <if test="dataName != null and  dataName !=''">
+          and  DATA_NAME like '%'||#{dataName,jdbcType=VARCHAR}||'%'
+        </if>
+    </where>
+  </select>
+
+  <select id="selectSeqDataId" resultType="String">
+    select seq_data_id.nextval from dual
+  </select>
+  <insert id="insertIntoData" parameterType="com.macro.mall.model.DCmsData">
+   <selectKey resultType="String" order="BEFORE" keyProperty="dataSort">
+       select data_sort_seq.nextval from dual
+   </selectKey>
+
+    insert into d_cms_data
+    (DATA_ID,
+    PAGE_ID,
+    FUNC_ID,
+    DATAS_ID,
+    DATAS_GROUP,
+    D_START_TIME,
+    D_END_TIME,
+    D_STATE,
+    D_MLIFE_FLAG,
+    M_LINK,
+    M_JUMP_ID,
+    M_JUMP_VALUE,
+    D_PHONE_FLAG,
+    P_LINK,
+    P_JUMP_ID,
+    P_JUMP_VALUE,
+    D_WX_FLAG,
+    W_LINK,
+    W_JUMP_ID,
+    W_JUMP_VALUE,
+    D_XCX_FLAG,
+    X_LINK,
+    X_JUMP_ID,
+    X_JUMP_VALUE,
+    DATA_NAME,
+    DATA_IMAGE1,
+    DATA_IMAGE2,
+    DATA_IMAGE3,
+    DATA_IMAGE4,
+    DATA_TYPE,
+    DATA_SORT
+
+     )
+     values
+    (
+     #{dataId,jdbcType=VARCHAR},
+     #{pageId,jdbcType=VARCHAR},
+     #{funcId,jdbcType=VARCHAR},
+     #{datasId,jdbcType=VARCHAR},
+     #{datasGroup,jdbcType=VARCHAR},
+     #{dStartTime,jdbcType=VARCHAR},
+     #{dEndTime,jdbcType=VARCHAR},
+     #{dState,jdbcType=VARCHAR},
+     #{dMlifeFlag,jdbcType=VARCHAR},
+     #{mLink,jdbcType=VARCHAR},
+     #{mJumpId,jdbcType=VARCHAR},
+     #{mJumpValue,jdbcType=VARCHAR},
+     #{dPhoneFlag,jdbcType=VARCHAR},
+     #{pLink,jdbcType=VARCHAR},
+     #{pJumpId,jdbcType=VARCHAR},
+     #{pJumpValue,jdbcType=VARCHAR},
+     #{dWxFlag,jdbcType=VARCHAR},
+     #{wLink,jdbcType=VARCHAR},
+     #{wJumpId,jdbcType=VARCHAR},
+     #{wJumpValue,jdbcType=VARCHAR},
+     #{dXcxFlag,jdbcType=VARCHAR},
+     #{xLink,jdbcType=VARCHAR},
+     #{xJumpId,jdbcType=VARCHAR},
+     #{xJumpValue,jdbcType=VARCHAR},
+     #{dataName,jdbcType=VARCHAR},
+     #{dataImage1,jdbcType=VARCHAR},
+     #{dataImage2,jdbcType=VARCHAR},
+     #{dataImage3,jdbcType=VARCHAR},
+     #{dataImage4,jdbcType=VARCHAR},
+     #{dataType,jdbcType=VARCHAR},
+      (select count(1) + 1 from D_CMS_DATA WHERE DATAS_ID = #{datasId,jdbcType=VARCHAR} group by DATAS_ID)
+     )
+  </insert>
+
+  <delete id="delDataById" parameterType="String">
+        delete from d_cms_data where DATA_ID = #{dataId}
+    </delete>
+  <delete id="delDataByDatasId" parameterType="String">
+        delete from d_cms_data where DATAS_ID =  #{datasId}
+    </delete>
+  <select id="selectDataById" parameterType="String" resultMap="BaseResultMap">
+        select DATA_ID,PAGE_ID,FUNC_ID,DATAS_ID,DATAS_GROUP,D_START_TIME,D_END_TIME,D_STATE,D_MLIFE_FLAG,M_LINK,M_JUMP_ID,M_JUMP_VALUE,
+      D_PHONE_FLAG,P_LINK,P_JUMP_ID,P_JUMP_VALUE,D_WX_FLAG,W_LINK,W_JUMP_ID,W_JUMP_VALUE,D_XCX_FLAG,X_LINK,X_JUMP_ID,X_JUMP_VALUE,
+      DATA_NAME,DATA_IMAGE1,DATA_IMAGE2,DATA_IMAGE3,DATA_IMAGE4,DATA_TYPE,FUNCS_ID,DATA_SORT from d_cms_data where data_id = #{dataId}
+    </select>
+
+    <update id="updateDataById" parameterType="com.macro.mall.model.DCmsData">
+        update D_CMS_DATA
+        <set>
+            <if test="dataId != null">
+                DATA_ID = #{dataId,jdbcType=VARCHAR},
+            </if>
+            <if test="pageId != null">
+                PAGE_ID = #{pageId,jdbcType=VARCHAR},
+            </if>
+            <if test="funcId != null">
+                FUNC_ID = #{funcId,jdbcType=VARCHAR},
+            </if>
+            <if test="datasId != null">
+                DATAS_ID = #{datasId,jdbcType=VARCHAR},
+            </if>
+            <if test="datasGroup != null">
+                DATAS_GROUP = #{datasGroup,jdbcType=VARCHAR},
+            </if>
+            <if test="dStartTime != null">
+                D_START_TIME = #{dStartTime,jdbcType=VARCHAR},
+            </if>
+            <if test="dEndTime != null">
+                D_END_TIME = #{dEndTime,jdbcType=VARCHAR},
+            </if>
+            <if test="dState != null">
+                D_STATE = #{dState,jdbcType=VARCHAR},
+            </if>
+            <if test="dMlifeFlag != null">
+                D_MLIFE_FLAG = #{dMlifeFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="mLink != null">
+                M_LINK = #{mLink,jdbcType=VARCHAR},
+            </if>
+            <if test="mJumpId != null">
+                M_JUMP_ID = #{mJumpId,jdbcType=VARCHAR},
+            </if>
+            <if test="mJumpValue != null">
+                M_JUMP_VALUE = #{mJumpValue,jdbcType=VARCHAR},
+            </if>
+            <if test="dPhoneFlag != null">
+                D_PHONE_FLAG = #{dPhoneFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="pLink != null">
+                P_LINK = #{pLink,jdbcType=VARCHAR},
+            </if>
+            <if test="pJumpId != null">
+                P_JUMP_ID = #{pJumpId,jdbcType=VARCHAR},
+            </if>
+            <if test="pJumpValue != null">
+                P_JUMP_VALUE = #{pJumpValue,jdbcType=VARCHAR},
+            </if>
+            <if test="dWxFlag != null">
+                D_WX_FLAG = #{dWxFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="wLink != null">
+                W_LINK = #{wLink,jdbcType=VARCHAR},
+            </if>
+            <if test="wJumpId != null">
+                W_JUMP_ID = #{wJumpId,jdbcType=VARCHAR},
+            </if>
+            <if test="wJumpValue != null">
+                W_JUMP_VALUE = #{wJumpValue,jdbcType=VARCHAR},
+            </if>
+            <if test="dXcxFlag != null">
+                D_XCX_FLAG = #{dXcxFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="xLink != null">
+                X_LINK = #{xLink,jdbcType=VARCHAR},
+            </if>
+            <if test="xJumpId != null">
+                X_JUMP_ID = #{xJumpId,jdbcType=VARCHAR},
+            </if>
+            <if test="xJumpValue != null">
+                X_JUMP_VALUE = #{xJumpValue,jdbcType=VARCHAR},
+            </if>
+            <if test="dataName != null">
+                DATA_NAME = #{dataName,jdbcType=VARCHAR},
+            </if>
+            <if test="dataImage1 != null">
+                DATA_IMAGE1 = #{dataImage1,jdbcType=VARCHAR},
+            </if>
+            <if test="dataImage2 != null">
+                DATA_IMAGE2 = #{dataImage2,jdbcType=VARCHAR},
+            </if>
+            <if test="dataImage3 != null">
+                DATA_IMAGE3 = #{dataImage3,jdbcType=VARCHAR},
+            </if>
+            <if test="dataImage4 != null">
+                DATA_IMAGE4 = #{dataImage4,jdbcType=VARCHAR},
+            </if>
+            <if test="dataType != null">
+                DATA_TYPE = #{dataType,jdbcType=VARCHAR},
+            </if>
+            <if test="funcsId != null">
+                FUNCS_ID = #{funcsId,jdbcType=VARCHAR},
+            </if>
+            <if test="dataSort != null">
+                DATA_SORT = #{dataSort,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where
+        DATA_ID =  #{dataId,jdbcType=VARCHAR}
+    </update>
+
+    <select id="citys" resultMap="citysResult" parameterType="String">
+        select REGION_ID, PROVINCE_ID from d_cms_region where region_id
+    </select>
+
+  <select id="CMS000007" parameterType="com.macro.mall.cms.bean.CMS000007" resultMap="CMS000007Result">
+      select * from (
+      select a.*,to_char(wm_concat(b.USER_ID)) as PEOPLE_TYPE from (
+      select a.DATA_ID, a.DATAS_GROUP,a.D_START_TIME,a.D_END_TIME,a.D_STATE,a.D_MLIFE_FLAG,a.M_LINK,
+      a.M_JUMP_ID,a.M_JUMP_VALUE,a.D_PHONE_FLAG,a.P_LINK,a.P_JUMP_ID,a.P_JUMP_VALUE,a.D_WX_FLAG,a.W_LINK,a.W_JUMP_ID,
+      a.W_JUMP_VALUE,a.D_XCX_FLAG,a.X_LINK,a.X_JUMP_ID,a.X_JUMP_VALUE,a.DATA_NAME,a.DATA_IMAGE1,a.DATA_IMAGE2,a.DATA_IMAGE3,
+      a.DATA_IMAGE4,a.DATA_TYPE,
+      CASE WHEN to_char(wm_concat(b.PROVINCE_ID || '-' || b.CITY_ID)) = '-' THEN NULL ELSE to_char(wm_concat(b.PROVINCE_ID || '-' || b.CITY_ID)) END as CITY_ID
+      from D_CMS_DATA a
+      left join d_cms_region b on a.data_id = b.region_id
+      <where>
+          <if test="funId != null and funId != ''">a.FUNC_ID = #{funId}</if>
+          <if test="funTitle != null and funTitle != ''">and a.DATA_NAME like '%'||#{funTitle}||'%'</if>
+          <if test="funState != null and funState != ''">and a.D_STATE = #{funState}</if>
+      </where>
+
+      group by a.DATA_ID, a.DATAS_GROUP,a.D_START_TIME,a.D_END_TIME,a.D_STATE,a.D_MLIFE_FLAG,a.M_LINK,
+      a.M_JUMP_ID,a.M_JUMP_VALUE,a.D_PHONE_FLAG,a.P_LINK,a.P_JUMP_ID,a.P_JUMP_VALUE,a.D_WX_FLAG,a.W_LINK,a.W_JUMP_ID,
+      a.W_JUMP_VALUE,a.D_XCX_FLAG,a.X_LINK,a.X_JUMP_ID,a.X_JUMP_VALUE,a.DATA_NAME,a.DATA_IMAGE1,a.DATA_IMAGE2,a.DATA_IMAGE3,
+      a.DATA_IMAGE4,a.DATA_TYPE) a
+      left join d_cms_people b on a.DATA_ID = b.PEOPLE_ID group by a.DATA_ID, a.DATAS_GROUP,a.D_START_TIME,a.D_END_TIME,a.D_STATE,a.D_MLIFE_FLAG,a.M_LINK,
+      a.M_JUMP_ID,a.M_JUMP_VALUE,a.D_PHONE_FLAG,a.P_LINK,a.P_JUMP_ID,a.P_JUMP_VALUE,a.D_WX_FLAG,a.W_LINK,a.W_JUMP_ID,
+      a.W_JUMP_VALUE,a.D_XCX_FLAG,a.X_LINK,a.X_JUMP_ID,a.X_JUMP_VALUE,a.DATA_NAME,a.DATA_IMAGE1,a.DATA_IMAGE2,a.DATA_IMAGE3,
+      a.DATA_IMAGE4,a.DATA_TYPE,a.CITY_ID) a
+
+
+      group by a.DATA_ID, a.DATAS_GROUP,a.D_START_TIME,a.D_END_TIME,a.D_STATE,a.D_MLIFE_FLAG,a.M_LINK,
+      a.M_JUMP_ID,a.M_JUMP_VALUE,a.D_PHONE_FLAG,a.P_LINK,a.P_JUMP_ID,a.P_JUMP_VALUE,a.D_WX_FLAG,a.W_LINK,a.W_JUMP_ID,
+      a.W_JUMP_VALUE,a.D_XCX_FLAG,a.X_LINK,a.X_JUMP_ID,a.X_JUMP_VALUE,a.DATA_NAME,a.DATA_IMAGE1,a.DATA_IMAGE2,a.DATA_IMAGE3,
+      a.DATA_IMAGE4,a.DATA_TYPE,a.CITY_ID,a.PEOPLE_TYPE
+  </select>
+
+
+</mapper>

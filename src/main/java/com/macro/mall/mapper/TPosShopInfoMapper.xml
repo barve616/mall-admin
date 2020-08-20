@@ -1,0 +1,623 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.macro.mall.mapper.TPosShopInfoMapper">
+  <resultMap id="BaseResultMap" type="com.macro.mall.model.TPosShopInfo">
+    <id column="SHOP_ID" jdbcType="VARCHAR" property="shopId" />
+    <result column="POS_ID" jdbcType="VARCHAR" property="posId" />
+    <result column="SHOP_LOGO" jdbcType="VARCHAR" property="shopLogo" />
+    <result column="SHOP_LABEL" jdbcType="VARCHAR" property="shopLabel" />
+    <result column="SHOP_NAME" jdbcType="VARCHAR" property="shopName" />
+    <result column="SHOP_ENGLISH_NAME" jdbcType="VARCHAR" property="shopEnglishName" />
+    <result column="SHOP_TYPE" jdbcType="VARCHAR" property="shopType" />
+    <result column="SHOP_DESCRIPTION" jdbcType="VARCHAR" property="shopDescription" />
+    <result column="PROVINCE_CODE" jdbcType="VARCHAR" property="provinceCode" />
+    <result column="CITY_CODE" jdbcType="VARCHAR" property="cityCode" />
+    <result column="REGION_CODE" jdbcType="VARCHAR" property="regionCode" />
+    <result column="SHOP_ADDRESS" jdbcType="VARCHAR" property="shopAddress" />
+    <result column="SEARCH_PAGE_IMAGE" jdbcType="VARCHAR" property="searchPageImage" />
+    <result column="ROTATIONN_CHART_INFO" jdbcType="VARCHAR" property="rotationnChartInfo" />
+    <result column="SHOP_WINDOW_SEAT" jdbcType="VARCHAR" property="shopWindowSeat" />
+    <result column="CREATE_TIME" jdbcType="VARCHAR" property="createTime" />
+    <result column="UPDATE_TIME" jdbcType="VARCHAR" property="updateTime" />
+    <result column="COACH_ID" jdbcType="CHAR" property="coachId" />
+    <result column="MER_ID" jdbcType="VARCHAR" property="merId" />
+    <result column="TERM_ID" jdbcType="VARCHAR" property="termId" />
+    <result column="TERM_NAME" jdbcType="VARCHAR" property="termName" />
+    <result column="SHOP_STATUS" jdbcType="CHAR" property="shopStatus" />
+    <result column="SEARCH_FOUNDATION_DATA" jdbcType="VARCHAR" property="searchFoundationData" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.macro.mall.model.TPosShopInfo">
+    <result column="SHOP_DETAIL" jdbcType="BLOB" property="shopDetail" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    SHOP_ID, POS_ID, SHOP_LOGO, SHOP_LABEL, SHOP_NAME, SHOP_ENGLISH_NAME, SHOP_TYPE, 
+    SHOP_DESCRIPTION, PROVINCE_CODE, CITY_CODE, REGION_CODE, SHOP_ADDRESS, SEARCH_PAGE_IMAGE, 
+    ROTATIONN_CHART_INFO, SHOP_WINDOW_SEAT, CREATE_TIME, UPDATE_TIME, COACH_ID, MER_ID, 
+    TERM_ID, TERM_NAME, SHOP_STATUS, SEARCH_FOUNDATION_DATA
+  </sql>
+  <sql id="Blob_Column_List">
+    SHOP_DETAIL
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.macro.mall.model.TPosShopInfoExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from T_POS_SHOP_INFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.macro.mall.model.TPosShopInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_POS_SHOP_INFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from T_POS_SHOP_INFO
+    where SHOP_ID = #{shopId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from T_POS_SHOP_INFO
+    where SHOP_ID = #{shopId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.macro.mall.model.TPosShopInfoExample">
+    delete from T_POS_SHOP_INFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.macro.mall.model.TPosShopInfo">
+    insert into T_POS_SHOP_INFO (SHOP_ID, POS_ID, SHOP_LOGO, 
+      SHOP_LABEL, SHOP_NAME, SHOP_ENGLISH_NAME, 
+      SHOP_TYPE, SHOP_DESCRIPTION, PROVINCE_CODE, 
+      CITY_CODE, REGION_CODE, SHOP_ADDRESS, 
+      SEARCH_PAGE_IMAGE, ROTATIONN_CHART_INFO, SHOP_WINDOW_SEAT, 
+      CREATE_TIME, UPDATE_TIME, COACH_ID, 
+      MER_ID, TERM_ID, TERM_NAME, 
+      SHOP_STATUS, SEARCH_FOUNDATION_DATA, SHOP_DETAIL
+      )
+    values (#{shopId,jdbcType=VARCHAR}, #{posId,jdbcType=VARCHAR}, #{shopLogo,jdbcType=VARCHAR}, 
+      #{shopLabel,jdbcType=VARCHAR}, #{shopName,jdbcType=VARCHAR}, #{shopEnglishName,jdbcType=VARCHAR}, 
+      #{shopType,jdbcType=VARCHAR}, #{shopDescription,jdbcType=VARCHAR}, #{provinceCode,jdbcType=VARCHAR}, 
+      #{cityCode,jdbcType=VARCHAR}, #{regionCode,jdbcType=VARCHAR}, #{shopAddress,jdbcType=VARCHAR}, 
+      #{searchPageImage,jdbcType=VARCHAR}, #{rotationnChartInfo,jdbcType=VARCHAR}, #{shopWindowSeat,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR}, #{coachId,jdbcType=CHAR}, 
+      #{merId,jdbcType=VARCHAR}, #{termId,jdbcType=VARCHAR}, #{termName,jdbcType=VARCHAR}, 
+      #{shopStatus,jdbcType=CHAR}, #{searchFoundationData,jdbcType=VARCHAR}, #{shopDetail,jdbcType=BLOB}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.macro.mall.model.TPosShopInfo">
+    insert into T_POS_SHOP_INFO
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="shopId != null">
+        SHOP_ID,
+      </if>
+      <if test="posId != null">
+        POS_ID,
+      </if>
+      <if test="shopLogo != null">
+        SHOP_LOGO,
+      </if>
+      <if test="shopLabel != null">
+        SHOP_LABEL,
+      </if>
+      <if test="shopName != null">
+        SHOP_NAME,
+      </if>
+      <if test="shopEnglishName != null">
+        SHOP_ENGLISH_NAME,
+      </if>
+      <if test="shopType != null">
+        SHOP_TYPE,
+      </if>
+      <if test="shopDescription != null">
+        SHOP_DESCRIPTION,
+      </if>
+      <if test="provinceCode != null">
+        PROVINCE_CODE,
+      </if>
+      <if test="cityCode != null">
+        CITY_CODE,
+      </if>
+      <if test="regionCode != null">
+        REGION_CODE,
+      </if>
+      <if test="shopAddress != null">
+        SHOP_ADDRESS,
+      </if>
+      <if test="searchPageImage != null">
+        SEARCH_PAGE_IMAGE,
+      </if>
+      <if test="rotationnChartInfo != null">
+        ROTATIONN_CHART_INFO,
+      </if>
+      <if test="shopWindowSeat != null">
+        SHOP_WINDOW_SEAT,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+      <if test="coachId != null">
+        COACH_ID,
+      </if>
+      <if test="merId != null">
+        MER_ID,
+      </if>
+      <if test="termId != null">
+        TERM_ID,
+      </if>
+      <if test="termName != null">
+        TERM_NAME,
+      </if>
+      <if test="shopStatus != null">
+        SHOP_STATUS,
+      </if>
+      <if test="searchFoundationData != null">
+        SEARCH_FOUNDATION_DATA,
+      </if>
+      <if test="shopDetail != null">
+        SHOP_DETAIL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="shopId != null">
+        #{shopId,jdbcType=VARCHAR},
+      </if>
+      <if test="posId != null">
+        #{posId,jdbcType=VARCHAR},
+      </if>
+      <if test="shopLogo != null">
+        #{shopLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="shopLabel != null">
+        #{shopLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="shopName != null">
+        #{shopName,jdbcType=VARCHAR},
+      </if>
+      <if test="shopEnglishName != null">
+        #{shopEnglishName,jdbcType=VARCHAR},
+      </if>
+      <if test="shopType != null">
+        #{shopType,jdbcType=VARCHAR},
+      </if>
+      <if test="shopDescription != null">
+        #{shopDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceCode != null">
+        #{provinceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cityCode != null">
+        #{cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="regionCode != null">
+        #{regionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="shopAddress != null">
+        #{shopAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="searchPageImage != null">
+        #{searchPageImage,jdbcType=VARCHAR},
+      </if>
+      <if test="rotationnChartInfo != null">
+        #{rotationnChartInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="shopWindowSeat != null">
+        #{shopWindowSeat,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="coachId != null">
+        #{coachId,jdbcType=CHAR},
+      </if>
+      <if test="merId != null">
+        #{merId,jdbcType=VARCHAR},
+      </if>
+      <if test="termId != null">
+        #{termId,jdbcType=VARCHAR},
+      </if>
+      <if test="termName != null">
+        #{termName,jdbcType=VARCHAR},
+      </if>
+      <if test="shopStatus != null">
+        #{shopStatus,jdbcType=CHAR},
+      </if>
+      <if test="searchFoundationData != null">
+        #{searchFoundationData,jdbcType=VARCHAR},
+      </if>
+      <if test="shopDetail != null">
+        #{shopDetail,jdbcType=BLOB},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.macro.mall.model.TPosShopInfoExample" resultType="java.lang.Long">
+    select count(*) from T_POS_SHOP_INFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update T_POS_SHOP_INFO
+    <set>
+      <if test="record.shopId != null">
+        SHOP_ID = #{record.shopId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.posId != null">
+        POS_ID = #{record.posId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopLogo != null">
+        SHOP_LOGO = #{record.shopLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopLabel != null">
+        SHOP_LABEL = #{record.shopLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopName != null">
+        SHOP_NAME = #{record.shopName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopEnglishName != null">
+        SHOP_ENGLISH_NAME = #{record.shopEnglishName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopType != null">
+        SHOP_TYPE = #{record.shopType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopDescription != null">
+        SHOP_DESCRIPTION = #{record.shopDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.provinceCode != null">
+        PROVINCE_CODE = #{record.provinceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cityCode != null">
+        CITY_CODE = #{record.cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.regionCode != null">
+        REGION_CODE = #{record.regionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopAddress != null">
+        SHOP_ADDRESS = #{record.shopAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.searchPageImage != null">
+        SEARCH_PAGE_IMAGE = #{record.searchPageImage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rotationnChartInfo != null">
+        ROTATIONN_CHART_INFO = #{record.rotationnChartInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopWindowSeat != null">
+        SHOP_WINDOW_SEAT = #{record.shopWindowSeat,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null">
+        UPDATE_TIME = #{record.updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.coachId != null">
+        COACH_ID = #{record.coachId,jdbcType=CHAR},
+      </if>
+      <if test="record.merId != null">
+        MER_ID = #{record.merId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.termId != null">
+        TERM_ID = #{record.termId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.termName != null">
+        TERM_NAME = #{record.termName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopStatus != null">
+        SHOP_STATUS = #{record.shopStatus,jdbcType=CHAR},
+      </if>
+      <if test="record.searchFoundationData != null">
+        SEARCH_FOUNDATION_DATA = #{record.searchFoundationData,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopDetail != null">
+        SHOP_DETAIL = #{record.shopDetail,jdbcType=BLOB},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update T_POS_SHOP_INFO
+    set SHOP_ID = #{record.shopId,jdbcType=VARCHAR},
+      POS_ID = #{record.posId,jdbcType=VARCHAR},
+      SHOP_LOGO = #{record.shopLogo,jdbcType=VARCHAR},
+      SHOP_LABEL = #{record.shopLabel,jdbcType=VARCHAR},
+      SHOP_NAME = #{record.shopName,jdbcType=VARCHAR},
+      SHOP_ENGLISH_NAME = #{record.shopEnglishName,jdbcType=VARCHAR},
+      SHOP_TYPE = #{record.shopType,jdbcType=VARCHAR},
+      SHOP_DESCRIPTION = #{record.shopDescription,jdbcType=VARCHAR},
+      PROVINCE_CODE = #{record.provinceCode,jdbcType=VARCHAR},
+      CITY_CODE = #{record.cityCode,jdbcType=VARCHAR},
+      REGION_CODE = #{record.regionCode,jdbcType=VARCHAR},
+      SHOP_ADDRESS = #{record.shopAddress,jdbcType=VARCHAR},
+      SEARCH_PAGE_IMAGE = #{record.searchPageImage,jdbcType=VARCHAR},
+      ROTATIONN_CHART_INFO = #{record.rotationnChartInfo,jdbcType=VARCHAR},
+      SHOP_WINDOW_SEAT = #{record.shopWindowSeat,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=VARCHAR},
+      COACH_ID = #{record.coachId,jdbcType=CHAR},
+      MER_ID = #{record.merId,jdbcType=VARCHAR},
+      TERM_ID = #{record.termId,jdbcType=VARCHAR},
+      TERM_NAME = #{record.termName,jdbcType=VARCHAR},
+      SHOP_STATUS = #{record.shopStatus,jdbcType=CHAR},
+      SEARCH_FOUNDATION_DATA = #{record.searchFoundationData,jdbcType=VARCHAR},
+      SHOP_DETAIL = #{record.shopDetail,jdbcType=BLOB}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update T_POS_SHOP_INFO
+    set SHOP_ID = #{record.shopId,jdbcType=VARCHAR},
+      POS_ID = #{record.posId,jdbcType=VARCHAR},
+      SHOP_LOGO = #{record.shopLogo,jdbcType=VARCHAR},
+      SHOP_LABEL = #{record.shopLabel,jdbcType=VARCHAR},
+      SHOP_NAME = #{record.shopName,jdbcType=VARCHAR},
+      SHOP_ENGLISH_NAME = #{record.shopEnglishName,jdbcType=VARCHAR},
+      SHOP_TYPE = #{record.shopType,jdbcType=VARCHAR},
+      SHOP_DESCRIPTION = #{record.shopDescription,jdbcType=VARCHAR},
+      PROVINCE_CODE = #{record.provinceCode,jdbcType=VARCHAR},
+      CITY_CODE = #{record.cityCode,jdbcType=VARCHAR},
+      REGION_CODE = #{record.regionCode,jdbcType=VARCHAR},
+      SHOP_ADDRESS = #{record.shopAddress,jdbcType=VARCHAR},
+      SEARCH_PAGE_IMAGE = #{record.searchPageImage,jdbcType=VARCHAR},
+      ROTATIONN_CHART_INFO = #{record.rotationnChartInfo,jdbcType=VARCHAR},
+      SHOP_WINDOW_SEAT = #{record.shopWindowSeat,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=VARCHAR},
+      COACH_ID = #{record.coachId,jdbcType=CHAR},
+      MER_ID = #{record.merId,jdbcType=VARCHAR},
+      TERM_ID = #{record.termId,jdbcType=VARCHAR},
+      TERM_NAME = #{record.termName,jdbcType=VARCHAR},
+      SHOP_STATUS = #{record.shopStatus,jdbcType=CHAR},
+      SEARCH_FOUNDATION_DATA = #{record.searchFoundationData,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.macro.mall.model.TPosShopInfo">
+    update T_POS_SHOP_INFO
+    <set>
+      <if test="posId != null">
+        POS_ID = #{posId,jdbcType=VARCHAR},
+      </if>
+      <if test="shopLogo != null">
+        SHOP_LOGO = #{shopLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="shopLabel != null">
+        SHOP_LABEL = #{shopLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="shopName != null">
+        SHOP_NAME = #{shopName,jdbcType=VARCHAR},
+      </if>
+      <if test="shopEnglishName != null">
+        SHOP_ENGLISH_NAME = #{shopEnglishName,jdbcType=VARCHAR},
+      </if>
+      <if test="shopType != null">
+        SHOP_TYPE = #{shopType,jdbcType=VARCHAR},
+      </if>
+      <if test="shopDescription != null">
+        SHOP_DESCRIPTION = #{shopDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceCode != null">
+        PROVINCE_CODE = #{provinceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cityCode != null">
+        CITY_CODE = #{cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="regionCode != null">
+        REGION_CODE = #{regionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="shopAddress != null">
+        SHOP_ADDRESS = #{shopAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="searchPageImage != null">
+        SEARCH_PAGE_IMAGE = #{searchPageImage,jdbcType=VARCHAR},
+      </if>
+      <if test="rotationnChartInfo != null">
+        ROTATIONN_CHART_INFO = #{rotationnChartInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="shopWindowSeat != null">
+        SHOP_WINDOW_SEAT = #{shopWindowSeat,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="coachId != null">
+        COACH_ID = #{coachId,jdbcType=CHAR},
+      </if>
+      <if test="merId != null">
+        MER_ID = #{merId,jdbcType=VARCHAR},
+      </if>
+      <if test="termId != null">
+        TERM_ID = #{termId,jdbcType=VARCHAR},
+      </if>
+      <if test="termName != null">
+        TERM_NAME = #{termName,jdbcType=VARCHAR},
+      </if>
+      <if test="shopStatus != null">
+        SHOP_STATUS = #{shopStatus,jdbcType=CHAR},
+      </if>
+      <if test="searchFoundationData != null">
+        SEARCH_FOUNDATION_DATA = #{searchFoundationData,jdbcType=VARCHAR},
+      </if>
+      <if test="shopDetail != null">
+        SHOP_DETAIL = #{shopDetail,jdbcType=BLOB},
+      </if>
+    </set>
+    where SHOP_ID = #{shopId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.macro.mall.model.TPosShopInfo">
+    update T_POS_SHOP_INFO
+    set POS_ID = #{posId,jdbcType=VARCHAR},
+      SHOP_LOGO = #{shopLogo,jdbcType=VARCHAR},
+      SHOP_LABEL = #{shopLabel,jdbcType=VARCHAR},
+      SHOP_NAME = #{shopName,jdbcType=VARCHAR},
+      SHOP_ENGLISH_NAME = #{shopEnglishName,jdbcType=VARCHAR},
+      SHOP_TYPE = #{shopType,jdbcType=VARCHAR},
+      SHOP_DESCRIPTION = #{shopDescription,jdbcType=VARCHAR},
+      PROVINCE_CODE = #{provinceCode,jdbcType=VARCHAR},
+      CITY_CODE = #{cityCode,jdbcType=VARCHAR},
+      REGION_CODE = #{regionCode,jdbcType=VARCHAR},
+      SHOP_ADDRESS = #{shopAddress,jdbcType=VARCHAR},
+      SEARCH_PAGE_IMAGE = #{searchPageImage,jdbcType=VARCHAR},
+      ROTATIONN_CHART_INFO = #{rotationnChartInfo,jdbcType=VARCHAR},
+      SHOP_WINDOW_SEAT = #{shopWindowSeat,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=VARCHAR},
+      COACH_ID = #{coachId,jdbcType=CHAR},
+      MER_ID = #{merId,jdbcType=VARCHAR},
+      TERM_ID = #{termId,jdbcType=VARCHAR},
+      TERM_NAME = #{termName,jdbcType=VARCHAR},
+      SHOP_STATUS = #{shopStatus,jdbcType=CHAR},
+      SEARCH_FOUNDATION_DATA = #{searchFoundationData,jdbcType=VARCHAR},
+      SHOP_DETAIL = #{shopDetail,jdbcType=BLOB}
+    where SHOP_ID = #{shopId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.macro.mall.model.TPosShopInfo">
+    update T_POS_SHOP_INFO
+    set POS_ID = #{posId,jdbcType=VARCHAR},
+      SHOP_LOGO = #{shopLogo,jdbcType=VARCHAR},
+      SHOP_LABEL = #{shopLabel,jdbcType=VARCHAR},
+      SHOP_NAME = #{shopName,jdbcType=VARCHAR},
+      SHOP_ENGLISH_NAME = #{shopEnglishName,jdbcType=VARCHAR},
+      SHOP_TYPE = #{shopType,jdbcType=VARCHAR},
+      SHOP_DESCRIPTION = #{shopDescription,jdbcType=VARCHAR},
+      PROVINCE_CODE = #{provinceCode,jdbcType=VARCHAR},
+      CITY_CODE = #{cityCode,jdbcType=VARCHAR},
+      REGION_CODE = #{regionCode,jdbcType=VARCHAR},
+      SHOP_ADDRESS = #{shopAddress,jdbcType=VARCHAR},
+      SEARCH_PAGE_IMAGE = #{searchPageImage,jdbcType=VARCHAR},
+      ROTATIONN_CHART_INFO = #{rotationnChartInfo,jdbcType=VARCHAR},
+      SHOP_WINDOW_SEAT = #{shopWindowSeat,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=VARCHAR},
+      COACH_ID = #{coachId,jdbcType=CHAR},
+      MER_ID = #{merId,jdbcType=VARCHAR},
+      TERM_ID = #{termId,jdbcType=VARCHAR},
+      TERM_NAME = #{termName,jdbcType=VARCHAR},
+      SHOP_STATUS = #{shopStatus,jdbcType=CHAR},
+      SEARCH_FOUNDATION_DATA = #{searchFoundationData,jdbcType=VARCHAR}
+    where SHOP_ID = #{shopId,jdbcType=VARCHAR}
+  </update>
+
+
+  <resultMap id="PosShopInfoDTOMap" type="com.macro.mall.communicate.resourcecenter.bean.TPosShopInfoDTO" extends="BaseResultMap"/>
+
+
+  <!--根据商户id查询商户店铺信息-->
+  <select id="selectPosShopInfoByPosId" parameterType="java.lang.String" resultMap="PosShopInfoDTOMap">
+       select t.shop_id,
+           t.pos_id,
+           case  when t.shop_logo is null then '' else (select param_value  from d_tcodeposs_para a where a.param_type = 'visitPath2') || t.shop_logo end as shop_logo,
+           t.shop_label,
+           t.shop_name,
+           t.shop_english_name,
+           t.shop_type,
+           t.shop_description,
+           t.province_code,
+           t.city_code,
+           t.region_code,
+           t.shop_address,
+           case  when t.search_page_image is null then t.search_page_image else (select param_value from d_tcodeposs_para a  where a.param_type = 'visitPath2') || t.search_page_image end as search_page_image,
+           t.rotationn_chart_info,
+           t.shop_window_seat,
+           t.shop_detail,
+           t.mer_id,
+           t.term_id,
+           t.term_name,
+           t.shop_status,
+           t.search_foundation_data
+        from t_pos_shop_info t
+       where t.pos_id=#{posId}  and rownum=1
+  </select>
+
+</mapper>

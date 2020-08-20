@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.macro.mall.mapper.DMatchMaxtypeMapper">
+  <resultMap id="BaseResultMap" type="com.macro.mall.model.DMatchMaxtype">
+    <result column="MATCH_MAX_TYPE_ID" jdbcType="VARCHAR" property="matchMaxTypeId" />
+    <result column="MATCH_MAX_TYPE_NAME" jdbcType="VARCHAR" property="matchMaxTypeName" />
+    <result column="MATCH_CREATE_TIME" jdbcType="VARCHAR" property="matchCreateTime" />
+  </resultMap>
+
+
+  <sql id="Base_Column_List">
+    MATCH_MAX_TYPE_ID, MATCH_MAX_TYPE_NAME,MATCH_CREATE_TIME
+  </sql>
+
+  <delete id="delete" parameterType="String">
+    delete from D_MATCH_MAXTYPE
+     where MATCH_MAX_TYPE_ID=  #{matchMaxTypeId,jdbcType=VARCHAR}
+  </delete>
+
+  <insert id="insert" parameterType="com.macro.mall.model.DMatchMaxtype">
+    insert into D_MATCH_MAXTYPE (MATCH_MAX_TYPE_ID, MATCH_MAX_TYPE_NAME,MATCH_CREATE_TIME)
+    values (#{matchMaxTypeId,jdbcType=VARCHAR}, #{matchMaxTypeName,jdbcType=VARCHAR}, to_char(sysdate,'yyyy-mm-dd hh24:mi:ss'))
+  </insert>
+
+
+
+  <update id="update" parameterType="com.macro.mall.model.DMatchMaxtype">
+    update D_MATCH_MAXTYPE
+      set
+      <if test="matchMaxTypeName != null and matchMaxTypeName!=''">
+        MATCH_MAX_TYPE_NAME = #{matchMaxTypeName,jdbcType=VARCHAR}
+      </if>
+   where  MATCH_MAX_TYPE_ID = #{matchMaxTypeId,jdbcType=VARCHAR}
+  </update>
+
+  <select id="queryList" parameterType="com.macro.mall.model.DMatchMaxtype" resultMap="BaseResultMap">
+        select  * from  D_MATCH_MAXTYPE
+        <where>
+          <if test="matchMaxTypeId != null and matchMaxTypeId!=''">
+            and MATCH_MAX_TYPE_ID = #{matchMaxTypeId,jdbcType=VARCHAR}
+          </if>
+          <if test="matchMaxTypeName != null and matchMaxTypeName!=''">
+           and  MATCH_MAX_TYPE_NAME = #{matchMaxTypeName,jdbcType=VARCHAR}
+          </if>
+        </where>
+        order by MATCH_CREATE_TIME desc
+    </select>
+  <select id="queryList1" parameterType="com.macro.mall.model.DMatchMaxtype" resultMap="BaseResultMap">
+    select  * from  D_MATCH_MAXTYPE
+    <where>
+      <if test="matchMaxTypeId != null and matchMaxTypeId!=''">
+        and MATCH_MAX_TYPE_ID = #{matchMaxTypeId,jdbcType=VARCHAR}
+      </if>
+      <if test="matchMaxTypeName != null and matchMaxTypeName!=''">
+        and  MATCH_MAX_TYPE_NAME = #{matchMaxTypeName,jdbcType=VARCHAR}
+      </if>
+    </where>
+    order by MATCH_CREATE_TIME desc
+  </select>
+</mapper>

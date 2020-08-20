@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.macro.mall.mapper.DCmsFuncitonMapper">
+  <resultMap id="BaseResultMap" type="com.macro.mall.model.DCmsFunciton">
+    <result column="FUN_ID" jdbcType="VARCHAR" property="funId" />
+    <result column="FUN_NAME" jdbcType="VARCHAR" property="funName" />
+    <result column="FUN_IMAGE" jdbcType="VARCHAR" property="funImage" />
+    <result column="FUN_FLAG" jdbcType="VARCHAR" property="funFlag" />
+  </resultMap>
+
+
+  <!-- 首页信息查询 -->
+  <select id="selectFunlist"  parameterType="com.macro.mall.model.DCmsFunciton" resultMap="BaseResultMap">
+    select
+      FUN_ID,FUN_NAME,FUN_IMAGE,FUN_FLAG
+    from D_CMS_FUNCITON
+    where 1=1
+    and   FUN_FLAG ='01'
+
+  </select>
+
+  <select id="selectFUn" parameterType="string" resultMap="BaseResultMap">
+   select FUN_ID,FUN_NAME,FUN_IMAGE,FUN_FLAG from D_CMS_FUNCITON  where  FUN_ID = #{0}
+  </select>
+
+
+
+
+</mapper>

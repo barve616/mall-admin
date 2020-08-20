@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.macro.mall.mapper.TSportShopAroundMapper">
+  <resultMap id="BaseResultMap" type="com.macro.mall.model.TSportShopAround">
+    <id column="ID" jdbcType="CHAR" property="id" />
+    <result column="SHOP_ID" jdbcType="VARCHAR" property="shopId" />
+    <result column="AROUND_ID" jdbcType="VARCHAR" property="aroundId" />
+    <result column="CREATE_DATE" jdbcType="CHAR" property="createDate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, SHOP_ID, AROUND_ID, CREATE_DATE
+  </sql>
+  <select id="selectByExample" parameterType="com.macro.mall.model.TSportShopAroundExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_SPORT_SHOP_AROUND
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from T_SPORT_SHOP_AROUND
+    where ID = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from T_SPORT_SHOP_AROUND
+    where ID = #{id,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.macro.mall.model.TSportShopAroundExample">
+    delete from T_SPORT_SHOP_AROUND
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.macro.mall.model.TSportShopAround">
+    insert into T_SPORT_SHOP_AROUND (ID, SHOP_ID, AROUND_ID, 
+      CREATE_DATE)
+    values (#{id,jdbcType=CHAR}, #{shopId,jdbcType=VARCHAR}, #{aroundId,jdbcType=VARCHAR},
+      #{createDate,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.macro.mall.model.TSportShopAround">
+    insert into T_SPORT_SHOP_AROUND
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="shopId != null">
+        SHOP_ID,
+      </if>
+      <if test="aroundId != null">
+        AROUND_ID,
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="shopId != null">
+        #{shopId,jdbcType=VARCHAR},
+      </if>
+      <if test="aroundId != null">
+        #{aroundId,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.macro.mall.model.TSportShopAroundExample" resultType="java.lang.Long">
+    select count(*) from T_SPORT_SHOP_AROUND
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update T_SPORT_SHOP_AROUND
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=CHAR},
+      </if>
+      <if test="record.shopId != null">
+        SHOP_ID = #{record.shopId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.aroundId != null">
+        AROUND_ID = #{record.aroundId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null">
+        CREATE_DATE = #{record.createDate,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update T_SPORT_SHOP_AROUND
+    set ID = #{record.id,jdbcType=CHAR},
+      SHOP_ID = #{record.shopId,jdbcType=VARCHAR},
+      AROUND_ID = #{record.aroundId,jdbcType=VARCHAR},
+      CREATE_DATE = #{record.createDate,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.macro.mall.model.TSportShopAround">
+    update T_SPORT_SHOP_AROUND
+    <set>
+      <if test="shopId != null">
+        SHOP_ID = #{shopId,jdbcType=VARCHAR},
+      </if>
+      <if test="aroundId != null">
+        AROUND_ID = #{aroundId,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE = #{createDate,jdbcType=CHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.macro.mall.model.TSportShopAround">
+    update T_SPORT_SHOP_AROUND
+    set SHOP_ID = #{shopId,jdbcType=VARCHAR},
+      AROUND_ID = #{aroundId,jdbcType=VARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=CHAR}
+    where ID = #{id,jdbcType=CHAR}
+  </update>
+
+  <!--根据店铺id和周边商户推荐id查询绑定信息-->
+  <select id="getShopAroundByShopIdAndAroundId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select t.id, t.shop_id, t.around_id, t.create_date
+    from t_sport_shop_Around t
+    where t.shop_id = #{shopId,jdbcType=VARCHAR} and t.around_id =  #{aroundId,jdbcType=CHAR}
+  </select>
+
+  <!--根据店铺id和周边商户推荐id删除关联信息-->
+  <delete id="deleteShopAroundByShopIdAndAroundId" parameterType="java.lang.String">
+    delete from T_SPORT_SHOP_AROUND t
+    where t.shop_id = #{shopId,jdbcType=VARCHAR} and t.around_id =  #{aroundId,jdbcType=CHAR}
+  </delete>
+
+</mapper>

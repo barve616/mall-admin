@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.macro.mall.mapper.TSportCommodityActivityMapper">
+  <resultMap id="BaseResultMap" type="com.macro.mall.model.TSportCommodityActivity">
+    <result column="COMMODITY_ID" jdbcType="VARCHAR" property="commodityId" />
+    <result column="ACTIVITY_ID" jdbcType="VARCHAR" property="activityId" />
+    <result column="ACTIVITY_STOCK" jdbcType="VARCHAR" property="activityStock" />
+    <result column="COMMODITY_ACTIVITY_STATE" jdbcType="CHAR" property="commodityActivityState" />
+    <result column="TIME_SLOT_ID" jdbcType="VARCHAR" property="timeSlotId" />
+    <result column="SPIKE_PRICE" jdbcType="VARCHAR" property="spikePrice" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    COMMODITY_ID, ACTIVITY_ID, ACTIVITY_STOCK, COMMODITY_ACTIVITY_STATE, TIME_SLOT_ID, 
+    SPIKE_PRICE
+  </sql>
+  <select id="selectByExample" parameterType="com.macro.mall.model.TSportCommodityActivityExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_SPORT_COMMODITY_ACTIVITY
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.macro.mall.model.TSportCommodityActivityExample">
+    delete from T_SPORT_COMMODITY_ACTIVITY
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.macro.mall.model.TSportCommodityActivity">
+    insert into T_SPORT_COMMODITY_ACTIVITY (COMMODITY_ID, ACTIVITY_ID, ACTIVITY_STOCK, 
+      COMMODITY_ACTIVITY_STATE, TIME_SLOT_ID, SPIKE_PRICE
+      )
+    values (#{commodityId,jdbcType=VARCHAR}, #{activityId,jdbcType=VARCHAR}, #{activityStock,jdbcType=VARCHAR}, 
+      #{commodityActivityState,jdbcType=CHAR}, #{timeSlotId,jdbcType=VARCHAR}, #{spikePrice,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.macro.mall.model.TSportCommodityActivity">
+    insert into T_SPORT_COMMODITY_ACTIVITY
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="commodityId != null">
+        COMMODITY_ID,
+      </if>
+      <if test="activityId != null">
+        ACTIVITY_ID,
+      </if>
+      <if test="activityStock != null">
+        ACTIVITY_STOCK,
+      </if>
+      <if test="commodityActivityState != null">
+        COMMODITY_ACTIVITY_STATE,
+      </if>
+      <if test="timeSlotId != null">
+        TIME_SLOT_ID,
+      </if>
+      <if test="spikePrice != null">
+        SPIKE_PRICE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="commodityId != null">
+        #{commodityId,jdbcType=VARCHAR},
+      </if>
+      <if test="activityId != null">
+        #{activityId,jdbcType=VARCHAR},
+      </if>
+      <if test="activityStock != null">
+        #{activityStock,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityActivityState != null">
+        #{commodityActivityState,jdbcType=CHAR},
+      </if>
+      <if test="timeSlotId != null">
+        #{timeSlotId,jdbcType=VARCHAR},
+      </if>
+      <if test="spikePrice != null">
+        #{spikePrice,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.macro.mall.model.TSportCommodityActivityExample" resultType="java.lang.Long">
+    select count(*) from T_SPORT_COMMODITY_ACTIVITY
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update T_SPORT_COMMODITY_ACTIVITY
+    <set>
+      <if test="record.commodityId != null">
+        COMMODITY_ID = #{record.commodityId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.activityId != null">
+        ACTIVITY_ID = #{record.activityId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.activityStock != null">
+        ACTIVITY_STOCK = #{record.activityStock,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commodityActivityState != null">
+        COMMODITY_ACTIVITY_STATE = #{record.commodityActivityState,jdbcType=CHAR},
+      </if>
+      <if test="record.timeSlotId != null">
+        TIME_SLOT_ID = #{record.timeSlotId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.spikePrice != null">
+        SPIKE_PRICE = #{record.spikePrice,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update T_SPORT_COMMODITY_ACTIVITY
+    set COMMODITY_ID = #{record.commodityId,jdbcType=VARCHAR},
+      ACTIVITY_ID = #{record.activityId,jdbcType=VARCHAR},
+      ACTIVITY_STOCK = #{record.activityStock,jdbcType=VARCHAR},
+      COMMODITY_ACTIVITY_STATE = #{record.commodityActivityState,jdbcType=CHAR},
+      TIME_SLOT_ID = #{record.timeSlotId,jdbcType=VARCHAR},
+      SPIKE_PRICE = #{record.spikePrice,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.macro.mall.mapper.DMatchFinalsInfoMapper">
+  <resultMap id="BaseResultMap" type="com.macro.mall.model.DMatchFinalsInfo">
+    <result column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="MATCH_ID" jdbcType="VARCHAR" property="matchId" />
+    <result column="USER_NM" jdbcType="VARCHAR" property="userNm" />
+    <result column="CERT_NO" jdbcType="VARCHAR" property="certNo" />
+    <result column="USER_NAME" jdbcType="VARCHAR" property="userName" />
+    <result column="STATE" jdbcType="CHAR" property="state" />
+    <result column="DETAILS" jdbcType="VARCHAR" property="details" />
+    <result column="CREAT_TIME" jdbcType="CHAR" property="creatTime" />
+    <result column="REMOVE_TIME" jdbcType="CHAR" property="removeTime" />
+    <result column="HEAD_FLAG" jdbcType="CHAR" property="headFlag" />
+    <result column="MATCH_TYPE" jdbcType="CHAR" property="matchType" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, MATCH_ID, USER_NM, CERT_NO, USER_NAME, STATE, DETAILS, CREAT_TIME, REMOVE_TIME
+  </sql>
+  <select id="selectByExample" parameterType="com.macro.mall.model.DMatchFinalsInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from D_MATCH_FINALS_INFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.macro.mall.model.DMatchFinalsInfoExample">
+    delete from D_MATCH_FINALS_INFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.macro.mall.model.DMatchFinalsInfo">
+    insert into D_MATCH_FINALS_INFO (ID, MATCH_ID, USER_NM, 
+      CERT_NO, USER_NAME, STATE, 
+      DETAILS, CREAT_TIME, REMOVE_TIME
+      )
+    values (#{id,jdbcType=VARCHAR}, #{matchId,jdbcType=VARCHAR}, #{userNm,jdbcType=VARCHAR}, 
+      #{certNo,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{state,jdbcType=CHAR}, 
+      #{details,jdbcType=VARCHAR}, #{creatTime,jdbcType=CHAR}, #{removeTime,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.macro.mall.model.DMatchFinalsInfo">
+    insert into D_MATCH_FINALS_INFO
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="matchId != null">
+        MATCH_ID,
+      </if>
+      <if test="userNm != null">
+        USER_NM,
+      </if>
+      <if test="certNo != null">
+        CERT_NO,
+      </if>
+      <if test="userName != null">
+        USER_NAME,
+      </if>
+      <if test="state != null">
+        STATE,
+      </if>
+      <if test="details != null">
+        DETAILS,
+      </if>
+      <if test="creatTime != null">
+        CREAT_TIME,
+      </if>
+      <if test="removeTime != null">
+        REMOVE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="matchId != null">
+        #{matchId,jdbcType=VARCHAR},
+      </if>
+      <if test="userNm != null">
+        #{userNm,jdbcType=VARCHAR},
+      </if>
+      <if test="certNo != null">
+        #{certNo,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=CHAR},
+      </if>
+      <if test="details != null">
+        #{details,jdbcType=VARCHAR},
+      </if>
+      <if test="creatTime != null">
+        #{creatTime,jdbcType=CHAR},
+      </if>
+      <if test="removeTime != null">
+        #{removeTime,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.macro.mall.model.DMatchFinalsInfoExample" resultType="java.lang.Long">
+    select count(*) from D_MATCH_FINALS_INFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update D_MATCH_FINALS_INFO
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.matchId != null">
+        MATCH_ID = #{record.matchId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userNm != null">
+        USER_NM = #{record.userNm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.certNo != null">
+        CERT_NO = #{record.certNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userName != null">
+        USER_NAME = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null">
+        STATE = #{record.state,jdbcType=CHAR},
+      </if>
+      <if test="record.details != null">
+        DETAILS = #{record.details,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creatTime != null">
+        CREAT_TIME = #{record.creatTime,jdbcType=CHAR},
+      </if>
+      <if test="record.removeTime != null">
+        REMOVE_TIME = #{record.removeTime,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update D_MATCH_FINALS_INFO
+    set ID = #{record.id,jdbcType=VARCHAR},
+      MATCH_ID = #{record.matchId,jdbcType=VARCHAR},
+      USER_NM = #{record.userNm,jdbcType=VARCHAR},
+      CERT_NO = #{record.certNo,jdbcType=VARCHAR},
+      USER_NAME = #{record.userName,jdbcType=VARCHAR},
+      STATE = #{record.state,jdbcType=CHAR},
+      DETAILS = #{record.details,jdbcType=VARCHAR},
+      CREAT_TIME = #{record.creatTime,jdbcType=CHAR},
+      REMOVE_TIME = #{record.removeTime,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <select id="queryPreMatchList" parameterType="String" resultMap="BaseResultMap">
+    SELECT t.id,
+       t.match_id,
+       t.user_nm,
+       t.cert_no,
+       t.user_name,
+       t.state,
+       t.details,
+       t.creat_time,
+       t.remove_time from d_match_finals_info t  WHERE t.match_id=#{matchId}
+  </select>
+
+  <insert id="insertFinalMatch" parameterType="com.macro.mall.model.DMatchFinalsInfo">
+    insert into D_MATCH_FINALS_INFO (ID, MATCH_ID, USER_NM,
+      CERT_NO, USER_NAME, STATE,
+      DETAILS, CREAT_TIME,HEAD_FLAG,MATCH_TYPE
+      )
+    values (#{id,jdbcType=VARCHAR}, #{matchId,jdbcType=VARCHAR}, #{userNm,jdbcType=VARCHAR},
+      #{certNo,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{state,jdbcType=CHAR},
+      #{details,jdbcType=VARCHAR}, #{creatTime,jdbcType=CHAR},#{headFlag,jdbcType=CHAR},
+      #{matchType,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertFinalMatchList"  parameterType="java.util.List">
+    insert into D_MATCH_FINALS_INFO (ID, MATCH_ID, USER_NM,
+    CERT_NO, USER_NAME, STATE,
+    DETAILS, CREAT_TIME,HEAD_FLAG,MATCH_TYPE
+    )
+    <foreach collection="list" item="item" index="index" separator="union all">
+      select
+      #{item.id,jdbcType=VARCHAR}, #{item.matchId,jdbcType=VARCHAR}, #{item.userNm,jdbcType=VARCHAR},
+      #{item.certNo,jdbcType=VARCHAR}, #{item.userName,jdbcType=VARCHAR}, #{item.state,jdbcType=CHAR},
+      #{item.details,jdbcType=VARCHAR}, #{item.creatTime,jdbcType=CHAR},#{item.headFlag,jdbcType=CHAR},
+      #{item.matchType,jdbcType=CHAR}
+      from dual
+    </foreach>
+  </insert>
+  <delete id="deleteFinalById" parameterType="String">
+    delete from D_MATCH_FINALS_INFO where id=#{id}
+  </delete>
+  <update id="updateRemoveById" parameterType="String">
+    update D_MATCH_FINALS_INFO
+    set
+    STATE ='2',
+    DETAILS='已删除的数据',
+    REMOVE_TIME =to_char(sysdate,'YYYY-MM-DD HH24:MI:SS')
+    where id in
+      <foreach collection="ids" index="index" item="item" open=" ( " separator=" , " close=" ) ">
+        #{item}
+      </foreach>
+  </update>
+
+
+</mapper>

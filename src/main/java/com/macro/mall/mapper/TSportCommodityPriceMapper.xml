@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.macro.mall.mapper.TSportCommodityPriceMapper">
+  <resultMap id="BaseResultMap" type="com.macro.mall.model.TSportCommodityPrice">
+    <id column="DISCOUNT_TIME_PRICE_ID" jdbcType="VARCHAR" property="discountTimePriceId" />
+    <result column="COMMODITY_DETAIL_ID" jdbcType="VARCHAR" property="commodityDetailId" />
+    <result column="CREATE_TIME" jdbcType="CHAR" property="createTime" />
+    <result column="UPDATE_TIME" jdbcType="CHAR" property="updateTime" />
+    <result column="PRICE_DATE" jdbcType="CHAR" property="priceDate" />
+    <result column="PARCE" jdbcType="NUMERIC" property="parce" />
+    <result column="STOCK" jdbcType="NUMERIC" property="stock" />
+    <result column="COMMODITY_ID" jdbcType="VARCHAR" property="commodityId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    DISCOUNT_TIME_PRICE_ID, COMMODITY_DETAIL_ID, CREATE_TIME, UPDATE_TIME, PRICE_DATE, 
+    PARCE, STOCK
+  </sql>
+  <select id="selectByExample" parameterType="com.macro.mall.model.TSportCommodityPriceExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_SPORT_COMMODITY_PRICE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from T_SPORT_COMMODITY_PRICE
+    where DISCOUNT_TIME_PRICE_ID = #{discountTimePriceId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from T_SPORT_COMMODITY_PRICE
+    where DISCOUNT_TIME_PRICE_ID = #{discountTimePriceId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.macro.mall.model.TSportCommodityPriceExample">
+    delete from T_SPORT_COMMODITY_PRICE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.macro.mall.model.TSportCommodityPrice">
+    insert into T_SPORT_COMMODITY_PRICE (DISCOUNT_TIME_PRICE_ID, COMMODITY_DETAIL_ID, 
+      CREATE_TIME, UPDATE_TIME, PRICE_DATE, 
+      PARCE, STOCK)
+    values (#{discountTimePriceId,jdbcType=VARCHAR}, #{commodityDetailId,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=CHAR}, #{updateTime,jdbcType=CHAR}, #{priceDate,jdbcType=CHAR}, 
+      #{parce,jdbcType=NUMERIC}, #{stock,jdbcType=NUMERIC})
+  </insert>
+  <insert id="insertSelective" parameterType="com.macro.mall.model.TSportCommodityPrice">
+    insert into T_SPORT_COMMODITY_PRICE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="discountTimePriceId != null">
+        DISCOUNT_TIME_PRICE_ID,
+      </if>
+      <if test="commodityDetailId != null">
+        COMMODITY_DETAIL_ID,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+      <if test="priceDate != null">
+        PRICE_DATE,
+      </if>
+      <if test="parce != null">
+        PARCE,
+      </if>
+      <if test="stock != null">
+        STOCK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="discountTimePriceId != null">
+        #{discountTimePriceId,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityDetailId != null">
+        #{commodityDetailId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=CHAR},
+      </if>
+      <if test="priceDate != null">
+        #{priceDate,jdbcType=CHAR},
+      </if>
+      <if test="parce != null">
+        #{parce,jdbcType=NUMERIC},
+      </if>
+      <if test="stock != null">
+        #{stock,jdbcType=NUMERIC},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.macro.mall.model.TSportCommodityPriceExample" resultType="java.lang.Long">
+    select count(*) from T_SPORT_COMMODITY_PRICE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update T_SPORT_COMMODITY_PRICE
+    <set>
+      <if test="record.discountTimePriceId != null">
+        DISCOUNT_TIME_PRICE_ID = #{record.discountTimePriceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commodityDetailId != null">
+        COMMODITY_DETAIL_ID = #{record.commodityDetailId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        CREATE_TIME = #{record.createTime,jdbcType=CHAR},
+      </if>
+      <if test="record.updateTime != null">
+        UPDATE_TIME = #{record.updateTime,jdbcType=CHAR},
+      </if>
+      <if test="record.priceDate != null">
+        PRICE_DATE = #{record.priceDate,jdbcType=CHAR},
+      </if>
+      <if test="record.parce != null">
+        PARCE = #{record.parce,jdbcType=NUMERIC},
+      </if>
+      <if test="record.stock != null">
+        STOCK = #{record.stock,jdbcType=NUMERIC},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update T_SPORT_COMMODITY_PRICE
+    set DISCOUNT_TIME_PRICE_ID = #{record.discountTimePriceId,jdbcType=VARCHAR},
+      COMMODITY_DETAIL_ID = #{record.commodityDetailId,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=CHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=CHAR},
+      PRICE_DATE = #{record.priceDate,jdbcType=CHAR},
+      PARCE = #{record.parce,jdbcType=NUMERIC},
+      STOCK = #{record.stock,jdbcType=NUMERIC}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.macro.mall.model.TSportCommodityPrice">
+    update T_SPORT_COMMODITY_PRICE
+    <set>
+      <if test="commodityDetailId != null">
+        COMMODITY_DETAIL_ID = #{commodityDetailId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=CHAR},
+      </if>
+      <if test="priceDate != null">
+        PRICE_DATE = #{priceDate,jdbcType=CHAR},
+      </if>
+      <if test="parce != null">
+        PARCE = #{parce,jdbcType=NUMERIC},
+      </if>
+      <if test="stock != null">
+        STOCK = #{stock,jdbcType=NUMERIC},
+      </if>
+    </set>
+    where DISCOUNT_TIME_PRICE_ID = #{discountTimePriceId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.macro.mall.model.TSportCommodityPrice">
+    update T_SPORT_COMMODITY_PRICE
+    set COMMODITY_DETAIL_ID = #{commodityDetailId,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=CHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=CHAR},
+      PRICE_DATE = #{priceDate,jdbcType=CHAR},
+      PARCE = #{parce,jdbcType=NUMERIC},
+      STOCK = #{stock,jdbcType=NUMERIC}
+    where DISCOUNT_TIME_PRICE_ID = #{discountTimePriceId,jdbcType=VARCHAR}
+  </update>
+  <!--根据主商品id查询商品实际支付价格-->
+<select id="selectPriceByCommodityId" resultMap="BaseResultMap">
+    select tsc.commodity_id,scp.parce from t_sport_commodity_price scp
+      left join t_sport_commodity_detail scd
+      on scp.commodity_detail_id=scd.commodity_detail_id
+      left join t_sport_commodity tsc
+      on tsc.commodity_id=scd.commodity_id
+      where tsc.commodity_id=#{commodityId,jdbcType=VARCHAR}
+      and scp.price_date=#{priceDate,jdbcType=VARCHAR}
+      group by tsc.commodity_id,scp.parce
+</select>
+</mapper>

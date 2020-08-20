@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.macro.mall.base.dao.TModuleConfigDao" >
+    <resultMap id="BaseResultMap" type="com.macro.mall.base.dto.topConfig.TModuleConfig" >
+        <!--
+          WARNING - @mbggenerated
+        -->
+        <result column="ID" property="id" jdbcType="VARCHAR" />
+        <result column="FUN_ID" property="funId" jdbcType="VARCHAR" />
+        <result column="FUN_IMAGE" property="funImage" jdbcType="VARCHAR" />
+        <result column="FUN_TITLE" property="funTitle" jdbcType="VARCHAR" />
+        <result column="START_DATE" property="startDate" jdbcType="CHAR" />
+        <result column="END_DATE" property="endDate" jdbcType="CHAR" />
+        <result column="REGION" property="region" jdbcType="VARCHAR" />
+        <result column="CHANNEL" property="channel" jdbcType="VARCHAR" />
+        <result column="KEY_WORD" property="keyWord" jdbcType="VARCHAR" />
+        <result column="FUN_STATE" property="funState" jdbcType="CHAR" />
+        <result column="JUMP_TYPE" property="jumpType" jdbcType="CHAR" />
+        <result column="JUMP_LINK" property="jumpLink" jdbcType="VARCHAR" />
+        <result column="UIJUMP_ID" property="uiJumpId" jdbcType="VARCHAR" />
+        <result column="UIPARAM_VALUE" property="uiParamValue" jdbcType="VARCHAR" />
+        <result column="MSG_TYPE" property="msgType" jdbcType="CHAR" />
+        <result column="MSG_INFO" property="msgInfo" jdbcType="VARCHAR" />
+
+    </resultMap>
+
+
+    <select id="selectInfoList" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select  *
+        from T_MODULE_CONFIG
+        where 1=1
+        <if test="channel != null and channel != ''">
+            and CHANNEL=#{channel,jdbcType=VARCHAR}
+        </if>
+        <if test="region != null and region != ''">
+            and REGION=#{region,jdbcType=VARCHAR}
+        </if>
+
+    </select>
+
+    <!--zxy 根据渠道查询  -->
+    <select id="selectInfoByChannleAndCity" parameterType="String" resultMap="BaseResultMap">
+        select ID,
+        FUN_ID,
+        (select param_value from
+        d_tcodeposs_para a where a.param_type =
+        'visitPath2')||FUN_IMAGE as FUN_IMAGE,
+        FUN_TITLE,
+        START_DATE,
+        END_DATE,
+        REGION,
+        CHANNEL,
+        KEY_WORD,
+        FUN_STATE,
+        JUMP_TYPE,
+        JUMP_LINK,
+        UIJUMP_ID,
+        UIPARAM_VALUE,
+        MSG_TYPE,
+        MSG_INFO
+        from T_MODULE_CONFIG
+        where 1=1  and FUN_STATE ='00'  and CHANNEL=#{userPlt}
+        <!--  <if test="msgType != null and msgType != ''">
+          and MSG_TYPE = #{msgType}
+         </if> -->
+    </select>
+
+    <insert id="insertModuleConfig" parameterType="com.macro.mall.base.dto.topConfig.TModuleConfig">
+
+  insert into T_MODULE_CONFIG (ID,FUN_ID,FUN_IMAGE,FUN_TITLE,START_DATE,END_DATE,REGION,CHANNEL,
+                              KEY_WORD,FUN_STATE,JUMP_TYPE,JUMP_LINK,UIJUMP_ID,UIPARAM_VALUE )
+  values
+  (#{id,jdbcType=VARCHAR},
+   #{funId,jdbcType=VARCHAR},
+   #{funImage,jdbcType=VARCHAR},
+   #{funTitle,jdbcType=VARCHAR},
+   #{startDate,jdbcType=CHAR},
+   #{endDate,jdbcType=CHAR},
+   #{region,jdbcType=VARCHAR},
+   #{channel,jdbcType=VARCHAR},
+   #{keyWord,jdbcType=VARCHAR},
+   #{funState,jdbcType=CHAR},
+   #{jumpType,jdbcType=CHAR},
+   #{jumpLink,jdbcType=VARCHAR},
+   #{uiJumpId,jdbcType=VARCHAR},
+   #{uiParamValue,jdbcType=VARCHAR})
+  </insert>
+    <!-- 批量插入 -->
+    <insert id="insertInfoList" parameterType="list">
+        insert into T_MODULE_CONFIG
+        (ID,FUN_ID,
+        FUN_IMAGE,FUN_TITLE,START_DATE,END_DATE,
+        REGION,CHANNEL,
+        KEY_WORD,FUN_STATE,JUMP_TYPE,JUMP_LINK,UIJUMP_ID,UIPARAM_VALUE,MSG_TYPE,MSG_INFO
+        )
+        <foreach collection="list" item="item" index="index" separator="union all">
+            select
+            #{item.id,jdbcType=VARCHAR},
+            #{item.funId,jdbcType=VARCHAR},
+            #{item.funImage,jdbcType=VARCHAR},
+            #{item.funTitle,jdbcType=VARCHAR},
+            #{item.startDate,jdbcType=CHAR},
+            #{item.endDate,jdbcType=CHAR},
+            #{item.region,jdbcType=VARCHAR},
+            #{item.channel,jdbcType=VARCHAR},
+            #{item.keyWord,jdbcType=VARCHAR},
+            #{item.funState,jdbcType=CHAR},
+            #{item.jumpType,jdbcType=CHAR},
+            #{item.jumpLink,jdbcType=VARCHAR},
+            #{item.uiJumpId,jdbcType=VARCHAR},
+            #{item.uiParamValue,jdbcType=VARCHAR},
+            #{item.msgType,jdbcType=CHAR},
+            #{item.msgInfo,jdbcType=VARCHAR}
+            from dual
+        </foreach>
+
+    </insert>
+    <update id="updateModuleConfig" parameterType="com.macro.mall.base.dto.topConfig.TModuleConfig">
+        update T_MODULE_CONFIG set
+        FUN_ID = #{funId,jdbcType=VARCHAR},
+        <if test="funImage != null and funImage != ''">
+            FUN_IMAGE = #{funImage,jdbcType=VARCHAR},
+        </if>
+        FUN_TITLE = #{funTitle,jdbcType=VARCHAR},
+        START_DATE = #{startDate,jdbcType=CHAR},
+        END_DATE = #{endDate,jdbcType=CHAR},
+        REGION = #{region,jdbcType=VARCHAR},
+        CHANNEL = #{channel,jdbcType=VARCHAR},
+        KEY_WORD = #{keyWord,jdbcType=VARCHAR},
+        FUN_STATE = #{funState,jdbcType=CHAR},
+        JUMP_TYPE = #{jumpType,jdbcType=CHAR},
+        JUMP_LINK = #{jumpLink,jdbcType=VARCHAR},
+        UIJUMP_ID = #{uiJumpId,jdbcType=VARCHAR},
+        UIPARAM_VALUE = #{uiParamValue,jdbcType=VARCHAR},
+        MSG_TYPE=#{msgType,jdbcType=CHAR},
+        MSG_INFO=#{msgInfo,jdbcType=VARCHAR}
+        where ID= #{id}
+
+
+        <!-- <if test="funId != null and funId != ''" >
+         </if>
+         <if test="funImage != null and funImage != ''" >
+         </if>
+         <if test="funTitle != null and funTitle != ''" >
+              FUN_TITLE = #{funTitle},
+         </if>
+         <if test="startDate != null and startDate !=''" >
+              START_DATE = #{startDate},
+         </if>
+         <if test="endDate != null and endDate != ''" >
+              END_DATE = #{endDate},
+         </if>
+         <if test="region != null and region != ''" >
+              REGION = #{region},
+         </if>
+         <if test="channel != null and channel != ''" >
+              CHANNEL = #{channel},
+         </if>
+         <if test="keyWord != null and keyWord !=''" >
+              KEY_WORD = #{keyWord},
+         </if>
+         <if test="funState != null and funState != ''" >
+              FUN_STATE = #{funState},
+         </if>
+         <if test="jumpType != null and jumpType !=''" >
+              JUMP_TYPE = #{jumpType},
+         </if>
+         <if test="jumpLink != null and jumpLink != ''" >
+              JUMP_LINK = #{jumpLink},
+         </if>
+         <if test="uiJumpId != null and uiJumpId !=''" >
+              UIJUMP_ID = #{uiJumpId},
+         </if>
+         <if test="uiParamValue != null and uiParamValue !='' " >
+              UIPARAM_VALUE = #{uiParamValue}
+         </if> -->
+    </update>
+
+
+    <delete id="deleteTModuleConfigByid" parameterType = "String"  >
+        delete from T_MODULE_CONFIG t  where  t.ID
+        in
+        <foreach collection="array" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+
+    <select id="getTModuleConfigList" resultMap="BaseResultMap" parameterType="com.macro.mall.base.dto.topConfig.TModuleConfig">
+
+        select ID,
+        FUN_ID,
+        (select param_value from
+        d_tcodeposs_para a where a.param_type =
+        'visitPath2')||FUN_IMAGE as FUN_IMAGE,
+        FUN_TITLE,
+        START_DATE,
+        END_DATE,
+        REGION,
+        CHANNEL,
+        KEY_WORD,
+        FUN_STATE,
+        JUMP_TYPE,
+        JUMP_LINK,
+        UIJUMP_ID,
+        UIPARAM_VALUE,
+        MSG_TYPE,MSG_INFO
+        from T_MODULE_CONFIG t where 1=1
+
+        <if test= "funId!=null and funId!=''">
+            and  FUN_ID =#{funId}
+        </if>
+        <if test=   "id!=null and id!=''">
+            and  ID=#{id}
+        </if>
+        <if test=   "channel != null and channel != ''">
+            and  CHANNEL = #{channel}
+        </if>
+        <if test=   "msgType != null and msgType != ''">
+            and  MSG_TYPE = #{msgType}
+        </if>
+    </select>
+
+
+    <!--   <select id="getTModuleConfigCount" resultType="int"  parameterType="com.mlife.topConfig.entity.TModuleConfig">
+      select count(*) from (
+      select * from T_MODULE_CONFIG t where 1=1
+             <if test= "funId!=null and funId!=''">
+            and  FUN_ID =#{funId}
+            </if>
+            <if test=   "id!=null and id!=''">
+            and  ID=#{id}
+            </if>
+
+
+                )a
+      </select> -->
+    <update id="updateFunStateById" parameterType="map">
+        update T_MODULE_CONFIG set fun_state = #{funState}
+        where ID in
+        <foreach collection="id" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+
+    <!--  <select id="selectIndexCityInfo" parameterType="com.mlife.pageNew.bean.DLayoutContentRegion" resultMap="BaseResultMap">
+       select  REGION_ID,
+             CONTENT_ID,
+             PROVINCE_ID,
+             CITY_ID
+             from d_layout_Content_region
+             where CONTENT_ID =#{contentId} and CITY_ID = #{cityId}
+      </select>-->
+</mapper>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.macro.mall.mapper.DFunInfoMapper">
+  <resultMap id="BaseResultMap" type="com.macro.mall.model.DFunInfo">
+    <result column="FUN_ID" jdbcType="VARCHAR" property="funId" />
+    <result column="FUN_NAME" jdbcType="VARCHAR" property="funName" />
+    <result column="FUN_PID" jdbcType="VARCHAR" property="funPid" />
+    <result column="FUN_SEQ" jdbcType="NUMERIC" property="funSeq" />
+    <result column="FUN_STYLE" jdbcType="VARCHAR" property="funStyle" />
+    <result column="FUN_TYPE" jdbcType="VARCHAR" property="funType" />
+    <result column="FUN_STATE" jdbcType="VARCHAR" property="funState" />
+    <result column="FUN_PARM" jdbcType="VARCHAR" property="funParm" />
+    <result column="MODE_TYPE" jdbcType="VARCHAR" property="modeType" />
+    <result column="MLIFE_FLAG" jdbcType="VARCHAR" property="mlifeFlag" />
+    <result column="PHONE_FLAG" jdbcType="VARCHAR" property="phoneFlag" />
+    <result column="WX_FLAG" jdbcType="VARCHAR" property="wxFlag" />
+    <result column="XCX_FLAG" jdbcType="VARCHAR" property="xcxFlag" />
+    <result column="APP_FUN_TYPE" jdbcType="VARCHAR" property="appFunType" />
+  </resultMap>
+
+    <resultMap id="DFunInfoSpResultMap" type="com.macro.mall.model.DFunInfoSp">
+        <!--@mbg.generated-->
+        <!--@Table D_FUN_INFO_SP-->
+        <result column="FUN_ID" jdbcType="VARCHAR" property="funId" />
+        <result column="FUN_NAME" jdbcType="VARCHAR" property="funName" />
+        <result column="FUN_PID" jdbcType="VARCHAR" property="funPid" />
+        <result column="FUN_SEQ" jdbcType="DECIMAL" property="funSeq" />
+        <result column="FUN_STYLE" jdbcType="VARCHAR" property="funStyle" />
+        <result column="FUN_TYPE" jdbcType="VARCHAR" property="funType" />
+        <result column="FUN_STATE" jdbcType="VARCHAR" property="funState" />
+        <result column="FUN_PARM" jdbcType="VARCHAR" property="funParm" />
+        <result column="MODE_TYPE" jdbcType="VARCHAR" property="modeType" />
+        <result column="MLIFE_FLAG" jdbcType="VARCHAR" property="mlifeFlag" />
+        <result column="PHONE_FLAG" jdbcType="VARCHAR" property="phoneFlag" />
+        <result column="WX_FLAG" jdbcType="VARCHAR" property="wxFlag" />
+        <result column="XCX_FLAG" jdbcType="VARCHAR" property="xcxFlag" />
+        <result column="APP_FUN_TYPE" jdbcType="VARCHAR" property="appFunType" />
+    </resultMap>
+
+  <select id="findById" parameterType="String" resultMap="BaseResultMap">
+		select *from d_fun_info where fun_id=#{funId}
+	</select>
+
+  <select id="findByfunId" parameterType="String" resultMap="BaseResultMap">
+		select fun_id,fun_pid,fun_name from d_fun_info where fun_id=#{funId}
+	</select>
+  <select id="findAll" parameterType="com.macro.mall.cms.bean.CMS000018" resultMap="DFunInfoSpResultMap">
+      select FUN_ID,FUN_NAME,FUN_PID,FUN_SEQ,FUN_STYLE,FUN_TYPE,FUN_STATE,FUN_PARM,MODE_TYPE,MLIFE_FLAG,PHONE_FLAG,WX_FLAG,XCX_FLAG,
+      APP_FUN_TYPE from D_FUN_INFO_SP
+      <where>
+          <if test="mlifeFlag != null and mlifeFlag !=''  ">
+              and MLIFE_FLAG = #{mlifeFlag,jdbcType=VARCHAR}
+          </if>
+
+          <if test="phoneFlag != null and phoneFlag !=''  ">
+              and PHONE_FLAG = #{phoneFlag,jdbcType=VARCHAR}
+          </if>
+
+          <if test="wxFlag != null and wxFlag !=''  ">
+              and WX_FLAG = #{wxFlag,jdbcType=VARCHAR}
+          </if>
+
+          <if test="xcxFlag != null and xcxFlag !=''  ">
+              and XCX_FLAG = #{xcxFlag,jdbcType=VARCHAR}
+          </if>
+      </where>
+
+      order by APP_FUN_TYPE desc,fun_id
+	</select>
+
+</mapper>

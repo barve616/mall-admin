@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.macro.mall.mapper.DMatchResultInfoMapper">
+  <resultMap id="BaseResultMap" type="com.macro.mall.model.DMatchResultInfo">
+    <result column="RESULT_ID" jdbcType="VARCHAR" property="resultId" />
+    <result column="APPLY_ID" jdbcType="VARCHAR" property="applyId" />
+    <result column="USER_NM" jdbcType="VARCHAR" property="userNm" />
+    <result column="RESULT" jdbcType="VARCHAR" property="result" />
+    <result column="PRIZE" jdbcType="VARCHAR" property="prize" />
+    <result column="RANK_SECOND" jdbcType="VARCHAR" property="rankSecond" />
+    <result column="TOTAL_SECOND" jdbcType="VARCHAR" property="totalSecond" />
+    <result column="VOTE_NUM" jdbcType="VARCHAR" property="voteNum" />
+    <result column="MATCH_TP" jdbcType="VARCHAR" property="matchTp" />
+    <result column="MATCH_TP_NAME" jdbcType="VARCHAR" property="matchTpName" />
+    <result column="MATCH_NAME" jdbcType="VARCHAR" property="matchName" />
+    <result column="TEAM_NAME" jdbcType="VARCHAR" property="teamName" />
+
+  </resultMap>
+
+
+
+  <select id="queryList" parameterType="com.macro.mall.model.DMatchResultInfo" resultMap="BaseResultMap">
+    select m.match_tp_name ,d.RESULT_ID,  f.match_name , t.team_id,  (select sum(m.VOTE_NUM) from D_MATCH_VOTE_INFO m where m.team_id=t.team_id) VOTE_NUM,d.result ,d.prize,d.rank_second,d.total_second  ,
+    case p.match_type
+    when '0' then p.real_name
+    ELSE t.team_name END  team_name
+    from d_match_result_info d
+    left join d_match_apply_info p on d.apply_id=p.id
+    left join d_match_team_info t on t.team_id=p.team_id and p.match_type='1'
+    left join d_match_info f on p.match_id=f.match_id
+    left join d_match_minterm m on m.match_min_id=f.match_group_id
+        <where>
+          <if test="matchTp != null and matchTp!=''">
+            and  m.MATCH_TP = #{matchTp,jdbcType=VARCHAR}
+          </if>
+          <if test="matchName != null and matchName!=''">
+            and  f.match_name = #{matchName,jdbcType=VARCHAR}
+          </if>
+          <if test="teamName != null and teamName!=''">
+            and  (p.real_name = #{teamName,jdbcType=VARCHAR} or t.team_name = #{teamName,jdbcType=VARCHAR})
+          </if>
+        </where>
+  </select>
+
+  <insert id="insert" parameterType="com.macro.mall.model.DMatchResultInfo">
+    insert into D_MATCH_RESULT_INFO (RESULT_ID, APPLY_ID, USER_NM, 
+      RESULT, PRIZE, RANK_SECOND, 
+      TOTAL_SECOND, VOTE_NUM)
+    values (#{resultId,jdbcType=VARCHAR}, #{applyId,jdbcType=VARCHAR}, #{userNm,jdbcType=VARCHAR}, 
+      #{result,jdbcType=VARCHAR}, #{prize,jdbcType=VARCHAR}, #{rankSecond,jdbcType=VARCHAR}, 
+      #{totalSecond,jdbcType=VARCHAR}, #{voteNum,jdbcType=VARCHAR})
+  </insert>
+
+
+  <insert id="insertList"  parameterType="java.util.List">
+    insert into D_MATCH_RESULT_INFO (RESULT_ID, APPLY_ID,USER_NM,RESULT,PRIZE,TOTAL_SECOND,RANK_SECOND)
+    <foreach collection="list" item="item" index="index" separator="union all">
+      select
+      #{item.resultId,jdbcType=VARCHAR},
+      #{item.applyId,jdbcType=VARCHAR},
+      #{item.userNm,jdbcType=VARCHAR},
+      #{item.result,jdbcType=VARCHAR},
+      #{item.prize,jdbcType=VARCHAR},
+      #{item.totalSecond,jdbcType=VARCHAR},
+      #{item.rankSecond,jdbcType=VARCHAR}
+      from dual
+    </foreach>
+  </insert>
+
+  <delete id="delete" parameterType="String">
+    delete from D_MATCH_RESULT_INFO
+    where RESULT_ID =#{resultId,jdbcType=VARCHAR}
+  </delete>
+
+</mapper>

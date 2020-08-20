@@ -1,0 +1,47 @@
+spring:
+  redis:
+    timeout: 60000
+    cluster:
+      nodes: 21.124.160.244:6379,21.124.160.246:6379,21.124.162.20:6379
+    password: Redispass01!
+    database: 0
+    jedis:
+      pool:
+        max-wait: -1
+        max-idle: 50
+        min-idle: 5
+
+  datasource:
+    #    url: jdbc:mysql://localhost:3306/databases?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    #    username: root
+    #    password: 123456
+    #    driver-class-name: com.mysql.jdbc.Driver
+
+
+    #    url: jdbc:oracle:thin:@39.99.147.100:1521:orcl
+    #    username: system
+    #    password: motion
+    #    driver-class-name: oracle.jdbc.driver.OracleDriver
+
+#    url: jdbc:oracle:thin:@22.188.24.249:1521:oraMLIF
+#    username: motion
+#    password: qwe123
+#    driver-class-name: oracle.jdbc.driver.OracleDriver
+
+    url: jdbc:oracle:thin:@(DESCRIPTION =(ADDRESS = (PROTOCOL = TCP)(HOST = 21.123.58.82)(PORT = 1521))(ADDRESS = (PROTOCOL = TCP)(HOST = 21.123.58.85)(PORT = 1521))(LOAD_BALANCE = yes)(CONNECT_DATA =(SERVER = DEDICATED)(SERVICE_NAME = oraMLIFE)(FAILOVER_MODE =(TYPE = SELECT)(METHOD = BASIC)(RETRIES = 180)(DELAY = 5))))
+    username: motion
+    password: ghi67asx
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+
+    druid:
+      initial-size: 5 #连接池初始化大小
+      min-idle: 10 #最小空闲连接数
+      max-active: 20 #最大连接数
+      web-stat-filter:
+        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*" #不统计这些请求数据
+      stat-view-servlet: #访问监控网页的登录用户名和密码
+        login-username: druid
+        login-password: druid
+
+        logging:
+          path: /var/logs #配置日志生成路径

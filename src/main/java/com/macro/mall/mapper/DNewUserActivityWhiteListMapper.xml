@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.macro.mall.mapper.DNewUserActivityWhiteListMapper">
+  <resultMap id="BaseResultMap" type="com.macro.mall.model.DNewUserActivityWhiteList">
+    <result column="LIST_ID" jdbcType="VARCHAR" property="listId" />
+    <result column="LIST_NAME" jdbcType="VARCHAR" property="listName" />
+    <result column="CERT_TYPE" jdbcType="VARCHAR" property="certType" />
+    <result column="CERT_ID" jdbcType="VARCHAR" property="certId" />
+    <result column="STATE" jdbcType="VARCHAR" property="state" />
+    <result column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="DIGITAL_FLAG" jdbcType="VARCHAR" property="digitalFlag" />
+  </resultMap>
+
+
+  <select id="getWhiteList" parameterType="com.macro.mall.model.DNewUserActivityWhiteList" resultMap="BaseResultMap">
+       select distinct a.list_id,a.list_name   from D_NEW_USER_ACTIVITY_WHITE_LIST  a order by a.list_name
+  </select>
+
+
+</mapper>

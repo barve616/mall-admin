@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.macro.mall.mapper.DMatchTypeInfoMapper">
+  <resultMap id="BaseResultMap" type="com.macro.mall.model.DMatchTypeInfo">
+    <id column="MATCH_TYPE_ID" jdbcType="VARCHAR" property="matchTypeId" />
+    <result column="MATCH_TYPE_NAME" jdbcType="VARCHAR" property="matchTypeName" />
+    <result column="MATCH_TYPE_FLAG" jdbcType="VARCHAR" property="matchTypeFlag" />
+  </resultMap>
+
+
+  <sql id="Base_Column_List">
+    MATCH_TYPE_ID, MATCH_TYPE_NAME, MATCH_TYPE_FLAG
+  </sql>
+
+  <select id="queryMatchType" parameterType="com.macro.mall.model.DMatchTypeInfo" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from D_MATCH_TYPE_INFO
+    <where>
+      <if test="matchTypeId!=null and matchTypeId!=''">
+       and  MATCH_TYPE_ID = #{matchTypeId,jdbcType=VARCHAR}
+      </if>
+      <if test="matchTypeName!=null and matchTypeName!=''">
+        and  MATCH_TYPE_NAME = #{matchTypeName,jdbcType=VARCHAR}
+      </if>
+      <if test="matchTypeFlag!=null and matchTypeFlag!=''">
+        and  MATCH_TYPE_FLAG = #{matchTypeFlag,jdbcType=VARCHAR}
+      </if>
+    </where>
+    order by MATCH_CREATE_TIME  DESC
+  </select>
+
+    <select id="queryMatchType1" parameterType="com.macro.mall.model.DMatchTypeInfo" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from D_MATCH_TYPE_INFO
+        <where>
+            <if test="matchTypeId!=null and matchTypeId!=''">
+                and  MATCH_TYPE_ID = #{matchTypeId,jdbcType=VARCHAR}
+            </if>
+            <if test="matchTypeName!=null and matchTypeName!=''">
+                and  MATCH_TYPE_NAME = #{matchTypeName,jdbcType=VARCHAR}
+            </if>
+            <if test="matchTypeFlag!=null and matchTypeFlag!=''">
+                and  MATCH_TYPE_FLAG = #{matchTypeFlag,jdbcType=VARCHAR}
+            </if>
+        </where>
+        order by MATCH_CREATE_TIME  DESC
+    </select>
+
+
+    <select id="queryMatchType2" parameterType="com.macro.mall.model.DMatchTypeInfo" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from D_MATCH_TYPE_INFO
+        <where>
+            <if test="matchTypeFlag!=null and matchTypeFlag!=''">
+                and  MATCH_TYPE_FLAG = #{matchTypeFlag,jdbcType=VARCHAR}
+            </if>
+            <if test="matchTypeId!=null and matchTypeId!=''">
+                and  MATCH_TYPE_ID = #{matchTypeId,jdbcType=VARCHAR}
+            </if>
+            <if test="matchTypeName!=null and matchTypeName!=''">
+                and  MATCH_TYPE_NAME = #{matchTypeName,jdbcType=VARCHAR}
+            </if>
+        </where>
+        order by MATCH_CREATE_TIME  DESC
+    </select>
+
+
+  <delete id="deleteMatchType" parameterType="java.lang.String">
+    delete from D_MATCH_TYPE_INFO
+    where MATCH_TYPE_ID = #{matchTypeId,jdbcType=VARCHAR}
+  </delete>
+
+
+  <update id="updateMatchType" parameterType="com.macro.mall.model.DMatchTypeInfo">
+    update D_MATCH_TYPE_INFO
+    <set>
+      <if test="matchTypeName!=null and matchTypeName!=''">
+        MATCH_TYPE_NAME = #{matchTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="matchTypeFlag!=null and matchTypeFlag!=''">
+        MATCH_TYPE_FLAG = #{matchTypeFlag,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where MATCH_TYPE_ID = #{matchTypeId,jdbcType=VARCHAR}
+  </update>
+
+
+  <insert id="insertMatchType" parameterType="com.macro.mall.model.DMatchTypeInfo">
+    insert into D_MATCH_TYPE_INFO
+     (MATCH_TYPE_ID,
+      MATCH_TYPE_NAME,
+      MATCH_TYPE_FLAG,
+      MATCH_CREATE_TIME
+      )
+    values
+    (sys_guid(),
+    #{matchTypeName,jdbcType=VARCHAR},
+    #{matchTypeFlag,jdbcType=CHAR},
+    to_char(sysdate,'yyyy-mm-dd hh24:mi:ss')
+      )
+  </insert>
+
+</mapper>

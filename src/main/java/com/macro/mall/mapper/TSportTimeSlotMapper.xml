@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.macro.mall.mapper.TSportTimeSlotMapper">
+  <resultMap id="BaseResultMap" type="com.macro.mall.model.TSportTimeSlot">
+    <result column="TIME_SLOT_ID" jdbcType="VARCHAR" property="timeSlotId" />
+    <result column="ACTIVITY_ID" jdbcType="VARCHAR" property="activityId" />
+    <result column="TIME_SLOT_NAME" jdbcType="VARCHAR" property="timeSlotName" />
+    <result column="START_TIME" jdbcType="CHAR" property="startTime" />
+    <result column="END_TIME" jdbcType="CHAR" property="endTime" />
+    <result column="CYCLE" jdbcType="VARCHAR" property="cycle" />
+    <result column="STATE" jdbcType="CHAR" property="state" />
+    <result column="CREATE_TIME" jdbcType="CHAR" property="createTime" />
+    <result column="UPDATE_TIME" jdbcType="CHAR" property="updateTime" />
+    <result column="CYCLE_TYPE" jdbcType="CHAR" property="cycleType" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    TIME_SLOT_ID, ACTIVITY_ID, TIME_SLOT_NAME, START_TIME, END_TIME, CYCLE, STATE, CREATE_TIME, 
+    UPDATE_TIME, CYCLE_TYPE
+  </sql>
+  <select id="selectByExample" parameterType="com.macro.mall.model.TSportTimeSlotExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_SPORT_TIME_SLOT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.macro.mall.model.TSportTimeSlotExample">
+    delete from T_SPORT_TIME_SLOT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.macro.mall.model.TSportTimeSlot">
+    insert into T_SPORT_TIME_SLOT (TIME_SLOT_ID, ACTIVITY_ID, TIME_SLOT_NAME, 
+      START_TIME, END_TIME, CYCLE, 
+      STATE, CREATE_TIME, UPDATE_TIME, 
+      CYCLE_TYPE)
+    values (#{timeSlotId,jdbcType=VARCHAR}, #{activityId,jdbcType=VARCHAR}, #{timeSlotName,jdbcType=VARCHAR}, 
+      #{startTime,jdbcType=CHAR}, #{endTime,jdbcType=CHAR}, #{cycle,jdbcType=VARCHAR}, 
+      #{state,jdbcType=CHAR}, #{createTime,jdbcType=CHAR}, #{updateTime,jdbcType=CHAR}, 
+      #{cycleType,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.macro.mall.model.TSportTimeSlot">
+    insert into T_SPORT_TIME_SLOT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="timeSlotId != null">
+        TIME_SLOT_ID,
+      </if>
+      <if test="activityId != null">
+        ACTIVITY_ID,
+      </if>
+      <if test="timeSlotName != null">
+        TIME_SLOT_NAME,
+      </if>
+      <if test="startTime != null">
+        START_TIME,
+      </if>
+      <if test="endTime != null">
+        END_TIME,
+      </if>
+      <if test="cycle != null">
+        CYCLE,
+      </if>
+      <if test="state != null">
+        STATE,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+      <if test="cycleType != null">
+        CYCLE_TYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="timeSlotId != null">
+        #{timeSlotId,jdbcType=VARCHAR},
+      </if>
+      <if test="activityId != null">
+        #{activityId,jdbcType=VARCHAR},
+      </if>
+      <if test="timeSlotName != null">
+        #{timeSlotName,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=CHAR},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=CHAR},
+      </if>
+      <if test="cycle != null">
+        #{cycle,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=CHAR},
+      </if>
+      <if test="cycleType != null">
+        #{cycleType,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.macro.mall.model.TSportTimeSlotExample" resultType="java.lang.Long">
+    select count(*) from T_SPORT_TIME_SLOT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update T_SPORT_TIME_SLOT
+    <set>
+      <if test="record.timeSlotId != null">
+        TIME_SLOT_ID = #{record.timeSlotId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.activityId != null">
+        ACTIVITY_ID = #{record.activityId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.timeSlotName != null">
+        TIME_SLOT_NAME = #{record.timeSlotName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startTime != null">
+        START_TIME = #{record.startTime,jdbcType=CHAR},
+      </if>
+      <if test="record.endTime != null">
+        END_TIME = #{record.endTime,jdbcType=CHAR},
+      </if>
+      <if test="record.cycle != null">
+        CYCLE = #{record.cycle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null">
+        STATE = #{record.state,jdbcType=CHAR},
+      </if>
+      <if test="record.createTime != null">
+        CREATE_TIME = #{record.createTime,jdbcType=CHAR},
+      </if>
+      <if test="record.updateTime != null">
+        UPDATE_TIME = #{record.updateTime,jdbcType=CHAR},
+      </if>
+      <if test="record.cycleType != null">
+        CYCLE_TYPE = #{record.cycleType,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update T_SPORT_TIME_SLOT
+    set TIME_SLOT_ID = #{record.timeSlotId,jdbcType=VARCHAR},
+      ACTIVITY_ID = #{record.activityId,jdbcType=VARCHAR},
+      TIME_SLOT_NAME = #{record.timeSlotName,jdbcType=VARCHAR},
+      START_TIME = #{record.startTime,jdbcType=CHAR},
+      END_TIME = #{record.endTime,jdbcType=CHAR},
+      CYCLE = #{record.cycle,jdbcType=VARCHAR},
+      STATE = #{record.state,jdbcType=CHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=CHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=CHAR},
+      CYCLE_TYPE = #{record.cycleType,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+
+  <!--根据时间段id查询时间段信息-->
+  <select id="selectByPrimaryKey" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List"/>
+    from T_SPORT_TIME_SLOT
+    where TIME_SLOT_ID=#{timeSlotId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectTimeSlotByActivityId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <!--根据活动id查询时间段-->
+    select
+    <include refid="Base_Column_List"/>,
+    (select count (*)
+    from T_SPORT_COMMODITY_ACTIVITY sca
+    where sts.TIME_SLOT_ID = SCA.TIME_SLOT_ID
+    and sca.ACTIVITY_ID= #{activityId,jdbcType=VARCHAR}
+    ) commodityNum
+    from T_SPORT_TIME_SLOT sts
+  </select>
+  <!--编辑时间段信息-->
+  <update id="updateByPrimaryKey" parameterType="com.macro.mall.model.TSportTimeSlot">
+     update T_SPORT_TIME_SLOT
+    set TIME_SLOT_ID = #{timeSlotId,jdbcType=VARCHAR},
+      ACTIVITY_ID = #{activityId,jdbcType=VARCHAR},
+      TIME_SLOT_NAME = #{timeSlotName,jdbcType=VARCHAR},
+      START_TIME = #{startTime,jdbcType=CHAR},
+      ENDTIME = #{endtime,jdbcType=CHAR},
+      CYCLE = #{cycle,jdbcType=VARCHAR},
+      STATE = #{state,jdbcType=CHAR},
+      CREATE_TIME = #{createTime,jdbcType=CHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=CHAR}
+      where TIME_SLOT_ID=#{timeSlotId,jdbcType=VARCHAR}
+  </update>
+
+</mapper>

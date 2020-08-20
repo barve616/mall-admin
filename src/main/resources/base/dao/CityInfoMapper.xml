@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.macro.mall.base.dao.CityInfoDao">
+	<resultMap type="com.macro.mall.base.dto.topConfig.CityInfo" id="provinceList">
+		<result column="PROVINCE_ID" property="provinceId" />
+		<result column="PROVINCE_NAME" property="provinceName" />
+		<result column="CITY_NAME" property="cityName" />
+		<result column="CITY_ID" property="cityId" />
+		<result column="AREA2" property="area2" />
+		<result column="LOCATION_ID" property="locationId" />
+		<result column="VAS_CITY_ID" property="vasCityId" />
+		<result column="VALS_POSTION_ID" property="valsPostionId" />
+		<result column="FLAG" property="flag" />
+		<result column="IS_HOT" property="isHot" />
+		<result column="name" property="name" />
+	</resultMap>
+	<select id="getProvinceInfo" resultMap="provinceList">
+		select PROVINCE_ID,PROVINCE_NAME
+		from d_city_information
+		where CITY_ID !='000000'
+		group by PROVINCE_ID,PROVINCE_NAME
+		order by PROVINCE_ID
+	</select>
+	<select id="getCityInfo" resultMap="provinceList"
+		parameterType="com.macro.mall.base.dto.topConfig.CityInfo">
+		select PROVINCE_ID,PROVINCE_NAME,CITY_NAME,CITY_ID from
+		d_city_information
+		<where>
+			PROVINCE_ID !='000000'
+			<if test="provinceId!=null &amp;&amp; provinceId.length()>0">
+				AND PROVINCE_ID LIKE '%'||#{provinceId}||'%'
+			</if>
+		</where>
+		order by CITY_ID
+	</select>
+	<select id="getCityMapInfo" resultMap="provinceList"
+		parameterType="com.macro.mall.base.dto.topConfig.CityInfo">
+		select * from (select CITY_ID, CITY_NAME as name ,PROVINCE_ID  
+  from d_city_information
+  <where>
+      PROVINCE_ID !='000000' and nvl(flag,'1') !='0'
+      <if test="provinceName!=null &amp;&amp; provinceName.length()>0">
+        AND PROVINCE_NAME LIKE '%'||#{provinceName}||'%'
+      </if>
+      <if test="cityName!=null &amp;&amp; cityName.length()>0">
+        AND CITY_NAME LIKE '%'||#{cityName}||'%'
+      </if>
+    </where> 
+union all (select PROVINCE_ID as CITY_ID, PROVINCE_NAME as name,null as PROVINCE_ID
+             from (select PROVINCE_ID,
+                          PROVINCE_NAME,
+                          CITY_NAME,
+                          CITY_ID,
+                          row_number() over(PARTITION by t.province_id order by CITY_ID) rn
+                     from d_city_information t
+                     <where>
+                      PROVINCE_ID !='000000' and nvl(flag,'1') !='0'
+                       <if test="provinceName!=null &amp;&amp; provinceName.length()>0">
+					        AND PROVINCE_NAME LIKE '%'||#{provinceName}||'%'
+					      </if>
+					      <if test="cityName!=null &amp;&amp; cityName.length()>0">
+					        AND CITY_NAME LIKE '%'||#{cityName}||'%'
+					      </if>
+                    </where>)
+            where rn = 1) )order by name
+	</select>
+	<select id="getCityInfoOne" resultMap="provinceList"
+		parameterType="com.macro.mall.base.dto.topConfig.CityInfo">
+		select distinct PROVINCE_NAME ,CITY_NAME,PROVINCE_ID,CITY_ID
+		from d_city_information where CITY_ID=#{cityId}
+	</select>
+	<select id="getCityOne" resultMap="provinceList" parameterType="string">
+		select distinct PROVINCE_NAME ,CITY_NAME
+		from d_city_information where CITY_ID=#{cityId}
+	</select>
+</mapper>

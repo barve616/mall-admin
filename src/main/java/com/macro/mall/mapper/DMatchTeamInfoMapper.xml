@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.macro.mall.mapper.DMatchTeamInfoDao">
+    <resultMap id="BaseResultMap" type="com.macro.mall.model.DMatchTeamInfo">
+        <!--
+          WARNING - @mbggenerated
+        -->
+        <id column="TEAM_ID" property="teamId" jdbcType="VARCHAR"/>
+        <result column="TEAM_CODE" property="teamCode" jdbcType="VARCHAR"/>
+        <result column="MATCH_ID" property="matchId" jdbcType="CHAR"/>
+        <result column="TEAM_ID" property="teamId" jdbcType="VARCHAR"/>
+        <result column="TEAM_NAME" property="teamName" jdbcType="VARCHAR"/>
+        <result column="TEAM_UPDATE_TIME" property="teamUpdateTime" jdbcType="VARCHAR"/>
+        <result column="TEAM_HEADER_NAME" property="teamHeaderName" jdbcType="VARCHAR"/>
+        <result column="TEAM_HEADER_PHONE" property="teamHeaderPhone" jdbcType="VARCHAR"/>
+        <result column="TEAM_STATE" property="teamState" jdbcType="CHAR"/>
+        <result column="TEAM_NUM" property="teamNum" jdbcType="VARCHAR"/>
+        <result column="TEAM_CHECK_DES" property="teamCheckDes" jdbcType="VARCHAR"/>
+        <result column="MATCH_MAX_ID" property="matchMaxId" jdbcType="VARCHAR"/>
+        <result column="MATCH_MIN_ID" property="matchMinId" jdbcType="VARCHAR"/>
+        <result column="MATCH_MAX_NAME" property="matchMaxName" jdbcType="VARCHAR"/>
+        <result column="MATCH_MIN_DETAIL" property="matchMinDetail" jdbcType="VARCHAR"/>
+        <result column="TEAM_CREATE_TIME" property="teamCreateTime" jdbcType="VARCHAR"/>
+        <result column="GENDER" property="gender" jdbcType="VARCHAR"/>
+        <result column="AGE" property="age" jdbcType="VARCHAR"/>
+        <result column="CERT_TYPE" property="certType" jdbcType="VARCHAR"/>
+        <result column="CERT_ID" property="certId" jdbcType="VARCHAR"/>
+        <result column="EMERGENCY_NAME" property="emergencyName" jdbcType="VARCHAR"/>
+        <result column="EMERGENCY_PHONE" property="emergencyPhone" jdbcType="VARCHAR"/>
+        <result column="EMERGENCY_ADDRESS" property="emergencyAddress" jdbcType="VARCHAR"/>
+        <result column="MATCH_TP" property="matchTp" jdbcType="VARCHAR"/>
+        <result column="MATCH_TP_NAME" property="matchTpName" jdbcType="VARCHAR"/>
+        <result column="LOGIN_NAME" property="loginName" jdbcType="VARCHAR"/>
+        <result column="BANK_CARD" property="bankCard" jdbcType="VARCHAR"/>
+    </resultMap>
+
+
+    <select id="findTeamInfo" parameterType="com.macro.mall.model.DMatchTeamInfo" resultMap="BaseResultMap">
+        select d.team_id,
+        d.team_code,
+        d.match_id,
+        d.team_name,
+        d.team_header_name,
+        d.team_header_phone,
+        d.team_state,
+        d.team_num,
+        d.team_check_des,
+        d.login_name,
+        s.match_tp,
+        s.match_tp_name,
+        s.match_max_name,
+        s.match_min_detail,
+        s.match_min_id,
+        s.match_max_id,
+        d.TEAM_CREATE_TIME,
+        d.team_update_time,
+        t.gender,
+        t.age,
+        t.cert_type,
+        t.cert_id,
+        t.EMERGENCY_NAME,
+        t.EMERGENCY_PHONE,
+        t.EMERGENCY_ADDRESS,
+        t.bank_card
+        from d_match_team_info d
+        join d_match_apply_info t on d.team_id=t.team_id
+        and d.team_header_phone=t.user_phone
+        and t.apply_state='00'
+          join d_match_info m on d.match_id=m.match_id
+          join d_match_minterm s on s.match_min_id=m.match_group_id
+       where  1=1
+       and d.team_state !='5'
+            <if test="teamState!=null and teamState!=''">
+                and d.TEAM_STATE = #{teamState}
+            </if>
+            <if test="teamName!=null and teamName!=''">
+                and d.TEAM_NAME like
+                '%'||#{teamName,jdbcType=VARCHAR}||'%'
+            </if>
+            <if test="teamHeaderName!=null and teamHeaderName!=''">
+                and d.TEAM_HEADER_NAME like
+                '%'||#{teamHeaderName,jdbcType=VARCHAR}||'%'
+            </if>
+            <if test="matchMaxId!=null and matchMaxId!=''">
+                and s.MATCH_MAX_ID = #{matchMaxId}
+            </if>
+            <if test="matchTp!=null and matchTp!=''">
+                and s.MATCH_TP = #{matchTp}
+            </if>
+            <if test="startTime!=null and startTime!=''  ">
+                and d.TEAM_CREATE_TIME  <![CDATA[>]]> #{startTime}
+            </if>
+            <if test="endTime!=null and endTime!='' ">
+                and d.TEAM_CREATE_TIME  <![CDATA[<]]> #{endTime}
+            </if>
+            order by  d.TEAM_CREATE_TIME desc
+    </select>
+
+
+
+    <select id="queryTeamInfo" parameterType="String" resultType="String">
+        select MATCH_ID
+        from d_match_team_info
+        where TEAM_ID = #{teamId}
+
+    </select>
+
+    <select id="queryTeamInfo1" parameterType="String" resultMap="BaseResultMap">
+       select d.team_id,
+       d.team_code,
+       d.match_id,
+       d.team_name,
+       d.team_header_name,
+       d.team_header_phone,
+       d.team_state,
+       d.team_num,
+       d.team_check_des,
+       d.team_update_time,
+       d.team_create_time,
+       d.team_logo,
+       d.login_name
+        from d_match_team_info d
+        where d.team_id = #{teamId}
+
+    </select>
+
+    <update id="updateTeamInfo" parameterType="com.macro.mall.model.DMatchTeamInfo">
+        update d_match_team_info
+        set TEAM_STATE = #{teamState,jdbcType=VARCHAR},
+        LOGIN_NAME= #{loginName,jdbcType=VARCHAR},
+        TEAM_UPDATE_TIME=to_char(sysdate,'yyyy-mm-dd hh24:mi:ss')
+        <if test="teamCheckDes != null and teamCheckDes != ''">
+            , TEAM_CHECK_DES = #{teamCheckDes,jdbcType=VARCHAR}
+        </if>
+        where TEAM_ID = #{teamId}
+
+    </update>
+
+
+    <update id="updateAllTeamInfo" parameterType="String">
+        update d_match_team_info
+        set TEAM_STATE ='1',
+         LOGIN_NAME= #{loginName,jdbcType=VARCHAR},
+        TEAM_UPDATE_TIME=to_char(sysdate,'yyyy-mm-dd hh24:mi:ss')
+        <if test="teamCheckDes != null and teamCheckDes != ''">
+            , TEAM_CHECK_DES = #{teamCheckDes,jdbcType=VARCHAR}
+        </if>
+        where TEAM_ID = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateAllTeamInfo1" parameterType="String">
+        update d_match_team_info
+        set TEAM_STATE ='4',
+        TEAM_UPDATE_TIME=to_char(sysdate,'yyyy-mm-dd hh24:mi:ss'),
+        LOGIN_NAME= #{loginName,jdbcType=VARCHAR}
+        <if test="teamCheckDes != null and teamCheckDes != ''">
+            , TEAM_CHECK_DES = #{teamCheckDes,jdbcType=VARCHAR}
+        </if>
+        where TEAM_ID = #{id,jdbcType=VARCHAR}
+    </update>
+
+
+    <select id="queryMatchTeamApplyByKey" parameterType="com.macro.mall.model.DMatchTeamInfo" resultMap="BaseResultMap">
+                                      select s.team_name,
+                                       s.team_header_name,
+                                       d.cert_type,
+                                       d.cert_id,
+                                       s.team_header_phone,
+                                       d.gender,
+                                       d.age,
+                                       d.emergency_name,
+                                       d.emergency_phone,
+                                       d.emergency_address,
+                                       s.team_create_time,
+                                       s.team_state,
+                                       (select distinct count(*)
+                                          from d_match_apply_info t
+                                         where t.team_id = s.team_id) num
+                                  from d_match_team_info s
+                                  left join d_match_apply_info d
+                                    on s.match_id = d.match_id
+                                   and s.team_id = d.team_id
+                                   and s.team_header_phone = d.user_phone
+                                   where  s.match_id=#{matchId}
+                                    <if test="teamName!=null and teamName!=''">
+                                        and s.TEAM_NAME like
+                                         '%'||#{teamName,jdbcType=VARCHAR}||'%'
+                                    </if>
+                                    <if test="teamHeaderName!=null and teamHeaderName!=''">
+                                        and s.team_header_name like
+                                         '%'||#{teamHeaderName,jdbcType=VARCHAR}||'%'
+                                     </if>
+                                      <if test="teamState!=null and teamState!=''">
+                                        and s.team_state = #{teamState}
+                                      </if>
+                                   </select>
+
+</mapper>

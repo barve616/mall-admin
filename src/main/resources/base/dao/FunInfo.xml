@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.macro.mall.base.dao.FunInfoDao">
+	<select id="findAll" resultMap="funInfoResult">
+		select *from d_fun_info order by fun_id
+	</select>
+	<resultMap type="com.macro.mall.base.dto.FunInfo" id="funInfoResult">
+		<result property="funId" column="fun_id" />
+		<result property="funPid" column="fun_pid" />
+		<result  property="funName" column="fun_name"/>
+		<result property="funSeq"  column="fun_seq"/>
+		<result  property="funStyle" column="fun_style"/>
+		<result  property="funType" column="fun_type"/>
+		<result property="funState"  column="fun_state"/>
+		<result property="funParm" column="fun_parm" />
+	</resultMap>
+	<select id="findById" parameterType="String" resultMap="funInfoResult">
+		select *from d_fun_info where fun_id=#{funId}
+	</select>
+	
+	<select id="findByfunId" parameterType="String" resultMap="funInfoResult">
+		select fun_id,fun_pid,fun_name from d_fun_info where fun_id=#{funId}
+	</select>
+</mapper>

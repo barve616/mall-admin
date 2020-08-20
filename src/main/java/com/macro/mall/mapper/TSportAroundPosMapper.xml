@@ -1,0 +1,464 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.macro.mall.mapper.TSportAroundPosMapper">
+  <resultMap id="BaseResultMap" type="com.macro.mall.model.TSportAroundPos">
+    <result column="AROUND_POS_ID" jdbcType="CHAR" property="aroundPosId" />
+    <result column="CREATE_DT" jdbcType="CHAR" property="createDt" />
+    <result column="UPDATE_DT" jdbcType="CHAR" property="updateDt" />
+    <result column="SHOP_ID" jdbcType="CHAR" property="shopId" />
+    <result column="POS_NAME" jdbcType="VARCHAR" property="posName" />
+    <result column="CITY_CODE" jdbcType="VARCHAR" property="cityCode" />
+    <result column="REGION_CODE" jdbcType="VARCHAR" property="regionCode" />
+    <result column="STREET_CODE" jdbcType="VARCHAR" property="streetCode" />
+    <result column="SITE" jdbcType="VARCHAR" property="site" />
+    <result column="PHONE" jdbcType="VARCHAR" property="phone" />
+    <result column="BUSINESS_TIME_TYPE" jdbcType="CHAR" property="businessTimeType" />
+    <result column="BUSINESS_START_TIME" jdbcType="CHAR" property="businessStartTime" />
+    <result column="BUSINESS_END_TIME" jdbcType="CHAR" property="businessEndTime" />
+    <result column="FACILITIES" jdbcType="VARCHAR" property="facilities" />
+    <result column="LABEL" jdbcType="VARCHAR" property="label" />
+    <result column="SHOP_LOGO" jdbcType="VARCHAR" property="shopLogo" />
+    <result column="ROTATION_CHART_PIC" jdbcType="VARCHAR" property="rotationChartPic" />
+    <result column="STATE" jdbcType="CHAR" property="state" />
+    <result column="AROUND_POS_TYPE" jdbcType="CHAR" property="aroundPosType" />
+    <result column="PRICE" jdbcType="VARCHAR" property="price" />
+    <result column="POS_TYPE" jdbcType="CHAR" property="posType" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    AROUND_POS_ID, CREATE_DT, UPDATE_DT, SHOP_ID, POS_NAME, CITY_CODE, REGION_CODE, STREET_CODE, 
+    SITE, PHONE, BUSINESS_TIME_TYPE, BUSINESS_START_TIME, BUSINESS_END_TIME, FACILITIES, 
+    LABEL, SHOP_LOGO, ROTATION_CHART_PIC, STATE, AROUND_POS_TYPE, PRICE, POS_TYPE
+  </sql>
+  <select id="selectByExample" parameterType="com.macro.mall.model.TSportAroundPosExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_SPORT_AROUND_POS
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.macro.mall.model.TSportAroundPosExample">
+    delete from T_SPORT_AROUND_POS
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.macro.mall.model.TSportAroundPos">
+    insert into T_SPORT_AROUND_POS (AROUND_POS_ID, CREATE_DT, UPDATE_DT, 
+      SHOP_ID, POS_NAME, CITY_CODE, 
+      REGION_CODE, STREET_CODE, SITE, 
+      PHONE, BUSINESS_TIME_TYPE, BUSINESS_START_TIME, 
+      BUSINESS_END_TIME, FACILITIES, LABEL, 
+      SHOP_LOGO, ROTATION_CHART_PIC, STATE, 
+      AROUND_POS_TYPE, PRICE, POS_TYPE
+      )
+    values (#{aroundPosId,jdbcType=CHAR}, #{createDt,jdbcType=CHAR}, #{updateDt,jdbcType=CHAR}, 
+      #{shopId,jdbcType=CHAR}, #{posName,jdbcType=VARCHAR}, #{cityCode,jdbcType=VARCHAR}, 
+      #{regionCode,jdbcType=VARCHAR}, #{streetCode,jdbcType=VARCHAR}, #{site,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{businessTimeType,jdbcType=CHAR}, #{businessStartTime,jdbcType=CHAR}, 
+      #{businessEndTime,jdbcType=CHAR}, #{facilities,jdbcType=VARCHAR}, #{label,jdbcType=VARCHAR}, 
+      #{shopLogo,jdbcType=VARCHAR}, #{rotationChartPic,jdbcType=VARCHAR}, #{state,jdbcType=CHAR}, 
+      #{aroundPosType,jdbcType=CHAR}, #{price,jdbcType=VARCHAR}, #{posType,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.macro.mall.model.TSportAroundPos">
+    insert into T_SPORT_AROUND_POS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="aroundPosId != null">
+        AROUND_POS_ID,
+      </if>
+      <if test="createDt != null">
+        CREATE_DT,
+      </if>
+      <if test="updateDt != null">
+        UPDATE_DT,
+      </if>
+      <if test="shopId != null">
+        SHOP_ID,
+      </if>
+      <if test="posName != null">
+        POS_NAME,
+      </if>
+      <if test="cityCode != null">
+        CITY_CODE,
+      </if>
+      <if test="regionCode != null">
+        REGION_CODE,
+      </if>
+      <if test="streetCode != null">
+        STREET_CODE,
+      </if>
+      <if test="site != null">
+        SITE,
+      </if>
+      <if test="phone != null">
+        PHONE,
+      </if>
+      <if test="businessTimeType != null">
+        BUSINESS_TIME_TYPE,
+      </if>
+      <if test="businessStartTime != null">
+        BUSINESS_START_TIME,
+      </if>
+      <if test="businessEndTime != null">
+        BUSINESS_END_TIME,
+      </if>
+      <if test="facilities != null">
+        FACILITIES,
+      </if>
+      <if test="label != null">
+        LABEL,
+      </if>
+      <if test="shopLogo != null">
+        SHOP_LOGO,
+      </if>
+      <if test="rotationChartPic != null">
+        ROTATION_CHART_PIC,
+      </if>
+      <if test="state != null">
+        STATE,
+      </if>
+      <if test="aroundPosType != null">
+        AROUND_POS_TYPE,
+      </if>
+      <if test="price != null">
+        PRICE,
+      </if>
+      <if test="posType != null">
+        POS_TYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="aroundPosId != null">
+        #{aroundPosId,jdbcType=CHAR},
+      </if>
+      <if test="createDt != null">
+        #{createDt,jdbcType=CHAR},
+      </if>
+      <if test="updateDt != null">
+        #{updateDt,jdbcType=CHAR},
+      </if>
+      <if test="shopId != null">
+        #{shopId,jdbcType=CHAR},
+      </if>
+      <if test="posName != null">
+        #{posName,jdbcType=VARCHAR},
+      </if>
+      <if test="cityCode != null">
+        #{cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="regionCode != null">
+        #{regionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="streetCode != null">
+        #{streetCode,jdbcType=VARCHAR},
+      </if>
+      <if test="site != null">
+        #{site,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="businessTimeType != null">
+        #{businessTimeType,jdbcType=CHAR},
+      </if>
+      <if test="businessStartTime != null">
+        #{businessStartTime,jdbcType=CHAR},
+      </if>
+      <if test="businessEndTime != null">
+        #{businessEndTime,jdbcType=CHAR},
+      </if>
+      <if test="facilities != null">
+        #{facilities,jdbcType=VARCHAR},
+      </if>
+      <if test="label != null">
+        #{label,jdbcType=VARCHAR},
+      </if>
+      <if test="shopLogo != null">
+        #{shopLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="rotationChartPic != null">
+        #{rotationChartPic,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=CHAR},
+      </if>
+      <if test="aroundPosType != null">
+        #{aroundPosType,jdbcType=CHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="posType != null">
+        #{posType,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.macro.mall.model.TSportAroundPosExample" resultType="java.lang.Long">
+    select count(*) from T_SPORT_AROUND_POS
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update T_SPORT_AROUND_POS
+    <set>
+      <if test="record.aroundPosId != null">
+        AROUND_POS_ID = #{record.aroundPosId,jdbcType=CHAR},
+      </if>
+      <if test="record.createDt != null">
+        CREATE_DT = #{record.createDt,jdbcType=CHAR},
+      </if>
+      <if test="record.updateDt != null">
+        UPDATE_DT = #{record.updateDt,jdbcType=CHAR},
+      </if>
+      <if test="record.shopId != null">
+        SHOP_ID = #{record.shopId,jdbcType=CHAR},
+      </if>
+      <if test="record.posName != null">
+        POS_NAME = #{record.posName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cityCode != null">
+        CITY_CODE = #{record.cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.regionCode != null">
+        REGION_CODE = #{record.regionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.streetCode != null">
+        STREET_CODE = #{record.streetCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.site != null">
+        SITE = #{record.site,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null">
+        PHONE = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.businessTimeType != null">
+        BUSINESS_TIME_TYPE = #{record.businessTimeType,jdbcType=CHAR},
+      </if>
+      <if test="record.businessStartTime != null">
+        BUSINESS_START_TIME = #{record.businessStartTime,jdbcType=CHAR},
+      </if>
+      <if test="record.businessEndTime != null">
+        BUSINESS_END_TIME = #{record.businessEndTime,jdbcType=CHAR},
+      </if>
+      <if test="record.facilities != null">
+        FACILITIES = #{record.facilities,jdbcType=VARCHAR},
+      </if>
+      <if test="record.label != null">
+        LABEL = #{record.label,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopLogo != null">
+        SHOP_LOGO = #{record.shopLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rotationChartPic != null">
+        ROTATION_CHART_PIC = #{record.rotationChartPic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null">
+        STATE = #{record.state,jdbcType=CHAR},
+      </if>
+      <if test="record.aroundPosType != null">
+        AROUND_POS_TYPE = #{record.aroundPosType,jdbcType=CHAR},
+      </if>
+      <if test="record.price != null">
+        PRICE = #{record.price,jdbcType=VARCHAR},
+      </if>
+      <if test="record.posType != null">
+        POS_TYPE = #{record.posType,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update T_SPORT_AROUND_POS
+    set AROUND_POS_ID = #{record.aroundPosId,jdbcType=CHAR},
+      CREATE_DT = #{record.createDt,jdbcType=CHAR},
+      UPDATE_DT = #{record.updateDt,jdbcType=CHAR},
+      SHOP_ID = #{record.shopId,jdbcType=CHAR},
+      POS_NAME = #{record.posName,jdbcType=VARCHAR},
+      CITY_CODE = #{record.cityCode,jdbcType=VARCHAR},
+      REGION_CODE = #{record.regionCode,jdbcType=VARCHAR},
+      STREET_CODE = #{record.streetCode,jdbcType=VARCHAR},
+      SITE = #{record.site,jdbcType=VARCHAR},
+      PHONE = #{record.phone,jdbcType=VARCHAR},
+      BUSINESS_TIME_TYPE = #{record.businessTimeType,jdbcType=CHAR},
+      BUSINESS_START_TIME = #{record.businessStartTime,jdbcType=CHAR},
+      BUSINESS_END_TIME = #{record.businessEndTime,jdbcType=CHAR},
+      FACILITIES = #{record.facilities,jdbcType=VARCHAR},
+      LABEL = #{record.label,jdbcType=VARCHAR},
+      SHOP_LOGO = #{record.shopLogo,jdbcType=VARCHAR},
+      ROTATION_CHART_PIC = #{record.rotationChartPic,jdbcType=VARCHAR},
+      STATE = #{record.state,jdbcType=CHAR},
+      AROUND_POS_TYPE = #{record.aroundPosType,jdbcType=CHAR},
+      PRICE = #{record.price,jdbcType=VARCHAR},
+      POS_TYPE = #{record.posType,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+
+
+  <sql id="AroundPosSql">
+        t.around_pos_id,t.create_dt,t.update_dt, t.shop_id,t.pos_name,t.city_code,t.region_code,t.street_code,
+                t.site,t.phone,t.business_time_type,t.business_start_time,t.business_end_time,t.facilities,t.label,
+                t.shop_logo,t.rotation_chart_pic,t.state,t.around_pos_type
+  </sql>
+
+  <resultMap id="AroundPosListMap" type="com.macro.mall.communicate.resourcecenter.bean.AroundPosDTO">
+    <result column="AROUND_POS_ID" jdbcType="CHAR" property="aroundPosId" />
+    <result column="SHOP_ID" jdbcType="CHAR" property="shopId" />
+    <result column="POS_NAME" jdbcType="VARCHAR" property="posName" />
+    <result column="LABEL" jdbcType="VARCHAR" property="label" />
+    <result column="SHOP_LOGO" jdbcType="VARCHAR" property="shopLogo" />
+    <result column="PRICE" jdbcType="VARCHAR" property="price" />
+    <result column="type_name" jdbcType="VARCHAR" property="typeName" />
+    <result column="site" jdbcType="VARCHAR" property="site" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="business_start_time" jdbcType="VARCHAR" property="businessStartTime" />
+    <result column="business_end_time" jdbcType="VARCHAR" property="businessEndTime" />
+    <result column="facilities" jdbcType="VARCHAR" property="facilities" />
+    <result column="rotation_chart_pic" jdbcType="VARCHAR" property="rotationChartPic" />
+    <result column="city_name" jdbcType="VARCHAR" property="cityName" />
+    <result column="businessTimeTypeName" jdbcType="VARCHAR" property="businessTimeTypeName" />
+  </resultMap>
+
+
+  <!--查询店铺商户列表-->
+  <select id="getAroundPosList" parameterType="com.macro.mall.communicate.resourcecenter.bean.AroundPosListVO" resultMap="BaseResultMap">
+    select t.around_pos_id,t.shop_id,t.pos_name,t.site,t.phone,t.business_start_time,t.business_end_time,
+           t.facilities, t.label,  t.shop_logo,t.rotation_chart_pic,t.price, b.type_name,ci1.city_name, t.STATE,
+               (case t.business_time_type
+                 when '01' then
+                  '周一到周日'
+                 when '02' then
+                  '工作日'
+                 when '03' then
+                  '休息日（周六日）'
+                 else
+                  '周一到周日'
+               end) as businessTimeTypeName
+          from t_sport_Around_pos t
+          left join T_SPORT_AROUND_TYPE b on t.around_pos_type = b.id
+          left join D_CITY_INFORMATION ci1 on t.city_code = ci1.city_id
+          order by t.create_dt desc
+  </select>
+
+  <!--查询商户详情-->
+  <select id="getAroundPosDetail" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select t.around_pos_id,
+           t.create_dt,
+           t.update_dt,
+           t.shop_id,
+           t.pos_name,
+           t.city_code,
+           t.region_code,
+           t.street_code,
+           t.site,
+           t.phone,
+           t.business_time_type,
+           t.business_start_time,
+           t.business_end_time,
+           t.facilities,
+           t.label,
+        (select param_value from d_tcodeposs_para a where a.param_type = 'visitPath2')||t.shop_logo as  shop_logo,
+           t.rotation_chart_pic,
+           t.state,
+           t.around_pos_type,
+           t.price,
+           t.pos_type
+    from T_SPORT_AROUND_POS t
+    where t.around_pos_id = #{aroundPosId,jdbcType=CHAR}
+  </select>
+
+
+  <!--查询店铺推荐的商户-->
+  <select id="getRecommendAroundPosList" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select <include refid="AroundPosSql"/> from t_sport_Around_pos t
+    left join t_sport_shop_Around a on t.around_pos_id = a.around_id
+    where 1=1 and t.state='00' and a.shop_id =#{shopId,jdbcType=CHAR}
+  </select>
+
+  <!--查询店铺没有推荐的商户-->
+  <select id="getNoRecommendAroundPosList" parameterType="com.macro.mall.communicate.resourcecenter.bean.AroundPosListVO" resultMap="BaseResultMap">
+    select <include refid="AroundPosSql"/>
+    from t_sport_Around_pos t
+    where t.around_pos_id not in (select t.around_id from t_sport_shop_Around t where t.shop_id = #{shopId,jdbcType=CHAR})
+    and t.state = '00'
+    <if test="posName!=null and posName !=''">
+      and t.pos_name like  '%'|| #{posName,jdbcType=VARCHAR} ||'%'
+    </if>
+    <if test="site !=null and site !=''">
+      and  t.site like '%'|| #{site,jdbcType=VARCHAR} ||'%'
+    </if>
+    <if test="aroundPosType !=null and aroundPosType !=''">
+      and  t.around_pos_type  = #{aroundPosType,jdbcType=CHAR}
+    </if>
+  </select>
+
+</mapper>

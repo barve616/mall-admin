@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.macro.mall.mapper.DMatchMaxtermMapper">
+    <resultMap id="BaseResultMap" type="com.macro.mall.model.DMatchMaxterm">
+        <result column="MATCH_MAX_ID" jdbcType="VARCHAR" property="matchMaxId"/>
+        <result column="MATCH_MAX_NAME" jdbcType="VARCHAR" property="matchMaxName"/>
+        <result column="MATCH_MAX_DETAIL" jdbcType="VARCHAR" property="matchMaxDetail"/>
+        <result column="MATCH_MAX_TYPE_ID" jdbcType="VARCHAR" property="matchMaxTypeId"/>
+        <result column="MATCH_DETAIL" jdbcType="BLOB" property="matchDetail"/>
+    </resultMap>
+
+
+    <sql id="Base_Column_List">
+    MATCH_MAX_ID, MATCH_MAX_NAME, MATCH_MAX_DETAIL, MATCH_MAX_TYPE_ID,MATCH_DETAIL
+  </sql>
+
+    <delete id="delete" parameterType="com.macro.mall.model.DMatchMaxterm">
+    delete from D_MATCH_MAXTERM
+    where MATCH_MAX_ID=#{matchMaxId,jdbcType=VARCHAR}
+  </delete>
+
+    <insert id="insert" parameterType="com.macro.mall.model.DMatchMaxterm">
+    insert into D_MATCH_MAXTERM (MATCH_MAX_ID, MATCH_MAX_NAME, MATCH_MAX_DETAIL, 
+      MATCH_MAX_TYPE_ID,MATCH_DETAIL)
+    values (#{matchMaxId,jdbcType=VARCHAR}, #{matchMaxName,jdbcType=VARCHAR}, #{matchMaxDetail,jdbcType=VARCHAR}, 
+      #{matchMaxTypeId,jdbcType=VARCHAR}, #{matchDetail,jdbcType=BLOB})
+  </insert>
+
+
+    <select id="queryList" parameterType="com.macro.mall.model.DMatchMaxterm" resultMap="BaseResultMap">
+        select d.MATCH_MAX_ID, d.MATCH_MAX_NAME, d.MATCH_DETAIL,t.MATCH_MAX_TYPE_NAME AS MATCH_MAX_DETAIL, d.MATCH_MAX_TYPE_ID from
+        D_MATCH_MAXTERM d join D_MATCH_MAXTYPE t
+        on d.MATCH_MAX_TYPE_ID=t.MATCH_MAX_TYPE_ID
+        <where>
+            <if test="matchMaxName != null and matchMaxName !=''">
+                and d.MATCH_MAX_NAME = #{matchMaxName,jdbcType=VARCHAR}
+            </if>
+            <if test="matchMaxId != null and matchMaxId !=''">
+                and d.MATCH_MAX_ID = #{matchMaxId,jdbcType=VARCHAR}
+            </if>
+            <if test="matchMaxDetail != null and matchMaxDetail !=''">
+                and d.MATCH_MAX_DETAIL = #{matchMaxDetail,jdbcType=VARCHAR}
+            </if>
+            <if test="matchMaxTypeId != null and matchMaxTypeId !=''">
+                and d.MATCH_MAX_TYPE_ID = #{matchMaxTypeId,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+
+
+    <select id="queryList1" parameterType="com.macro.mall.model.DMatchMaxterm" resultMap="BaseResultMap">
+        select d.MATCH_MAX_ID, d.MATCH_MAX_NAME,  d.MATCH_DETAIL,t.MATCH_MAX_TYPE_NAME AS MATCH_MAX_DETAIL, d.MATCH_MAX_TYPE_ID from
+        D_MATCH_MAXTERM d join D_MATCH_MAXTYPE t
+        on d.MATCH_MAX_TYPE_ID=t.MATCH_MAX_TYPE_ID
+        <where>
+            <if test="matchMaxName != null and matchMaxName !=''">
+                and d.MATCH_MAX_NAME = #{matchMaxName,jdbcType=VARCHAR}
+            </if>
+            <if test="matchMaxId != null and matchMaxId !=''">
+                and d.MATCH_MAX_ID = #{matchMaxId,jdbcType=VARCHAR}
+            </if>
+            <if test="matchMaxDetail != null and matchMaxDetail !=''">
+                and d.MATCH_MAX_DETAIL = #{matchMaxDetail,jdbcType=VARCHAR}
+            </if>
+            <if test="matchMaxTypeId != null and matchMaxTypeId !=''">
+                and d.MATCH_MAX_TYPE_ID = #{matchMaxTypeId,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+    <update id="update" parameterType="com.macro.mall.model.DMatchMaxterm">
+        update D_MATCH_MAXTERM
+        <set>
+            <if test="matchMaxName != null and matchMaxName !=''">
+                MATCH_MAX_NAME = #{matchMaxName,jdbcType=VARCHAR},
+            </if>
+            <if test="matchDetail != null and matchDetail !=''">
+                MATCH_DETAIL = #{matchDetail,jdbcType=VARCHAR},
+            </if>
+            <if test="matchMaxDetail != null and matchMaxDetail !=''">
+                MATCH_MAX_DETAIL = #{matchMaxDetail,jdbcType=VARCHAR},
+            </if>
+            <if test="matchMaxTypeId != null and matchMaxTypeId !=''">
+                MATCH_MAX_TYPE_ID = #{matchMaxTypeId,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where MATCH_MAX_ID = #{matchMaxId,jdbcType=VARCHAR}
+    </update>
+</mapper>

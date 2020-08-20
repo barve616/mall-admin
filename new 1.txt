@@ -1,0 +1,31 @@
+mvn install:install-file -DgroupId=com.oracle -DartifactId=ojdbc14 -Dversion=10.2.0.4.0 -Dpackaging=jar -Dfile=ojdbc6.jar
+mvn install:install-file -DgroupId=com.macro.mall -DartifactId=mall-mbg -Dversion=1.9-RELEASE -Dpackaging=jar -Dfile=mall-mbg-1.9-RELEASE.jar
+mvn install:install-file -DgroupId=com.macro.mall -DartifactId=mall -Dversion=1.9-RELEASE -Dpackaging=pom -Dfile=mall-1.9-RELEASE.pom
+
+mvn install:install-file -DgroupId=bcsp.preWSServerSMS -DartifactId=bcsp.preWSServerSMS -Dversion=1.0 -Dpackaging=jar -Dfile=bcsp.preWSServerSMS-1.0.jar
+
+
+mvn install:install-file -DgroupId=bcsp.jaxrpc -DartifactId=bcsp.jaxrpc -Dversion=1.0 -Dpackaging=jar -Dfile=bcsp.jaxrpc-1.0.jar
+
+mvn install:install-file -DgroupId=fakepath -DartifactId=cxf -Dversion=2.3.1 -Dpackaging=jar -Dfile=cxf-2.3.1.jar
+
+mvn install:install-file -DgroupId=com.oracle.jdbc -DartifactId=ojdbc8 -Dversion=18.3.0.0 -Dpackaging=jar -Dfile=ojdbc8-18.3.0.0.jar
+
+mvn install:install-file -DgroupId=com.macro.mall -DartifactId=mall-security -Dversion=1.9-RELEASE -Dpackaging=jar -Dfile=mall-security-1.9-RELEASE.jar
+
+mvn install:install-file -DgroupId=com.macro.mall -DartifactId=mall -Dversion=1.9-RELEASE -Dpackaging=jar -Dfile=mall-security-1.9-RELEASE.jar
+
+
+mvn install:install-file -DgroupId=com.macro.mall -DartifactId=mall-common -Dversion=1.9-RELEASE -Dpackaging=jar -Dfile=mall-common-1.9-RELEASE.jar
+
+
+
+mvn deploy:deploy-file -Dmaven.test.skip=true -DgroupId=com.yourgroupId
+-DartifactId=com.yourgroupId -Dversion=1.7 -Dpackaging=jar -Dfile=D:\pathTo\yourJar.jar
+-Durl=http://你的maven私服地址 -DrepositoryId=releases
+
+
+mvn deploy:deploy-file -Dmaven.test.skip=true -DgroupId=com.yourgroupId
+-DartifactId=com.yourgroupId -Dversion=1.7 -Dpackaging=jar -Dfile=D:\pathTo\yourJar.jar
+-Durl=http://你的maven私服地址 -DrepositoryId=releases
+
